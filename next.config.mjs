@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  experimental: {
+    appDir: true,
+    allowedDevOrigins: ["*.localhost:3000", "*.localhost"],
+  },
+};
 
 export default nextConfig;

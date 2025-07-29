@@ -1,0 +1,545 @@
+// schema.prisma
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model users {
+  id             BigInt     @id @default(autoincrement())
+  desa_id        Int
+  nik            String     @unique @db.VarChar(16)
+  username       String     @unique @db.VarChar(50)
+  full_name      String     @db.VarChar(255)
+  email          String     @unique @db.VarChar(255)
+  password       String     @db.VarChar(255)
+  role           Role
+  status         Status
+  last_login_at  DateTime?  
+  created_at     DateTime
+  updated_at     DateTime
+
+  profile_desa   profile_desa @relation(fields: [desa_id], references: [id])
+  profil_masyarakat profil_masyarakat?
+  pengajuan_proposal pengajuan_proposal[]
+  articles       articles[]
+  agenda_desa    agenda_desa[]
+
+}
+
+model profile_desa {
+  id               Int       @id @default(autoincrement())
+  subdomain        String
+  nama_desa        String
+  alamat           String
+  telepon          String
+  email            String
+  twitter          String
+  instagram        String
+  visi             String
+  misi             String
+  tujuan           String
+  gmaps_embed_url  String
+  lat              Decimal?  @db.Decimal(10, 8)
+  lng              Decimal?  @db.Decimal(11, 8)
+  created_at       DateTime
+  updated_at       DateTime
+
+  users            users[]
+  pengajuan_proposal pengajuan_proposal[]
+  potensi_desa     potensi_desa[]
+  anggaran_apbdes  anggaran_apbdes[]
+  articles         articles[]
+  videos           videos[]
+  organisasi       organisasi[]
+  agenda_desa      agenda_desa[]
+  officials        officials[]
+  sarana_prasarana sarana_prasarana[]
+  penduduk         penduduk[]
+}
+
+model pengajuan_proposal {
+  id              BigInt     @id @default(autoincrement())
+  user_id         BigInt
+  desa_id         Int
+  judul_pengajuan String     @db.VarChar(255)
+  deskripsi       String
+  dokumen_path    String     @db.VarChar(255)
+  kategori        ProposalKategori
+  status          Status
+  tanggapan_admin String
+  created_at      DateTime
+  updated_at      DateTime
+
+  users           users      @relation(fields: [user_id], references: [id])
+  profile_desa    profile_desa @relation(fields: [desa_id], references: [id])
+}
+
+model profil_masyarakat {
+  id                   BigInt   @id @default(autoincrement())
+  user_id              BigInt   @unique
+  tempat_lahir         String   @db.VarChar(100)
+  tanggal_lahir        DateTime
+  jenis_kelamin        Gender
+  alamat               String
+  agama                String   @db.VarChar(50)
+  status_perkawinan    StatusPerkawinan
+  pekerjaan            String   @db.VarChar(100)
+  pendidikan_terakhir  PendidikanTerakhir
+  no_hp                String   @db.VarChar(20)
+  foto_path            String   @db.VarChar(255)
+  created_at           DateTime
+  updated_at           DateTime
+
+  users                users    @relation(fields: [user_id], references: [id])
+}
+
+model layanan {
+  id                  Int       @id @default(autoincrement())
+  instansi_id         Int
+  nama_layanan        String
+  loket               String
+  instansi_pelaksana  String
+  deskripsi           String
+  created_at          DateTime
+  updated_at          DateTime
+
+  instansi            instansi  @relation(fields: [instansi_id], references: [id])
+  persyaratan_layanan persyaratan_layanan[]
+  jadwal_layanan      jadwal_layanan[]
+}
+
+model persyaratan_layanan {
+  id               Int     @id @default(autoincrement())
+  layanan_id       Int
+  nama_persyaratan String
+  keterangan       String
+  file_url         String
+
+  layanan          layanan @relation(fields: [layanan_id], references: [id])
+}
+
+model jadwal_layanan {
+  id         Int       @id @default(autoincrement())
+  layanan_id Int
+  hari       Hari
+  jam_buka   DateTime  @db.Time
+  jam_tutup  DateTime  @db.Time
+
+  layanan    layanan   @relation(fields: [layanan_id], references: [id])
+}
+
+model instansi {
+  id          Int      @id @default(autoincrement())
+  nama_instansi String
+  deskripsi    String
+  alamat       String
+  telepon      String
+  email        String
+  website      String
+  logo_path    String
+  created_at   DateTime
+  updated_at   DateTime
+
+  layanan      layanan[]
+}
+
+model potensi_desa {
+  id           Int      @id @default(autoincrement())
+  desa_id      Int
+  kategori     PotensiKategori
+  nama_potensi String   @db.VarChar(255)
+  deskripsi    String
+  icon         String   @db.VarChar(100)
+  gambar_path  String   @db.VarChar(255)
+
+  profile_desa profile_desa @relation(fields: [desa_id], references: [id])
+}
+
+model anggaran_apbdes {
+  id                  Int      @id @default(autoincrement())
+  desa_id             Int
+  tahun_anggaran      Int      @db.Year
+  deskripsi           String   @db.VarChar(255)
+  total_pendapatan    Decimal  @db.Decimal(15, 2)
+  total_belanja       Decimal  @db.Decimal(15, 2)
+  dokumen_realisasi_path String @db.VarChar(255)
+  infografis_path     String   @db.VarChar(255)
+  status              ApbdesStatus
+  published_at        DateTime
+
+  profile_desa        profile_desa @relation(fields: [desa_id], references: [id])
+}
+
+model articles {
+  id                 BigInt    @id @default(autoincrement())
+  user_id            BigInt
+  desa_id            Int
+  tipe               ArticleType
+  title              String    @db.VarChar(255)
+  slug               String    @unique
+  content            String    @db.LongText
+  featured_image     String    @db.VarChar(255)
+  dokumen_terkait_path String  @db.VarChar(255)
+  waktu_kegiatan     DateTime
+  lokasi_kegiatan    String    @db.VarChar(255)
+  status             ArticleStatus
+  published_at       DateTime
+  created_at         DateTime
+  updated_at         DateTime
+
+  users              users     @relation(fields: [user_id], references: [id])
+  profile_desa       profile_desa @relation(fields: [desa_id], references: [id])
+}
+
+model videos {
+  id           Int      @id @default(autoincrement())
+  desa_id      Int
+  title        String   @db.VarChar(255)
+  embed_url    String   @db.VarChar(255)
+  deskripsi    String
+  uploaded_at  DateTime
+
+  profile_desa profile_desa @relation(fields: [desa_id], references: [id])
+}
+
+model organisasi {
+  id                  Int    @id @default(autoincrement())
+  desa_id             Int
+  kategori_id         Int
+  nama_organisasi     String @db.VarChar(255)
+  nama_ketua          String @db.VarChar(255)
+  deskripsi_kegiatan  String
+  logo_path           String @db.VarChar(255)
+
+  profile_desa        profile_desa @relation(fields: [desa_id], references: [id])
+  kategori_organisasi kategori_organisasi @relation(fields: [kategori_id], references: [id])
+}
+
+model kategori_organisasi {
+  id              Int          @id @default(autoincrement())
+  nama_kategori   String       @db.VarChar(100)
+
+  organisasi      organisasi[]
+}
+
+model agenda_desa {
+  id           Int     @id @default(autoincrement())
+  desa_id      Int
+  judul        String  @db.VarChar(255)
+  slug         String  @unique
+  kategori     AgendaKategori
+  deskripsi    String
+  lokasi       String  @db.VarChar(255)
+  waktu        DateTime
+  poster       String  @db.VarChar(255)
+  created_by   BigInt
+  status       Status
+  created_at   DateTime
+  updated_at   DateTime
+
+  profile_desa profile_desa @relation(fields: [desa_id], references: [id])
+  users        users        @relation(fields: [created_by], references: [id])
+}
+
+model officials {
+  id            Int     @id @default(autoincrement())
+  desa_id       Int
+  name          String
+  position      String
+  photo         String
+  display_order Int
+  created_at    DateTime
+  updated_at    DateTime
+
+  profile_desa  profile_desa @relation(fields: [desa_id], references: [id])
+}
+
+model sarana_prasarana {
+  id             Int    @id @default(autoincrement())
+  desa_id        Int
+  kategori       SaranaKategori
+  nama_sarana    String @db.VarChar(255)
+  deskripsi      String
+  alamat_lokasi  String @db.VarChar(255)
+  koordinat_lat  String @db.VarChar(50)
+  koordinat_long String @db.VarChar(50)
+  foto_path      String @db.VarChar(255)
+  status         Status
+
+  profile_desa   profile_desa @relation(fields: [desa_id], references: [id])
+}
+
+model penduduk {
+  id                  Int       @id @default(autoincrement())
+  desa_id             Int
+  keluarga_id         Int
+  nik                 String    @unique
+  nama                String
+  jenis_kelamin       JenisKelamin
+  umur                Int
+  status_perkawinan   StatusPerkawinan
+  agama               String
+  partisipasi_sekolah PartisipasiSekolah
+  ijazah_tertinggi    PendidikanTerakhir
+  jaminan_kesehatan   JaminanKesehatan
+  disabilitas         Disabilitas
+  penyakit_kronis     PenyakitKronis
+  jenis_usaha         JenisUsaha
+  hubungan_dengan_kk  HubunganKK
+  created_at          DateTime
+  updated_at          DateTime
+
+  profile_desa        profile_desa @relation(fields: [desa_id], references: [id])
+  keluarga            keluarga     @relation(fields: [keluarga_id], references: [id])
+}
+
+model keluarga {
+  id                   Int       @id @default(autoincrement())
+  no_kk                String    @unique
+  kepala_keluarga      String
+  desa_id              Int
+  alamat               String
+  sumber_listrik       SumberListrik
+  bahan_bakar_memasak  BahanBakar
+  sumber_air_minum     SumberAir
+  pembuangan_tinja     PembuanganTinja
+  jenis_lantai         JenisLantai
+  kualitas_lantai      Kualitas
+  jenis_dinding        JenisDinding
+  kualitas_dinding     Kualitas
+  jenis_atap           JenisAtap
+  kualitas_atap        Kualitas
+  aset_bergerak        String
+  created_at           DateTime
+  updated_at           DateTime
+
+  penduduk             penduduk[]
+}
+
+// ENUM DEFINITIONS
+
+enum Role {
+  admin_desa
+  masyarakat
+  admin_kab
+}
+
+enum Status {
+  pending
+  approved
+  rejected
+}
+
+enum ProposalKategori {
+  Bantuan_Sosial
+  Pembangunan_Fisik
+  Kegiatan_Masyarakat
+  Lainnya
+}
+
+enum Gender {
+  L
+  P
+}
+
+enum StatusPerkawinan {
+  Belum_Kawin
+  Kawin
+  Cerai_Hidup
+  Cerai_Mati
+}
+
+enum PendidikanTerakhir {
+  Belum_Mengisi
+  Tidak_Punya_Ijazah
+  SD_Sederajat
+  SMP_Sederajat
+  SMA_Sederajat
+  D1_D2_D3
+  D4_S1
+  S2_S3
+}
+
+enum Hari {
+  Senin
+  Selasa
+  Rabu
+  Kamis
+  Jumat
+  Sabtu
+  Minggu
+}
+
+enum PotensiKategori {
+  Pertanian
+  Peternakan
+  UMKM
+  Pariwisata
+  Jasa
+}
+
+enum ApbdesStatus {
+  direncanakan
+  realisasi
+}
+
+enum ArticleType {
+  berita
+  agenda
+  sakip
+  sid
+}
+
+enum ArticleStatus {
+  published
+  draft
+}
+
+enum AgendaKategori {
+  Kebudayaan
+  Olahraga
+  Umum
+  Peringatan_Hari_Besar
+  Sepedahan
+  Olahraga_Asik
+  PKK
+}
+
+enum SaranaKategori {
+  pendidikan
+  kesehatan
+  ibadah
+  olahraga
+  umum
+}
+
+enum JenisKelamin {
+  Laki_laki
+  Perempuan
+}
+
+enum PartisipasiSekolah {
+  Tidak_Sekolah
+  Masih_Sekolah
+  Tidak_Bersekolah
+}
+
+enum JaminanKesehatan {
+  KKS_KPS
+  KIP_BSM
+  KIS_BPJS
+}
+
+enum Disabilitas {
+  Belum_Mengisi
+  Tidak_Cacat
+  Tuna_Daksa
+  Cacat_Mental
+  Cacat_Fisik_Mental
+  Tuna_Netra
+  Tuna_Rungu
+  Tuna_Wicara
+  Tuna_Rungu_Netra_Cacat_Tubuh
+}
+
+enum PenyakitKronis {
+  Belum_Mengisi
+  Tidak_Ada
+  Hipertensi
+  Rematik
+  Asma
+  Masalah_Jantung
+  Diabetes
+  TBC
+  Stroke
+  Kanker
+  Lainnya
+}
+
+enum JenisUsaha {
+  Pertanian
+  Konstruksi
+  Perdagangan
+  Hotel_Restoran
+}
+
+enum HubunganKK {
+  Kepala_Keluarga
+  Istri
+  Anak
+  Orang_Tua
+  Anggota_Lain
+}
+
+enum SumberListrik {
+  Listrik_PLN
+  Listrik_Non_PLN
+}
+
+enum BahanBakar {
+  Gas_3Kg_Lebih
+  Gas_3Kg
+  Gas_Kota_Biogas
+  Kayu_Bakar
+  Tidak_Memasak
+}
+
+enum SumberAir {
+  Lainnya
+  Air_Isi_Ulang
+  Leding_Meteran
+  Leding_Eceran
+  Sumur_Bor
+  Sumur_Terlindung
+  Sumur_Tak_Terlindung
+  Mata_Air_Terlindung
+  Mata_Air_Tak_Terlindung
+}
+
+enum PembuanganTinja {
+  Belum_Mengisi
+  Tangki
+  SPAL
+  Lubang_Tanah
+  Kolam_Sawah
+  Lainnya
+}
+
+enum JenisLantai {
+  Marmer
+  Keramik
+  Ubin
+  Kayu_Bagus
+  Semen
+  Bambu
+  Kayu_Jelek
+  Lainnya
+}
+
+enum JenisDinding {
+  Belum_Mengisi
+  Tembok
+  Plesteran
+  Kayu
+  Anyaman
+  Bambu
+  Lainnya
+}
+
+enum JenisAtap {
+  Beton
+  Genteng_Keramik
+  Genteng_Metal
+  Genteng_Tanah_Liat
+  Asbes
+}
+
+enum Kualitas {
+  Kualitas_Tinggi
+  Kualitas_Rendah
+}
