@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import SubdomainNavGuest from "@/components/Navbar/SubdomainNavGuest";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Website Desa",
@@ -11,32 +13,15 @@ export default function SubdomainLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = headers();
+  const host = headersList.get("host") || "";
+  const subdomain = host.split(".")[0];
   return (
     <html lang="id">
       <body>
-        <header className="bg-green-600 text-white p-4">
-          <nav className="container mx-auto">
-            <h1 className="text-2xl font-bold">Website Desa</h1>
-            <div className="mt-2">
-              <a href="/" className="hover:text-green-200 mr-4">
-                Beranda
-              </a>
-              <a href="/profil" className="hover:text-green-200 mr-4">
-                Profil
-              </a>
-              <a href="/berita" className="hover:text-green-200 mr-4">
-                Berita
-              </a>
-              <a href="/pelayanan" className="hover:text-green-200 mr-4">
-                Pelayanan
-              </a>
-              <a href="/kontak" className="hover:text-green-200">
-                Kontak
-              </a>
-            </div>
-          </nav>
+        <header>
+          <SubdomainNavGuest subdomain={subdomain} />
         </header>
-
         <main className="min-h-screen">{children}</main>
 
         <footer className="bg-gray-800 text-white p-6 mt-8">

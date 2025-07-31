@@ -1,3 +1,5 @@
+import Hero from "@/components/Landing/HeroSubdomain";
+import FloatingSearchBar from "@/components/Search/SubdomainSearchLanding";
 import { headers } from "next/headers";
 
 export default function SubdomainHomePage() {
@@ -6,17 +8,16 @@ export default function SubdomainHomePage() {
   const subdomain = host.split(".")[0];
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <section className="text-center py-16">
-        <h1 className="text-4xl font-bold text-gray-800 mb-6">
-          Selamat Datang di Desa {subdomain}
-        </h1>
-        <p className="text-xl text-gray-600 mb-8">
-          Website resmi Desa {subdomain}
-        </p>
+    <div className="container px-[31px] lg:px-[100px] px-4 py-8 ">
+      <section className="text-center pt-16">
+        <Hero subdomain={subdomain} />
+      </section>
+      <section className="mt-52 px-6 py-12 bg-gray-800">
+        <h2 className="text-2xl font-bold">Tentang Kami</h2>
+        {/* konten tentang kami */}
       </section>
 
-      <section className="grid md:grid-cols-3 gap-8 py-8">
+      {/* <section className="grid md:grid-cols-3 gap-8 py-8">
         <div className="bg-white p-6 rounded-lg shadow">
           <h3 className="text-xl font-semibold mb-4">Profil Desa</h3>
           <p className="text-gray-600 mb-4">
@@ -46,7 +47,7 @@ export default function SubdomainHomePage() {
             Selengkapnya →
           </a>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

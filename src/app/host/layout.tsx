@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Website Desa - Platform Resmi",
@@ -16,6 +17,16 @@ export default function HostLayout({
       <body>
         <header className="bg-blue-600 text-white p-4">
           <nav className="container mx-auto">
+            <a href="/" className="flex items-center text-lg font-bold">
+              <Image
+                src="/assets/logo-fix/logo-sumedang-500.png"
+                className="h-8 w-auto mr-2"
+                alt="Logo Desa"
+                width={20}
+                height={20}
+              />
+              Desa Cikeusi
+            </a>
             <h1 className="text-2xl font-bold">Website Desa Platform</h1>
             <p className="text-blue-100">
               Platform Resmi Desa Digital Indonesia

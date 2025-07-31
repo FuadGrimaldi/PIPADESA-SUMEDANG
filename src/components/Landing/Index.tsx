@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import Hero from "./Hero";
+import Hero from "./HeroSubdomain";
 
 export default function RootLanding() {
   const headersList = headers();
