@@ -15,11 +15,11 @@ const Hero = ({ subdomain }: { subdomain: string | null }) => {
   }
 
   return (
-    <div className="pt-4 px-4 relative">
+    <div className="pt-4 relative">
       {" "}
       {/* Tambahkan relative di sini */}
       <div
-        className="hero h-96 rounded-2xl shadow-lg"
+        className="hero h-[500px] rounded-2xl shadow-lg"
         style={{
           backgroundImage:
             "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",

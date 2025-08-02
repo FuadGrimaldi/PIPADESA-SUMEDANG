@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import SubdomainNavGuest from "@/components/Navbar/SubdomainNavGuest";
 import { headers } from "next/headers";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Website Desa",
@@ -24,11 +25,7 @@ export default function SubdomainLayout({
         </header>
         <main className="min-h-screen">{children}</main>
 
-        <footer className="bg-gray-800 text-white p-6 mt-8">
-          <div className="container mx-auto text-center">
-            <p>&copy; 2024 Website Desa. All rights reserved.</p>
-          </div>
-        </footer>
+        <Footer />
       </body>
     </html>
   );

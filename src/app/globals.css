@@ -7,3 +7,9 @@
     text-wrap: balance;
   }
 }
+
+#lapor-card {
+  background-image: url("/assets/background/bg-lapor.png");
+  background-size: cover;
+  background-position: center;
+}
