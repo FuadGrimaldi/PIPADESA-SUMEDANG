@@ -23,7 +23,7 @@ export default function SubdomainLayout({
         <header>
           <SubdomainNavGuest subdomain={subdomain} />
         </header>
-        <main className="min-h-screen">{children}</main>
+        <main>{children}</main>
 
         <Footer />
       </body>

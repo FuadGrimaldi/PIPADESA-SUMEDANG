@@ -141,9 +141,12 @@ export default function SubdomainNavGuest({
 
             {/* Auth Button & Mobile Menu Toggle */}
             <div className="flex items-center space-x-4">
-              <button className="hidden sm:block bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105">
+              <Link
+                href="/login"
+                className="hidden sm:block bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105"
+              >
                 Masuk/Daftar
-              </button>
+              </Link>
 
               {/* Mobile menu button */}
               <button
