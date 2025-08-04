@@ -70,7 +70,8 @@ export default function SubdomainNavGuest({
       icon: FileText,
       submenu: [
         { name: "Berita", href: "/berita" },
-        { name: "Artikel", href: "/artikel" },
+        { name: "Kegiatan", href: "/kegiatan" },
+        { name: "Agenda", href: "/agenda" },
       ],
     },
     { name: "Direktori", href: "/direktori", icon: BookOpen },

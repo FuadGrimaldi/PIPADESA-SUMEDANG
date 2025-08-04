@@ -1,9 +1,7 @@
-import SubdomainAbout from "@/components/About/SubdomainAbout";
 import LaporCard from "@/components/Card/LaporCard";
 import StatistikPenduduk from "@/components/Landing/DataStatistik";
 import Hero from "@/components/Landing/HeroSubdomain";
 import News from "@/components/News/News";
-import FloatingSearchBar from "@/components/Search/SubdomainSearchLanding";
 import PartnerLogos from "@/components/Slide/SliderSubdomain";
 import { headers } from "next/headers";
 
@@ -26,11 +24,13 @@ export default function SubdomainHomePage() {
       <div className="px-[31px] lg:px-[100px] px-4 py-8">
         <News />
       </div>
-      <div className="px-[31px] lg:px-[100px] px-4 py-8">
-        <StatistikPenduduk />
-      </div>
-      <div className="px-[31px] lg:px-[100px] px-4 py-8 hover:scale-105 transition-transform duration-300">
-        <LaporCard />
+      <div className="px-[31px] lg:px-[100px] px-4 py-8 bg-gray-400">
+        <div className="bg-none">
+          <StatistikPenduduk />
+        </div>
+        <div className=" py-8 hover:scale-105 transition-transform duration-300">
+          <LaporCard />
+        </div>
       </div>
       <div className="px-[31px] lg:px-[100px] px-4 py-8">
         <PartnerLogos />

@@ -4,6 +4,9 @@ const nextConfig = {
     appDir: true,
     allowedDevOrigins: ["*.localhost:3000", "*.localhost"],
   },
+  images: {
+    domains: ["images.unsplash.com"],
+  },
 };
 
 export default nextConfig;

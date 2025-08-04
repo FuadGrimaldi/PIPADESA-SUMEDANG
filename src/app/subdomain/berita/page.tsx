@@ -1,14 +1,13 @@
-import StrukturDesa from "@/components/ProfileDesa/Struktur";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 
-export default function VisiMisiPage() {
+export default function BeritaPage() {
   const links = [
     { to: "/", label: "Home" },
-    { to: "/struktur", label: "Struktur" },
+    { to: "/berita", label: "Berita" },
   ];
   return (
     <div className="container min-h-screen">
@@ -21,7 +20,9 @@ export default function VisiMisiPage() {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <StrukturDesa />
+              <h1 className="text-2xl font-bold mb-4">Berita</h1>
+              <p>Berita terbaru akan ditampilkan di sini.</p>
+              {/* Placeholder for news content */}
             </div>
             <SumedangWeatherWidget />
           </div>

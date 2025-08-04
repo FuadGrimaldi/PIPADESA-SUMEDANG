@@ -1,14 +1,15 @@
-import StrukturDesa from "@/components/ProfileDesa/Struktur";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 
-export default function VisiMisiPage() {
+export default function DetailBeritaPage() {
+  const id = 1; // Assuming you're using a routing library that provides useParams
   const links = [
     { to: "/", label: "Home" },
-    { to: "/struktur", label: "Struktur" },
+    { to: "/berita", label: "Berita" },
+    { to: `/berita/${id}`, label: "Detail" },
   ];
   return (
     <div className="container min-h-screen">
@@ -21,7 +22,10 @@ export default function VisiMisiPage() {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <StrukturDesa />
+              <h1 className="text-2xl font-bold mb-4">Berita</h1>
+              <p>Detail berita dengan ID {id} akan ditampilkan di sini.</p>
+
+              {/* Placeholder for news content */}
             </div>
             <SumedangWeatherWidget />
           </div>
