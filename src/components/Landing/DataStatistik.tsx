@@ -56,17 +56,21 @@ export default function StatistikPenduduk() {
               key={index}
               className="group px-6 py-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow hover:-translate-y-1 duration-300"
             >
-              <div className="flex items-center gap-4 mb-2">
-                <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-full transition-all group-hover:scale-110">
+              <div className="flex items-center gap-1 lg:gap-4 mb-2">
+                <div className="p-[5px] lg:p-3 bg-purple-100 dark:bg-purple-900 rounded-full transition-all group-hover:scale-110">
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-medium text-gray-700 dark:text-white">
+                <h3 className="text-sm lg:text-lg font-medium text-gray-700 text-black">
                   {item.title}
                 </h3>
               </div>
-              <p className="text-2xl font-bold text-black dark:text-white">
-                {item.value}
-              </p>
+              <div className="flex items-center">
+                <div className="w-full py-1 bg-purple-200 rounded-xl mr-2"></div>
+
+                <p className="text-lg lg:text-2xl font-bold text-right text-black">
+                  {item.value}
+                </p>
+              </div>
             </div>
           ))}
         </div>

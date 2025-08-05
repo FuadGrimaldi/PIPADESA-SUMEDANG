@@ -69,8 +69,7 @@ export default function SubdomainNavGuest({
       name: "Publikasi",
       icon: FileText,
       submenu: [
-        { name: "Berita", href: "/berita" },
-        { name: "Kegiatan", href: "/kegiatan" },
+        { name: "Berita & Informasi", href: "/berita" },
         { name: "Agenda", href: "/agenda" },
       ],
     },

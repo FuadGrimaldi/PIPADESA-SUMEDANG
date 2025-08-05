@@ -5,7 +5,7 @@ const nextConfig = {
     allowedDevOrigins: ["*.localhost:3000", "*.localhost"],
   },
   images: {
-    domains: ["images.unsplash.com"],
+    domains: ["images.unsplash.com", "cdn.tailgrids.com"],
   },
 };
 

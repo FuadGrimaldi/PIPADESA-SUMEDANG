@@ -47,7 +47,7 @@ const SidebarNewsPhoto = () => {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-      <h4 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 border-b-2 border-blue-500 pb-2">
+      <h4 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 border-b-2 border-[#C0B099] pb-2">
         Informasi Lainnya
       </h4>
 
@@ -122,7 +122,7 @@ const SidebarNewsPhoto = () => {
 
       <div className="mt-6 text-center">
         <a
-          href="/#"
+          href="/berita"
           className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-sm transition-colors duration-200"
         >
           Lihat Semua Berita

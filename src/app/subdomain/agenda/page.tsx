@@ -1,3 +1,4 @@
+import AllAgenda from "@/components/ProfileDesa/AllAgenda";
 import AllBerita from "@/components/ProfileDesa/AllBerita";
 import SearchBerita from "@/components/Search/SearchNews";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
@@ -6,10 +7,10 @@ import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 
-export default function BeritaPage() {
+export default function AgendaDesa() {
   const links = [
     { to: "/", label: "Home" },
-    { to: "/berita", label: "Berita" },
+    { to: "/agenda", label: "Agenda" },
   ];
   return (
     <div className="container min-h-screen">
@@ -25,7 +26,7 @@ export default function BeritaPage() {
               <SearchBerita />
             </div>
             <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
-              <AllBerita />
+              <AllAgenda />
               {/* <h1 className="text-2xl font-bold mb-4">Berita</h1>
               <p>Berita terbaru akan ditampilkan di sini.</p> */}
               {/* Placeholder for news content */}

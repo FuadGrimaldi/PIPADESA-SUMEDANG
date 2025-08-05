@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 type NewsItem = {
@@ -83,7 +84,7 @@ const News = () => {
         {/* Show All Button */}
         <div className="text-left mt-6">
           <a
-            href="/news"
+            href="/berita"
             className="inline-block bg-primary hover:bg-opacity-90 text-white font-semibold py-3 px-6 rounded transition text-sm hover:bg-blue-500"
           >
             Lihat Semua Berita...
@@ -100,7 +101,13 @@ const BlogCard = ({ image, date, CardTitle, CardDescription }) => {
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow transform hover:-translate-y-1 overflow-hidden">
       <div className="relative">
-        <img src={image} alt={CardTitle} className="w-full h-48 object-cover" />
+        <Image
+          src={image}
+          alt={CardTitle}
+          className="w-full h-48 object-cover"
+          width={400}
+          height={200}
+        />
         <div className="absolute top-0 right-0 text-black text-xs px-3 py-1 m-2 rounded backdrop-blur-xl bg-white/60">
           Kegiatan Desa
         </div>
@@ -149,7 +156,7 @@ const SidebarNews = () => {
         Informasi Lainnya
       </h4>
       <ul className="space-y-4">
-        {items.map((item, idx) => (
+        {items.slice(0, 4).map((item, idx) => (
           <li key={idx} className="border-b pb-3 dark:border-gray-700">
             <a
               href={item.link}
