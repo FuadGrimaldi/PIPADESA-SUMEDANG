@@ -1,19 +1,15 @@
+import AllInstansi from "@/components/ProfileDesa/AllInstansi";
+import SearchLayanan from "@/components/Search/SearchLayanan";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
-import { useParams } from "next/navigation";
+
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 
-type Props = {
-  params: { id: string };
-};
-
-export default function DetailBeritaPage({ params }: Props) {
-  const id = params.id; // Assuming you're using a routing library that provides useParams // Assuming you're using a routing library that provides useParams
+export default function InstansiPage() {
   const links = [
     { to: "/", label: "Home" },
-    { to: "/berita", label: "Berita" },
-    { to: `/berita/${id}`, label: `${id}` },
+    { to: "/instansi", label: "Instansi" },
   ];
   return (
     <div className="container min-h-screen">
@@ -25,11 +21,11 @@ export default function DetailBeritaPage({ params }: Props) {
         <div className="relative z-10 flex flex-col lg:flex-row gap-8 items-start ">
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
-            <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <h1 className="text-2xl font-bold mb-4">Berita</h1>
-              <p>Detail berita dengan ID {id} akan ditampilkan di sini.</p>
-
-              {/* Placeholder for news content */}
+            <div className="mb-4">
+              <SearchLayanan />
+            </div>
+            <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
+              <AllInstansi />
             </div>
             <SumedangWeatherWidget />
           </div>

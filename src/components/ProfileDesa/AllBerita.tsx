@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 type NewsItem = {
   id: number;
+  des_id: number;
   title: string;
   excerpt: string;
   date: string;
@@ -16,6 +17,7 @@ type NewsItem = {
 const newsData: NewsItem[] = [
   {
     id: 1,
+    des_id: 1,
     title: "Gotong Royong Bersihkan Lingkungan",
     category: "Berita Desa",
     excerpt:
@@ -26,6 +28,7 @@ const newsData: NewsItem[] = [
   },
   {
     id: 2,
+    des_id: 1,
     title: "Pelatihan UMKM untuk Warga",
     category: "Berita Desa",
     excerpt:
@@ -36,6 +39,7 @@ const newsData: NewsItem[] = [
   },
   {
     id: 3,
+    des_id: 1,
     title: "Penyaluran Bantuan Sosial",
     category: "Berita Desa",
     excerpt:
@@ -46,6 +50,7 @@ const newsData: NewsItem[] = [
   },
   {
     id: 4,
+    des_id: 1,
     title: "Pembukaan Jalan Baru",
     category: "Berita Desa",
     excerpt:
@@ -56,6 +61,7 @@ const newsData: NewsItem[] = [
   },
   {
     id: 5,
+    des_id: 1,
     title: "Penyaluran Bantuan Sosial",
     category: "Berita Desa",
     excerpt:
@@ -66,6 +72,7 @@ const newsData: NewsItem[] = [
   },
   {
     id: 6,
+    des_id: 1,
     title: "Pembukaan Jalan Baru",
     category: "Berita Desa",
     excerpt:
@@ -76,6 +83,7 @@ const newsData: NewsItem[] = [
   },
   {
     id: 7,
+    des_id: 1,
     title: "Pembukaan Jalan Baru",
     category: "Kegiatan Desa",
     excerpt:
@@ -137,6 +145,7 @@ const AllBerita = () => {
         >
           {currentItems.map((news) => (
             <CardNews
+              id={news.id}
               key={news.id}
               date={news.date}
               CardTitle={news.title}

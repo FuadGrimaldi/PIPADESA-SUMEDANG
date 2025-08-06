@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CardNews({
+  id,
   category,
   image,
   date,
@@ -8,7 +10,10 @@ export default function CardNews({
   CardDescription,
 }) {
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow transform hover:-translate-y-1 overflow-hidden">
+    <Link
+      href={`/berita/${id}`}
+      className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow transform hover:-translate-y-1 overflow-hidden"
+    >
       <div className="relative">
         <Image
           src={image}
@@ -34,10 +39,10 @@ export default function CardNews({
           {date}
         </time>
         <h3 className="mt-4 text-lg font-semibold text-gray-900 hover:text-blue-600 transition">
-          <a href="/#">{CardTitle}</a>
+          <span>{CardTitle}</span>
         </h3>
         <p className="mt-2 text-sm text-gray-700">{CardDescription}</p>
       </div>
-    </div>
+    </Link>
   );
 }

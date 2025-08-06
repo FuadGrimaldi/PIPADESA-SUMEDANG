@@ -1,19 +1,14 @@
+import MainKontak from "@/components/ProfileDesa/Kontak";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
-import { useParams } from "next/navigation";
+
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 
-type Props = {
-  params: { id: string };
-};
-
-export default function DetailBeritaPage({ params }: Props) {
-  const id = params.id; // Assuming you're using a routing library that provides useParams // Assuming you're using a routing library that provides useParams
+export default function SejarahPage() {
   const links = [
     { to: "/", label: "Home" },
-    { to: "/berita", label: "Berita" },
-    { to: `/berita/${id}`, label: `${id}` },
+    { to: "/kontak", label: "Kontak" },
   ];
   return (
     <div className="container min-h-screen">
@@ -26,10 +21,7 @@ export default function DetailBeritaPage({ params }: Props) {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <h1 className="text-2xl font-bold mb-4">Berita</h1>
-              <p>Detail berita dengan ID {id} akan ditampilkan di sini.</p>
-
-              {/* Placeholder for news content */}
+              <MainKontak />
             </div>
             <SumedangWeatherWidget />
           </div>

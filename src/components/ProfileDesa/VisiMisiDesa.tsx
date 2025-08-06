@@ -19,7 +19,7 @@ export default function VisiMisiDesa() {
 
         <div className="bg-white max-w-4xl mx-auto">
           {/* Fetch data mulai dari sini */}
-          <div className="mb-12">
+          <div className="mb-10">
             <h2 className="lg:text-3xl text-2xl font-bold text-primary mb-4">
               Visi
             </h2>
@@ -56,6 +56,15 @@ export default function VisiMisiDesa() {
                 pembangunan desa.
               </li>
             </ul>
+          </div>
+          <div className="mt-10">
+            <h2 className="lg:text-3xl text-2xl font-bold text-primary mb-4">
+              Tujuan
+            </h2>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus, quae.
+            </p>
           </div>
         </div>
       </motion.div>

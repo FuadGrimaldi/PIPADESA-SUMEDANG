@@ -47,12 +47,16 @@ export default function SubdomainNavGuest({
       submenu: [
         { name: "Visi Misi", href: "/visi-misi" },
         { name: "Struktur", href: "/struktur" },
+        { name: "Sejarah", href: "/sejarah" },
+        { name: "Kontak", href: "/kontak" },
       ],
     },
     {
       name: "Layanan",
       icon: Settings,
       submenu: [
+        { name: "Daftar Instansi", href: "/instansi" },
+        { name: "Daftar Layanan", href: "/layanan" },
         { name: "Administrasi", href: "/administrasi" },
         { name: "Pengaduan", href: "/pengaduan" },
       ],
@@ -71,6 +75,7 @@ export default function SubdomainNavGuest({
       submenu: [
         { name: "Berita & Informasi", href: "/berita" },
         { name: "Agenda", href: "/agenda" },
+        { name: "Galeri", href: "/galeri" },
       ],
     },
     { name: "Direktori", href: "/direktori", icon: BookOpen },
