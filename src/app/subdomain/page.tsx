@@ -21,10 +21,15 @@ export default function SubdomainHomePage() {
         </div>
       </div>
 
-      <div className="px-[31px] lg:px-[100px] px-4 py-8">
+      <div id="news-landing" className="px-[31px] lg:px-[100px] px-4 py-8">
         <News />
       </div>
-      <div className="px-[31px] lg:px-[100px] px-4 py-8 bg-gray-400">
+      <div
+        id="kemerdekaan-landing"
+        className="px-[31px] lg:px-[100px] px-4 h-[300px] bg-[#fcf6f0]"
+      ></div>
+
+      <div id="stats" className="px-[31px] lg:px-[100px] px-4 py-8">
         <div className="bg-none">
           <StatistikPenduduk />
         </div>
@@ -32,7 +37,7 @@ export default function SubdomainHomePage() {
           <LaporCard />
         </div>
       </div>
-      <div className="px-[31px] lg:px-[100px] px-4 py-8">
+      <div id="partner-landing" className="px-[31px] lg:px-[100px] px-4 py-8">
         <PartnerLogos />
       </div>
     </div>

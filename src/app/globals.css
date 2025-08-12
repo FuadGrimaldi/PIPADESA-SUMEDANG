@@ -13,3 +13,16 @@
   background-size: cover;
   background-position: center;
 }
+
+#kemerdekaan-landing {
+  background-image: url("/assets/background/bg-kemerdekaan.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* #tahu-sumedang-layanan {
+  background-image: url("");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat; */
+/* } */

@@ -1,4 +1,4 @@
-import AllLayanan from "@/components/ProfileDesa/AllLayanan";
+import DetailInstansi from "@/components/ProfileDesa/DetailInstansi";
 import SearchLayanan from "@/components/Search/SearchLayanan";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 
@@ -31,7 +31,7 @@ export default function DetailInstansiPage({ params }: Props) {
               <SearchLayanan />
             </div>
             <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
-              {/* <AllLayanan /> */}
+              <DetailInstansi id={id} />
             </div>
             <SumedangWeatherWidget />
           </div>

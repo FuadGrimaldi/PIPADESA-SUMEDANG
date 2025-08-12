@@ -1,5 +1,5 @@
-import AllLayanan from "@/components/ProfileDesa/AllLayanan";
-import DetailLayanan from "@/components/ProfileDesa/DetailLayanan";
+import AllInstansi from "@/components/ProfileDesa/AllInstansi";
+import TahuSumedangComp from "@/components/ProfileDesa/TahuSumedang";
 import SearchLayanan from "@/components/Search/SearchLayanan";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 
@@ -7,16 +7,10 @@ import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 
-type Props = {
-  params: { id: string };
-};
-
-export default function DetailLayananPage({ params }: Props) {
-  const id = params.id; // Assuming you're using a routing library that provides useParams
+export default function TahuSumedangPage() {
   const links = [
     { to: "/", label: "Home" },
-    { to: "/layanan", label: "Layanan" },
-    { to: `/layanan/${id}`, label: `${id}` }, // Assuming you want to link to a specific service detail page
+    { to: "/tahu-sumedang", label: "Tahu Sumedang" },
   ];
   return (
     <div className="container min-h-screen">
@@ -32,7 +26,7 @@ export default function DetailLayananPage({ params }: Props) {
               <SearchLayanan />
             </div>
             <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
-              <DetailLayanan id={id} />
+              <TahuSumedangComp />
             </div>
             <SumedangWeatherWidget />
           </div>

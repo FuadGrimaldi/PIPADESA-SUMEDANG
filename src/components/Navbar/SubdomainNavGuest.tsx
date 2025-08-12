@@ -57,7 +57,7 @@ export default function SubdomainNavGuest({
       submenu: [
         { name: "Daftar Instansi", href: "/instansi" },
         { name: "Daftar Layanan", href: "/layanan" },
-        { name: "Administrasi", href: "/administrasi" },
+        { name: "Tahu Sumedang", href: "/tahu-sumedang" },
         { name: "Pengaduan", href: "/pengaduan" },
       ],
     },
@@ -65,7 +65,7 @@ export default function SubdomainNavGuest({
       name: "Statistik Desa",
       icon: BarChart3,
       submenu: [
-        { name: "Data Penduduk", href: "/data-penduduk" },
+        { name: "Data Penduduk", href: "/statistik/jenis-kelamin" },
         { name: "Kependudukan", href: "/kependudukan" },
       ],
     },
