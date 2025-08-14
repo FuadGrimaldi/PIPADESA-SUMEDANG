@@ -39,43 +39,24 @@ export async function PUT(
   req: Request,
   { params }: { params: { id: string } }
 ) {
-  const id = parseInt(params.id, 10);
-
-  if (isNaN(id)) {
-    return NextResponse.json(
-      { success: false, message: "Invalid desa ID" },
-      { status: 400 }
-    );
-  }
-
   try {
     const body = await req.json();
-    const { id_user, name, age, gender, contact, job } = body;
-
-    if (!name || !age || !gender || !contact || !job) {
+    const id = parseInt(params.id, 10);
+    if (isNaN(id)) {
       return NextResponse.json(
-        { success: false, message: "field are required" },
+        { success: false, message: "Invalid desa ID" },
         { status: 400 }
       );
     }
+    const updatedDesa = await updateDesa(id, {
+      ...body,
+      updated_at: new Date(),
+    });
 
-    const updatedUser = await updateDesa(id, body);
-    if (!updatedUser) {
-      return NextResponse.json(
-        { success: false, message: "User not found" },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json(
-      { success: true, data: updatedUser },
-      { status: 200 }
-    );
+    return NextResponse.json(updatedDesa);
   } catch (error) {
-    return NextResponse.json(
-      { success: false, message: "Failed to update user", error },
-      { status: 500 }
-    );
+    console.error(error);
+    return NextResponse.json({ error: "Gagal update desa" }, { status: 500 });
   }
 }
 

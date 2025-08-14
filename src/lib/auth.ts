@@ -31,9 +31,12 @@ export const authOptions: NextAuthOptions = {
           const passwordMatch = await bcrypt.compare(password, user.password);
           if (passwordMatch) {
             return {
-              id: user.id.toString(),
+              id: user.id.toString(), // Convert BigInt to string
+              desaId: user.desa_id.toString(), // Convert BigInt to string
               email: user.email,
-              name: user.username, // NextAuth expects 'name' property
+              name: user.full_name,
+              role: user.role,
+              username: user.username,
             };
           }
         }
@@ -45,8 +48,10 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.desaId = user.desaId;
         token.email = user.email;
-        token.username = user.name; // Use 'name' from user object
+        token.username = user.username;
+        token.name = user.name;
         token.role = user.role;
       }
       return token;
@@ -54,8 +59,10 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
+        session.user.desaId = token.desaId as string;
         session.user.email = token.email as string;
         session.user.username = token.username as string;
+        session.user.name = token.name as string;
         session.user.role = token.role as string;
       }
       return session;

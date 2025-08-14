@@ -1,11 +1,16 @@
 import VisiMisiDesa from "@/components/ProfileDesa/VisiMisiDesa";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
-
+import { headers } from "next/headers";
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
+import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 
-export default function VisiMisiPage() {
+export default async function VisiMisiPage() {
+  const headersList = headers();
+  const host = headersList.get("host") || "";
+  const subdomain = host.split(".")[0];
+  const desa = await getDesaBySubdomain(subdomain); // Replace with actual subdomain logic if needed
   const links = [
     { to: "/", label: "Home" },
     { to: "/visi-misi", label: "Visi & Misi" },
@@ -21,7 +26,7 @@ export default function VisiMisiPage() {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <VisiMisiDesa />
+              <VisiMisiDesa desa={desa} />
             </div>
             <SumedangWeatherWidget />
           </div>

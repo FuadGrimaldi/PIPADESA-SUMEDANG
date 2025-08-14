@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
-export default function VisiMisiDesa() {
+import { Desa } from "@/types/desa";
+
+export default function VisiMisiDesa({ desa }: { desa: Desa | null }) {
   return (
     <section>
       <motion.div
@@ -24,9 +26,7 @@ export default function VisiMisiDesa() {
               Visi
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Menjadi desa mandiri yang berbasis potensi lokal serta berdaya
-              saing di tingkat nasional, dengan tata kelola yang transparan dan
-              partisipatif.
+              {desa?.visi || "Loading... Visi desa belum tersedia."}
             </p>
           </div>
 
@@ -34,36 +34,16 @@ export default function VisiMisiDesa() {
             <h2 className="lg:text-3xl text-2xl font-bold text-primary mb-4">
               Misi
             </h2>
-            <ul className="list-disc list-inside space-y-4 text-lg text-gray-700 leading-relaxed">
-              <li>
-                Meningkatkan kualitas sumber daya manusia melalui pendidikan dan
-                pelatihan berbasis potensi desa.
-              </li>
-              <li>
-                Mendorong kemandirian ekonomi desa dengan memanfaatkan produk
-                lokal dan teknologi tepat guna.
-              </li>
-              <li>
-                Memperkuat tata kelola pemerintahan desa yang transparan,
-                akuntabel, dan berbasis digital.
-              </li>
-              <li>
-                Menjaga kelestarian lingkungan hidup dan pengelolaan sumber daya
-                alam yang berkelanjutan.
-              </li>
-              <li>
-                Memperkuat solidaritas dan partisipasi masyarakat dalam
-                pembangunan desa.
-              </li>
-            </ul>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              {desa?.misi || "Loading... Visi desa belum tersedia."}
+            </p>
           </div>
           <div className="mt-10">
             <h2 className="lg:text-3xl text-2xl font-bold text-primary mb-4">
               Tujuan
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus, quae.
+              {desa?.tujuan || "Loading... Tujuan desa belum tersedia."}
             </p>
           </div>
         </div>

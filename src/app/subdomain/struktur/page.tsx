@@ -1,11 +1,17 @@
 import StrukturDesa from "@/components/ProfileDesa/Struktur";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
-
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { OfficialsService } from "@/lib/prisma-services/officialService";
 
-export default function VisiMisiPage() {
+export default async function VisiMisiPage() {
+  const session = await getServerSession(authOptions);
+  const officials = await OfficialsService.getOfficialsByDesaId(
+    Number(session?.user?.desaId)
+  );
   const links = [
     { to: "/", label: "Home" },
     { to: "/struktur", label: "Struktur" },
@@ -21,7 +27,7 @@ export default function VisiMisiPage() {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <StrukturDesa />
+              <StrukturDesa officials={officials} />
             </div>
             <SumedangWeatherWidget />
           </div>

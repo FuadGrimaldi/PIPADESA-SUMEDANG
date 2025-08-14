@@ -13,7 +13,5 @@ export default function RootLanding() {
 
   const isMainDomain = host === "localhost:3000" || host === "yourdomain.com";
 
-  console.log("Subdomain:", subdomain); // Debugging line
-
   return <Hero subdomain={isMainDomain ? null : subdomain} />;
 }

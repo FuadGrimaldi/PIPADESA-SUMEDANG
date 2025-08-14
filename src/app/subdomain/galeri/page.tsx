@@ -1,15 +1,18 @@
 import Galeri from "@/components/ProfileDesa/Galery";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
-
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
-export default function GaleryPage() {
+export default async function GaleryPage() {
+  const session = await getServerSession(authOptions);
   const links = [
     { to: "/", label: "Home" },
     { to: "/galeri", label: "Galery" },
   ];
+
   return (
     <div className="container min-h-screen">
       <div className="relative px-[31px] lg:px-[100px] py-8 bg-gray-800 overflow-visible pt-[90px]">

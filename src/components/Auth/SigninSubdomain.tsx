@@ -1,21 +1,59 @@
 "use client";
 
-import { useState } from "react";
+import { useState, SyntheticEvent } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import axios from "axios";
+import { useRouter } from "next/navigation"; // untuk melakukan redirect
+import { signIn } from "next-auth/react";
+import { Desa } from "@/types/desa"; // Pastikan Anda memiliki tipe Desa yang sesuai
 
-export default function SubdomainLogin() {
+export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    setError("");
     setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const singInData = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+      const response = await axios.post("/api/login", {
+        email: data.email,
+        password: data.password,
+      });
+
+      if (response.status === 200 && response.data) {
+        const DesaId = response.data.user.desa_id;
+        if (DesaId !== desa?.id) {
+          alert("You are not authorized to access this desa.");
+          return;
+        }
+        const userId = response.data.user.id;
+        localStorage.setItem("id", userId);
+        localStorage.setItem("username", response.data.user.username);
+        localStorage.setItem("email", response.data.user.email);
+        alert("Login successful");
+        router.push("/admindesa/dashboard"); // arahkan ke dashboard setelah login berhasil
+        router.refresh(); // refresh halaman untuk memastikan data terbar
+      } else {
+        alert("Login failed");
+      }
+    } catch (error) {
+      alert("Login failed: " + error);
+    } finally {
       setIsLoading(false);
-      alert("Logged In!");
-    }, 2000);
+    }
   };
 
   return (
@@ -60,9 +98,11 @@ export default function SubdomainLogin() {
               </p>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <input
+                  value={data.email}
+                  onChange={(e) => setData({ ...data, email: e.target.value })}
                   type="email"
                   placeholder="Email"
                   className="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400 transition-all"
@@ -73,6 +113,10 @@ export default function SubdomainLogin() {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
+                  value={data.password}
+                  onChange={(e) =>
+                    setData({ ...data, password: e.target.value })
+                  }
                   placeholder="Password"
                   className="w-full text-sm text-gray-800 px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400 transition-all"
                   required

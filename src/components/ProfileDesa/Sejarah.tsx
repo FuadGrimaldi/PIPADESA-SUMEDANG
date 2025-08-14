@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
-export default function SejarahDesa() {
+import { Desa } from "@/types/desa";
+
+export default function SejarahDesa({ desa }: { desa: Desa | null }) {
   return (
     <section>
       <motion.div
@@ -24,10 +26,7 @@ export default function SejarahDesa() {
               Sejarah Desa
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Desa kita memiliki sejarah yang kaya dan beragam, dimulai dari
-              pembentukan komunitas awal hingga perkembangan yang pesat saat
-              ini. Sejak zaman dahulu, desa ini telah menjadi pusat kegiatan
-              sosial, ekonomi, dan budaya masyarakat setempat.
+              {desa?.sejarah || "Loading... Sejarah desa belum tersedia."}
             </p>
           </div>
         </div>

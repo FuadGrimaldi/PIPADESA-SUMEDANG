@@ -1,5 +1,3 @@
-// schema.prisma
-
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
@@ -10,7 +8,7 @@ generator client {
 }
 
 model users {
-  id             BigInt     @id @default(autoincrement())
+  id             Int     @id @default(autoincrement())
   desa_id        Int
   nik            String     @unique @db.VarChar(16)
   username       String     @unique @db.VarChar(50)
@@ -28,7 +26,6 @@ model users {
   pengajuan_proposal pengajuan_proposal[]
   articles       articles[]
   agenda_desa    agenda_desa[]
-
 }
 
 model profile_desa {
@@ -40,12 +37,13 @@ model profile_desa {
   email            String
   twitter          String
   instagram        String
-  visi             String
-  misi             String
-  tujuan           String
-  gmaps_embed_url  String
-  lat              Decimal?  @db.Decimal(10, 8)
-  lng              Decimal?  @db.Decimal(11, 8)
+  visi             String   @db.LongText
+  misi             String   @db.LongText
+  tujuan           String   @db.LongText
+  sejarah           String   @db.LongText
+  gmaps_embed_url  String   @db.LongText
+  lat              Float?
+  lng              Float?
   created_at       DateTime
   updated_at       DateTime
 
@@ -63,15 +61,15 @@ model profile_desa {
 }
 
 model pengajuan_proposal {
-  id              BigInt     @id @default(autoincrement())
-  user_id         BigInt
+  id              Int     @id @default(autoincrement())
+  user_id         Int
   desa_id         Int
   judul_pengajuan String     @db.VarChar(255)
-  deskripsi       String
+  deskripsi       String     @db.LongText
   dokumen_path    String     @db.VarChar(255)
   kategori        ProposalKategori
   status          Status
-  tanggapan_admin String
+  tanggapan_admin String     @db.LongText
   created_at      DateTime
   updated_at      DateTime
 
@@ -80,12 +78,12 @@ model pengajuan_proposal {
 }
 
 model profil_masyarakat {
-  id                   BigInt   @id @default(autoincrement())
-  user_id              BigInt   @unique
+  id                   Int   @id @default(autoincrement())
+  user_id              Int   @unique
   tempat_lahir         String   @db.VarChar(100)
   tanggal_lahir        DateTime
   jenis_kelamin        Gender
-  alamat               String
+  alamat               String   @db.LongText
   agama                String   @db.VarChar(50)
   status_perkawinan    StatusPerkawinan
   pekerjaan            String   @db.VarChar(100)
@@ -104,7 +102,7 @@ model layanan {
   nama_layanan        String
   loket               String
   instansi_pelaksana  String
-  deskripsi           String
+  deskripsi           String   @db.LongText
   created_at          DateTime
   updated_at          DateTime
 
@@ -117,7 +115,7 @@ model persyaratan_layanan {
   id               Int     @id @default(autoincrement())
   layanan_id       Int
   nama_persyaratan String
-  keterangan       String
+  keterangan       String   @db.LongText
   file_url         String
 
   layanan          layanan @relation(fields: [layanan_id], references: [id])
@@ -136,8 +134,8 @@ model jadwal_layanan {
 model instansi {
   id          Int      @id @default(autoincrement())
   nama_instansi String
-  deskripsi    String
-  alamat       String
+  deskripsi    String   @db.LongText
+  alamat       String   @db.LongText
   telepon      String
   email        String
   website      String
@@ -153,7 +151,7 @@ model potensi_desa {
   desa_id      Int
   kategori     PotensiKategori
   nama_potensi String   @db.VarChar(255)
-  deskripsi    String
+  deskripsi    String   @db.LongText
   icon         String   @db.VarChar(100)
   gambar_path  String   @db.VarChar(255)
 
@@ -164,7 +162,7 @@ model anggaran_apbdes {
   id                  Int      @id @default(autoincrement())
   desa_id             Int
   tahun_anggaran      Int      @db.Year
-  deskripsi           String   @db.VarChar(255)
+  deskripsi           String   @db.LongText
   total_pendapatan    Decimal  @db.Decimal(15, 2)
   total_belanja       Decimal  @db.Decimal(15, 2)
   dokumen_realisasi_path String @db.VarChar(255)
@@ -176,8 +174,8 @@ model anggaran_apbdes {
 }
 
 model articles {
-  id                 BigInt    @id @default(autoincrement())
-  user_id            BigInt
+  id                 Int    @id @default(autoincrement())
+  user_id            Int
   desa_id            Int
   tipe               ArticleType
   title              String    @db.VarChar(255)
@@ -201,7 +199,7 @@ model videos {
   desa_id      Int
   title        String   @db.VarChar(255)
   embed_url    String   @db.VarChar(255)
-  deskripsi    String
+  deskripsi    String   @db.LongText
   uploaded_at  DateTime
 
   profile_desa profile_desa @relation(fields: [desa_id], references: [id])
@@ -213,7 +211,7 @@ model organisasi {
   kategori_id         Int
   nama_organisasi     String @db.VarChar(255)
   nama_ketua          String @db.VarChar(255)
-  deskripsi_kegiatan  String
+  deskripsi_kegiatan  String @db.LongText
   logo_path           String @db.VarChar(255)
 
   profile_desa        profile_desa @relation(fields: [desa_id], references: [id])
@@ -233,11 +231,11 @@ model agenda_desa {
   judul        String  @db.VarChar(255)
   slug         String  @unique
   kategori     AgendaKategori
-  deskripsi    String
+  deskripsi    String  @db.LongText
   lokasi       String  @db.VarChar(255)
   waktu        DateTime
   poster       String  @db.VarChar(255)
-  created_by   BigInt
+  created_by   Int
   status       Status
   created_at   DateTime
   updated_at   DateTime
@@ -264,7 +262,7 @@ model sarana_prasarana {
   desa_id        Int
   kategori       SaranaKategori
   nama_sarana    String @db.VarChar(255)
-  deskripsi      String
+  deskripsi      String @db.LongText
   alamat_lokasi  String @db.VarChar(255)
   koordinat_lat  String @db.VarChar(50)
   koordinat_long String @db.VarChar(50)
@@ -303,7 +301,7 @@ model keluarga {
   no_kk                String    @unique
   kepala_keluarga      String
   desa_id              Int
-  alamat               String
+  alamat               String    @db.LongText
   sumber_listrik       SumberListrik
   bahan_bakar_memasak  BahanBakar
   sumber_air_minum     SumberAir
@@ -320,6 +318,7 @@ model keluarga {
 
   penduduk             penduduk[]
 }
+
 
 // ENUM DEFINITIONS
 

@@ -15,8 +15,10 @@ import Link from "next/link";
 
 export default function SubdomainNavGuest({
   subdomain,
+  username,
 }: {
   subdomain: string | null;
+  username: string | null;
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -121,13 +123,13 @@ export default function SubdomainNavGuest({
                       <div className="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
                         <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-gray-200/50 py-2">
                           {item.submenu.map((subitem, subindex) => (
-                            <a
+                            <Link
                               key={subindex}
                               href={subitem.href}
                               className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200 font-medium"
                             >
                               {subitem.name}
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -146,12 +148,29 @@ export default function SubdomainNavGuest({
 
             {/* Auth Button & Mobile Menu Toggle */}
             <div className="flex items-center space-x-4">
-              <Link
-                href="/login"
-                className="hidden sm:block bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105"
-              >
-                Masuk/Daftar
-              </Link>
+              {username ? (
+                <Link
+                  href="/admindesa/dashboard"
+                  className="hidden sm:block bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105"
+                >
+                  {username}
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="hidden sm:block bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105"
+                  >
+                    Masuk
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="hidden sm:block bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105"
+                  >
+                    Daftar
+                  </Link>
+                </>
+              )}
 
               {/* Mobile menu button */}
               <button
@@ -265,18 +284,29 @@ export default function SubdomainNavGuest({
 
               {/* Mobile Auth Button */}
               <div className="flex justify-center gap-3 px-4 pt-6 border-t border-gray-200/50 mt-6">
-                <Link
-                  href="/login"
-                  className=" bg-gradient-to-r from-red-500 to-red-600 text-white px-[45px] py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md"
-                >
-                  Masuk
-                </Link>
-                <Link
-                  href="/register"
-                  className=" bg-gradient-to-r from-red-500 to-red-600 text-white px-[45px] py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md"
-                >
-                  Daftar
-                </Link>
+                {username ? (
+                  <Link
+                    href="/admindesa/dashboard"
+                    className="bg-gradient-to-r from-red-500 to-red-600 text-white px-[45px] py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md"
+                  >
+                    {username}
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      href="/login"
+                      className="bg-gradient-to-r from-red-500 to-red-600 text-white px-[45px] py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md"
+                    >
+                      Masuk
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="bg-gradient-to-r from-red-500 to-red-600 text-white px-[45px] py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md"
+                    >
+                      Daftar
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

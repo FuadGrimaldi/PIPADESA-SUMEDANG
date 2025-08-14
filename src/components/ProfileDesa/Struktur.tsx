@@ -3,58 +3,17 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { Official } from "@/types/official";
 
-export default function StrukturDesa() {
+interface StrukturDesaProps {
+  officials: Official[];
+}
+
+export default function StrukturDesa({ officials }: StrukturDesaProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Data aparatur desa (gunakan foto placeholder atau ganti dengan URL foto asli)
-  const aparaturDesa = [
-    {
-      id: 1,
-      nama: "H. Ahmad Suryadi, S.Sos",
-      jabatan: "Kepala Desa",
-      foto: "/assets/perangkat-desa/default-profile.jpg", // Fixed: provide default image
-    },
-    {
-      id: 2,
-      nama: "Dra. Siti Nurhalimah",
-      jabatan: "Sekretaris Desa",
-      foto: "/assets/perangkat-desa/default-profile.jpg", // Fixed: provide default image
-    },
-    {
-      id: 3,
-      nama: "Drs. Bambang Hermawan",
-      jabatan: "Kepala Urusan Pemerintahan",
-      foto: "/assets/perangkat-desa/default-profile.jpg", // Fixed: provide default image
-    },
-    {
-      id: 4,
-      nama: "Sri Wahyuni, S.E",
-      jabatan: "Kepala Urusan Keuangan",
-      foto: "/assets/perangkat-desa/default-profile.jpg", // Fixed: provide default image
-    },
-    {
-      id: 5,
-      nama: "Ir. Dadang Supriatna",
-      jabatan: "Kepala Urusan Perencanaan",
-      foto: "/assets/perangkat-desa/default-profile.jpg", // Fixed: provide default image
-    },
-    {
-      id: 6,
-      nama: "Hj. Yayah Komariah",
-      jabatan: "Kepala Dusun 1",
-      foto: "/assets/perangkat-desa/default-profile.jpg", // Fixed: provide default image
-    },
-    {
-      id: 7,
-      nama: "Hj. Yayah Komariah",
-      jabatan: "Kepala Dusun 1",
-      foto: "/assets/perangkat-desa/default-profile.jpg", // Fixed: provide default image
-    },
-  ];
-
   const itemsPerSlide = 3;
-  const totalSlides = Math.ceil(aparaturDesa.length / itemsPerSlide);
+  const totalSlides = Math.ceil(officials.length / itemsPerSlide);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -99,7 +58,7 @@ export default function StrukturDesa() {
                 {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                   <div key={slideIndex} className="w-full flex-shrink-0">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
-                      {aparaturDesa
+                      {officials
                         .slice(
                           slideIndex * itemsPerSlide,
                           (slideIndex + 1) * itemsPerSlide
@@ -121,13 +80,13 @@ export default function StrukturDesa() {
                                 <div className="relative">
                                   <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300">
                                     <Image
-                                      src={getImageSrc(aparatur.foto)}
-                                      alt={aparatur.nama}
+                                      src={getImageSrc(aparatur.photo)}
+                                      alt={aparatur.name}
                                       className="w-full h-full object-cover"
                                       width={128}
                                       height={128}
                                       unoptimized={getImageSrc(
-                                        aparatur.foto
+                                        aparatur.photo
                                       ).startsWith("http")}
                                     />
                                   </div>
@@ -140,10 +99,10 @@ export default function StrukturDesa() {
                               {/* Info */}
                               <div className="text-center mb-4">
                                 <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-700 transition-colors">
-                                  {aparatur.nama}
+                                  {aparatur.name}
                                 </h3>
                                 <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#D2B48C] to-[#DEB887] text-white text-sm font-semibold rounded-full mb-3">
-                                  {aparatur.jabatan}
+                                  {aparatur.position}
                                 </div>
                               </div>
 

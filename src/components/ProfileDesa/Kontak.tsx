@@ -10,22 +10,10 @@ import {
   User,
   MessageSquare,
 } from "lucide-react";
+import { Desa } from "@/types/desa";
 
-const MainKontak = () => {
+const MainKontak = ({ desa }: { desa: Desa | null }) => {
   // Sample data - replace with actual data from your backend
-  const profileDesa = {
-    nama_desa: "Desa Sumedang Utara",
-    alamat:
-      "Jl. Raya Sumedang No. 123, Kecamatan Sumedang Utara, Kabupaten Sumedang, Jawa Barat 45311",
-    telepon: "+62 261 201234",
-    email: "info@sumedangutara.desa.id",
-    twitter: "@SumedangUtara",
-    instagram: "@sumedangutara_official",
-    gmaps_embed_url:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.0!2d107.9220!3d-6.8570!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTEnMjUuMiJTIDEwN8KwNTUnMTkuMiJF!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid",
-    lat: -6.857,
-    lng: 107.922,
-  };
 
   const [formData, setFormData] = useState({
     nama: "",
@@ -90,7 +78,9 @@ const MainKontak = () => {
               Telepon
             </h3>
           </div>
-          <p className="text-gray-600">{profileDesa.telepon}</p>
+          <p className="text-gray-600">
+            {desa?.telepon || "loading..mencari kontak"}
+          </p>
         </div>
 
         <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200 hover:shadow-lg transition-shadow">
@@ -100,7 +90,9 @@ const MainKontak = () => {
             </div>
             <h3 className="ml-4 text-lg font-semibold text-gray-800">Email</h3>
           </div>
-          <p className="text-gray-600">{profileDesa.email}</p>
+          <p className="text-gray-600">
+            {desa?.email || "loading..mencari kontak"}
+          </p>
         </div>
 
         <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200 hover:shadow-lg transition-shadow">
@@ -111,7 +103,7 @@ const MainKontak = () => {
             <h3 className="ml-4 text-lg font-semibold text-gray-800">Alamat</h3>
           </div>
           <p className="text-gray-600 text-sm leading-relaxed">
-            {profileDesa.alamat}
+            {desa?.alamat || "loading..mencari kontak"}
           </p>
         </div>
       </div>
@@ -270,7 +262,7 @@ const MainKontak = () => {
             <div className="p-6">
               <div className="rounded-lg overflow-hidden border border-gray-200 mb-4">
                 <iframe
-                  src={profileDesa.gmaps_embed_url}
+                  src={desa?.gmaps_embed_url || "loading..mencari lokasi"}
                   width="100%"
                   height="300"
                   style={{ border: 0 }}
@@ -282,9 +274,11 @@ const MainKontak = () => {
               </div>
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h4 className="font-semibold text-gray-800 mb-2">
-                  {profileDesa.nama_desa}
+                  {desa?.nama_desa || "loading..mencari kontak"}
                 </h4>
-                <p className="text-gray-600 text-sm">{profileDesa.alamat}</p>
+                <p className="text-gray-600 text-sm">
+                  {desa?.alamat || "loading..mencari kontak"}
+                </p>
               </div>
             </div>
           </div>
@@ -297,22 +291,19 @@ const MainKontak = () => {
 
             <div className="space-y-3 mb-6">
               <a
-                href={`https://twitter.com/${profileDesa.twitter.replace(
-                  "@",
-                  ""
-                )}`}
+                href={`https://twitter.com/${desa?.twitter.replace("@", "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors group"
               >
                 <Twitter className="w-6 h-6 text-blue-500 mr-3" />
                 <span className="text-gray-700 group-hover:text-blue-600">
-                  {profileDesa.twitter}
+                  {desa?.twitter || "loading..mencari kontak"}
                 </span>
               </a>
 
               <a
-                href={`https://instagram.com/${profileDesa.instagram.replace(
+                href={`https://instagram.com/${desa?.instagram.replace(
                   "@",
                   ""
                 )}`}
@@ -322,7 +313,7 @@ const MainKontak = () => {
               >
                 <Instagram className="w-6 h-6 text-blue-500 mr-3" />
                 <span className="text-gray-700 group-hover:text-blue-600">
-                  {profileDesa.instagram}
+                  {desa?.instagram || "loading..mencari kontak"}
                 </span>
               </a>
             </div>
