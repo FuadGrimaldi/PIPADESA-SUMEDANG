@@ -3,14 +3,17 @@ import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import { OfficialsService } from "@/lib/prisma-services/officialService";
+import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
+import { headers } from "next/headers";
 
 export default async function VisiMisiPage() {
-  const session = await getServerSession(authOptions);
+  const headersList = headers();
+  const host = headersList.get("host") || "";
+  const subdomain = host.split(".")[0];
+  const desa = await getDesaBySubdomain(subdomain); // Replace with actual subdomain logic if needed
   const officials = await OfficialsService.getOfficialsByDesaId(
-    Number(session?.user?.desaId)
+    Number(desa?.id) || 0
   );
   const links = [
     { to: "/", label: "Home" },
