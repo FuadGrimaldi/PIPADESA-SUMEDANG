@@ -300,7 +300,9 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
     <div className="space-y-8">
       {/* Header */}
       <div className="flex justify-between items-center bg-gradient-to-r from-blue-600 to-blue-500 p-5 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-white">Profil Desa</h2>
+        <h2 className="lg:text-2xl text-lg font-bold text-white">
+          Profil Desa
+        </h2>
         <button
           onClick={() => setIsEditing(true)}
           className="px-4 py-2 bg-white text-blue-600 font-medium rounded-md shadow hover:bg-gray-100 transition"

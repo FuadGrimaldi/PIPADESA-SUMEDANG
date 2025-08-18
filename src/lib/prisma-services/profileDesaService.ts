@@ -21,9 +21,13 @@ export const getDesaById = async (id: number) => {
 };
 
 export const getDesaBySubdomain = async (subdomain: string) => {
-  return prisma.profile_desa.findFirst({
-    where: { subdomain },
-  });
+  try {
+    return await prisma.profile_desa.findFirst({
+      where: { subdomain },
+    });
+  } catch (error) {
+    return null; // fallback biar app tetap jalan
+  }
 };
 
 export const updateDesa = async (id: number, data) => {

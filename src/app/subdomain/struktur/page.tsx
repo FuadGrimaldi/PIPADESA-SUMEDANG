@@ -7,7 +7,7 @@ import { OfficialsService } from "@/lib/prisma-services/officialService";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 import { headers } from "next/headers";
 
-export default async function VisiMisiPage() {
+export default async function StrukturPage() {
   const headersList = headers();
   const host = headersList.get("host") || "";
   const subdomain = host.split(".")[0];

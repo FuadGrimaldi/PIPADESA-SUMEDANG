@@ -16,6 +16,8 @@ import {
   ChevronRight,
   Menu,
   X,
+  Home,
+  Newspaper,
 } from "lucide-react";
 import { cn } from "@/lib/utils/clsx";
 import { useRouter } from "next/navigation";
@@ -24,18 +26,20 @@ import { useRouter } from "next/navigation";
 const menuData = [
   {
     title: "Profile",
-    icon: Users,
+    icon: Home,
     items: [
       { title: "Profile Desa", url: "/admindesa/profile" },
       { title: "Struktur ", url: "/admindesa/struktur" },
     ],
   },
   {
-    title: "Pendidikan",
-    icon: GraduationCap,
+    title: "Publikasi",
+    icon: Newspaper,
     items: [
-      { title: "Partisipasi Sekolah", url: "/partisipasi-sekolah" },
-      { title: "Ijazah", url: "/ijazah" },
+      { title: "Berita", url: "/admindesa/berita" },
+      { title: "Kegiatan", url: "/kegiatan" },
+      { title: "Agenda", url: "/agenda" },
+      { title: "Pengumuman", url: "/pengumuman" },
     ],
   },
   {
@@ -154,7 +158,7 @@ export default function AdminDesSidabar() {
       {/* Mobile Menu Toggle Button */}
       <button
         onClick={toggleMobile}
-        className="lg:hidden fixed top-4 left-10 z-[60] p-3 bg-[#C0B099] text-white rounded-lg shadow-lg hover:bg-[#A0906B] transition-all duration-200"
+        className="lg:hidden fixed top-4 left-10 z-50 p-3 bg-[#C0B099] text-white rounded-lg shadow-lg hover:bg-[#A0906B] transition-all duration-200"
         aria-label="Toggle navigation menu"
       >
         <Menu className="h-5 w-5" />
@@ -180,7 +184,7 @@ export default function AdminDesSidabar() {
         aria-label="Statistics navigation"
       >
         {/* Sidebar Content */}
-        <div className=" overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
+        <div className=" overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 lg:mt-0 mt-[70px]">
           <nav className="p-3 sm:p-4 space-y-2" role="navigation">
             {menuData.map((item, index) => (
               <div

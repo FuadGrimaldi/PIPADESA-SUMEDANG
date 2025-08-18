@@ -25,14 +25,6 @@ export async function POST(req: NextRequest) {
     const display_order = formData.get("display_order") as string;
     const photoFile = formData.get("photo") as File | null;
 
-    console.log("Form data received:", {
-      name,
-      position,
-      desa_id,
-      display_order,
-      photoFile: photoFile?.name || "No file",
-    });
-
     // Validation
     if (!name || !position || !desa_id || !display_order) {
       console.error("Missing required fields:", {
@@ -110,11 +102,7 @@ export async function POST(req: NextRequest) {
       photo: photoPath,
     };
 
-    console.log("Creating official with data:", officialData);
-
     const official = await OfficialsService.createOfficial(officialData);
-
-    console.log("Official created successfully:", official);
     return NextResponse.json(official, { status: 201 });
   } catch (error: any) {
     console.error("POST /api/officials error:", error);

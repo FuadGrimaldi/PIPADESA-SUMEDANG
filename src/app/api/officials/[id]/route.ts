@@ -87,7 +87,6 @@ export async function PUT(
             currentOfficial.photo
           );
           if (fs.existsSync(oldPhotoPath)) {
-            console.log("Deleting old photo:", oldPhotoPath);
             fs.unlinkSync(oldPhotoPath);
           }
         }
@@ -175,6 +174,7 @@ export async function DELETE(
       const photoPath = path.join(
         process.cwd(),
         "public",
+
         currentOfficial.photo
       );
       if (fs.existsSync(photoPath)) {

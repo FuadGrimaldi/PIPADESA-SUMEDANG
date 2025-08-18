@@ -392,6 +392,8 @@ enum ArticleType {
   agenda
   sakip
   sid
+  kegiatan
+  pengumuman
 }
 
 enum ArticleStatus {
