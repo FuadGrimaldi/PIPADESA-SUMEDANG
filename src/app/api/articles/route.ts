@@ -7,6 +7,8 @@ import { ArticleType, ArticleStatus, ArticleCreate } from "@/types/article";
 
 export async function GET() {
   try {
+    console.log("GET /api/articles - Starting request");
+    // Fetch all articles
     const articles = await ArticlesDesaService.getAllArticles();
     return NextResponse.json(articles);
   } catch (error: any) {

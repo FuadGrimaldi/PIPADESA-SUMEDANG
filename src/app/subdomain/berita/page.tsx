@@ -1,16 +1,22 @@
 import AllBerita from "@/components/ProfileDesa/AllBerita";
 import SearchBerita from "@/components/Search/SearchNews";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
-
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
+import { headers } from "next/headers";
+import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 
-export default function BeritaPage() {
+export default async function BeritaPage() {
+  const headersList = headers();
+  const host = headersList.get("host") || "";
+  const subdomain = host.split(".")[0];
+  const desa = await getDesaBySubdomain(subdomain);
   const links = [
     { to: "/", label: "Home" },
     { to: "/berita", label: "Berita" },
   ];
+
   return (
     <div className="container min-h-screen">
       <div className="relative px-[31px] lg:px-[100px] py-8 bg-gray-800 overflow-visible pt-[90px]">
@@ -25,7 +31,7 @@ export default function BeritaPage() {
               <SearchBerita />
             </div>
             <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
-              <AllBerita />
+              <AllBerita desaId={Number(desa?.id)} />
               {/* <h1 className="text-2xl font-bold mb-4">Berita</h1>
               <p>Berita terbaru akan ditampilkan di sini.</p> */}
               {/* Placeholder for news content */}

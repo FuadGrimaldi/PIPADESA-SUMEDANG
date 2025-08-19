@@ -41,7 +41,6 @@ export default function CardNews({
         <h3 className="mt-4 text-lg font-semibold text-gray-900 hover:text-blue-600 transition">
           <span>{CardTitle}</span>
         </h3>
-        <p className="mt-2 text-sm text-gray-700">{CardDescription}</p>
       </div>
     </Link>
   );

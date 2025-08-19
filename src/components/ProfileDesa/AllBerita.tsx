@@ -1,101 +1,21 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import CardNews from "../Card/NewsCard";
 import { motion } from "framer-motion";
+import { Article } from "@/types/article";
 
-type NewsItem = {
-  id: number;
-  des_id: number;
-  title: string;
-  excerpt: string;
-  date: string;
-  category: string;
-  image: string;
-};
+interface AllBeritaProps {
+  desaId: number;
+}
 
-const newsData: NewsItem[] = [
-  {
-    id: 1,
-    des_id: 1,
-    title: "Gotong Royong Bersihkan Lingkungan",
-    category: "Berita Desa",
-    excerpt:
-      "Warga Desa Cikeusi melaksanakan kegiatan gotong royong membersihkan jalan utama desa...",
-    date: "2025-07-30",
-    image:
-      "https://cdn.tailgrids.com/assets/images/application/blogs/blog-01/image-01.jpg",
-  },
-  {
-    id: 2,
-    des_id: 1,
-    title: "Pelatihan UMKM untuk Warga",
-    category: "Berita Desa",
-    excerpt:
-      "Pelatihan UMKM dilaksanakan untuk meningkatkan keterampilan usaha mikro masyarakat...",
-    date: "2025-07-28",
-    image:
-      "https://cdn.tailgrids.com/assets/images/application/blogs/blog-01/image-02.jpg",
-  },
-  {
-    id: 3,
-    des_id: 1,
-    title: "Penyaluran Bantuan Sosial",
-    category: "Berita Desa",
-    excerpt:
-      "Desa Cikeusi menyalurkan bantuan sosial kepada warga kurang mampu...",
-    date: "2025-07-25",
-    image:
-      "https://cdn.tailgrids.com/assets/images/application/blogs/blog-01/image-03.jpg",
-  },
-  {
-    id: 4,
-    des_id: 1,
-    title: "Pembukaan Jalan Baru",
-    category: "Berita Desa",
-    excerpt:
-      "Jalan penghubung antar dusun resmi dibuka untuk memudahkan akses transportasi...",
-    date: "2025-07-20",
-    image:
-      "https://cdn.tailgrids.com/assets/images/application/blogs/blog-01/image-03.jpg",
-  },
-  {
-    id: 5,
-    des_id: 1,
-    title: "Penyaluran Bantuan Sosial",
-    category: "Berita Desa",
-    excerpt:
-      "Desa Cikeusi menyalurkan bantuan sosial kepada warga kurang mampu...",
-    date: "2025-07-25",
-    image:
-      "https://cdn.tailgrids.com/assets/images/application/blogs/blog-01/image-03.jpg",
-  },
-  {
-    id: 6,
-    des_id: 1,
-    title: "Pembukaan Jalan Baru",
-    category: "Berita Desa",
-    excerpt:
-      "Jalan penghubung antar dusun resmi dibuka untuk memudahkan akses transportasi...",
-    date: "2025-07-20",
-    image:
-      "https://cdn.tailgrids.com/assets/images/application/blogs/blog-01/image-03.jpg",
-  },
-  {
-    id: 7,
-    des_id: 1,
-    title: "Pembukaan Jalan Baru",
-    category: "Kegiatan Desa",
-    excerpt:
-      "Jalan penghubung antar dusun resmi dibuka untuk memudahkan akses transportasi...",
-    date: "2025-07-20",
-    image:
-      "https://cdn.tailgrids.com/assets/images/application/blogs/blog-01/image-03.jpg",
-  },
-];
 const ITEMS_PER_PAGE = 6;
-const AllBerita = () => {
+
+const AllBerita = ({ desaId }: AllBeritaProps) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const getPageFromURL = () => {
     if (typeof window !== "undefined") {
@@ -105,8 +25,9 @@ const AllBerita = () => {
     }
     return 1;
   };
+
   // Function to update URL with page param
-  const updateURL = (page) => {
+  const updateURL = (page: number) => {
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
       if (page === 1) {
@@ -118,29 +39,66 @@ const AllBerita = () => {
     }
   };
 
+  // Fetch articles by desa_id
+  const fetchArticles = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`/api/articles`);
+      const data = await res.json();
+
+      if (data.error) {
+        setError(data.error);
+        setArticles([]);
+      } else {
+        // Filter artikel dengan tipe 'berita' dan status 'published'
+        const beritaArticles = data.filter(
+          (article: Article) =>
+            article.tipe === "berita" &&
+            article.status === "published" &&
+            article.desa_id === desaId
+        );
+        setArticles(beritaArticles);
+      }
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+      setError("Gagal memuat artikel");
+      setArticles([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [desaId, currentPage]);
+
   // Initialize page from URL on component mount
   useEffect(() => {
     const pageFromURL = getPageFromURL();
     setCurrentPage(pageFromURL);
   }, []);
 
+  // Fetch articles when desaId or currentPage changes
+  useEffect(() => {
+    if (desaId) {
+      fetchArticles();
+    }
+  }, [desaId, currentPage, fetchArticles]);
+
   // Update URL when page changes
   useEffect(() => {
     updateURL(currentPage);
   }, [currentPage]);
 
-  const totalPages = Math.ceil(newsData.length / ITEMS_PER_PAGE);
-
+  const totalPages = Math.ceil(articles.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentItems = articles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-  const currentItems = newsData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-  const handlePageChange = (newPage) => {
+  const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
       // Scroll to top when page changes
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
+
   // Generate page numbers for pagination
   const getPageNumbers = () => {
     const pageNumbers: number[] = [];
@@ -165,26 +123,86 @@ const AllBerita = () => {
 
     return pageNumbers;
   };
-  if (currentItems.length === 0) {
+
+  // Convert Article to format expected by CardNews
+  const convertArticleToNewsCard = (article: Article) => ({
+    id: article.id,
+    title: article.title,
+    excerpt: article.content.substring(0, 150) + "...", // Create excerpt from content
+    image: article.featured_image || "/default-news-image.jpg",
+    date: new Date(article.published_at).toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
+    category: article.tipe,
+  });
+
+  if (loading) {
     return (
-      <div className="container mx-auto px-4">
-        <div className="mb-6 w-full border-b-4 border-[#C0B099]">
-          <div className="mb-6 text-center max-w-xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
-              Berita & Informasi Desa
-            </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
-              Temukan berbagai kabar terbaru, pengumuman resmi, dan informasi
-              penting seputar kegiatan dan perkembangan di lingkungan kita.
-            </p>
+      <section>
+        <div className="container mx-auto px-4">
+          <div className="mb-6 w-full border-b-4 border-[#C0B099]">
+            <div className="mb-6 text-center max-w-xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+                Berita & Informasi Desa
+              </h2>
+              <p className="text-base text-gray-600 dark:text-gray-400">
+                Temukan berbagai kabar terbaru, pengumuman resmi, dan informasi
+                penting seputar kegiatan dan perkembangan di lingkungan kita.
+              </p>
+            </div>
           </div>
+          <div className="text-center text-gray-500">Memuat berita...</div>
         </div>
-        <div className="text-center text-gray-500">
-          Tidak ada berita yang tersedia.
-        </div>
-      </div>
+      </section>
     );
   }
+
+  if (error) {
+    return (
+      <section>
+        <div className="container mx-auto px-4">
+          <div className="mb-6 w-full border-b-4 border-[#C0B099]">
+            <div className="mb-6 text-center max-w-xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+                Berita & Informasi Desa
+              </h2>
+              <p className="text-base text-gray-600 dark:text-gray-400">
+                Temukan berbagai kabar terbaru, pengumuman resmi, dan informasi
+                penting seputar kegiatan dan perkembangan di lingkungan kita.
+              </p>
+            </div>
+          </div>
+          <div className="text-center text-red-500">{error}</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (currentItems.length === 0) {
+    return (
+      <section>
+        <div className="container mx-auto px-4">
+          <div className="mb-6 w-full border-b-4 border-[#C0B099]">
+            <div className="mb-6 text-center max-w-xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+                Berita & Informasi Desa
+              </h2>
+              <p className="text-base text-gray-600 dark:text-gray-400">
+                Temukan berbagai kabar terbaru, pengumuman resmi, dan informasi
+                penting seputar kegiatan dan perkembangan di lingkungan kita.
+              </p>
+            </div>
+          </div>
+          <div className="text-center text-gray-500">
+            Tidak ada berita yang tersedia.
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section>
       <div className="container mx-auto px-4">
@@ -206,17 +224,20 @@ const AllBerita = () => {
           transition={{ duration: 0.6 }}
           className="w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {currentItems.map((news) => (
-            <CardNews
-              id={news.id}
-              key={news.id}
-              date={news.date}
-              CardTitle={news.title}
-              CardDescription={news.excerpt}
-              image={news.image}
-              category={news.category}
-            />
-          ))}
+          {currentItems.map((article) => {
+            const newsData = convertArticleToNewsCard(article);
+            return (
+              <CardNews
+                id={newsData.id}
+                key={newsData.id}
+                date={newsData.date}
+                CardTitle={newsData.title}
+                CardDescription={newsData.excerpt}
+                image={newsData.image}
+                category={newsData.category}
+              />
+            );
+          })}
         </motion.div>
 
         {/* Enhanced Pagination */}
@@ -288,8 +309,8 @@ const AllBerita = () => {
             {/* Page Info */}
             <div className="text-sm text-gray-600">
               Showing {startIndex + 1} to{" "}
-              {Math.min(startIndex + ITEMS_PER_PAGE, newsData.length)} of{" "}
-              {newsData.length} services
+              {Math.min(startIndex + ITEMS_PER_PAGE, articles.length)} of{" "}
+              {articles.length} articles
             </div>
           </div>
         )}

@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
+import ArticleDetail from "@/components/ProfileDesa/DetailBerita";
 
 type Props = {
   params: { id: string };
@@ -26,10 +27,7 @@ export default function DetailBeritaPage({ params }: Props) {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <h1 className="text-2xl font-bold mb-4">Berita</h1>
-              <p>Detail berita dengan ID {id} akan ditampilkan di sini.</p>
-
-              {/* Placeholder for news content */}
+              <ArticleDetail articleId={parseInt(id)} />
             </div>
             <SumedangWeatherWidget />
           </div>

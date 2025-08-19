@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
+import RichTextEditor from "../Ui/Editor/RichTextEditor";
+import Link from "next/link";
 
 type Article = {
   id: number;
@@ -36,6 +38,7 @@ export default function ArticleManager({
   desaId,
   userId,
 }: ArticleManagerProps) {
+  const [content, setContent] = useState(""); // For RichTextEditor
   const [articles, setArticles] = useState<Article[]>([]);
   const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -78,11 +81,13 @@ export default function ArticleManager({
 
   const handleOpenAdd = () => {
     setEditData(null);
+    setContent("");
     setModalOpen(true);
   };
 
   const handleOpenEdit = (article: Article) => {
     setEditData(article);
+    setContent(article.content || ""); // Set content for RichTextEditor
     setModalOpen(true);
   };
 
@@ -109,6 +114,9 @@ export default function ArticleManager({
     const form = e.currentTarget;
     const fd = new FormData(form);
 
+    // tambahkan isi CKEditor ke form
+    fd.set("content", content);
+
     try {
       let res;
       if (editData) {
@@ -133,6 +141,7 @@ export default function ArticleManager({
 
       if (res.ok) {
         setModalOpen(false);
+        setContent(""); // Reset content after submit
         fetchArticles();
         alert("Artikel berhasil disimpan!");
       } else {
@@ -248,11 +257,9 @@ export default function ArticleManager({
 
             <div className="mb-3">
               <label className="block mb-1">Konten *</label>
-              <textarea
-                name="content"
-                defaultValue={editData?.content || ""}
-                className="border w-full px-3 py-2 rounded h-32"
-                required
+              <RichTextEditor
+                initialData={content}
+                onChange={(data) => setContent(data)} // langsung simpan ke state
               />
             </div>
 
@@ -461,12 +468,12 @@ export default function ArticleManager({
                   </td>
                   <td className="border px-3 py-2 text-center">
                     <div className="flex space-x-2 justify-center">
-                      <button
-                        onClick={() => handleOpenEdit(article)}
-                        className="px-3 py-1 bg-yellow-500 text-white rounded whitespace-nowrap"
+                      <Link
+                        href={`/berita/${article.id}`}
+                        className="px-3 py-1 bg-blue-500 text-white rounded whitespace-nowrap"
                       >
-                        Edit
-                      </button>
+                        View
+                      </Link>
                       <button
                         onClick={() => handleOpenEdit(article)}
                         className="px-3 py-1 bg-yellow-500 text-white rounded whitespace-nowrap"

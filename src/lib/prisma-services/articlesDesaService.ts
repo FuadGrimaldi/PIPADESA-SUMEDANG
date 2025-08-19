@@ -50,18 +50,24 @@ export class ArticlesDesaService {
     }
   }
 
-  // Get all articles by desa_id
-  static async getArticlesByDesaId(desa_id: number) {
-    return prisma.articles.findMany({
-      where: { desa_id },
-      orderBy: { created_at: "desc" },
-    });
-  }
-
   // Get a single article by id
   static async getArticleById(id: number) {
     return prisma.articles.findUnique({
       where: { id },
+      include: {
+        profile_desa: {
+          select: {
+            id: true,
+            nama_desa: true,
+          },
+        },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+          },
+        },
+      },
     });
   }
 
@@ -101,6 +107,19 @@ export class ArticlesDesaService {
   static async deleteArticle(id: number) {
     return prisma.articles.delete({
       where: { id },
+    });
+  }
+  static async getArticlesByDesaId(
+    desa_id: number,
+    page: number = 1,
+    limit: number = 10
+  ) {
+    const skip = (page - 1) * limit;
+    return prisma.articles.findMany({
+      where: { desa_id },
+      orderBy: { created_at: "desc" },
+      skip,
+      take: limit,
     });
   }
 }
