@@ -1,6 +1,10 @@
 import FloatingSearchBar from "@/components/Search/SubdomainSearchLanding";
+import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
+import { NextRequest } from "next/server";
 
-const Hero = ({ subdomain }: { subdomain: string | null }) => {
+const Hero = async ({ subdomain }: { subdomain: string | null }) => {
+  const desa = await getDesaBySubdomain(subdomain || "");
+
   if (!subdomain) {
     return (
       <div className="hero min-h-screen">
@@ -21,8 +25,14 @@ const Hero = ({ subdomain }: { subdomain: string | null }) => {
       <div
         className="hero h-[500px] rounded-2xl shadow-lg"
         style={{
-          backgroundImage:
-            "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
+          backgroundImage: `url(${
+            desa?.foto_depan
+              ? desa.foto_depan
+              : "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
+          })`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="hero-overlay bg-opacity-60 rounded-2xl"></div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Desa } from "@/types/desa"; // Adjust path as needed
 import { MapPin, Phone, Mail, Twitter, Instagram, Clock } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface ProfileDesaProps {
   desa: Desa;
@@ -12,6 +13,8 @@ interface ProfileDesaProps {
 export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     nama_desa: desa.nama_desa,
     alamat: desa.alamat,
@@ -40,30 +43,77 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
     }));
   };
 
+  // Handle file selection
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+
+      // Create preview URL
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      console.log("Updating desa with data:");
-      const updateData = {
-        ...formData,
-        lat: formData.lat ? parseFloat(formData.lat) : null,
-        lng: formData.lng ? parseFloat(formData.lng) : null,
-      };
+      // Use FormData for file upload
+      const submitData = new FormData();
+
+      // Add all text fields
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          submitData.append(key, value);
+        }
+      });
+
+      // Add coordinate fields with proper conversion
+      if (formData.lat) {
+        submitData.append("lat", formData.lat);
+      }
+      if (formData.lng) {
+        submitData.append("lng", formData.lng);
+      }
+
+      // Add file if selected
+      if (selectedFile) {
+        submitData.append("foto_depan", selectedFile);
+      }
+
+      console.log("Updating desa with FormData");
 
       const res = await fetch(`/api/desa/${desa.id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updateData),
+        body: submitData, // Don't set Content-Type, let browser set it for FormData
       });
 
-      if (!res.ok) throw new Error("Gagal update");
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || "Gagal update");
+      }
+
+      alert("Profil desa berhasil diperbarui!");
       setIsEditing(false);
+
+      // Clean up preview URL
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+        setPreviewUrl(null);
+      }
+      setSelectedFile(null);
+
       router.refresh(); // Refresh to show updated data
     } catch (error) {
       console.error("Error updating desa:", error);
-      alert("Terjadi kesalahan saat mengupdate profil desa");
+      alert(
+        `Terjadi kesalahan: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
     } finally {
       setIsLoading(false);
     }
@@ -85,6 +135,13 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
       lat: desa.lat?.toString() || "",
       lng: desa.lng?.toString() || "",
     });
+
+    // Clean up file selection
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+      setPreviewUrl(null);
+    }
+    setSelectedFile(null);
     setIsEditing(false);
   };
 
@@ -101,7 +158,11 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4"
+          encType="multipart/form-data"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -115,6 +176,60 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Foto Depan
+              </label>
+              <input
+                type="file"
+                name="foto_depan"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+
+              {/* Preview current or selected image */}
+              <div className="mt-2">
+                {previewUrl ? (
+                  <div className="relative">
+                    <Image
+                      src={previewUrl}
+                      alt="Preview"
+                      width={200}
+                      height={150}
+                      className="object-cover rounded border"
+                    />
+                    <span className="text-xs text-green-600 block mt-1">
+                      Gambar baru (belum disimpan)
+                    </span>
+                  </div>
+                ) : desa.foto_depan ? (
+                  <div className="relative">
+                    <Image
+                      src={desa.foto_depan}
+                      alt="Current"
+                      width={200}
+                      height={150}
+                      className="object-cover rounded border"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "/images/default-village.jpg";
+                      }}
+                    />
+                    <span className="text-xs text-gray-600 block mt-1">
+                      Gambar saat ini
+                    </span>
+                  </div>
+                ) : (
+                  <div className="w-200 h-150 bg-gray-100 rounded border flex items-center justify-center">
+                    <span className="text-gray-400 text-sm">
+                      Tidak ada gambar
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div>
@@ -152,6 +267,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 name="twitter"
                 value={formData.twitter}
                 onChange={handleInputChange}
+                placeholder="https://twitter.com/username"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -165,6 +281,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 name="instagram"
                 value={formData.instagram}
                 onChange={handleInputChange}
+                placeholder="https://instagram.com/username"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -178,6 +295,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 name="gmaps_embed_url"
                 value={formData.gmaps_embed_url}
                 onChange={handleInputChange}
+                placeholder="https://www.google.com/maps/embed?pb=..."
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -192,6 +310,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 name="lat"
                 value={formData.lat}
                 onChange={handleInputChange}
+                placeholder="-6.2088"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -206,6 +325,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 name="lng"
                 value={formData.lng}
                 onChange={handleInputChange}
+                placeholder="106.8456"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -262,6 +382,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Sejarah
@@ -313,6 +434,27 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
 
       {/* Grid utama */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Foto Desa */}
+        {desa.foto_depan && (
+          <div className="bg-white rounded-lg shadow-md p-5 md:col-span-2">
+            <h3 className="text-lg font-semibold border-b pb-2 mb-4">
+              Foto Desa
+            </h3>
+            <div className="relative w-full h-64">
+              <Image
+                src={desa.foto_depan}
+                alt={`Foto ${desa.nama_desa}`}
+                fill
+                className="object-cover rounded"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "/images/default-village.jpg";
+                }}
+              />
+            </div>
+          </div>
+        )}
+
         {/* Informasi Dasar */}
         <div className="bg-white rounded-lg shadow-md p-5 space-y-4">
           <h3 className="text-lg font-semibold border-b pb-2">
@@ -399,6 +541,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
           <p className="whitespace-pre-wrap">{desa.tujuan}</p>
         </div>
       </div>
+
       {/* Sejarah Desa */}
       <div className="bg-white rounded-lg shadow-md p-5">
         <h3 className="text-lg font-semibold border-b pb-2">Sejarah Desa</h3>

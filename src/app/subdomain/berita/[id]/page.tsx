@@ -4,13 +4,20 @@ import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 import ArticleDetail from "@/components/ProfileDesa/DetailBerita";
+import { headers } from "next/headers";
+import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 
 type Props = {
   params: { id: string };
 };
 
-export default function DetailBeritaPage({ params }: Props) {
+export default async function DetailBeritaPage({ params }: Props) {
   const id = params.id; // Assuming you're using a routing library that provides useParams // Assuming you're using a routing library that provides useParams
+  const headersList = headers();
+  const host = headersList.get("host") || "";
+  const subdomain = host.split(".")[0];
+  const desa = await getDesaBySubdomain(subdomain);
+  const desaId = Number(desa?.id);
   const links = [
     { to: "/", label: "Home" },
     { to: "/berita", label: "Berita" },
@@ -34,7 +41,7 @@ export default function DetailBeritaPage({ params }: Props) {
 
           {/* Sidebar */}
           <div className="w-full lg:w-[300px] flex-shrink-0 bg-white">
-            <SidebarNewsPhoto />
+            <SidebarNewsPhoto desaId={desaId} />
           </div>
         </div>
         <Wave1 />

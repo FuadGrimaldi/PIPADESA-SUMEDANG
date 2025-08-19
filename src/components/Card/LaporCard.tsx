@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function LaporCard() {
   return (
@@ -22,10 +23,13 @@ export default function LaporCard() {
           Kami melayani dengan sepenuh hati tanpa gratifikasi dan pungli. Klik
           tombol dibawah apabila menemukan pelayanan yang menyimpang.
         </p>
-        <button className="inline-flex items-center gap-2 bg-white text-red-600 font-semibold px-4 py-2 rounded-md hover:bg-gray-100 transition hover:bg-gray-300">
+        <Link
+          href="https://www.lapor.go.id/"
+          className="inline-flex items-center gap-2 bg-white text-red-600 font-semibold px-4 py-2 rounded-md hover:bg-gray-100 transition hover:bg-gray-300"
+        >
           Laporkan
           <ArrowRight className="w-4 h-4" />
-        </button>
+        </Link>
       </div>
     </div>
   );

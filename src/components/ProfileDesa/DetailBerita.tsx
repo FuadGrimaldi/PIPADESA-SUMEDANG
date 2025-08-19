@@ -58,7 +58,7 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
     currentArticleId: number
   ) => {
     try {
-      const res = await fetch(`/api/articles?desa_id=${desaId}&limit=3`);
+      const res = await fetch(`/api/articles`);
       const data = await res.json();
 
       if (!data.error) {
@@ -66,7 +66,9 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
         const related = data
           .filter(
             (art: Article) =>
-              art.id !== currentArticleId && art.status === "published"
+              art.id !== currentArticleId &&
+              art.status === "published" &&
+              art.desa_id === desaId
           )
           .slice(0, 3);
         setRelatedArticles(related);
@@ -320,11 +322,7 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
                     key={relatedArticle.id}
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
-                      // Navigate to related article
-                      window.scrollTo(0, 0);
-                      setArticle(null);
-                      setLoading(true);
-                      setTimeout(() => fetchArticle(), 100);
+                      window.location.href = `/berita/${relatedArticle.id}`;
                     }}
                   >
                     {relatedArticle.featured_image && (
@@ -354,7 +352,7 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
                       </h3>
 
                       <p className="text-sm text-gray-600 line-clamp-3">
-                        {relatedArticle.content.substring(0, 100)}...
+                        {parse(relatedArticle.content.substring(0, 100))}
                       </p>
 
                       <div className="flex items-center justify-between mt-3 text-xs text-gray-500">

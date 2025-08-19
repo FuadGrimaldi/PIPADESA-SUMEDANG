@@ -6,6 +6,7 @@ export interface Desa {
   alamat: string;
   telepon: string;
   email: string;
+  foto_depan?: string | null;
   twitter: string;
   instagram: string;
   visi: string;

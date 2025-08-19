@@ -5,8 +5,15 @@ import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
+import { headers } from "next/headers";
+import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 
-export default function InstansiPage() {
+export default async function InstansiPage() {
+  const headersList = headers();
+  const host = headersList.get("host") || "";
+  const subdomain = host.split(".")[0];
+  const desa = await getDesaBySubdomain(subdomain);
+  const desaId = Number(desa?.id);
   const links = [
     { to: "/", label: "Home" },
     { to: "/instansi", label: "Instansi" },
@@ -32,7 +39,7 @@ export default function InstansiPage() {
 
           {/* Sidebar */}
           <div className="w-full lg:w-[300px] flex-shrink-0 bg-white">
-            <SidebarNewsPhoto />
+            <SidebarNewsPhoto desaId={desaId} />
           </div>
         </div>
         <Wave1 />

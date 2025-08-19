@@ -4,11 +4,13 @@ import Hero from "@/components/Landing/HeroSubdomain";
 import News from "@/components/News/News";
 import PartnerLogos from "@/components/Slide/SliderSubdomain";
 import { headers } from "next/headers";
+import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 
-export default function SubdomainHomePage() {
+export default async function SubdomainHomePage() {
   const headersList = headers();
   const host = headersList.get("host") || "";
   const subdomain = host.split(".")[0];
+  const desa = await getDesaBySubdomain(subdomain);
 
   return (
     <div className="container min-h-screen  ">
@@ -22,7 +24,7 @@ export default function SubdomainHomePage() {
       </div>
 
       <div id="news-landing" className="px-[31px] lg:px-[100px] px-4 py-8">
-        <News />
+        <News desaId={Number(desa?.id)} />
       </div>
       <div
         id="kemerdekaan-landing"

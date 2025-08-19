@@ -4,6 +4,9 @@ import {
   updateDesa,
   deleteDesa,
 } from "@/lib/prisma-services/profileDesaService";
+import { writeFile } from "fs/promises";
+import fs from "fs";
+import path from "path";
 
 export async function GET(
   req: Request,
@@ -40,23 +43,126 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const body = await req.json();
     const id = parseInt(params.id, 10);
+
     if (isNaN(id)) {
       return NextResponse.json(
         { success: false, message: "Invalid desa ID" },
         { status: 400 }
       );
     }
-    const updatedDesa = await updateDesa(id, {
-      ...body,
-      updated_at: new Date(),
+
+    // Check if desa exists
+    const existingDesa = await getDesaById(id);
+    if (!existingDesa) {
+      return NextResponse.json({ error: "Desa not found" }, { status: 404 });
+    }
+
+    // Parse form data
+    const formData = await req.formData();
+
+    // Extract form fields
+    const updateData: any = {};
+
+    // Get all text fields from form data
+    formData.forEach((value, key) => {
+      if (key !== "foto_depan" && typeof value === "string") {
+        if (key === "lat" || key === "lng") {
+          // konversi ke float
+          updateData[key] = value ? parseFloat(value) : null;
+        } else {
+          updateData[key] = value;
+        }
+      }
     });
 
-    return NextResponse.json(updatedDesa);
+    // Handle file upload
+    const foto_depan = formData.get("foto_depan") as File | null;
+    let imagePath: string | undefined = existingDesa.foto_depan || undefined;
+
+    if (foto_depan && foto_depan.size > 0) {
+      try {
+        // Delete old image if it exists
+        if (existingDesa.foto_depan) {
+          const oldImagePath = path.join(
+            process.cwd(),
+            "public",
+            existingDesa.foto_depan
+          );
+          if (fs.existsSync(oldImagePath)) {
+            try {
+              fs.unlinkSync(oldImagePath);
+            } catch (deleteError) {
+              console.warn("Could not delete old image:", deleteError);
+            }
+          }
+        }
+
+        // Process new image
+        const bytes = await foto_depan.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+
+        // Create unique filename
+        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+        const fileExtension = path.extname(foto_depan.name);
+        const fileName = `${uniqueSuffix}${fileExtension}`;
+
+        // Ensure upload directory exists
+        const uploadDir = path.join(
+          process.cwd(),
+          "public",
+          "assets",
+          "uploads",
+          "profile-desa"
+        );
+
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        // Write file
+        const filePath = path.join(uploadDir, fileName);
+        await writeFile(filePath, buffer);
+
+        // Update image path (fix path to match upload directory)
+        imagePath = `/assets/uploads/profile-desa/${fileName}`;
+      } catch (uploadError) {
+        console.error("File upload error:", uploadError);
+        return NextResponse.json(
+          { error: "Failed to upload file" },
+          { status: 500 }
+        );
+      }
+    }
+
+    // Prepare final update data
+    const finalUpdateData = {
+      ...updateData,
+      foto_depan: imagePath,
+      updated_at: new Date(),
+    };
+
+    // Update desa
+    const updatedDesa = await updateDesa(id, finalUpdateData);
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Desa updated successfully",
+        data: updatedDesa,
+      },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Gagal update desa" }, { status: 500 });
+    console.error("Update desa error:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Gagal update desa",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -74,21 +180,50 @@ export async function DELETE(
   }
 
   try {
-    const deletedUser = await deleteDesa(id);
-    if (!deletedUser) {
+    // Check if desa exists
+    const existingDesa = await getDesaById(id);
+    if (!existingDesa) {
       return NextResponse.json(
         { success: false, message: "Desa not found" },
         { status: 404 }
       );
     }
 
+    // Delete associated image file if exists
+    if (existingDesa.foto_depan) {
+      const imagePath = path.join(
+        process.cwd(),
+        "public",
+        existingDesa.foto_depan
+      );
+      if (fs.existsSync(imagePath)) {
+        try {
+          fs.unlinkSync(imagePath);
+        } catch (deleteError) {
+          console.warn("Could not delete image file:", deleteError);
+        }
+      }
+    }
+
+    // Delete desa from database
+    const deletedDesa = await deleteDesa(id);
+
     return NextResponse.json(
-      { success: true, message: "Desa deleted successfully" },
+      {
+        success: true,
+        message: "Desa deleted successfully",
+        data: deletedDesa,
+      },
       { status: 200 }
     );
   } catch (error) {
+    console.error("Delete desa error:", error);
     return NextResponse.json(
-      { success: false, message: "Failed to delete Desa", error },
+      {
+        success: false,
+        message: "Failed to delete Desa",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
       { status: 500 }
     );
   }

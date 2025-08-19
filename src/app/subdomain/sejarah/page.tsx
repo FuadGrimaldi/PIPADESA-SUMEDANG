@@ -12,6 +12,7 @@ export default async function SejarahPage() {
   const host = headersList.get("host") || "";
   const subdomain = host.split(".")[0];
   const desa = await getDesaBySubdomain(subdomain);
+  const desaId = Number(desa?.id);
   const links = [
     { to: "/", label: "Home" },
     { to: "/sejarah", label: "Sejarah" },
@@ -34,7 +35,7 @@ export default async function SejarahPage() {
 
           {/* Sidebar */}
           <div className="w-full lg:w-[300px] flex-shrink-0 bg-white">
-            <SidebarNewsPhoto />
+            <SidebarNewsPhoto desaId={desaId} />
           </div>
         </div>
         <Wave1 />

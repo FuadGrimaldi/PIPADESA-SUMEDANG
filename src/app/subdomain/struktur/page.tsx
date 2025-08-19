@@ -12,6 +12,7 @@ export default async function StrukturPage() {
   const host = headersList.get("host") || "";
   const subdomain = host.split(".")[0];
   const desa = await getDesaBySubdomain(subdomain); // Replace with actual subdomain logic if needed
+  const desaId = Number(desa?.id);
   const officials = await OfficialsService.getOfficialsByDesaId(
     Number(desa?.id) || 0
   );
@@ -37,7 +38,7 @@ export default async function StrukturPage() {
 
           {/* Sidebar */}
           <div className="w-full lg:w-[300px] flex-shrink-0 bg-white">
-            <SidebarNewsPhoto />
+            <SidebarNewsPhoto desaId={desaId} />
           </div>
         </div>
         <Wave1 />

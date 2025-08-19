@@ -3,11 +3,15 @@ import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { headers } from "next/headers";
+import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 
 export default async function GaleryPage() {
-  const session = await getServerSession(authOptions);
+  const headersList = headers();
+  const host = headersList.get("host") || "";
+  const subdomain = host.split(".")[0];
+  const desa = await getDesaBySubdomain(subdomain);
+  const desaId = Number(desa?.id);
   const links = [
     { to: "/", label: "Home" },
     { to: "/galeri", label: "Galery" },
@@ -24,14 +28,14 @@ export default async function GaleryPage() {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <Galeri />
+              <Galeri desaId={Number(desa?.id)} />
             </div>
             <SumedangWeatherWidget />
           </div>
 
           {/* Sidebar */}
           <div className="w-full lg:w-[300px] flex-shrink-0 bg-white">
-            <SidebarNewsPhoto />
+            <SidebarNewsPhoto desaId={desaId} />
           </div>
         </div>
         <Wave1 />

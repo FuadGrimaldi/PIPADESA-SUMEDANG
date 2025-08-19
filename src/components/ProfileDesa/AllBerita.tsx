@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useState, useEffect, useCallback } from "react";
 import CardNews from "../Card/NewsCard";
 import { motion } from "framer-motion";
@@ -16,15 +15,6 @@ const AllBerita = ({ desaId }: AllBeritaProps) => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const getPageFromURL = () => {
-    if (typeof window !== "undefined") {
-      const urlParams = new URLSearchParams(window.location.search);
-      const page = parseInt(urlParams.get("page") || "1", 10);
-      return Math.max(1, page);
-    }
-    return 1;
-  };
 
   // Function to update URL with page param
   const updateURL = (page: number) => {
@@ -67,13 +57,9 @@ const AllBerita = ({ desaId }: AllBeritaProps) => {
     } finally {
       setLoading(false);
     }
-  }, [desaId, currentPage]);
+  }, [desaId]);
 
   // Initialize page from URL on component mount
-  useEffect(() => {
-    const pageFromURL = getPageFromURL();
-    setCurrentPage(pageFromURL);
-  }, []);
 
   // Fetch articles when desaId or currentPage changes
   useEffect(() => {

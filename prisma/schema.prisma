@@ -37,6 +37,7 @@ model profile_desa {
   email            String
   twitter          String
   instagram        String
+  foto_depan       String    @db.VarChar(255)
   visi             String   @db.LongText
   misi             String   @db.LongText
   tujuan           String   @db.LongText

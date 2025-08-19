@@ -11,6 +11,7 @@ export default async function VisiMisiPage() {
   const host = headersList.get("host") || "";
   const subdomain = host.split(".")[0];
   const desa = await getDesaBySubdomain(subdomain); // Replace with actual subdomain logic if needed
+  const desaId = Number(desa?.id);
   const links = [
     { to: "/", label: "Home" },
     { to: "/visi-misi", label: "Visi & Misi" },
@@ -33,7 +34,7 @@ export default async function VisiMisiPage() {
 
           {/* Sidebar */}
           <div className="w-full lg:w-[300px] flex-shrink-0 bg-white">
-            <SidebarNewsPhoto />
+            <SidebarNewsPhoto desaId={desaId} />
           </div>
         </div>
         <Wave1 />
