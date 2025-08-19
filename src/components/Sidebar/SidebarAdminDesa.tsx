@@ -37,9 +37,7 @@ const menuData = [
     icon: Newspaper,
     items: [
       { title: "Berita", url: "/admindesa/berita" },
-      { title: "Kegiatan", url: "/kegiatan" },
-      { title: "Agenda", url: "/agenda" },
-      { title: "Pengumuman", url: "/pengumuman" },
+      { title: "Agenda", url: "/admindesa/agenda" },
     ],
   },
   {
