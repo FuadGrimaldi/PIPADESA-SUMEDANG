@@ -1,0 +1,945 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "instansi": "DINAS PENANAMAN MODAL DAN PELAYANAN TERPADU SATU PINTU",
+      "alamat": "Jl. Prabu Geusan Ulun No.36, Regol Wetan, Sumedang Sel., Kabupaten Sumedang, Jawa Barat",
+      "kontak": {
+        "email": "ptsp.sumedang@gmail.com",
+        "telepon": "(0261) 205657",
+        "website": "https://ptsp.sumedangkab.go.id"
+      },
+      "jam_buka": {
+        "senin": "07:00 - 15:00",
+        "selasa": "07:00 - 15:00",
+        "rabu": "07:00 - 15:00",
+        "kamis": "07:00 - 15:00",
+        "jumat": "07:00 - 15:00",
+        "sabtu": "Tutup"
+      },
+      "layanan": [
+        {
+          "id": 1,
+          "nama": "Pelayanan Perizinan/Pendampingan",
+          "loket": "E",
+          "deskripsi": "Melayani Layanan Perizinan OSS dan Non OSS",
+          "jenis_layanan": [
+            "Nomor Induk Berusaha (NIB)",
+            "Surat Keterangan Penelitian",
+            "Ijin Praktik tenaga kesehatan hewan",
+            "Ijin Jam Operasional Toko Moderen",
+            "Izin Praktik Dokter",
+            "Izin Praktik Dokter Gigi",
+            "Izin Praktik Dokter Spesialis",
+            "Izin Praktik Dokter Gigi Spesialis",
+            "Izin Praktik Dokter Intership",
+            "Izin Praktik Perawat (SIPP)",
+            "Izin Praktik Bidan (SIPB)",
+            "Izin Praktik Apoteker (SIPA)",
+            "Izin Praktik Terapis Gigi dan Mulut (SIPTGM)",
+            "Izin Praktik Tenaga Teknis Kefarmasian (SIPTTK)",
+            "Izin Kerja Tenaga Sanitarian (SIKTS)",
+            "Izin Praktik Tenaga Gizi (SIPTGz)",
+            "Izin Kerja Tenaga Gizi (SIKTGz)",
+            "Izin Praktik Fisioterapis (SIPF)",
+            "Izin Kerja Fisioterapis (SIKF)",
+            "Izin Praktik Okupasi Terapis",
+            "Izin Kerja Okupasi Terapis",
+            "Izin Kerja Terapis Wicara",
+            "Izin Praktik Akupunktur Terapis",
+            "Izin Kerja Perekam Medis (SIKPM)",
+            "Izin Kerja Refraksionis Optisien (SIKRO)",
+            "Izin Kerja Optometris",
+            "Izin Kerja Teknisi Gigi (SIKTG)",
+            "Izin Praktik Penata Anestesi (SIPPA)",
+            "Izin Kerja Radiografer (SIKR)",
+            "Izin Praktik Elektromedis (SIP-E)",
+            "Izin Praktik Ahli Teknologi Laboratorium Medik (SIP-ATLM)",
+            "Izin Praktik Ortotis Prostetis",
+            "Izin Kerja Ortotis Prostetis",
+            "Izin Praktik Teknisi Kardiovaskuler (SIP-TKV)"
+          ],
+          "persyaratan": [
+            {
+              "nama": "Izin Praktik Apoteker",
+              "link": "https://ptsp.sumedangkab.go.id/ptsp/izin/detail/146"
+            },
+            {
+              "nama": "Izin Praktik Bidan",
+              "link": "https://ptsp.sumedangkab.go.id/ptsp/izin/detail/149"
+            },
+            {
+              "nama": "Izin Praktik Dokter",
+              "link": "https://ptsp.sumedangkab.go.id/ptsp/izin/detail/145"
+            },
+            {
+              "nama": "Izin Praktik Perawat",
+              "link": "https://ptsp.sumedangkab.go.id/ptsp/izin/detail/147"
+            },
+            {
+              "nama": "Izin Praktik Terapis Gigi dan Mulut",
+              "link": "https://ptsp.sumedangkab.go.id/ptsp/izin/detail/151"
+            },
+            {
+              "nama": "Surat Izin Kerja Optometris",
+              "link": "https://ptsp.sumedangkab.go.id/ptsp/izin/detail/171"
+            },
+            {
+              "nama": "Surat Izin Kerja Refraksionis Optisien",
+              "link": "https://ptsp.sumedangkab.go.id/ptsp/izin/detail/170"
+            },
+            {
+              "nama": "Surat Izin Praktik Fisioterapis",
+              "link": "https://ptsp.sumedangkab.go.id/ptsp/izin/detail/159"
+            },
+            {
+              "nama": "Izin Praktik Tenaga Kesehatan Hewan",
+              "link": "https://ptsp.sumedangkab.go.id/ptsp/izin/detail/85"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "nama": "Informasi Investasi",
+          "loket": "E",
+          "deskripsi": "Layanan informasi investasi",
+          "jenis_layanan": [
+            "Informasi Peluang Investasi",
+            "Bantuan Perizinan Investasi"
+          ],
+          "persyaratan": [
+            {
+              "nama": "Proposal Investasi",
+              "keterangan": "Dokumen proposal investasi yang diajukan",
+              "file": "proposal_investasi_dummy.pdf"
+            },
+            {
+              "nama": "Dokumen Identitas Pemohon",
+              "keterangan": "KTP atau dokumen identitas lainnya",
+              "file": "identitas_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "nama": "Pelayanan Pengaduan MPP",
+          "loket": "E",
+          "deskripsi": "Pelayanan Pengaduan mengenai Pelaksanaan layanan publik di MPP",
+          "jenis_layanan": ["Pengaduan Layanan Publik", "Saran dan Masukan"],
+          "persyaratan": [
+            {
+              "nama": "Formulir Pengaduan",
+              "keterangan": "Formulir yang telah diisi lengkap",
+              "file": "formulir_pengaduan_dummy.pdf"
+            },
+            {
+              "nama": "Dokumen Pendukung",
+              "keterangan": "Dokumen pendukung terkait pengaduan",
+              "file": "dokumen_pendukung_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "nama": "Pusat Informasi MPP",
+          "loket": "E",
+          "deskripsi": "Pusat Informasi Mall Pelayanan Publik",
+          "jenis_layanan": ["Informasi Umum MPP", "Bantuan Pengisian Formulir"],
+          "persyaratan": [
+            {
+              "nama": "Tidak ada persyaratan khusus",
+              "keterangan": "Layanan informasi umum",
+              "file": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "instansi": "DINAS PERHUBUNGAN",
+      "alamat": "Jl. Raya Sumedang No.123, Sumedang, Jawa Barat",
+      "kontak": {
+        "email": "dishub@sumedangkab.go.id",
+        "telepon": "(0261) 123456",
+        "website": "https://dishub.sumedangkab.go.id"
+      },
+      "jam_buka": {
+        "senin": "08:00 - 15:00",
+        "selasa": "08:00 - 15:00",
+        "rabu": "08:00 - 15:00",
+        "kamis": "08:00 - 15:00",
+        "jumat": "08:00 - 15:00",
+        "sabtu": "Tutup"
+      },
+      "layanan": [
+        {
+          "id": 5,
+          "nama": "Parkir Berlangganan",
+          "loket": "AA",
+          "deskripsi": "Layanan pengurusan dan pendaftaran parkir berlangganan di Kabupaten Sumedang",
+          "jenis_layanan": [
+            "Pendaftaran Parkir Berlangganan",
+            "Perpanjangan Parkir Berlangganan"
+          ],
+          "persyaratan": [
+            {
+              "nama": "Fotokopi KTP",
+              "keterangan": "Masih berlaku",
+              "file": "ktp_dummy.pdf"
+            },
+            {
+              "nama": "STNK Kendaraan",
+              "keterangan": "Sesuai dengan nama pemohon",
+              "file": "stnk_dummy.pdf"
+            },
+            {
+              "nama": "Bukti Pembayaran",
+              "keterangan": "Slip pembayaran retribusi parkir berlangganan",
+              "file": "bukti_pembayaran_dummy.pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "instansi": "DINAS PMPTSP PROVINSI JAWA BARAT",
+      "alamat": "Jl. Windu, Jl. Pelajar Pejuang 45 No.26, Lkr. Sel., Kec. Lengkong, Kota Bandung, Jawa Barat",
+      "kontak": {
+        "email": "ptsp.sumedang@gmail.com",
+        "telepon": "(022) 73515151",
+        "website": "https://ptsp.sumedangkab.go.id"
+      },
+      "jam_buka": {
+        "senin": "07:00 - 15:00",
+        "selasa": "07:00 - 15:00",
+        "rabu": "07:00 - 15:00",
+        "kamis": "07:00 - 23:55",
+        "jumat": "07:00 - 23:55",
+        "sabtu": "Tutup"
+      },
+      "layanan": [
+        {
+          "id": 6,
+          "nama": "Pelayanan Perizinan",
+          "loket": "F",
+          "deskripsi": "Pelayanan perizinan berbagai bidang sesuai kewenangan provinsi.",
+          "jenis_layanan": [
+            "Izin Prinsip Pendirian Sekolah Yang Diselenggarakan Masyarakat (SMA) 14 Hari",
+            "Izin Prinsip Pendirian Sekolah Yang Diselenggarakan Masyarakat (SMK) 14 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Luar Biasa (SLB - Baru) 21 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Menengah Atas (SMA) Yang Diselenggarakan Masyarakat (Baru) 21 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Menengah Atas (SMA) Yang Diselenggarakan Masyarakat (Perubahan Perpanjangan) 14 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Menengah Atas (SMA) Yang Diselenggarakan Masyarakat (Penggantian Nama) 14 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Menengah Atas (SMA) Yang Diselenggarakan Masyarakat (Penggabungan) 14 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Menengah Atas (SMA) Yang Diselenggarakan Masyarakat (Penutupan) 14 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Menengah Kejuruan (SMK) Yang Diselenggarakan Masyarakat (Baru) 21 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Menengah Kejuruan (SMK) Yang Diselenggarakan Masyarakat (Perubahan) 14 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Menengah Kejuruan (SMK) Yang Diselenggarakan Masyarakat (Kompetensi Keahlian) 21 Hari",
+            "Izin Operasional Penyelenggaraan Sekolah Menengah Kejuruan (SMK) Yang Diselenggarakan Masyarakat (Penutupan) 14 Hari",
+            "Izin Usaha Kecil Obat Tradisional (IUKOT) 35 Hari",
+            "Izin Usaha Kecil Obat Tradisional (IUKOT - Pergantian Penanggung Jawab Teknis) 14 Hari",
+            "Izin Usaha Kecil Obat Tradisional (IUKOT-Pergantian Direktur) 14 Hari",
+            "Izin Usaha Kecil Obat Tradisional (IUKOT - Penambahan/Perluasan Lokasi Atau Fasilitas Produksi) 14 Hari",
+            "Izin Usaha Kecil Obat Tradisional (IUKOT - Penambahan Sediaan Obat Tradisional) 14 Hari",
+            "Izin Usaha Kecil Obat Tradisional (IUKOT-Penutupan) 14 Hari",
+            "Izin Mendirikan Rumah Sakit (Umum & Khusus) Kelas B Pemerintah Dan Swasta 40 Hari",
+            "Izin Operasional Rumah Sakit (Umum & Khusus) Kelas B Pemerintah Dan Swasta 40 Hari"
+          ],
+          "persyaratan": [
+            {
+              "nama": "Formulir Permohonan",
+              "keterangan": "Formulir permohonan yang telah diisi lengkap",
+              "file": null
+            },
+            {
+              "nama": "Dokumen Identitas",
+              "keterangan": "KTP atau dokumen identitas pemohon",
+              "file": null
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "nama": "Pelayanan Informasi LKPM",
+          "loket": "F",
+          "deskripsi": "Pelayanan informasi Laporan Kegiatan Penanaman Modal (LKPM).",
+          "jenis_layanan": ["Informasi LKPM"],
+          "persyaratan": [
+            {
+              "nama": "Tidak ada persyaratan khusus",
+              "keterangan": "Layanan informasi",
+              "file": null
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "nama": "Informasi Investasi",
+          "loket": "F",
+          "deskripsi": "Layanan informasi investasi di wilayah Jawa Barat.",
+          "jenis_layanan": [
+            "Informasi Peluang Investasi",
+            "Bantuan Perizinan Investasi"
+          ],
+          "persyaratan": [
+            {
+              "nama": "Tidak ada persyaratan khusus",
+              "keterangan": "Layanan informasi",
+              "file": null
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "nama": "Layanan Pengaduan",
+          "loket": "F",
+          "deskripsi": "Layanan pengaduan terkait pelayanan publik, penyalahgunaan wewenang, punggutan liar, dan lainnya.",
+          "jenis_layanan": [
+            "Penyalahgunaan Wewenang",
+            "Pelayanan Masyarakat",
+            "Punggutan Liar",
+            "Tatalaksana Pemerintahan",
+            "Kemasyarakatan",
+            "Durasi Waktu",
+            "Salah Cetak",
+            "Sikap Petugas Pelayanan",
+            "Kebijakan",
+            "Lain Lain"
+          ],
+          "persyaratan": [
+            {
+              "nama": "Formulir Pengaduan",
+              "keterangan": "Formulir pengaduan yang telah diisi lengkap",
+              "file": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "instansi": "DINAS TENAGA KERJA DAN TRANSMIGRASI",
+      "alamat": "Jl. Pangeran Kornel No.241, Pasanggrahan Baru, Sumedang Sel., Kabupaten Sumedang, Jawa Barat",
+      "kontak": {
+        "email": "disnaker@gmail.com",
+        "telepon": "(0261) 201691",
+        "website": "https://disnaker.sumedangkab.go.id"
+      },
+      "jam_buka": {
+        "senin": "07:00 - 15:00",
+        "selasa": "07:00 - 15:00",
+        "rabu": "07:00 - 15:00",
+        "kamis": "07:00 - 15:00",
+        "jumat": "07:00 - 15:00",
+        "sabtu": "08:00 - 15:00"
+      },
+      "layanan": [
+        {
+          "id": 10,
+          "nama": "Pelayanan Kartu Tanda Pencari Kerja /AK 1",
+          "loket": "J",
+          "deskripsi": "Pelayanan Penerbitan Kartu Tanda Bukti Pendaftaran Pencari Kerja (AK.1)",
+          "jenis_layanan": [
+            "Penerbitan Kartu Tanda Bukti Pendaftaran Pencari Kerja (AK.1)"
+          ],
+          "persyaratan": [
+            {
+              "nama": "Copy KTP yang Masih Berlaku",
+              "keterangan": null,
+              "file": "ktp_dummy.pdf"
+            },
+            {
+              "nama": "Pas Foto terbaru berwarna",
+              "keterangan": null,
+              "file": "pasfoto_dummy.pdf"
+            },
+            {
+              "nama": "Copy ijazah pendidikan terakhir",
+              "keterangan": null,
+              "file": "ijazah_dummy.pdf"
+            },
+            {
+              "nama": "Copy sertifikat kompetensi kerja bagi yang memiliki",
+              "keterangan": null,
+              "file": "sertifikat_kompetensi_dummy.pdf"
+            },
+            {
+              "nama": "Copy surat pengalaman kerja bagi yang memiliki",
+              "keterangan": null,
+              "file": "pengalaman_kerja_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "nama": "Pelayanan Registrasi Calon pekerja MIGRAN Indonesia",
+          "loket": "J",
+          "deskripsi": "Registrasi Biometric CPMI Pada Sistem Informasi Ketenagakerjaan Terpadu dan Pembuatan Rekomendasi Paspor",
+          "jenis_layanan": [
+            "Registrasi Biometric CPMI",
+            "Pembuatan Rekomendasi Paspor"
+          ],
+          "persyaratan": [
+            {
+              "nama": "Berusia minimal 18 (delapan belas) tahun",
+              "keterangan": null,
+              "file": "usia_dummy.pdf"
+            },
+            {
+              "nama": "Kartu Tanda Penduduk elektronik dan kartu keluarga",
+              "keterangan": null,
+              "file": "ktp_kk_dummy.pdf"
+            },
+            {
+              "nama": "Surat keterangan status perkawinan, bagi yang telah menikah melampirkan fotocopy buku nikah",
+              "keterangan": null,
+              "file": "status_perkawinan_dummy.pdf"
+            },
+            {
+              "nama": "Surat keterangan izin suami atau istri, izin orang tua, atau izin wali yang diketahui oleh kepala desa atau lurah",
+              "keterangan": null,
+              "file": "izin_keluarga_dummy.pdf"
+            },
+            {
+              "nama": "Sertifikat kompetensi kerja",
+              "keterangan": null,
+              "file": "sertifikat_kompetensi_dummy.pdf"
+            },
+            {
+              "nama": "Surat keterangan sehat berdasarkan hasil pemeriksaan kesehatan dan psikologi",
+              "keterangan": null,
+              "file": "kesehatan_dummy.pdf"
+            },
+            {
+              "nama": "Perjanjian penempatan pekerja migran Indonesia",
+              "keterangan": null,
+              "file": "perjanjian_penempatan_dummy.pdf"
+            },
+            {
+              "nama": "Perjanjian kerja",
+              "keterangan": null,
+              "file": "perjanjian_kerja_dummy.pdf"
+            },
+            {
+              "nama": "Copy surat panggilan kerja dari pemberi kerja berbadan hukum",
+              "keterangan": null,
+              "file": "panggilan_kerja_dummy.pdf"
+            },
+            {
+              "nama": "Profil pemberi kerja berbadan hukum",
+              "keterangan": null,
+              "file": "profil_pemberi_kerja_dummy.pdf"
+            },
+            {
+              "nama": "Copy visa kerja",
+              "keterangan": null,
+              "file": "visa_kerja_dummy.pdf"
+            },
+            {
+              "nama": "Surat pernyataan bertanggungjawab terhadap segala resiko ketenagakerjaan yang dialami",
+              "keterangan": null,
+              "file": "pernyataan_resiko_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "nama": "Pelayanan Validasi TKA",
+          "loket": "J",
+          "deskripsi": "Pelayanan Validasi DKP-TKA Pada Sistem Informasi Ketenagakerjaan Terpadu",
+          "jenis_layanan": ["Validasi DKP-TKA"],
+          "persyaratan": [
+            {
+              "nama": "Surat permohonan dari pemberi kerja",
+              "keterangan": null,
+              "file": "surat_permohonan_dummy.pdf"
+            },
+            {
+              "nama": "Dokumen identitas TKA (paspor, visa kerja)",
+              "keterangan": null,
+              "file": "identitas_tka_dummy.pdf"
+            },
+            {
+              "nama": "Dokumen kontrak kerja TKA",
+              "keterangan": null,
+              "file": "kontrak_kerja_tka_dummy.pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "instansi": "KANTOR KEMENAG SUMEDANG",
+      "alamat": "Jl. Kutamaya No.25, Kotakulon, Sumedang Sel., Kabupaten Sumedang, Jawa Barat",
+      "kontak": {
+        "email": "kemenagsumedang@gmail.com",
+        "telepon": "(0261) 205785",
+        "website": "kemeneg.sumedangkab.go.id"
+      },
+      "jam_buka": {
+        "senin": "07:00 - 15:00",
+        "selasa": "07:00 - 15:00",
+        "rabu": "07:00 - 15:00",
+        "kamis": "07:00 - 15:00",
+        "jumat": "07:00 - 15:00",
+        "sabtu": "Tutup"
+      },
+      "layanan": [
+        {
+          "id": 13,
+          "nama": "Pembuatan Surat rekomendasi Pasport UMROH",
+          "loket": "O",
+          "deskripsi": "Pembuatan Surat rekomendasi Pasport UMROH",
+          "jenis_layanan": ["Pembuatan Surat rekomendasi Pasport UMROH"],
+          "persyaratan": [
+            {
+              "nama": "Surat keputusan izin operasional sebagai PPIU/PIHK",
+              "keterangan": null,
+              "file": "surat_izin_operasional_ppiu_pihk_dummy.pdf"
+            },
+            {
+              "nama": "Surat permohonan dari PPIU/PIHK kepada Kepala KANKEMENAG",
+              "keterangan": null,
+              "file": "surat_permohonan_ppiu_pihk_dummy.pdf"
+            },
+            {
+              "nama": "Fc KTP Jemaah umroh atau haji khusus",
+              "keterangan": null,
+              "file": "ktp_jemaah_dummy.pdf"
+            },
+            {
+              "nama": "Bukti setoran awal bagi calon jemaah umroh atau haji khusus",
+              "keterangan": null,
+              "file": "bukti_setoran_awal_dummy.pdf"
+            },
+            {
+              "nama": "Surat pernyataam dari travel",
+              "keterangan": null,
+              "file": "surat_pernyataan_travel_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "nama": "Pelayanan informasi HAJI dan UMROH",
+          "loket": "O",
+          "deskripsi": "Pelayanan informasi HAJI dan UMROH",
+          "jenis_layanan": ["Informasi Haji", "Informasi Umroh"],
+          "persyaratan": [
+            {
+              "nama": "Informasi Haji",
+              "keterangan": null,
+              "file": "informasi_haji_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "nama": "Pelayanan Informasi Zakat, Infaq, Shodaqoh & Wakaf",
+          "loket": "O",
+          "deskripsi": "Pelayanan Informasi Zakat, Infaq, Shodaqoh & Wakaf",
+          "jenis_layanan": [
+            "Informasi Zakat",
+            "Informasi Infaq",
+            "Informasi Shodaqoh",
+            "Informasi Wakaf"
+          ],
+          "persyaratan": []
+        },
+        {
+          "id": 16,
+          "nama": "Pendaftaran Perkawinan",
+          "loket": "O",
+          "deskripsi": "Pendaftaran Perkawinan",
+          "jenis_layanan": ["Pendaftaran Perkawinan"],
+          "persyaratan": []
+        },
+        {
+          "id": 17,
+          "nama": "Pelayanan Perkawinan",
+          "loket": "O",
+          "deskripsi": "Pelayanan Perkawinan",
+          "jenis_layanan": ["Pelayanan Perkawinan"],
+          "persyaratan": [
+            {
+              "nama": "Kedua mempelai pengantin",
+              "keterangan": null,
+              "file": "kedua_mempelai_dummy.pdf"
+            },
+            {
+              "nama": "Saksi",
+              "keterangan": null,
+              "file": "saksi_dummy.pdf"
+            },
+            {
+              "nama": "Penghulu",
+              "keterangan": null,
+              "file": "penghulu_dummy.pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "instansi": "PERUSAHAAN LISTRIK NEGARA",
+      "alamat": "Jl. Prabu Gajah Agung, Situ, Sumedang Utara, Kabupaten Sumedang, Jawa Barat",
+      "kontak": {
+        "email": "pln@gmail.com",
+        "telepon": "(0261) 210846",
+        "website": "https://www.pln.co.id/"
+      },
+      "jam_buka": {
+        "senin": "07:00 - 15:00",
+        "selasa": "07:00 - 15:00",
+        "rabu": "07:00 - 15:00",
+        "kamis": "07:00 - 15:00",
+        "jumat": "08:30 - 15:00",
+        "sabtu": "08:00 - 15:00"
+      },
+      "layanan": [
+        {
+          "id": 17,
+          "nama": "Informasi Pelayanan",
+          "loket": "L",
+          "deskripsi": "Layanan informasi terkait pelayanan PLN",
+          "jenis_layanan": ["Informasi Pelayanan"],
+          "persyaratan": [
+            {
+              "nama": "Tidak ada persyaratan khusus",
+              "keterangan": "Layanan informasi umum",
+              "file": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "instansi": "PDAM TIRTA MEDAL KABUPATEN SUMEDANG",
+      "alamat": "Jalan Raya Sumedang-Cirebon Km. 4,5 Cimalaka Sumedang",
+      "kontak": {
+        "email": "info@pdamsumedang.com",
+        "telepon": "(0261) 202627",
+        "website": "https://www.pdamsumedang.com"
+      },
+      "jam_buka": {
+        "senin": "07:00 - 15:00",
+        "selasa": "07:00 - 15:00",
+        "rabu": "07:00 - 15:00",
+        "kamis": "07:00 - 15:00",
+        "jumat": "07:00 - 15:00",
+        "sabtu": "Tutup"
+      },
+      "layanan": [
+        {
+          "id": 18,
+          "nama": "Loket Pembayaran",
+          "loket": "P",
+          "deskripsi": "Pelanggan PDAM bisa membayar tagihan air",
+          "jenis_layanan": ["Pembayaran Tagihan Air"],
+          "persyaratan": [
+            {
+              "nama": "Bukti Nota Pembayaran",
+              "keterangan": "",
+              "file": "nota_pembayaran_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 19,
+          "nama": "Pelayanan Informasi & Pengaduan",
+          "loket": "P",
+          "deskripsi": "Pelanggan bisa memperoleh informasi tentang PDAM, dan melakukan pengaduan terkait PDAM",
+          "jenis_layanan": ["Informasi PDAM", "Pengaduan PDAM"],
+          "persyaratan": [
+            {
+              "nama": "Formulir Pengaduan",
+              "keterangan": "Formulir yang telah diisi lengkap",
+              "file": "formulir_pengaduan_dummy.pdf"
+            },
+            {
+              "nama": "Dokumen Pendukung",
+              "keterangan": "Dokumen pendukung terkait pengaduan",
+              "file": "dokumen_pendukung_dummy.pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "instansi": "POS INDONESIA",
+      "alamat": "Jl. P.Geusan Ulun No. 82, Regol Wetan, Sumedang Sel., Kabupaten Sumedang, Jawa Barat",
+      "kontak": {
+        "email": "pos@sumedang.com",
+        "telepon": "(0261) 202006",
+        "website": "https://www.posindonesia.co.id"
+      },
+      "jam_buka": {
+        "senin": "07:00 - 15:00",
+        "selasa": "07:00 - 15:00",
+        "rabu": "07:00 - 15:00",
+        "kamis": "07:00 - 15:00",
+        "jumat": "07:00 - 15:00",
+        "sabtu": "Tutup"
+      },
+      "layanan": [
+        {
+          "id": 19,
+          "nama": "Penjualan Materai dan Prangko/Benda Pos",
+          "loket": "M",
+          "deskripsi": "Penjualan Sampul, Prangko dan Meterai",
+          "jenis_layanan": [
+            "Penjualan Sampul",
+            "Penjualan Prangko",
+            "Penjualan Meterai"
+          ],
+          "persyaratan": []
+        },
+        {
+          "id": 20,
+          "nama": "Penerimaan Kiriman Surat, Dokumen & Paket",
+          "loket": "M",
+          "deskripsi": "Kiriman Dokumen dan Paket ke dalam dan atau Luar negeri.",
+          "jenis_layanan": [
+            "Penerimaan Kiriman Surat",
+            "Penerimaan Kiriman Dokumen",
+            "Penerimaan Kiriman Paket"
+          ],
+          "persyaratan": [
+            {
+              "nama": "Kiriman bukan termasuk kategori barang yang dilarang",
+              "keterangan": "Cairan / Gas, Barang atau Zat Mudah Rusak / Terbakar / Meledak, Binatang, Narkoba, Zat Beracun / Menyebabkan Infeksi, Bahan Korosif dan Iritatif",
+              "file": null
+            }
+          ]
+        },
+        {
+          "id": 21,
+          "nama": "Pos Pay",
+          "loket": "M",
+          "deskripsi": "Layanan penerimaan pembayaran berbagai tagihan dan angsuran. Produk Layanan POSPAY terdiri dari: Finance (Angsuran Kredit), Telekomunikasi, Perbankan, Kartu Kredit, Personal Loan, Lain-lain (PLN, PDAM, Pajak, Asuransi, Zakat, Sodakoh, Infaq, dll).",
+          "jenis_layanan": [
+            "Pembayaran Angsuran Kredit",
+            "Pembayaran Tagihan Telekomunikasi",
+            "Pembayaran Tagihan Perbankan",
+            "Pembayaran Tagihan PLN",
+            "Pembayaran Tagihan PDAM",
+            "Pembayaran Pajak",
+            "Pembayaran Asuransi",
+            "Pembayaran Zakat, Sodakoh, Infaq"
+          ],
+          "persyaratan": [
+            {
+              "nama": "No Kontrak / No HP / No Id Pelanggan",
+              "keterangan": null,
+              "file": null
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "nama": "Pengiriman Uang dan Penarikan / Wesel / WU dan Transfer antar Bank (C2A)",
+          "loket": "M",
+          "deskripsi": "Layanan penarikan dan transfer uang cepat dalam negeri dan luar negeri. Produk layanan Remittance / Weselpos: Weselpos Prima, Weselpos Instan, Cash to Account, Western Union, Transfast, Arsema (Moneygram), WP BNI, WP BCA.",
+          "jenis_layanan": [
+            "Weselpos Prima",
+            "Weselpos Instan",
+            "Cash to Account",
+            "Western Union",
+            "Transfast",
+            "Arsema (Moneygram)",
+            "WP BNI",
+            "WP BCA"
+          ],
+          "persyaratan": [
+            {
+              "nama": "REMITTANCE / WESELPOS",
+              "keterangan": null,
+              "file": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "instansi": "TABUNGAN DAN ASURANSI PEGAWAI NEGERI",
+      "alamat": "Jl. Prabu Gajah Agung No.09, Situ, Sumedang Utara, Kabupaten Sumedang, Jawa Barat",
+      "kontak": {
+        "email": "-",
+        "telepon": "(0261) 202540",
+        "website": "#"
+      },
+      "jam_buka": {
+        "senin": "06:00 - 15:00",
+        "selasa": "06:00 - 15:00",
+        "rabu": "06:00 - 15:00",
+        "kamis": "06:00 - 15:00",
+        "jumat": "06:00 - 15:00",
+        "sabtu": "08:00 - 15:00"
+      },
+      "layanan": [
+        {
+          "id": 23,
+          "nama": "Pengajuan SPP Klaim",
+          "loket": "D",
+          "deskripsi": "Pengajuan SPP Klaim",
+          "jenis_layanan": ["Pengajuan SPP Klaim"],
+          "persyaratan": [
+            {
+              "nama": "Pengajuan SPP Klaim",
+              "keterangan": "",
+              "file": "pengajuan_spp_klaim_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 24,
+          "nama": "Pengajuan Mutasi Pensiun",
+          "loket": "D",
+          "deskripsi": "Pengajuan Mutasi Pensiun",
+          "jenis_layanan": ["Mutasi Finansial dan Non Finansial"],
+          "persyaratan": [
+            {
+              "nama": "Mutasi Finansial dan Non Finansial",
+              "keterangan": "",
+              "file": "mutasi_finansial_nonfinansial_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 25,
+          "nama": "Pengajuan KPT",
+          "loket": "D",
+          "deskripsi": "Pengajuan KPT (kepegawaian, Pensiun)",
+          "jenis_layanan": ["Pengajuan KPT"],
+          "persyaratan": []
+        },
+        {
+          "id": 26,
+          "nama": "Pengajuan Mutasi Keluarga",
+          "loket": "D",
+          "deskripsi": "Pengajuan Mutasi Keluarga",
+          "jenis_layanan": ["Mutasi Finansial dan Non Finansial"],
+          "persyaratan": [
+            {
+              "nama": "Mutasi Finansial dan Non Finansial",
+              "keterangan": "",
+              "file": "mutasi_keluarga_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 27,
+          "nama": "Pengajuan usul/ralat SK/Pensiun janda/duda/YP",
+          "loket": "D",
+          "deskripsi": "Pengajuan usul/ralat SK/Pensiun janda/duda/YP",
+          "jenis_layanan": ["Pengajuan usul/ralat SK/Pensiun janda/duda/YP"],
+          "persyaratan": []
+        },
+        {
+          "id": 28,
+          "nama": "Pengajuan JKK/JKM",
+          "loket": "D",
+          "deskripsi": "Pengajuan JKK/JKM",
+          "jenis_layanan": ["Pengajuan JKK/JKM"],
+          "persyaratan": [
+            {
+              "nama": "Pengajuan JKK/JKM",
+              "keterangan": "",
+              "file": "pengajuan_jkk_jkm_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 29,
+          "nama": "Informasi Ketaspenan",
+          "loket": "D",
+          "deskripsi": "Informasi Ketaspenan",
+          "jenis_layanan": ["Informasi Ketaspenan"],
+          "persyaratan": []
+        },
+        {
+          "id": 30,
+          "nama": "Enrollment/Perekaman Data Biometrik",
+          "loket": "D",
+          "deskripsi": "Enrollment/Perekaman Data Biometrik",
+          "jenis_layanan": ["Enrollment/Perekaman Data Biometrik"],
+          "persyaratan": []
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "instansi": "SISTEM ADMINISTRASI MANUNGGAL SATU ATAP",
+      "alamat": "Jl. Cut Nyak Dien No.114, Regol Wetan, Sumedang Sel., Kabupaten Sumedang, Jawa Barat",
+      "kontak": {
+        "email": "-",
+        "telepon": "(0261) 201979",
+        "website": "-"
+      },
+      "jam_buka": {
+        "senin": "07:00 - 15:00",
+        "selasa": "07:00 - 15:00",
+        "rabu": "07:00 - 15:00",
+        "kamis": "07:00 - 15:00",
+        "jumat": "07:00 - 15:00",
+        "sabtu": "Tutup"
+      },
+      "layanan": [
+        {
+          "id": 31,
+          "nama": "Pembayaran PKB, SWDKLLJ dan Pengesahan STNK Tahunan",
+          "loket": "C",
+          "deskripsi": "Pembayaran PKB, SWDKLLJ dan Pengesahan STNK Tahunan",
+          "jenis_layanan": [
+            "Pembayaran PKB",
+            "Pembayaran SWDKLLJ",
+            "Pengesahan STNK Tahunan"
+          ],
+          "persyaratan": [
+            {
+              "nama": "STNK Asli",
+              "keterangan": "",
+              "file": "stnk_asli_dummy.pdf"
+            },
+            {
+              "nama": "KTP/KK Asli sesuai nama STNK",
+              "keterangan": "",
+              "file": "ktp_kk_asli_dummy.pdf"
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "nama": "Cetak Pembayaran PKB Online",
+          "loket": "C",
+          "deskripsi": "Cetak Bukti Pembayaran PKB Online",
+          "jenis_layanan": ["Cetak Bukti Pembayaran PKB Online"],
+          "persyaratan": [
+            {
+              "nama": "Bukti Bayar/Struk Bayar",
+              "keterangan": "",
+              "file": "bukti_bayar_dummy.pdf"
+            },
+            {
+              "nama": "STNK Asli",
+              "keterangan": "",
+              "file": "stnk_asli_dummy.pdf"
+            },
+            {
+              "nama": "KTP Asli Sesuai Nama STNK",
+              "keterangan": "",
+              "file": "ktp_asli_dummy.pdf"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

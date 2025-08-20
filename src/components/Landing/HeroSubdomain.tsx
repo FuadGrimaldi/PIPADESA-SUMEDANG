@@ -1,6 +1,6 @@
 import FloatingSearchBar from "@/components/Search/SubdomainSearchLanding";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
-import { NextRequest } from "next/server";
+import Link from "next/link";
 
 const Hero = async ({ subdomain }: { subdomain: string | null }) => {
   const desa = await getDesaBySubdomain(subdomain || "");
@@ -46,9 +46,11 @@ const Hero = async ({ subdomain }: { subdomain: string | null }) => {
               Website resmi Desa {subdomain}. Dapatkan informasi terkini tentang
               pelayanan, berita, dan kegiatan desa.
             </p>
-            <div className="w-1/3 py-3 border border-blue-600 rounded-lg text-center cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 hover:text-white hover:shadow-lg hover:border-transparent hover:-translate-y-1">
-              Jelajahi Layanan
-            </div>
+            <Link href={`/layanan`}>
+              <div className="w-1/3 py-3 border border-blue-600 rounded-lg text-center cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 hover:text-white hover:shadow-lg hover:border-transparent hover:-translate-y-1">
+                Jelajahi Layanan
+              </div>
+            </Link>
           </div>
         </div>
       </div>

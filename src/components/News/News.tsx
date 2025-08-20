@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { Article } from "@/types/article";
+import { Agenda } from "@/types/agenda";
 import { useState, useEffect, useCallback } from "react";
 
 interface AllBeritaProps {
@@ -10,9 +11,29 @@ interface AllBeritaProps {
 
 const News = ({ desaId }: AllBeritaProps) => {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [agenda, setAgenda] = useState<Agenda[]>([]);
   const [sidebarArticles, setSidebarArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const fetchAgenda = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`/api/agenda/subdomain/${desaId}`);
+      if (!res.ok) {
+        throw new Error("Failed to fetch agenda");
+      }
+      const data = await res.json();
+      setAgenda(data);
+    } catch (error) {
+      console.error("Error fetching agenda:", error);
+      setError("Gagal memuat agenda");
+      setAgenda([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [desaId]);
 
   // Fetch articles by desa_id
   const fetchArticles = useCallback(async () => {
@@ -60,8 +81,9 @@ const News = ({ desaId }: AllBeritaProps) => {
   useEffect(() => {
     if (desaId) {
       fetchArticles();
+      fetchAgenda();
     }
-  }, [desaId, fetchArticles]);
+  }, [desaId, fetchArticles, fetchAgenda]);
 
   // Loading state
   if (loading) {
@@ -120,6 +142,7 @@ const News = ({ desaId }: AllBeritaProps) => {
 
   // Get first 3 articles for main display
   const displayedNews = articles.slice(0, 3);
+  const displayedAgenda = agenda.slice(0, 3);
 
   return (
     <section className="pb-16 pt-20">
@@ -162,27 +185,56 @@ const News = ({ desaId }: AllBeritaProps) => {
         ) : (
           <>
             <div className="flex flex-col lg:flex-row gap-8">
-              {/* Main Blog Cards */}
-              <div className="w-full lg:w-3/4 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {displayedNews.map((article) => (
-                  <BlogCard key={article.id} article={article} />
-                ))}
+              <div className="w-full lg:w-3/4 mb-6 lg:mb-0 space-y-6">
+                <div>
+                  <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg lg:text-2xl font-bold text-dark dark:text-white mb-4">
+                      Berita Terbaru
+                    </h2>
+                    <div>
+                      <a
+                        href="/berita"
+                        className="inline-block bg-primary hover:bg-opacity-90 text-white font-semibold py-2 px-6 rounded transition text-sm hover:bg-blue-500"
+                      >
+                        Lihat Semua Berita...
+                      </a>
+                    </div>
+                  </div>
+                  <div className=" grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {displayedNews.map((article) => (
+                      <BlogCard key={article.id} article={article} />
+                    ))}
+                  </div>
+                  {/* Show All Button */}
+                </div>
+                <div>
+                  <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg lg:text-2xl font-bold text-dark dark:text-white mb-4">
+                      Agenda Terbaru
+                    </h2>
+                    <div>
+                      <a
+                        href="/agenda"
+                        className="inline-block bg-primary hover:bg-opacity-90 text-white font-semibold py-2 px-6 rounded transition text-sm hover:bg-blue-500"
+                      >
+                        Lihat Semua Agenda...
+                      </a>
+                    </div>
+                  </div>
+                  <div className=" grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {displayedAgenda.map((agenda) => (
+                      <BlogCardAgenda key={agenda.id} agenda={agenda} />
+                    ))}
+                  </div>
+                  {/* Show All Button */}
+                </div>
               </div>
+              {/* Main Blog Cards */}
 
               <div className="bg-gray-200 rounded-lg shadow-lg px-[0.5px]"></div>
 
               {/* Sidebar */}
               <SidebarNews articles={sidebarArticles} />
-            </div>
-
-            {/* Show All Button */}
-            <div className="text-left mt-6">
-              <a
-                href="/berita"
-                className="inline-block bg-primary hover:bg-opacity-90 text-white font-semibold py-3 px-6 rounded transition text-sm hover:bg-blue-500"
-              >
-                Lihat Semua Berita...
-              </a>
             </div>
           </>
         )}
@@ -192,6 +244,68 @@ const News = ({ desaId }: AllBeritaProps) => {
 };
 
 export default News;
+
+interface BlogCardAgendaProps {
+  agenda: Agenda;
+}
+
+const BlogCardAgenda = ({ agenda }: BlogCardAgendaProps) => {
+  // Format date
+  const formatDate = (dateString: string | Date) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  // Truncate description
+  const truncateContent = (content: string, maxLength: number = 100) => {
+    if (!content) return "";
+    const plainText = content.replace(/<[^>]*>/g, ""); // Remove HTML tags
+    return plainText.length > maxLength
+      ? plainText.substring(0, maxLength) + "..."
+      : plainText;
+  };
+
+  return (
+    <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow transform hover:-translate-y-1 overflow-hidden">
+      <div className="relative">
+        <Image
+          src={agenda.poster || "/images/default-agenda.jpg"}
+          alt={agenda.judul}
+          className="w-full h-48 object-cover"
+          width={400}
+          height={200}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = "/images/default-agenda.jpg";
+          }}
+        />
+      </div>
+
+      <div className="p-5">
+        <span className="inline-block text-xs font-medium text-black border-2 border-blue-300 px-3 py-1 rounded-lg">
+          {formatDate(agenda.waktu)}
+        </span>
+        <h3 className="mt-4 text-lg font-semibold text-gray-900 hover:text-blue-600 transition">
+          <p className="line-clamp-2">{agenda.judul}</p>
+        </h3>
+        <div className="mt-2 flex flex-col gap-1 text-sm text-gray-600"></div>
+        <span>
+          <strong>Waktu:</strong> {formatDate(agenda.waktu)}
+        </span>
+        <br />
+        {agenda.lokasi && (
+          <span>
+            <strong>Lokasi:</strong> {agenda.lokasi}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+};
 
 // Updated BlogCard component to use Article data
 interface BlogCardProps {
@@ -286,7 +400,7 @@ const SidebarNews = ({ articles }: SidebarNewsProps) => {
         Informasi Lainnya
       </h4>
       <ul className="space-y-4">
-        {displayItems.slice(0, 4).map((item, idx) => (
+        {displayItems.slice(0, 7).map((item, idx) => (
           <li key={idx} className="border-b pb-3 dark:border-gray-700">
             <a
               href={
@@ -305,7 +419,7 @@ const SidebarNews = ({ articles }: SidebarNewsProps) => {
         ))}
       </ul>
 
-      {articles.length > 4 && (
+      {articles.length > 7 && (
         <div className="mt-4">
           <a href="/berita" className="text-sm text-blue-600 hover:underline">
             Lihat semua informasi →

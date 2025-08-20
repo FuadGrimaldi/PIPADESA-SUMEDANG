@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import Footer from "@/components/Footer/Footer";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = headers();
@@ -26,6 +27,8 @@ export default async function SubdomainLayout({
   const host = headersList.get("host") || "";
   const subdomain = host.split(".")[0];
   const session = await getServerSession(authOptions);
+  const desa = await getDesaBySubdomain(subdomain);
+  const desaId = Number(desa?.id) || null;
 
   return (
     <html lang="id">
@@ -33,6 +36,7 @@ export default async function SubdomainLayout({
         <header>
           <SubdomainNavGuest
             subdomain={subdomain}
+            desaId={desaId}
             username={session?.user?.username || null}
           />
         </header>

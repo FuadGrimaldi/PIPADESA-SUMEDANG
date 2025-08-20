@@ -1,14 +1,13 @@
-import AllInstansi from "@/components/ProfileDesa/AllInstansi";
-import SearchLayanan from "@/components/Search/SearchLayanan";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
-
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
 import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 import { headers } from "next/headers";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
+import LaporCard from "@/components/Card/LaporCard";
+import PengaduanComp from "@/components/ProfileDesa/Pengaduan";
 
-export default async function InstansiPage() {
+export default async function PengaduanPage() {
   const headersList = headers();
   const host = headersList.get("host") || "";
   const subdomain = host.split(".")[0];
@@ -16,7 +15,7 @@ export default async function InstansiPage() {
   const desaId = Number(desa?.id);
   const links = [
     { to: "/", label: "Home" },
-    { to: "/instansi", label: "Instansi" },
+    { to: "/pengaduan", label: "Pengaduan" },
   ];
   return (
     <div className="container min-h-screen">
@@ -28,11 +27,9 @@ export default async function InstansiPage() {
         <div className="relative z-10 flex flex-col lg:flex-row gap-8 items-start ">
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
-            <div className="mb-4">
-              <SearchLayanan />
-            </div>
-            <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
-              <AllInstansi desaId={desaId} />
+            <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
+              {/* disini */}
+              <PengaduanComp />
             </div>
             <SumedangWeatherWidget />
           </div>

@@ -33,7 +33,7 @@ export default async function SubdomainHomePage() {
 
       <div id="stats" className="px-[31px] lg:px-[100px] px-4 py-8">
         <div className="bg-none">
-          <StatistikPenduduk />
+          <StatistikPenduduk desaId={Number(desa?.id)} namaDesa={subdomain} />
         </div>
         <div className=" py-8 hover:scale-105 transition-transform duration-300">
           <LaporCard />

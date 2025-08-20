@@ -7,7 +7,7 @@ import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 import { headers } from "next/headers";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 
-export default async function TahuSumedangPage() {
+export default async function InformasiLainnyaPage() {
   const links = [
     { to: "/", label: "Home" },
     { to: "/tahu-sumedang", label: "Tahu Sumedang" },

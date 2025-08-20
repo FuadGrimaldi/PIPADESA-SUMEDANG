@@ -16,9 +16,11 @@ import Link from "next/link";
 export default function SubdomainNavGuest({
   subdomain,
   username,
+  desaId,
 }: {
   subdomain: string | null;
   username: string | null;
+  desaId: number | null;
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -59,16 +61,26 @@ export default function SubdomainNavGuest({
       submenu: [
         { name: "Daftar Instansi", href: "/instansi" },
         { name: "Daftar Layanan", href: "/layanan" },
-        { name: "Tahu Sumedang", href: "/tahu-sumedang" },
-        { name: "Pengaduan", href: "/pengaduan" },
+        { name: "Lapor!", href: "/pengaduan" },
       ],
     },
     {
       name: "Statistik Desa",
       icon: BarChart3,
       submenu: [
-        { name: "Data Penduduk", href: "/statistik/jenis-kelamin" },
-        { name: "Kependudukan", href: "/kependudukan" },
+        // { name: "Data Penduduk", href: "/statistik/jenis-kelamin" },
+        {
+          name: "Desa Cantik",
+          href: `https://e-officedesa.sumedangkab.go.id/dashboard_desa_cantik/desa/${desaId}`,
+        },
+        {
+          name: "Potensi Desa",
+          href: `https://e-officedesa.sumedangkab.go.id/dashboard_podes`,
+        },
+        {
+          name: "Desa Simpatik",
+          href: `https://e-officedesa.sumedangkab.go.id/dashboard_simpatik/desa/${desaId}`,
+        },
       ],
     },
     {
@@ -78,6 +90,7 @@ export default function SubdomainNavGuest({
         { name: "Berita & Informasi", href: "/berita" },
         { name: "Agenda", href: "/agenda" },
         { name: "Galeri", href: "/galeri" },
+        { name: "Informasi Lainnya", href: "/informasi-tambahan" },
       ],
     },
     { name: "Direktori", href: "/direktori", icon: BookOpen },

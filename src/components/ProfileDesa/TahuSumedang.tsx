@@ -20,11 +20,11 @@ export default function TahuSumedangComp() {
       <div>
         <div className="text-center mb-6 border-b-4 border-[#C0B099] pb-6">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Tahu Sumedang
+            Informasi Lainnya
           </h1>
           <p className="text-lg text-gray-600">
-            Aplikasi Tahu Sumedang untuk memudahkan akses informasi dan layanan
-            terkait Sumedang.
+            Temukan informasi penting dan layanan terkait Tahu Sumedang di sini.
+            Klik tombol di bawah untuk memilih layanan yang Anda butuhkan.
           </p>
         </div>
         {/* Tombol Pilihan Layanan dengan perulangan */}

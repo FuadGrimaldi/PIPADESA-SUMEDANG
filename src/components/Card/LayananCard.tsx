@@ -5,6 +5,8 @@ export default function CardLayanan({
   alt,
   link,
   nama_layanan,
+  deskripsi,
+  loket,
   nama_instansi,
 }) {
   // Function to generate background color based on the first letter
@@ -15,10 +17,15 @@ export default function CardLayanan({
     const index = (charCode - 65) % colors.length;
     return colors[index];
   };
+  const shortenText = (text: string, maxLength: number = 50): string => {
+    if (!text) return "";
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength).trimEnd() + "...";
+  };
 
   // Get the first letter of nama_layanan or alt as fallback
   const displayLetter = nama_layanan
-    ? nama_layanan.charAt(0).toUpperCase()
+    ? loket.charAt(0).toUpperCase()
     : alt || "L";
   const backgroundColorClass = getBackgroundColor(displayLetter);
 
@@ -68,8 +75,7 @@ export default function CardLayanan({
 
           {/* Service Description/Info */}
           <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-            Layanan {nama_layanan?.toLowerCase() || "layanan"} yang tersedia
-            untuk masyarakat melalui {nama_instansi || "instansi terkait"}.
+            {shortenText(deskripsi || "Deskripsi layanan tidak tersedia.")}
           </p>
 
           {/* Action Button/Link Indicator */}

@@ -1,93 +1,133 @@
 "use client";
 import CardLayanan from "../Card/LayananCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 
 type LayananItems = {
   id: number;
   alt: string;
   link: string;
+  deskripsi?: string;
   nama_layanan: string;
   nama_instansi: string;
+  Loket?: string;
 };
 
-const layananData: LayananItems[] = [
-  {
-    id: 1,
-    alt: "A",
-    link: "/layanan/akta-kelahiran",
-    nama_layanan: "Akta Kelahiran",
-    nama_instansi: "Dinas Kependudukan",
-  },
-  {
-    id: 2,
-    alt: "B",
-    link: "/layanan/bantuan-sosial",
-    nama_layanan: "Bantuan Sosial",
-    nama_instansi: "Dinas Sosial",
-  },
-  {
-    id: 3,
-    alt: "C",
-    link: "/layanan/cuci-darah",
-    nama_layanan: "Cuci Darah Gratis",
-    nama_instansi: "Dinas Kesehatan",
-  },
-  {
-    id: 4,
-    alt: "D",
-    link: "/layanan/dokumen-umum",
-    nama_layanan: "Dokumen Umum",
-    nama_instansi: "Kelurahan",
-  },
-  {
-    id: 5,
-    alt: "E",
-    link: "/layanan/e-ktp",
-    nama_layanan: "E-KTP",
-    nama_instansi: "Dinas Kependudukan",
-  },
-  {
-    id: 6,
-    alt: "F",
-    link: "/layanan/fasilitas-olahraga",
-    nama_layanan: "Fasilitas Olahraga",
-    nama_instansi: "Dinas Pemuda & Olahraga",
-  },
-  {
-    id: 7,
-    alt: "G",
-    link: "/layanan/gerakan-kebersihan",
-    nama_layanan: "Gerakan Kebersihan",
-    nama_instansi: "Dinas Lingkungan Hidup",
-  },
-  {
-    id: 8,
-    alt: "H",
-    link: "/layanan/home-care",
-    nama_layanan: "Home Care",
-    nama_instansi: "Dinas Kesehatan",
-  },
-  {
-    id: 9,
-    alt: "I",
-    link: "/layanan/izin-usaha",
-    nama_layanan: "Izin Usaha",
-    nama_instansi: "Dinas Penanaman Modal",
-  },
-  {
-    id: 10,
-    alt: "J",
-    link: "/layanan/jaminan-kesehatan",
-    nama_layanan: "Jaminan Kesehatan",
-    nama_instansi: "BPJS Kesehatan",
-  },
-];
+// TypeScript interfaces untuk data JSON
+interface KontakInstansi {
+  email?: string;
+  telepon?: string;
+  website?: string;
+}
 
-const ITEMS_PER_PAGE = 6;
+interface JamBuka {
+  senin: string;
+  selasa: string;
+  rabu: string;
+  kamis: string;
+  jumat: string;
+  sabtu: string;
+}
 
-const AllLayanan = () => {
+interface Persyaratan {
+  nama: string;
+  keterangan?: string;
+  link?: string;
+  file?: string | null;
+}
+
+interface Layanan {
+  id: number;
+  nama: string;
+  loket: string;
+  deskripsi: string;
+  jenis_layanan: string[];
+  persyaratan: Persyaratan[];
+}
+
+interface InstansiData {
+  id: number;
+  instansi: string;
+  alamat: string;
+  kontak: KontakInstansi;
+  jam_buka: JamBuka;
+  layanan: Layanan[];
+}
+
+interface JsonData {
+  data: InstansiData[];
+}
+
+interface AllLayananProps {
+  desaId?: number;
+}
+
+const ITEMS_PER_PAGE = 9;
+
+const AllLayanan = ({ desaId }: AllLayananProps) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [layananData, setLayananData] = useState<LayananItems[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Transform function untuk mengubah data JSON ke format LayananItems
+  const transformDataToLayananFormat = (jsonData: JsonData): LayananItems[] => {
+    const transformedData: LayananItems[] = [];
+
+    jsonData.data.forEach((instansi) => {
+      instansi.layanan.forEach((layanan) => {
+        transformedData.push({
+          id: layanan.id,
+          alt: `${layanan.nama} - ${instansi.instansi}`,
+          link: `/layanan/${layanan.id}`, // Link ke detail layanan
+          nama_layanan: layanan.nama,
+          nama_instansi: instansi.instansi,
+          deskripsi: layanan.deskripsi,
+          Loket: layanan.loket,
+        });
+      });
+    });
+
+    return transformedData;
+  };
+
+  // Fetch layanan data
+  const fetchLayananData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Try to fetch from API first
+      if (desaId) {
+        try {
+          const response = await fetch(`/api/layanan/subdomain/${desaId}`);
+          if (response.ok) {
+            const jsonData: JsonData = await response.json();
+            const transformedData = transformDataToLayananFormat(jsonData);
+            setLayananData(transformedData);
+            return;
+          }
+        } catch (apiError) {
+          console.warn("API call failed, using fallback data");
+        }
+      }
+
+      // Fallback: Load from local JSON file
+      const instansiJsonData = await import(
+        "../../../data/instansi_layanan.json"
+      );
+      const transformedData = transformDataToLayananFormat(
+        instansiJsonData as JsonData
+      );
+      setLayananData(transformedData);
+    } catch (err) {
+      console.error("Error fetching layanan data:", err);
+      setError("Gagal memuat data layanan");
+      setLayananData([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [desaId]);
 
   // Function to get page from URL params
   const getPageFromURL = () => {
@@ -100,7 +140,7 @@ const AllLayanan = () => {
   };
 
   // Function to update URL with page param
-  const updateURL = (page) => {
+  const updateURL = useCallback((page: number) => {
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
       if (page === 1) {
@@ -110,7 +150,7 @@ const AllLayanan = () => {
       }
       window.history.pushState({}, "", url.toString());
     }
-  };
+  }, []);
 
   // Initialize page from URL on component mount
   useEffect(() => {
@@ -121,7 +161,12 @@ const AllLayanan = () => {
   // Update URL when page changes
   useEffect(() => {
     updateURL(currentPage);
-  }, [currentPage]);
+  }, [currentPage, updateURL]);
+
+  // Fetch data on component mount
+  useEffect(() => {
+    fetchLayananData();
+  }, [fetchLayananData]);
 
   const totalPages = Math.ceil(layananData.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -130,16 +175,19 @@ const AllLayanan = () => {
     startIndex + ITEMS_PER_PAGE
   );
 
-  const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
-      // Scroll to top when page changes
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+  const handlePageChange = useCallback(
+    (newPage: number) => {
+      if (newPage >= 1 && newPage <= totalPages) {
+        setCurrentPage(newPage);
+        // Scroll to top when page changes
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    },
+    [totalPages]
+  );
 
   // Generate page numbers for pagination
-  const getPageNumbers = () => {
+  const getPageNumbers = useCallback(() => {
     const pageNumbers: number[] = [];
     const maxVisiblePages = 5;
 
@@ -161,46 +209,126 @@ const AllLayanan = () => {
     }
 
     return pageNumbers;
-  };
+  }, [totalPages, currentPage]);
 
-  if (currentItems.length === 0) {
+  // Loading state
+  if (loading) {
     return (
-      <div className="container mx-auto px-4">
-        <div className="mb-6 w-full border-b-4 border-[#C0B099]">
-          <div className="mb-6 text-center max-w-xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
-              Daftar Layanan
-            </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
-              Tidak ada layanan yang tersedia saat ini. Silakan hubungi
-              administrator untuk informasi lebih lanjut.
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 w-full border-b-4 border-[#C0B099]">
+            <div className="mb-6 text-center max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+                Daftar Layanan
+              </h2>
+              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+                Memuat data layanan...
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 9 }).map((_, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-md p-6 animate-pulse"
+              >
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-3 bg-gray-200 rounded mb-4 w-3/4"></div>
+                <div className="space-y-2">
+                  <div className="h-3 bg-gray-200 rounded"></div>
+                  <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Error state
+  if (error && layananData.length === 0) {
+    return (
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 w-full border-b-4 border-[#C0B099]">
+            <div className="mb-6 text-center max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+                Daftar Layanan
+              </h2>
+            </div>
+          </div>
+          <div className="text-center py-12">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-8 inline-block">
+              <svg
+                className="w-16 h-16 text-red-400 mx-auto mb-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <h3 className="text-lg font-semibold text-red-700 mb-2">Error</h3>
+              <p className="text-red-600 mb-4">{error}</p>
+              <button
+                onClick={fetchLayananData}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                Coba Lagi
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // No data state
+  if (layananData.length === 0) {
+    return (
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <div className="mb-6 w-full border-b-4 border-[#C0B099]">
+            <div className="mb-6 text-center max-w-xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+                Daftar Layanan
+              </h2>
+              <p className="text-base text-gray-600 dark:text-gray-400">
+                Tidak ada layanan yang tersedia saat ini. Silakan hubungi
+                administrator untuk informasi lebih lanjut.
+              </p>
+            </div>
+          </div>
+          <div className="text-center text-gray-500 py-12">
+            <div className="mb-4">
+              <svg
+                className="mx-auto w-24 h-24 text-gray-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-400 mb-2">
+              Tidak ada layanan yang tersedia
+            </h3>
+            <p className="text-gray-400">
+              Silakan hubungi administrator untuk informasi lebih lanjut.
             </p>
           </div>
         </div>
-        <div className="text-center text-gray-500 py-12">
-          <div className="mb-4">
-            <svg
-              className="mx-auto w-24 h-24 text-gray-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-400 mb-2">
-            Tidak ada layanan yang tersedia
-          </h3>
-          <p className="text-gray-400">
-            Silakan hubungi administrator untuk informasi lebih lanjut.
-          </p>
-        </div>
-      </div>
+      </section>
     );
   }
 
@@ -218,6 +346,13 @@ const AllLayanan = () => {
               Setiap instansi menyediakan berbagai layanan yang dapat diakses
               secara online.
             </p>
+            {error && (
+              <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <p className="text-yellow-700 text-sm">
+                  ⚠️ Menampilkan data fallback: {error}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -236,8 +371,9 @@ const AllLayanan = () => {
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
               <CardLayanan
+                deskripsi={layanan.deskripsi}
+                loket={layanan.Loket}
                 id={layanan.id}
-                key={layanan.id}
                 alt={layanan.alt}
                 link={layanan.link}
                 nama_layanan={layanan.nama_layanan}
