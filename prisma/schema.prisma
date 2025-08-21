@@ -48,6 +48,7 @@ model profile_desa {
   created_at       DateTime
   updated_at       DateTime
 
+
   users            users[]
   pengajuan_proposal pengajuan_proposal[]
   potensi_desa     potensi_desa[]
@@ -55,6 +56,7 @@ model profile_desa {
   articles         articles[]
   videos           videos[]
   organisasi       organisasi[]
+  kategori_organisasi   kategori_organisasi[]
   agenda_desa      agenda_desa[]
   officials        officials[]
   sarana_prasarana sarana_prasarana[]
@@ -222,6 +224,9 @@ model organisasi {
 model kategori_organisasi {
   id              Int          @id @default(autoincrement())
   nama_kategori   String       @db.VarChar(100)
+  desa_id         Int
+
+  profile_desa profile_desa @relation(fields: [desa_id], references: [id])
 
   organisasi      organisasi[]
 }
