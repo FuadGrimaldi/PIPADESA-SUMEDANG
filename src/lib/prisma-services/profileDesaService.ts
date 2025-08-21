@@ -1,4 +1,4 @@
-import prisma from "./prisma";
+import { prisma } from "./prisma";
 
 export const createDesa = async (data) => {
   return prisma.profile_desa.create({
@@ -21,13 +21,9 @@ export const getDesaById = async (id: number) => {
 };
 
 export const getDesaBySubdomain = async (subdomain: string) => {
-  try {
-    return await prisma.profile_desa.findFirst({
-      where: { subdomain },
-    });
-  } catch (error) {
-    return null; // fallback biar app tetap jalan
-  }
+  return await prisma.profile_desa.findFirst({
+    where: { subdomain },
+  });
 };
 
 export const updateDesa = async (id: number, data) => {

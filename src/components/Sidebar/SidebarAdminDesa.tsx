@@ -38,6 +38,17 @@ const menuData = [
     items: [
       { title: "Berita", url: "/admindesa/berita" },
       { title: "Agenda", url: "/admindesa/agenda" },
+      { title: "APBDes", url: "/admindesa/apbdes" },
+      { title: "Infografis", url: "/admindesa/infografis" },
+    ],
+  },
+  {
+    title: "Direktori",
+    icon: Building,
+    items: [
+      { title: "Kategori", url: "/admindesa/kategori" },
+      { title: "Organisasi", url: "/admindesa/organisasi" },
+      { title: "Sarana", url: "/admindesa/sarana" },
     ],
   },
   {
@@ -54,17 +65,7 @@ const menuData = [
     icon: Briefcase,
     items: [{ title: "Lapangan Usaha", url: "/lapangan-usaha" }],
   },
-  {
-    title: "Perumahan & Aset",
-    icon: Building,
-    items: [
-      { title: "Perumahan", url: "/perumahan" },
-      { title: "Kepemilikan Aset", url: "/kepemilikan-aset" },
-      { title: "Bahan Bakar Utama", url: "/bahan-bakar-utama" },
-      { title: "Sumber Air Minum Utama", url: "/sumber-air-minum-utama" },
-      { title: "Pembuangan Akhir Tinja", url: "/pembuangan-akhir-tinja" },
-    ],
-  },
+
   {
     title: "Struktur Bangunan",
     icon: Shield,

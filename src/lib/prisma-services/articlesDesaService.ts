@@ -1,4 +1,4 @@
-import prisma from "./prisma";
+import { prisma } from "./prisma";
 import { ArticleCreate, ArticleUpdate } from "@/types/article";
 
 export class ArticlesDesaService {

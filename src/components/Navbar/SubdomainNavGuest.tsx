@@ -13,6 +13,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+interface Kategori {
+  id: number;
+  nama_kategori: string;
+}
+
 export default function SubdomainNavGuest({
   subdomain,
   username,
@@ -22,6 +27,7 @@ export default function SubdomainNavGuest({
   username: string | null;
   desaId: number | null;
 }) {
+  const [kategoris, setKategoris] = useState<Kategori[]>([]);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -34,6 +40,20 @@ export default function SubdomainNavGuest({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    async function fetchKategoris() {
+      try {
+        const res = await fetch("/api/organisasi/kategori/subdomain/" + desaId);
+        if (!res.ok) throw new Error("Failed to fetch kategori");
+        const data = await res.json();
+        setKategoris(data);
+      } catch (error) {
+        setKategoris([]);
+      }
+    }
+    fetchKategoris();
+  }, [desaId]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -68,7 +88,6 @@ export default function SubdomainNavGuest({
       name: "Statistik Desa",
       icon: BarChart3,
       submenu: [
-        // { name: "Data Penduduk", href: "/statistik/jenis-kelamin" },
         {
           name: "Desa Cantik",
           href: `https://e-officedesa.sumedangkab.go.id/dashboard_desa_cantik/desa/${desaId}`,
@@ -90,10 +109,21 @@ export default function SubdomainNavGuest({
         { name: "Berita & Informasi", href: "/berita" },
         { name: "Agenda", href: "/agenda" },
         { name: "Galeri", href: "/galeri" },
+        { name: "APBDes", href: "/apbdes" },
         { name: "Informasi Lainnya", href: "/informasi-tambahan" },
       ],
     },
-    { name: "Direktori", href: "/direktori", icon: BookOpen },
+    {
+      name: "Direktori",
+      icon: BookOpen,
+      submenu: [
+        ...kategoris.map((kategori) => ({
+          name: kategori.nama_kategori,
+          href: `/direktori/${kategori.nama_kategori.toLowerCase()}`,
+        })),
+        { name: "Sarana", href: "/sarana" },
+      ],
+    },
   ];
 
   return (

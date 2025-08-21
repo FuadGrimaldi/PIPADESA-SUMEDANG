@@ -1,4 +1,4 @@
-import prisma from "./prisma";
+import { prisma } from "./prisma";
 import { Agenda, CreateAgendaData, UpdateAgendaData } from "@/types/agenda";
 
 export class AgendaDesaService {

@@ -1,4 +1,4 @@
-import prisma from "./prisma";
+import { prisma } from "./prisma";
 import { CreateOfficialData, UpdateOfficialData } from "@/types/official";
 
 export class OfficialsService {
