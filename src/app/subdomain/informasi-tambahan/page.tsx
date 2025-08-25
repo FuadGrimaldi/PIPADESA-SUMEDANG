@@ -1,4 +1,3 @@
-import TahuSumedangComp from "@/components/ProfileDesa/TahuSumedang";
 import SearchLayanan from "@/components/Search/SearchLayanan";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
@@ -6,6 +5,7 @@ import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 import { headers } from "next/headers";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
+import InfografisComp from "@/components/ProfileDesa/AllInfografis";
 
 export default async function InformasiLainnyaPage() {
   const links = [
@@ -32,7 +32,7 @@ export default async function InformasiLainnyaPage() {
               <SearchLayanan />
             </div>
             <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
-              <TahuSumedangComp />
+              <InfografisComp desa_id={desaId} />
             </div>
             <SumedangWeatherWidget />
           </div>

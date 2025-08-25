@@ -47,7 +47,7 @@ const Hero = async ({ subdomain }: { subdomain: string | null }) => {
               pelayanan, berita, dan kegiatan desa.
             </p>
             <Link href={`/layanan`}>
-              <div className="w-1/3 py-3 border border-blue-600 rounded-lg text-center cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 hover:text-white hover:shadow-lg hover:border-transparent hover:-translate-y-1">
+              <div className="w-1/3 py-2 border border-blue-600 rounded-lg text-center cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 hover:text-white hover:shadow-lg hover:border-transparent hover:-translate-y-1">
                 Jelajahi Layanan
               </div>
             </Link>

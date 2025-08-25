@@ -158,7 +158,7 @@ export default function StatistikPenduduk({
   }, [fetchStatistikData]);
 
   return (
-    <section className="py-12 bg-gray-50 dark:bg-gray-900">
+    <section className="py-12 bg-white shadow-md rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-8 items-center mb-6">
           <div>

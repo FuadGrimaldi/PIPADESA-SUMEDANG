@@ -40,7 +40,7 @@ export default async function SubdomainLayout({
             username={session?.user?.username || null}
           />
         </header>
-        <main>{children}</main>
+        <main className="bg-gray-100">{children}</main>
         <Footer />
       </body>
     </html>

@@ -346,7 +346,6 @@ const AllOrganisasi: React.FC<AllOrganisasiProps> = ({
   kategoriId,
   namaKategori,
 }) => {
-  console.log("Desa ID:", namaKategori);
   const [currentPage, setCurrentPage] = useState(1);
   const [organisasiData, setOrganisasiData] = useState<Organisasi[]>([]);
   const [kategoriData, setKategoriData] = useState<KategoriOrganisasi[]>([]);
@@ -430,10 +429,6 @@ const AllOrganisasi: React.FC<AllOrganisasiProps> = ({
           (org) => org.kategori_organisasi.nama_kategori === namaKategori
         );
       }
-      console.log(
-        "Filtered Organisasi Data:",
-        filteredData[0].kategori_organisasi.nama_kategori
-      );
 
       setOrganisasiData(filteredData);
     } catch (err) {

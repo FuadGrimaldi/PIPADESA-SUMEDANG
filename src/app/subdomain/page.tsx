@@ -16,7 +16,7 @@ export default async function SubdomainHomePage() {
     <div className="container min-h-screen  ">
       <div className="relative px-[31px] lg:px-[100px] px-4 py-8 bg-gray-800">
         {/* Gradient overlay */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-white via-[#C0B099] via-50% to-white pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-gray-100 via-[#C0B099] via-50% to-gray-100 pointer-events-none" />
 
         <div className="relative pt-16 z-10">
           <Hero subdomain={subdomain} />

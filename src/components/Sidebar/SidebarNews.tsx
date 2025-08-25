@@ -10,6 +10,7 @@ interface SidebarNewsPhotoProps {
 
 const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [pengumaman, setPengumuman] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,6 +34,7 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
       if (data.error) {
         setError(data.error);
         setArticles([]);
+        setPengumuman([]);
       } else {
         // Sort by published date and take only 4
         const sortedArticles = data
@@ -44,15 +46,28 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
           .slice(0, 3);
 
         setArticles(sortedArticles);
+
+        // Ambil pengumuman terbaru (tipe === 'Pengumuman')
+        const pengumumanTerbaru = data
+          .filter((a: Article) => a.tipe === "pengumuman")
+          .sort(
+            (a: Article, b: Article) =>
+              new Date(b.published_at).getTime() -
+              new Date(a.published_at).getTime()
+          )
+          .slice(0, 3);
+
+        setPengumuman(pengumumanTerbaru);
       }
     } catch (error) {
       console.error("Error fetching sidebar articles:", error);
       setError("Gagal memuat artikel");
       setArticles([]);
+      setPengumuman([]);
     } finally {
       setLoading(false);
     }
-  }, [desaId]); // PERBAIKI: hanya desaId sebagai dependency
+  }, [desaId]);
 
   // Fetch articles when desaId changes - PERBAIKI: tambah guard
   useEffect(() => {
@@ -181,7 +196,7 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
         {articles.map((article) => (
           <article
             key={article.id}
-            className="group cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-700/50"
+            className="group cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-700/50 shadow-lg"
           >
             <a href={`/berita/${article.id}`} className="block">
               <div className="relative overflow-hidden">

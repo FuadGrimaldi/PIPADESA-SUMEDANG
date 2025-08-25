@@ -51,7 +51,7 @@ model profile_desa {
 
   users            users[]
   pengajuan_proposal pengajuan_proposal[]
-  potensi_desa     potensi_desa[]
+  infografis     infografis[]
   anggaran_apbdes  anggaran_apbdes[]
   articles         articles[]
   videos           videos[]
@@ -149,13 +149,10 @@ model instansi {
   layanan      layanan[]
 }
 
-model potensi_desa {
+model infografis {
   id           Int      @id @default(autoincrement())
-  desa_id      Int
-  kategori     PotensiKategori
-  nama_potensi String   @db.VarChar(255)
-  deskripsi    String   @db.LongText
-  icon         String   @db.VarChar(100)
+  desa_id      Int  
+  title String   @db.VarChar(255)
   gambar_path  String   @db.VarChar(255)
 
   profile_desa profile_desa @relation(fields: [desa_id], references: [id])

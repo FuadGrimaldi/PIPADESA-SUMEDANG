@@ -85,7 +85,14 @@ export async function PUT(
       existingOrganization.logo_path || undefined;
     if (logoFile && logoFile.size > 0) {
       try {
-        if (existingOrganization.logo_path) {
+        const defaultImages = [
+          "/assets/default/image-not-available.png",
+          "/assets/default/default.jpg",
+        ];
+        if (
+          existingOrganization.logo_path &&
+          !defaultImages.includes(existingOrganization.logo_path)
+        ) {
           // Delete old image if it exists
           const oldImagePath = path.join(
             process.cwd(),
