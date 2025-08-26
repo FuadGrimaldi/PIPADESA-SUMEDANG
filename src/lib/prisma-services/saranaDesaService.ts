@@ -31,6 +31,7 @@ export class SaranaDesaService {
         nama_sarana: data.nama_sarana,
         deskripsi: data.deskripsi,
         alamat_lokasi: data.alamat_lokasi,
+        foto_path: data.foto_path,
         koordinat_lat: data.koordinat_lat,
         koordinat_long: data.koordinat_long,
       };

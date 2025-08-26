@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
       koordinat_lat: koordinatLat || "",
       koordinat_long: koordinatLong || "",
       status: (status as Status) || Status.pending, // fallback default
-      foto_path: fotoPath || "",
+      foto_path: fotoPath || "/assets/default/image-not-available.png",
     };
     const newSarana = await SaranaDesaService.createSarana(saranaData);
     return NextResponse.json(newSarana, { status: 201 });
