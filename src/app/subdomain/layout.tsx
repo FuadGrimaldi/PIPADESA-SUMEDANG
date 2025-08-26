@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const subdomain = host.split(".")[0];
 
   return {
-    title: `Website Desa ${subdomain || ""}`,
+    title: `SID Desa ${subdomain || ""}`,
     description: "Website resmi desa",
   };
 }

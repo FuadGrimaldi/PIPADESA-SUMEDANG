@@ -6,6 +6,7 @@ import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 import { headers } from "next/headers";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
+import AllSarana from "@/components/ProfileDesa/AllSarana";
 
 export default async function SaranaPage() {
   const headersList = headers();
@@ -32,9 +33,7 @@ export default async function SaranaPage() {
             </div>
             <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
               <div>
-                <h2 className="text-xl font-semibold mb-4">Sarana</h2>
-                {/* Here you can add the component that lists the directories based on the category */}
-                {/* Example: <DirectoryList kategori={kategori} desaId={desaId} /> */}
+                <AllSarana desaId={desaId} />
               </div>
             </div>
             <SumedangWeatherWidget />

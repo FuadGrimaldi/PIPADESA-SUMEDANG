@@ -216,7 +216,7 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
                 </div>
               </div>
 
-              <h1 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-4">
                 {article.title}
               </h1>
 

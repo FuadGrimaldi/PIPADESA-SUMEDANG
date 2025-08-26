@@ -125,9 +125,9 @@ const News = ({ desaId }: AllBeritaProps) => {
   // Loading state
   if (loading) {
     return (
-      <section className="pb-16 pt-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 max-w-xl mx-auto">
+      <section className="pb-16">
+        <div className="container mx-auto">
+          <div className="text-left mb-6 max-w-xl ">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
               Berita dan Informasi
             </h2>
@@ -148,9 +148,9 @@ const News = ({ desaId }: AllBeritaProps) => {
   // Error state
   if (error) {
     return (
-      <section className="pb-16 pt-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 max-w-xl mx-auto">
+      <section className="pb-16">
+        <div className="container mx-auto">
+          <div className="text-left mb-6 max-w-xl ">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
               Berita dan Informasi
             </h2>
@@ -159,7 +159,7 @@ const News = ({ desaId }: AllBeritaProps) => {
               penting seputar kegiatan dan perkembangan di lingkungan kita.
             </p>
           </div>
-          <div className="text-center">
+          <div className="text-left">
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 inline-block">
               <span className="text-red-700">Error: {error}</span>
             </div>
@@ -182,9 +182,9 @@ const News = ({ desaId }: AllBeritaProps) => {
   const displayedAgenda = agenda.slice(0, 3);
 
   return (
-    <section className="pb-16 pt-20">
+    <section className="pb-16">
       <div className="container mx-auto">
-        <div className="text-center mb-12 max-w-xl mx-auto">
+        <div className="text-left mb-6 max-w-xl">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
             Berita dan Informasi
           </h2>
@@ -196,7 +196,7 @@ const News = ({ desaId }: AllBeritaProps) => {
 
         {displayedNews.length === 0 ? (
           // No articles state
-          <div className="text-center py-12">
+          <div className="text-left py-12">
             <div className="bg-gray-50 rounded-lg p-8 inline-block">
               <svg
                 className="w-16 h-16 text-gray-400 mx-auto mb-4"
