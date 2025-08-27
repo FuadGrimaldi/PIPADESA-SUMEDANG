@@ -9,8 +9,6 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    console.log("PUT /api/officials/[id] - Starting request");
-
     const id = parseInt(params.id);
     if (isNaN(id)) {
       return NextResponse.json(
@@ -36,14 +34,6 @@ export async function PUT(
     const desa_id = formData.get("desa_id") as string;
     const display_order = formData.get("display_order") as string;
     const photoFile = formData.get("photo") as File | null;
-
-    console.log("Form data received:", {
-      name,
-      position,
-      desa_id,
-      display_order,
-      photoFile: photoFile?.name || "No file",
-    });
 
     // Validation
     if (!name || !position || !desa_id || !display_order) {
@@ -79,8 +69,15 @@ export async function PUT(
     // Handle file upload
     if (photoFile && photoFile.size > 0) {
       try {
+        const defaultImages = [
+          "/assets/default/image-not-available.png",
+          "/assets/default/default.jpg",
+        ];
         // Delete old photo if exists
-        if (currentOfficial.photo) {
+        if (
+          currentOfficial.photo &&
+          !defaultImages.includes(currentOfficial.photo)
+        ) {
           const oldPhotoPath = path.join(
             process.cwd(),
             "public",
@@ -168,9 +165,16 @@ export async function DELETE(
         { status: 404 }
       );
     }
+    const defaultImages = [
+      "/assets/default/image-not-available.png",
+      "/assets/default/default.jpg",
+    ];
 
     // Delete photo file if exists
-    if (currentOfficial.photo) {
+    if (
+      currentOfficial.photo &&
+      !defaultImages.includes(currentOfficial.photo)
+    ) {
       const photoPath = path.join(
         process.cwd(),
         "public",

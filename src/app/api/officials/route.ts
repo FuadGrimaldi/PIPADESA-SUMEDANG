@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
       name,
       position,
       display_order: parsedDisplayOrder,
-      photo: photoPath,
+      photo: photoPath || "/assets/default/default.png",
     };
 
     const official = await OfficialsService.createOfficial(officialData);

@@ -5,9 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
-  Users,
-  GraduationCap,
-  Heart,
+  MessageCircleDashedIcon,
   Briefcase,
   Building,
   Shield,
@@ -53,12 +51,11 @@ const menuData = [
     ],
   },
   {
-    title: "Kesehatan",
-    icon: Heart,
+    title: "Partisipasi Publik",
+    icon: MessageCircleDashedIcon,
     items: [
-      { title: "Jaminan Kesehatan", url: "/jaminan-kesehatan" },
-      { title: "Disabilitas", url: "/disabilitas" },
-      { title: "Penyakit Kronis", url: "/penyakit-kronis" },
+      { title: "Komentar", url: "/admindesa/komentar" },
+      { title: "Pengaduan dan Aspirasi", url: "/admindesa/pengaduan-aspirasi" },
     ],
   },
   {

@@ -33,7 +33,7 @@ export default async function SaranaPage() {
             </div>
             <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
               <div>
-                <AllSarana desaId={desaId} />
+                <AllSarana desaId={desaId} tipe="sarana" />
               </div>
             </div>
             <SumedangWeatherWidget />

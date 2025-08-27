@@ -13,10 +13,12 @@ export interface Sarana {
   koordinat_long: string;
   foto_path: string;
   status: string;
+  unggulan: string;
 }
 
 interface AllSaranaProps {
   desaId: number;
+  tipe: string;
 }
 
 // Modal Detail Sarana
@@ -24,12 +26,14 @@ interface ModalDetailProps {
   sarana: Sarana | null;
   isOpen: boolean;
   onClose: () => void;
+  tipe: string;
 }
 
 const ModalDetail: React.FC<ModalDetailProps> = ({
   sarana,
   isOpen,
   onClose,
+  tipe,
 }) => {
   if (!isOpen || !sarana) return null;
 
@@ -124,7 +128,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
                     d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                   />
                 </svg>
-                Foto Sarana
+                Foto {tipe}
               </h4>
               {sarana.foto_path ? (
                 <Image
@@ -351,7 +355,7 @@ const CardSarana: React.FC<CardSaranaProps> = ({ sarana, onClick }) => {
 
 const ITEMS_PER_PAGE = 6;
 
-const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
+const AllSarana: React.FC<AllSaranaProps> = ({ desaId, tipe }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [saranaData, setSaranaData] = useState<Sarana[]>([]);
   const [loading, setLoading] = useState(true);
@@ -359,6 +363,7 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
   const [selectedSarana, setSelectedSarana] = useState<Sarana | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const [showFeatures, setShowFeatures] = useState(false);
 
   // Handle modal
   const handleSaranaClick = (sarana: Sarana) => {
@@ -381,16 +386,25 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
     setError(null);
 
     try {
-      const response = await fetch(
-        `/api/sarana/subdomain/${desaId}?type=sarana`
-      );
+      if (tipe == "sarana") {
+        const response = await fetch(`/api/sarana/subdomain/${desaId}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch sarana data");
+        }
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch sarana data");
+        const data = await response.json();
+        const filteredSarana = data.filter(
+          (sarana: Sarana) => sarana.kategori !== "wisata"
+        );
+        setSaranaData(filteredSarana);
+      } else {
+        const res = await fetch(`/api/sarana/subdomain/${desaId}?type=${tipe}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch sarana data");
+        }
+        const data = await res.json();
+        setSaranaData(data);
       }
-
-      const data = await response.json();
-      setSaranaData(data);
     } catch (err) {
       console.error("Error fetching sarana data:", err);
       setError("Gagal memuat data sarana");
@@ -398,7 +412,7 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
     } finally {
       setLoading(false);
     }
-  }, [desaId]);
+  }, [desaId, tipe]);
 
   // Initialize page from URL
   useEffect(() => {
@@ -488,7 +502,7 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
-                Daftar Sarana
+                Daftar {tipe}
               </h2>
               <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
                 Memuat data sarana...
@@ -516,48 +530,6 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
     );
   }
 
-  // Error state
-  if (error && saranaData.length === 0) {
-    return (
-      <section>
-        <div className="container mx-auto px-4">
-          <div className="mb-8 w-full border-b-4 border-[#C0B099]">
-            <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
-                Daftar Sarana
-              </h2>
-            </div>
-          </div>
-          <div className="text-center py-12">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-8 inline-block">
-              <svg
-                className="w-16 h-16 text-red-400 mx-auto mb-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <h3 className="text-lg font-semibold text-red-700 mb-2">Error</h3>
-              <p className="text-red-600 mb-4">{error}</p>
-              <button
-                onClick={fetchSaranaData}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-              >
-                Coba Lagi
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   // No data state
   if (saranaData.length === 0) {
     return (
@@ -566,7 +538,7 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
-                Daftar Sarana
+                Daftar {tipe}
               </h2>
               <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
                 Temukan berbagai sarana yang tersedia di wilayah ini.
@@ -589,7 +561,7 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
                 />
               </svg>
               <h3 className="text-xl font-semibold text-gray-400 mb-2">
-                Tidak ada sarana yang tersedia
+                Tidak ada {tipe} yang tersedia
               </h3>
               <p className="text-gray-400">
                 Silakan hubungi administrator untuk informasi lebih lanjut.
@@ -609,11 +581,11 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
-                Daftar Sarana
+                Daftar {tipe}
               </h2>
               <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-                Temukan berbagai sarana yang tersedia di wilayah ini. Klik pada
-                kartu sarana untuk melihat detail lengkap dan lokasi.
+                Temukan berbagai {tipe} yang tersedia di wilayah ini. Klik pada
+                kartu {tipe} untuk melihat detail lengkap dan lokasi.
               </p>
               {error && (
                 <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
@@ -628,10 +600,41 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
           {/* View Toggle */}
           <div className="mb-6 flex justify-center">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-1 inline-flex">
+              {tipe === "wisata" && (
+                <button
+                  onClick={() => {
+                    setShowMap(false);
+                    setShowFeatures(true);
+                  }}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    !showMap && showFeatures
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-gray-600 hover:text-gray-800"
+                  }`}
+                >
+                  <svg
+                    className="w-4 h-4 mr-2 inline"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                    />
+                  </svg>
+                  Wisata Unggulan
+                </button>
+              )}
               <button
-                onClick={() => setShowMap(false)}
+                onClick={() => {
+                  setShowMap(false);
+                  setShowFeatures(false);
+                }}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  !showMap
+                  !showMap && !showFeatures
                     ? "bg-blue-600 text-white shadow-sm"
                     : "text-gray-600 hover:text-gray-800"
                 }`}
@@ -649,10 +652,13 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                   />
                 </svg>
-                Tampilan Grid
+                {tipe}
               </button>
               <button
-                onClick={() => setShowMap(true)}
+                onClick={() => {
+                  setShowMap(true);
+                  setShowFeatures(false);
+                }}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   showMap
                     ? "bg-blue-600 text-white shadow-sm"
@@ -678,7 +684,45 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
           </div>
 
           {/* Content */}
-          {showMap ? (
+          {showFeatures ? (
+            <div className=" mb-12">
+              {saranaData
+                .filter((s) => s.unggulan === "Y") // hanya sarana unggulan
+                .map((sarana) => (
+                  <CardSarana
+                    key={sarana.id}
+                    sarana={sarana}
+                    onClick={handleSaranaClick}
+                  />
+                ))}
+              {saranaData.filter((s) => s.unggulan === "Y").length === 0 && (
+                <div className="text-center py-12">
+                  <div className="bg-gray-50 rounded-lg p-8 inline-block">
+                    <svg
+                      className="mx-auto w-24 h-24 text-gray-300 mb-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                      />
+                    </svg>
+                    <h3 className="text-xl font-semibold text-gray-400 mb-2">
+                      Tidak ada {tipe} unggulan
+                    </h3>
+                    <p className="text-gray-400">
+                      Silakan hubungi administrator untuk informasi lebih
+                      lanjut.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : showMap ? (
             /* Map View */
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
               <div className="lg:col-span-2">
@@ -698,14 +742,14 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
                 ) : (
                   <div className="flex items-center justify-center h-full min-h-[300px] bg-gray-50 rounded-lg border border-gray-200">
                     <span className="text-gray-400 text-center">
-                      Pilih salah satu sarana untuk melihat lokasi pada peta.
+                      Pilih salah satu {tipe} untuk melihat lokasi pada peta.
                     </span>
                   </div>
                 )}
               </div>
               <div className="space-y-4 max-h-96 overflow-y-auto">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  Daftar Sarana ({saranaData.length})
+                  Daftar {tipe} ({saranaData.length})
                 </h3>
                 {saranaData.map((sarana) => (
                   <div
@@ -815,7 +859,7 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
                   <div className="text-sm text-gray-600">
                     Showing {startIndex + 1} to{" "}
                     {Math.min(startIndex + ITEMS_PER_PAGE, saranaData.length)}{" "}
-                    of {saranaData.length} sarana
+                    of {saranaData.length} {tipe}
                   </div>
                 </div>
               )}
@@ -827,6 +871,7 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
       {/* Modal Detail */}
       <ModalDetail
         sarana={selectedSarana}
+        tipe={tipe}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />

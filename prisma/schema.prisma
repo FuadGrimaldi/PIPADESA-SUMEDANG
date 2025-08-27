@@ -51,6 +51,7 @@ model profile_desa {
 
   users            users[]
   pengajuan_proposal pengajuan_proposal[]
+  pengaduan_aspirasi  pengaduan_aspirasi[]
   infografis     infografis[]
   anggaran_apbdes  anggaran_apbdes[]
   articles         articles[]
@@ -190,6 +191,7 @@ model articles {
   created_at         DateTime
   updated_at         DateTime
 
+  komentar           komentar[]
   users              users     @relation(fields: [user_id], references: [id])
   profile_desa       profile_desa @relation(fields: [desa_id], references: [id])
 }
@@ -260,6 +262,36 @@ model officials {
   profile_desa  profile_desa @relation(fields: [desa_id], references: [id])
 }
 
+model komentar {
+  id            Int     @id @default(autoincrement())
+  article_id    Int
+  name          String  @db.VarChar(255)
+  email         String  @db.VarChar(255)
+  no_telp       String
+  pesan         String  @db.LongText
+  status         Status
+  created_at    DateTime
+  updated_at    DateTime
+
+  articles      articles @relation(fields: [article_id], references: [id])
+}
+
+model pengaduan_aspirasi {
+  id            Int     @id @default(autoincrement())
+  desa_id      Int
+  name          String  @db.VarChar(255)
+  email         String  @db.VarChar(255)
+  no_telp       String
+  pesan         String  @db.LongText
+  kategori      PengaduanAspirasiKategori
+   status         Status
+  created_at    DateTime
+  updated_at    DateTime
+
+  profile_desa profile_desa @relation(fields: [desa_id], references: [id])
+}
+
+
 model sarana_prasarana {
   id             Int    @id @default(autoincrement())
   desa_id        Int
@@ -325,6 +357,12 @@ model keluarga {
 
 
 // ENUM DEFINITIONS
+
+
+enum PengaduanAspirasiKategori {
+  pengaduan
+  aspirasi
+}
 
 enum Role {
   admin_desa

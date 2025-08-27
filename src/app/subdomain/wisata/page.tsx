@@ -6,6 +6,7 @@ import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 import { headers } from "next/headers";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
+import AllSarana from "@/components/ProfileDesa/AllSarana";
 
 export default async function WisataPage() {
   const headersList = headers();
@@ -32,10 +33,7 @@ export default async function WisataPage() {
             </div>
             <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
               <div>
-                <h2 className="text-2xl font-bold mb-4">
-                  Wisata Page - Coming Soon
-                </h2>
-                <p>Content for the Wisata page will be added here.</p>
+                <AllSarana desaId={desaId} tipe="wisata" />
               </div>
             </div>
             <SumedangWeatherWidget />

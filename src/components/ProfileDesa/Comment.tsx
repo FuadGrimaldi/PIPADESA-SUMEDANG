@@ -158,7 +158,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
   };
 
   return (
-    <div className="mt-12 border-t border-gray-200 pt-8">
+    <div className="border-t border-gray-200 pt-3 px-8">
       {/* Section Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">

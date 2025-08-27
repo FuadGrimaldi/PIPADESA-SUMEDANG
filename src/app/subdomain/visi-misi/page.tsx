@@ -33,7 +33,7 @@ export default async function VisiMisiPage() {
           </div>
 
           {/* Sidebar */}
-          <div className="w-full lg:w-[300px] flex-shrink-0 bg-white">
+          <div className="w-full lg:w-[300px] flex-shrink-0 bg-white rounded-lg">
             <SidebarNewsPhoto desaId={desaId} />
           </div>
         </div>
