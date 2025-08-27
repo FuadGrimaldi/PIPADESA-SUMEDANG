@@ -13,14 +13,17 @@ export type Sarana = {
   koordinat_lat?: string;
   koordinat_long?: string;
   foto_path?: string;
+  tipe: string;
+  unggulan?: string;
   status: string;
 };
 
 interface SaranaManagerProps {
   desaId: number;
+  tipe: "sarana" | "wisata";
 }
 
-export default function SaranaManager({ desaId }: SaranaManagerProps) {
+export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
   const [sarana, setSarana] = useState<Sarana[]>([]);
   const [filtered, setFiltered] = useState<Sarana[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,17 +33,21 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
   const fetchSarana = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/sarana`);
-      const data = await res.json();
-
-      if (data.error) {
-        console.error("Error fetching sarana:", data.error);
-        setSarana([]);
-        setFiltered([]);
+      let res;
+      if (tipe == "sarana") {
+        res = await fetch(`/api/sarana/subdomain/${desaId}`);
+        const saranaData = await res.json();
+        const filteredData = Array.isArray(saranaData)
+          ? saranaData.filter((item: Sarana) => item.kategori !== "wisata")
+          : [];
+        setSarana(filteredData);
+        setFiltered(filteredData);
       } else {
-        const desaData = data.filter((item: Sarana) => item.desa_id === desaId);
-        setSarana(desaData);
-        setFiltered(desaData);
+        res = await fetch(`/api/sarana/subdomain/${desaId}?type=${tipe}`);
+        const data = await res.json();
+        const validData = Array.isArray(data) ? data : [];
+        setSarana(validData);
+        setFiltered(validData);
       }
     } catch (error) {
       console.error("Fetch error:", error);
@@ -48,7 +55,7 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
       setFiltered([]);
     }
     setLoading(false);
-  }, [desaId]);
+  }, [desaId, tipe]);
 
   useEffect(() => {
     if (desaId) {
@@ -67,19 +74,19 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus sarana ini?")) return;
+    if (!confirm("Yakin hapus ini?")) return;
 
     try {
       const res = await fetch(`/api/sarana/${id}`, { method: "DELETE" });
       if (res.ok) {
         fetchSarana();
-        alert("Sarana berhasil dihapus!");
+        alert(" berhasil dihapus!");
       } else {
-        alert("Gagal menghapus sarana");
+        alert("Gagal menghapus ");
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus sarana");
+      alert("Terjadi kesalahan saat menghapus ");
     }
   };
 
@@ -98,12 +105,9 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
           body: fd,
         });
       } else {
-        if (!fd.get("desa_id")) {
-          fd.set("desa_id", desaId.toString());
-        }
-        if (!fd.get("status")) {
-          fd.set("status", "approved");
-        }
+        fd.set("desa_id", desaId.toString());
+        fd.set("status", "approved");
+        if (tipe === "sarana") fd.set("unggulan", "N");
         res = await fetch("/api/sarana", {
           method: "POST",
           body: fd,
@@ -113,7 +117,7 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
       if (res.ok) {
         setModalOpen(false);
         fetchSarana();
-        alert("Sarana berhasil disimpan!");
+        alert("berhasil disimpan!");
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
@@ -121,7 +125,7 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan sarana");
+      alert("Terjadi kesalahan saat menyimpan");
     }
   };
 
@@ -141,14 +145,14 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
           <h2 className="text-lg font-semibold mb-4">
-            {editData ? "Edit Sarana" : "Tambah Sarana"}
+            {editData ? `Edit ${tipe}` : `Tambah ${tipe}`}
           </h2>
 
           <form onSubmit={handleSubmit} encType="multipart/form-data">
             {!editData && <input type="hidden" name="desa_id" value={desaId} />}
 
             <div className="mb-3">
-              <label className="block mb-1">Nama Sarana *</label>
+              <label className="block mb-1">Nama {tipe} *</label>
               <input
                 type="text"
                 name="nama_sarana"
@@ -157,23 +161,36 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
                 required
               />
             </div>
-
-            <div className="mb-3">
-              <label className="block mb-1">Kategori *</label>
-              <select
-                name="kategori"
-                defaultValue={editData?.kategori || ""}
-                className="border w-full px-3 py-2 rounded"
-                required
-              >
-                <option value="">-- Pilih Kategori --</option>
-                <option value="pendidikan">Pendidikan</option>
-                <option value="kesehatan">Kesehatan</option>
-                <option value="ibadah">Ibadah</option>
-                <option value="olahraga">Olahraga</option>
-                <option value="umum">Umum</option>
-              </select>
-            </div>
+            {tipe == "sarana" && (
+              <div className="mb-3">
+                <label className="block mb-1">Kategori *</label>
+                <select
+                  name="kategori"
+                  defaultValue={editData?.kategori || ""}
+                  className="border w-full px-3 py-2 rounded"
+                  required
+                >
+                  <option value="">-- Pilih Kategori --</option>
+                  <option value="pendidikan">Pendidikan</option>
+                  <option value="kesehatan">Kesehatan</option>
+                  <option value="ibadah">Ibadah</option>
+                  <option value="olahraga">Olahraga</option>
+                  <option value="umum">Umum</option>
+                </select>
+              </div>
+            )}
+            {tipe == "wisata" && (
+              <div className="mb-3">
+                <label className="block mb-1">Kategori *</label>
+                <input
+                  type="text"
+                  name="kategori"
+                  defaultValue={editData?.kategori || "wisata"}
+                  className="border w-full px-3 py-2 rounded"
+                  readOnly
+                />
+              </div>
+            )}
 
             <div className="mb-3">
               <label className="block mb-1">Deskripsi</label>
@@ -215,6 +232,19 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
                 />
               </div>
             </div>
+            {tipe == "wisata" && (
+              <div className="mb-3">
+                <label className="block mb-1">Unggulan</label>
+                <select
+                  name="unggulan"
+                  defaultValue={editData?.unggulan || "N"}
+                  className="border w-full px-3 py-2 rounded"
+                >
+                  <option value="Y">Ya</option>
+                  <option value="N">Tidak</option>
+                </select>
+              </div>
+            )}
 
             <div className="mb-3">
               <label className="block mb-1">Foto</label>
@@ -263,20 +293,20 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
     <div className="space-y-8">
       <div className="flex justify-between items-center bg-gradient-to-r from-blue-600 to-blue-500 p-5 rounded-lg shadow-md">
         <h2 className="lg:text-2xl text-lg font-bold text-white">
-          Sarana Desa
+          {tipe} Desa
         </h2>
         <button
           onClick={handleOpenAdd}
           className="px-4 py-2 bg-white text-blue-600 font-medium rounded-md shadow hover:bg-gray-100 transition"
         >
-          Tambah Sarana
+          Tambah {tipe}
         </button>
       </div>
 
       <div className="flex mb-4">
         <input
           type="text"
-          placeholder="Cari nama sarana..."
+          placeholder={`Cari nama ${tipe}...`}
           className="border px-3 py-2 rounded w-full max-w-64"
           onChange={handleSearch}
         />
@@ -285,14 +315,14 @@ export default function SaranaManager({ desaId }: SaranaManagerProps) {
       {loading ? (
         <p>Loading...</p>
       ) : filtered.length === 0 ? (
-        <p>Belum ada data sarana</p>
+        <p>Belum ada data {tipe}</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full min-w-max border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
                 <th className="border px-3 py-2 min-w-20">Foto</th>
-                <th className="border px-3 py-2 min-w-32">Nama Sarana</th>
+                <th className="border px-3 py-2 min-w-32">Nama {tipe}</th>
                 <th className="border px-3 py-2 min-w-32">Kategori</th>
                 <th className="border px-3 py-2 min-w-32">Deskripsi</th>
                 <th className="border px-3 py-2 min-w-32">Lokasi</th>

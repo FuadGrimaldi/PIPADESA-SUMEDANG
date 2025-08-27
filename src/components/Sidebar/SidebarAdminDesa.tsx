@@ -49,6 +49,7 @@ const menuData = [
       { title: "Kategori", url: "/admindesa/kategori" },
       { title: "Organisasi", url: "/admindesa/organisasi" },
       { title: "Sarana", url: "/admindesa/sarana" },
+      { title: "Wisata", url: "/admindesa/wisata" },
     ],
   },
   {

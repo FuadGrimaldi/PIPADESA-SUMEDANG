@@ -3,7 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import fs from "fs";
 import path from "path";
-import { SaranaUpdate, SaranaKategori, Status } from "@/types/sarana";
+import {
+  SaranaUpdate,
+  SaranaKategori,
+  Status,
+  SaranaWisataUnggulan,
+} from "@/types/sarana";
 
 // get by id
 export async function GET(
@@ -50,6 +55,7 @@ export async function PUT(
     const alamatLokasi = formData.get("alamat_lokasi") as string | null;
     const koordinatLat = formData.get("koordinat_lat") as string | null;
     const koordinatLong = formData.get("koordinat_long") as string | null;
+    const unggulan = formData.get("unggulan") as string | null;
     const status = formData.get("status") as string | null;
     const fotoFile = formData.get("foto_path") as File | null;
     // Validate required fields
@@ -125,6 +131,7 @@ export async function PUT(
       alamat_lokasi: alamatLokasi || undefined,
       koordinat_lat: koordinatLat || undefined,
       koordinat_long: koordinatLong || undefined,
+      unggulan: (unggulan as SaranaWisataUnggulan) || existingSarana.unggulan,
       foto_path: fotoPath,
       status: (status as Status) || existingSarana.status,
     };

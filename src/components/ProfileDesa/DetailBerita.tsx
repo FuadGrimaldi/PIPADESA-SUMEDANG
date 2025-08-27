@@ -15,6 +15,7 @@ import {
   Eye,
 } from "lucide-react";
 import { Article } from "@/types/article";
+import CommentSection from "./Comment";
 
 interface ArticleDetailProps {
   articleId: number;
@@ -302,72 +303,8 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
                 </div>
               )}
             </div>
+            <CommentSection articleId={article.id} />
           </motion.div>
-
-          {/* Related Articles */}
-          {relatedArticles.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-12"
-            >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                Artikel Terkait
-              </h2>
-
-              <div className="grid md:grid-cols-3 gap-6">
-                {relatedArticles.map((relatedArticle) => (
-                  <div
-                    key={relatedArticle.id}
-                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                    onClick={() => {
-                      window.location.href = `/berita/${relatedArticle.id}`;
-                    }}
-                  >
-                    {relatedArticle.featured_image && (
-                      <div className="relative h-40">
-                        <Image
-                          src={relatedArticle.featured_image}
-                          alt={relatedArticle.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-
-                    <div className="p-4">
-                      <div className="flex items-center mb-2">
-                        <span
-                          className={`px-2 py-1 rounded text-xs font-medium ${getTypeColor(
-                            relatedArticle.tipe
-                          )}`}
-                        >
-                          {relatedArticle.tipe}
-                        </span>
-                      </div>
-
-                      <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
-                        {relatedArticle.title}
-                      </h3>
-
-                      <p className="text-sm text-gray-600 line-clamp-3">
-                        {parse(relatedArticle.content.substring(0, 100))}
-                      </p>
-
-                      <div className="flex items-center justify-between mt-3 text-xs text-gray-500">
-                        <span>{formatDate(relatedArticle.published_at)}</span>
-                        <div className="flex items-center">
-                          <Eye className="w-3 h-3 mr-1" />
-                          Lihat
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import { SaranaDesaService } from "@/lib/prisma-services/saranaDesaService";
 import { NextRequest, NextResponse } from "next/server";
+import { SaranaKategori } from "@/types/sarana";
 
-// get by desaId
+// GET /api/sarana/subdomain/[id]?type=TIPE
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -12,14 +13,22 @@ export async function GET(
       return NextResponse.json({ error: "Invalid desa ID" }, { status: 400 });
     }
 
-    const sarana = await SaranaDesaService.getSaranaByDesaId(desaId);
-    if (!sarana) {
+    // Ambil query params (tipe)
+    const { searchParams } = new URL(req.url);
+    const typeParam = searchParams.get("type") || undefined;
+
+    const sarana = await SaranaDesaService.getSaranaByDesaId(
+      desaId,
+      typeParam as SaranaKategori | undefined // cast ke union type
+    );
+
+    if (!sarana || sarana.length === 0) {
       return NextResponse.json({ error: "Sarana not found" }, { status: 404 });
     }
 
     return NextResponse.json(sarana);
   } catch (error: any) {
-    console.error("GET /api/sarana/[desaId] error:", error);
+    console.error("GET /api/sarana/subdomain/[id] error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

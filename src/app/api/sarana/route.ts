@@ -3,7 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import fs from "fs";
 import path from "path";
-import { SaranaCreate, SaranaKategori, Status } from "@/types/sarana";
+import {
+  SaranaCreate,
+  SaranaKategori,
+  Status,
+  SaranaWisataUnggulan,
+} from "@/types/sarana";
 
 export async function GET() {
   try {
@@ -26,6 +31,8 @@ export async function POST(req: NextRequest) {
     const deskripsi = formData.get("deskripsi") as string | null;
     const alamatLokasi = formData.get("alamat_lokasi") as string | null;
     const koordinatLat = formData.get("koordinat_lat") as string | null;
+    const tipe = formData.get("tipe") as string;
+    const unggulan = formData.get("unggulan") as string | null;
     const koordinatLong = formData.get("koordinat_long") as string | null;
     const status = formData.get("status") as string | null;
     const fotoFile = formData.get("foto_path") as File | null;
@@ -85,8 +92,10 @@ export async function POST(req: NextRequest) {
       desa_id: parseInt(desaId),
       kategori: kategori as SaranaKategori, // ✅ aman
       deskripsi: deskripsi || "",
+
       alamat_lokasi: alamatLokasi || "",
       koordinat_lat: koordinatLat || "",
+      unggulan: (unggulan as SaranaWisataUnggulan) || "N",
       koordinat_long: koordinatLong || "",
       status: (status as Status) || Status.pending, // fallback default
       foto_path: fotoPath || "/assets/default/image-not-available.png",

@@ -270,6 +270,7 @@ model sarana_prasarana {
   koordinat_lat  String @db.VarChar(50)
   koordinat_long String @db.VarChar(50)
   foto_path      String @db.VarChar(255)
+  unggulan       SaranaUnggulan
   status         Status
 
   profile_desa   profile_desa @relation(fields: [desa_id], references: [id])
@@ -420,6 +421,12 @@ enum SaranaKategori {
   ibadah
   olahraga
   umum
+  wisata
+}
+
+enum SaranaUnggulan {
+  Y
+  N
 }
 
 enum JenisKelamin {

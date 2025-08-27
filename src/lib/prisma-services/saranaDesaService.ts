@@ -2,8 +2,9 @@ import { prisma } from "./prisma";
 import {
   SaranaCreate,
   SaranaUpdate,
-  SaranaKategori,
   Status,
+  SaranaWisataUnggulan,
+  SaranaKategori,
 } from "@/types/sarana";
 
 export class SaranaDesaService {
@@ -33,6 +34,7 @@ export class SaranaDesaService {
         alamat_lokasi: data.alamat_lokasi,
         foto_path: data.foto_path,
         koordinat_lat: data.koordinat_lat,
+        unggulan: data.unggulan,
         koordinat_long: data.koordinat_long,
       };
 
@@ -70,9 +72,12 @@ export class SaranaDesaService {
   }
 
   // Get sarana by desaId and optional kategori filter
-  static async getSaranaByDesaId(desaId: number) {
+  static async getSaranaByDesaId(desaId: number, kategori?: SaranaKategori) {
     return prisma.sarana_prasarana.findMany({
-      where: { desa_id: desaId },
+      where: {
+        desa_id: desaId,
+        ...(kategori ? { kategori } : {}), // filter by kolom 'tipe'
+      },
       orderBy: { id: "desc" },
     });
   }
@@ -89,6 +94,7 @@ export class SaranaDesaService {
         updateData.alamat_lokasi = data.alamat_lokasi;
       if (data.koordinat_lat !== undefined)
         updateData.koordinat_lat = data.koordinat_lat;
+      if (data.unggulan !== undefined) updateData.unggulan = data.unggulan;
       if (data.koordinat_long !== undefined)
         updateData.koordinat_long = data.koordinat_long;
       if (

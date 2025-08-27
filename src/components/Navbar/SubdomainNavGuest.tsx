@@ -122,6 +122,7 @@ export default function SubdomainNavGuest({
           href: `/direktori/${kategori.nama_kategori.toLowerCase()}`,
         })),
         { name: "Sarana", href: "/sarana" },
+        { name: "Wisata", href: "/wisata" },
       ],
     },
   ];

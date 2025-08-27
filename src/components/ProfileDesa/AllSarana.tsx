@@ -381,7 +381,9 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId }) => {
     setError(null);
 
     try {
-      const response = await fetch(`/api/sarana/subdomain/${desaId}`);
+      const response = await fetch(
+        `/api/sarana/subdomain/${desaId}?type=sarana`
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch sarana data");
