@@ -82,6 +82,7 @@ export default function SubdomainNavGuest({
         { name: "Daftar Instansi", href: "/instansi" },
         { name: "Daftar Layanan", href: "/layanan" },
         { name: "Lapor!", href: "/pengaduan" },
+        { name: "Pengaduan dan Aspirasi", href: "/pengaduan-aspirasi" },
       ],
     },
     {

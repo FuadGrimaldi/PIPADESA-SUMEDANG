@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getDesaById } from "@/lib/prisma-services/profileDesaService";
+import PengaduanAspirasiManager from "@/components/Admindesa/PengaduanAspirasi";
 
 export default async function PengaduanAspirasiAdminDesaPage() {
   const session = await getServerSession(authOptions);
@@ -16,7 +17,9 @@ export default async function PengaduanAspirasiAdminDesaPage() {
   return (
     <div className="container min-h-screen">
       <h1 className="text-2xl font-bold mb-4">Official {desa?.nama_desa}</h1>
-      <div>Pengaduan-Aspirasi Admin Desa Page - Under Construction</div>
+      <div>
+        <PengaduanAspirasiManager desaId={Number(desa.id)} />
+      </div>
     </div>
   );
 }
