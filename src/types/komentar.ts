@@ -2,6 +2,7 @@ import { Status } from "./agenda";
 
 export interface Komentar {
   id: number;
+  desa_id: number;
   article_id: number;
   name: string;
   email: string;
@@ -14,6 +15,7 @@ export interface Komentar {
 
 export interface CreateKomentarData {
   article_id: number;
+  desa_id: number;
   name: string;
   email: string;
   no_telp: string;

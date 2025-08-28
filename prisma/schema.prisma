@@ -50,6 +50,7 @@ model profile_desa {
 
 
   users            users[]
+  komentar          komentar[]
   pengajuan_proposal pengajuan_proposal[]
   pengaduan_aspirasi  pengaduan_aspirasi[]
   infografis     infografis[]
@@ -264,6 +265,7 @@ model officials {
 
 model komentar {
   id            Int     @id @default(autoincrement())
+  desa_id      Int
   article_id    Int
   name          String  @db.VarChar(255)
   email         String  @db.VarChar(255)
@@ -273,6 +275,7 @@ model komentar {
   created_at    DateTime
   updated_at    DateTime
 
+  profile_desa profile_desa @relation(fields: [desa_id], references: [id])
   articles      articles @relation(fields: [article_id], references: [id])
 }
 

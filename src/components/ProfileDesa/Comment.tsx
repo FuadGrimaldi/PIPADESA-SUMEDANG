@@ -4,6 +4,7 @@ import { MessageCircle, Send, User, Phone, Mail, Calendar } from "lucide-react";
 // TypeScript interfaces
 interface Comment {
   id: number;
+  desa_id: number;
   article_id: number;
   name: string;
   no_telp: string;
@@ -23,9 +24,13 @@ interface CommentFormData {
 
 interface CommentSectionProps {
   articleId: number;
+  desaId: number;
 }
 
-export default function CommentSection({ articleId }: CommentSectionProps) {
+export default function CommentSection({
+  articleId,
+  desaId,
+}: CommentSectionProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -105,6 +110,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
         },
         body: JSON.stringify({
           article_id: articleId,
+          desa_id: desaId,
           ...formData,
           created_at: new Date(),
           updated_at: new Date(),

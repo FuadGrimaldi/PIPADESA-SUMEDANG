@@ -37,6 +37,23 @@ export class KomentarArtikelService {
     }
   }
 
+  //   get comments by desa_id
+  static async getKomentarsByDesaId(desa_id: number) {
+    try {
+      const komentars = await prisma.komentar.findMany({
+        where: {
+          desa_id: desa_id,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+      return komentars;
+    } catch (error) {
+      throw new Error(`Failed to fetch comments by desa_id: ${error}`);
+    }
+  }
+
   // Get single comment by id
   static async getKomentarById(id: number) {
     try {
@@ -54,6 +71,7 @@ export class KomentarArtikelService {
     try {
       const createData: any = {
         article_id: data.article_id,
+        desa_id: data.desa_id,
         name: data.name,
         email: data.email,
         no_telp: data.no_telp,

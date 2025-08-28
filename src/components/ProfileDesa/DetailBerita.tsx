@@ -303,7 +303,7 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
                 </div>
               )}
             </div>
-            <CommentSection articleId={article.id} />
+            <CommentSection articleId={article.id} desaId={article.desa_id} />
           </motion.div>
         </div>
       </div>
