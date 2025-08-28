@@ -5,18 +5,20 @@ import { MessageCircle, Send, User, Phone, Mail, Calendar } from "lucide-react";
 interface Comment {
   id: number;
   article_id: number;
-  nama: string;
-  telp: string;
+  name: string;
+  no_telp: string;
   email: string;
   pesan: string;
+  status: string;
   created_at: string;
 }
 
 interface CommentFormData {
-  nama: string;
-  telp: string;
+  name: string;
+  no_telp: string;
   email: string;
   pesan: string;
+  status?: string;
 }
 
 interface CommentSectionProps {
@@ -29,10 +31,11 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
   const [submitting, setSubmitting] = useState(false);
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [formData, setFormData] = useState<CommentFormData>({
-    nama: "",
-    telp: "",
+    name: "",
+    no_telp: "",
     email: "",
     pesan: "",
+    status: "pending",
   });
   const [errors, setErrors] = useState<Partial<CommentFormData>>({});
 
@@ -40,10 +43,14 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
   const fetchComments = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/comments/${articleId}`);
+      const response = await fetch(`/api/komentar/article/${articleId}`);
       if (response.ok) {
-        const data = await response.json();
-        setComments(data.data || []);
+        const data = (await response.json()) as Comment[];
+        // Filter only approved comments
+        const approvedComments = data.filter(
+          (comment) => comment.status === "approved"
+        );
+        setComments(approvedComments || []);
       }
     } catch (error) {
       console.error("Error fetching comments:", error);
@@ -64,7 +71,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
 
     // Validate form
     const newErrors: Partial<CommentFormData> = {};
-    if (!formData.nama.trim()) newErrors.nama = "Nama wajib diisi";
+    if (!formData.name.trim()) newErrors.name = "name wajib diisi";
     if (!formData.email.trim()) newErrors.email = "Email wajib diisi";
     if (!formData.pesan.trim()) newErrors.pesan = "Pesan wajib diisi";
 
@@ -76,10 +83,10 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
 
     // Phone validation (optional)
     if (
-      formData.telp &&
-      !/^\d+$/.test(formData.telp.replace(/[\s-+()]/g, ""))
+      formData.no_telp &&
+      !/^\d+$/.test(formData.no_telp.replace(/[\s-+()]/g, ""))
     ) {
-      newErrors.telp = "Format nomor telepon tidak valid";
+      newErrors.no_telp = "Format nomor telepon tidak valid";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -91,7 +98,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
     setErrors({});
 
     try {
-      const response = await fetch("/api/comments", {
+      const response = await fetch("/api/komentar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,12 +106,14 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
         body: JSON.stringify({
           article_id: articleId,
           ...formData,
+          created_at: new Date(),
+          updated_at: new Date(),
         }),
       });
 
       if (response.ok) {
         // Reset form
-        setFormData({ nama: "", telp: "", email: "", pesan: "" });
+        setFormData({ name: "", no_telp: "", email: "", pesan: "" });
         setShowCommentForm(false);
 
         // Refresh comments
@@ -149,6 +158,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
 
   // Get initials for avatar
   const getInitials = (name: string) => {
+    if (!name) return "";
     return name
       .split(" ")
       .map((n) => n[0])
@@ -189,7 +199,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
             <button
               onClick={() => {
                 setShowCommentForm(false);
-                setFormData({ nama: "", telp: "", email: "", pesan: "" });
+                setFormData({ name: "", no_telp: "", email: "", pesan: "" });
                 setErrors({});
               }}
               className="text-gray-400 hover:text-gray-600"
@@ -214,27 +224,27 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <label
-                  htmlFor="nama"
+                  htmlFor="name"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Nama <span className="text-red-500">*</span>
+                  nama <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <input
                     type="text"
-                    id="nama"
-                    name="nama"
-                    value={formData.nama}
+                    id="name"
+                    name="name"
+                    value={formData.name}
                     onChange={handleInputChange}
                     className={`w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      errors.nama ? "border-red-300" : "border-gray-300"
+                      errors.name ? "border-red-300" : "border-gray-300"
                     }`}
-                    placeholder="Masukkan nama Anda"
+                    placeholder="Masukkan name Anda"
                   />
                 </div>
-                {errors.nama && (
-                  <p className="mt-1 text-sm text-red-600">{errors.nama}</p>
+                {errors.name && (
+                  <p className="mt-1 text-sm text-red-600">{errors.name}</p>
                 )}
               </div>
 
@@ -256,7 +266,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
                     className={`w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
                       errors.email ? "border-red-300" : "border-gray-300"
                     }`}
-                    placeholder="nama@email.com"
+                    placeholder="name@email.com"
                   />
                 </div>
                 {errors.email && (
@@ -267,7 +277,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
 
             <div>
               <label
-                htmlFor="telp"
+                htmlFor="no_telp"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Nomor Telepon
@@ -276,18 +286,18 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
                 <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="tel"
-                  id="telp"
-                  name="telp"
-                  value={formData.telp}
+                  id="no_telp"
+                  name="no_telp"
+                  value={formData.no_telp}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                    errors.telp ? "border-red-300" : "border-gray-300"
+                    errors.no_telp ? "border-red-300" : "border-gray-300"
                   }`}
                   placeholder="08xxxxxxxxxx"
                 />
               </div>
-              {errors.telp && (
-                <p className="mt-1 text-sm text-red-600">{errors.telp}</p>
+              {errors.no_telp && (
+                <p className="mt-1 text-sm text-red-600">{errors.no_telp}</p>
               )}
             </div>
 
@@ -319,7 +329,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
                 type="button"
                 onClick={() => {
                   setShowCommentForm(false);
-                  setFormData({ nama: "", telp: "", email: "", pesan: "" });
+                  setFormData({ name: "", no_telp: "", email: "", pesan: "" });
                   setErrors({});
                 }}
                 className="px-4 py-2 text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
@@ -400,7 +410,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
                 {/* Avatar */}
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                    {getInitials(comment.nama)}
+                    {getInitials(comment.name)}
                   </div>
                 </div>
 
@@ -410,7 +420,7 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center space-x-2">
                       <h4 className="text-sm font-semibold text-gray-900">
-                        {comment.nama}
+                        {comment.name}
                       </h4>
                       {comment.email && (
                         <span className="text-xs text-gray-500">
@@ -423,14 +433,6 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
                       {formatDate(comment.created_at)}
                     </div>
                   </div>
-
-                  {/* Phone Number (if available) */}
-                  {comment.telp && (
-                    <div className="flex items-center text-xs text-gray-500 mb-2">
-                      <Phone className="w-3 h-3 mr-1" />
-                      {comment.telp}
-                    </div>
-                  )}
 
                   {/* Comment Message */}
                   <div className="text-gray-700 text-sm leading-relaxed">
