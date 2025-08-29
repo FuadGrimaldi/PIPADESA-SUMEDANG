@@ -81,7 +81,7 @@ export default function SubdomainNavGuest({
       submenu: [
         { name: "Daftar Instansi", href: "/instansi" },
         { name: "Daftar Layanan", href: "/layanan" },
-        { name: "Lapor!", href: "/pengaduan" },
+        // { name: "Lapor!", href: "/pengaduan" },
         { name: "Pengaduan dan Aspirasi", href: "/pengaduan-aspirasi" },
       ],
     },
@@ -94,13 +94,14 @@ export default function SubdomainNavGuest({
           href: `https://e-officedesa.sumedangkab.go.id/dashboard_desa_cantik/desa/${desaId}`,
         },
         {
-          name: "Potensi Desa",
-          href: `https://e-officedesa.sumedangkab.go.id/dashboard_podes`,
+          name: "E-Sakip Desa",
+          href: `https://e-officedesa.sumedangkab.go.id/dashboard_sakip/desa/${desaId}`,
         },
         {
           name: "Desa Simpatik",
           href: `https://e-officedesa.sumedangkab.go.id/dashboard_simpatik/desa/${desaId}`,
         },
+        { name: "Status SDGS", href: "/sdgs" },
       ],
     },
     {

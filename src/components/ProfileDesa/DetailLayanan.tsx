@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Download, Clock, Building2, FileText, Calendar } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import CardTahuSumedang from "../Card/TahuSumedangCard";
 
 interface DetailLayananProps {
   id: string;
@@ -376,6 +377,8 @@ const DetailLayanan = ({ id }: DetailLayananProps) => {
                 </div>
               </div>
             )}
+
+            <CardTahuSumedang />
           </motion.div>
 
           {/* Right Column - Operating Hours */}
