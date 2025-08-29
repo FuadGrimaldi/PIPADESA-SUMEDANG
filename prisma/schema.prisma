@@ -63,6 +63,25 @@ model profile_desa {
   officials        officials[]
   sarana_prasarana sarana_prasarana[]
   penduduk         penduduk[]
+  sdgsscore         sdgsscore[]
+}
+
+model sdgs {
+  id     Int    @id @default(autoincrement())
+  title  String
+  image  String   @db.LongText
+
+  sdgsscore sdgsscore[]
+}
+
+model sdgsscore {
+  id          Int          @id @default(autoincrement())
+  desa_id      Int
+  sdgs_id      Int
+  score       Float?
+  tahun         Int
+  profile_desa profile_desa @relation(fields: [desa_id], references: [id])
+  sdgs        sdgs     @relation(fields: [sdgs_id], references: [id])
 }
 
 model pengajuan_proposal {
