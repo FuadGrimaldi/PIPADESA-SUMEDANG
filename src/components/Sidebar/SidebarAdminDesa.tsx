@@ -16,6 +16,7 @@ import {
   X,
   Home,
   Newspaper,
+  ChartBarIncreasing,
 } from "lucide-react";
 import { cn } from "@/lib/utils/clsx";
 import { useRouter } from "next/navigation";
@@ -59,21 +60,9 @@ const menuData = [
     ],
   },
   {
-    title: "Ketenagakerjaan",
-    icon: Briefcase,
-    items: [{ title: "Lapangan Usaha", url: "/lapangan-usaha" }],
-  },
-
-  {
-    title: "Struktur Bangunan",
-    icon: Shield,
-    items: [
-      { title: "Jenis Lantai Terluas", url: "/jenis-lantai-terluas" },
-      { title: "Jenis Atap Terluas", url: "/jenis-atap-terluas" },
-      { title: "Jenis Dinding", url: "/jenis-dinding" },
-      { title: "Kualitas Atap Terluas", url: "/kualitas-atap-terluas" },
-      { title: "Kualitas Dinding", url: "/kualitas-dinding" },
-    ],
+    title: "Statistik",
+    icon: ChartBarIncreasing,
+    items: [{ title: "SDGs", url: "/admindesa/sdgs" }],
   },
   {
     title: "Account",

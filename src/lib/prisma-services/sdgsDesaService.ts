@@ -149,4 +149,25 @@ export class SdgsDesaService {
       throw error;
     }
   }
+  // Get a single SDG score by id
+  static async getSdgsScoreById(id: number) {
+    return prisma.sdgsscore.findUnique({
+      where: { id },
+      include: {
+        profile_desa: {
+          select: {
+            id: true,
+            nama_desa: true,
+          },
+        },
+        sdgs: {
+          select: {
+            id: true,
+            title: true,
+            image: true,
+          },
+        },
+      },
+    });
+  }
 }
