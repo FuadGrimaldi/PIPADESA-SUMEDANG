@@ -9,6 +9,7 @@ interface AllOrganisasiProps {
   desaId: number;
   kategoriId?: number; // optional kategori filter
   namaKategori?: string; // optional untuk menampilkan nama kategori
+  searchResults?: Organisasi[];
 }
 
 // Modal Detail Organisasi
@@ -345,6 +346,7 @@ const AllOrganisasi: React.FC<AllOrganisasiProps> = ({
   desaId,
   kategoriId,
   namaKategori,
+  searchResults = [],
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [organisasiData, setOrganisasiData] = useState<Organisasi[]>([]);
@@ -357,6 +359,8 @@ const AllOrganisasi: React.FC<AllOrganisasiProps> = ({
   const [selectedOrganisasi, setSelectedOrganisasi] =
     useState<Organisasi | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // state tambahan untuk cek apakah user melakukan search
+  const [isSearching, setIsSearching] = useState(false);
 
   // Handle modal
   const handleOrganisasiClick = (organisasi: Organisasi) => {
@@ -439,6 +443,25 @@ const AllOrganisasi: React.FC<AllOrganisasiProps> = ({
       setLoading(false);
     }
   }, [desaId, selectedKategori, namaKategori]);
+
+  // jalankan saat searchResults berubah
+  useEffect(() => {
+    if (searchResults && searchResults.length > 0) {
+      setIsSearching(true);
+      setOrganisasiData(searchResults);
+      setLoading(false);
+    } else if (isSearching && searchResults.length === 0) {
+      // sedang search tapi hasil kosong
+      setOrganisasiData([]);
+      setLoading(false);
+    } else {
+      // tidak sedang search → tampilkan data default dari API
+      setIsSearching(false);
+      if (desaId) {
+        fetchOrganisasiData();
+      }
+    }
+  }, [searchResults, desaId, fetchOrganisasiData, isSearching]);
 
   // Initialize page from URL
   useEffect(() => {

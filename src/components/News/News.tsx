@@ -8,6 +8,7 @@ import SidebarNewsLanding from "../Sidebar/SidebarNewsLanding";
 import { BlogCard, BlogCardAgenda } from "../Card/CardLanding";
 import SidebarInfografisLanding from "../Sidebar/SidebarInfografisLanding";
 import SidebarPengumumanLanding from "../Sidebar/SidebarAnncounment";
+import SearchBerita from "../Search/SearchNews";
 
 interface AllBeritaProps {
   desaId: number;
@@ -159,7 +160,7 @@ const News = ({ desaId }: AllBeritaProps) => {
               penting seputar kegiatan dan perkembangan di lingkungan kita.
             </p>
           </div>
-          <div className="text-left">
+          <div className="text-center">
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 inline-block">
               <span className="text-red-700">Error: {error}</span>
             </div>
@@ -193,10 +194,11 @@ const News = ({ desaId }: AllBeritaProps) => {
             penting seputar kegiatan dan perkembangan di lingkungan kita.
           </p>
         </div>
+        <SearchBerita desaId={desaId} />
 
         {displayedNews.length === 0 ? (
           // No articles state
-          <div className="text-left py-12">
+          <div className="text-center py-12">
             <div className="bg-gray-50 rounded-lg p-8 inline-block">
               <svg
                 className="w-16 h-16 text-gray-400 mx-auto mb-4"

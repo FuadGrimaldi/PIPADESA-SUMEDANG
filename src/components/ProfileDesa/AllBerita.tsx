@@ -44,9 +44,7 @@ const AllBerita = ({ desaId }: AllBeritaProps) => {
         // Filter artikel dengan tipe 'berita' dan status 'published'
         const beritaArticles = data.filter(
           (article: Article) =>
-            article.tipe === "berita" &&
-            article.status === "published" &&
-            article.desa_id === desaId
+            article.status === "published" && article.desa_id === desaId
         );
         setArticles(beritaArticles);
       }

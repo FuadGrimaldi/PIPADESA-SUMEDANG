@@ -1,4 +1,3 @@
-import SearchLayanan from "@/components/Search/SearchLayanan";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
@@ -7,6 +6,7 @@ import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 import { headers } from "next/headers";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
 import AllOrganisasi from "@/components/ProfileDesa/Directori";
+import SearchOrganisasi from "@/components/Search/searchOrganisasi";
 type Props = {
   params: { kategori: string };
 };
@@ -35,11 +35,9 @@ export default async function DirektoriPage({ params }: Props) {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-4">
-              <SearchLayanan />
+              <SearchOrganisasi desaId={desaId} namaKategori={kategori} />
             </div>
-            <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
-              <AllOrganisasi desaId={desaId} namaKategori={kategori} />
-            </div>
+
             <SumedangWeatherWidget />
           </div>
 

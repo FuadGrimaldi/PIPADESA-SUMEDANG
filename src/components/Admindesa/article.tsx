@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
 import RichTextEditor from "../Ui/Editor/RichTextEditor";
 import Link from "next/link";
+import parse from "html-react-parser";
 
 type Article = {
   id: number;
@@ -225,11 +226,10 @@ export default function ArticleManager({
               >
                 <option value="">Pilih Tipe</option>
                 <option value="berita">Berita</option>
-                <option value="agenda">Agenda</option>
-                <option value="sakip">SAKIP</option>
-                <option value="sid">SID</option>
                 <option value="kegiatan">Kegiatan</option>
                 <option value="pengumuman">Pengumuman</option>
+                <option value="sakip">SAKIP</option>
+                <option value="sid">SID</option>
               </select>
             </div>
 
@@ -429,7 +429,7 @@ export default function ArticleManager({
                   <td className="border px-3 py-2 w-[120px]">
                     <div className="font-medium">{article.title}</div>
                     <div className="text-sm text-gray-500 truncate max-w-xs">
-                      {article.content.substring(0, 100)}...
+                      {parse(article.content.substring(0, 100))}...
                     </div>
                   </td>
                   <td className="border px-3 py-2 text-center">

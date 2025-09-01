@@ -1,4 +1,3 @@
-import AllBerita from "@/components/ProfileDesa/AllBerita";
 import SearchBerita from "@/components/Search/SearchNews";
 import SidebarNewsPhoto from "@/components/Sidebar/SidebarNews";
 import Breadcrumb from "@/components/Ui/breadchum/Breadchumb";
@@ -6,8 +5,21 @@ import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 import { headers } from "next/headers";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
+import SearchArticle from "@/components/ProfileDesa/SearchArticle";
+import { ArticlesDesaService } from "@/lib/prisma-services/articlesDesaService";
+import { Article, ArticleType } from "@/types/article";
 
-export default async function BeritaPage() {
+interface SearchPageProps {
+  searchParams: {
+    query?: string;
+    tipe?: string;
+    desa_id?: string;
+    page?: string;
+    limit?: string;
+  };
+}
+
+export default async function SearchPage({ searchParams }: SearchPageProps) {
   const headersList = headers();
   const host = headersList.get("host") || "";
   const subdomain = host.split(".")[0];
@@ -15,8 +27,39 @@ export default async function BeritaPage() {
   const desaId = Number(desa?.id);
   const links = [
     { to: "/", label: "Home" },
-    { to: "/berita", label: "Berita" },
+    { to: "/search", label: "Search" },
   ];
+
+  // Fetch search results from the API
+  const query = searchParams.query || "";
+  const tipe = searchParams.tipe || "";
+  const page = parseInt(searchParams.page || "1");
+  const limit = parseInt(searchParams.limit || "10");
+
+  let results: Article[] = [];
+  let error = null;
+  const hasSearchQuery =
+    (query && query.trim() !== "") || (tipe && tipe.trim() !== "");
+
+  if (hasSearchQuery) {
+    try {
+      const rawResults = await ArticlesDesaService.searchArticles(
+        query.trim(),
+        desaId,
+        tipe && tipe.trim() !== "" ? tipe : undefined,
+        page,
+        limit
+      );
+      results = rawResults.map((article: any) => ({
+        ...article,
+        tipe: article.tipe as ArticleType,
+      }));
+    } catch (err: any) {
+      console.error("Search error:", err);
+      error = err.message || "Failed to search articles";
+      results = [];
+    }
+  }
 
   return (
     <div className="container min-h-screen">
@@ -30,12 +73,9 @@ export default async function BeritaPage() {
           <div className="w-full lg:flex-1 ">
             <div className="mb-4">
               <SearchBerita desaId={Number(desa?.id)} />
-            </div>
-            <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
-              <AllBerita desaId={Number(desa?.id)} />
-              {/* <h1 className="text-2xl font-bold mb-4">Berita</h1>
-              <p>Berita terbaru akan ditampilkan di sini.</p> */}
-              {/* Placeholder for news content */}
+              <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
+                <SearchArticle articles={results} />
+              </div>
             </div>
             <SumedangWeatherWidget />
           </div>

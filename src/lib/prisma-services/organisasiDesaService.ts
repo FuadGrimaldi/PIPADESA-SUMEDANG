@@ -264,4 +264,42 @@ export class OrganisasiDesaService {
       throw new Error(`Failed to delete organization: ${error}`);
     }
   }
+  static async searchOrgansasi(
+    query: string,
+    desa_id: number,
+    kategori_id?: string,
+    page: number = 1,
+    limit: number = 10
+  ) {
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = { desa_id };
+
+    if (query && query.trim() !== "") {
+      whereClause.OR = [
+        { nama_organisasi: { contains: query } },
+        { nama_ketua: { contains: query } },
+        { deskripsi_kegiatan: { contains: query } },
+      ];
+    }
+
+    if (kategori_id && kategori_id.trim() !== "") {
+      whereClause.kategori_id = Number(kategori_id);
+    }
+
+    return prisma.organisasi.findMany({
+      where: whereClause,
+      skip,
+      take: limit,
+
+      include: {
+        profile_desa: {
+          select: { id: true, nama_desa: true },
+        },
+        kategori_organisasi: {
+          select: { id: true, nama_kategori: true },
+        },
+      },
+    });
+  }
 }

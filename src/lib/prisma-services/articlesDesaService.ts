@@ -122,4 +122,49 @@ export class ArticlesDesaService {
       take: limit,
     });
   }
+
+  // Ganti method searchArticles dengan versi yang lebih aman
+  static async searchArticles(
+    query: string,
+    desa_id: number,
+    tipe?: string,
+    page: number = 1,
+    limit: number = 10
+  ) {
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = { desa_id };
+
+    if (query && query.trim() !== "") {
+      whereClause.OR = [
+        { title: { contains: query } },
+        { content: { contains: query } },
+      ];
+    }
+
+    if (tipe && tipe.trim() !== "") {
+      whereClause.tipe = tipe;
+    }
+
+    return prisma.articles.findMany({
+      where: whereClause,
+      orderBy: { created_at: "desc" },
+      skip,
+      take: limit,
+      include: {
+        profile_desa: {
+          select: {
+            id: true,
+            nama_desa: true,
+          },
+        },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+          },
+        },
+      },
+    });
+  }
 }

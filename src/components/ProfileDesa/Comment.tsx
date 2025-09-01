@@ -410,7 +410,7 @@ export default function CommentSection({
           comments.map((comment) => (
             <div
               key={comment.id}
-              className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-sm transition-shadow"
+              className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-sm transition-shadow mb-4"
             >
               <div className="flex space-x-3">
                 {/* Avatar */}
