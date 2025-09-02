@@ -6,6 +6,7 @@ import Wave1 from "@/components/Ui/Wave/Wave1";
 import SumedangWeatherWidget from "@/components/Ui/Weather/SumedangWeather";
 import { headers } from "next/headers";
 import { getDesaBySubdomain } from "@/lib/prisma-services/profileDesaService";
+import AllVideo from "@/components/ProfileDesa/video";
 
 export default async function VideoPage() {
   const headersList = headers();
@@ -15,7 +16,7 @@ export default async function VideoPage() {
   const desaId = Number(desa?.id);
   const links = [
     { to: "/", label: "Home" },
-    { to: "/sejarah", label: "Sejarah" },
+    { to: "/video", label: "Video" },
   ];
   return (
     <div className="container min-h-screen">
@@ -28,7 +29,7 @@ export default async function VideoPage() {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <SejarahDesa subdomain={subdomain} />
+              <AllVideo desaId={desaId} />
             </div>
             <SumedangWeatherWidget />
           </div>

@@ -6,14 +6,12 @@ import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
   MessageCircleDashedIcon,
-  Briefcase,
   Building,
   Shield,
   Zap,
   ChevronDown,
-  ChevronRight,
   Menu,
-  X,
+  UserRoundCog,
   Home,
   Newspaper,
   ChartBarIncreasing,
@@ -26,10 +24,12 @@ const menuData = [
   {
     title: "Profile",
     icon: Home,
-    items: [
-      { title: "Profile Desa", url: "/admindesa/profile" },
-      { title: "Struktur ", url: "/admindesa/struktur" },
-    ],
+    items: [{ title: "Profile Desa", url: "/admindesa/profile" }],
+  },
+  {
+    title: "Struktur",
+    icon: UserRoundCog,
+    items: [{ title: "Perangkat Desa", url: "/admindesa/struktur" }],
   },
   {
     title: "Publikasi",
@@ -37,7 +37,7 @@ const menuData = [
     items: [
       { title: "Berita", url: "/admindesa/berita" },
       { title: "Agenda", url: "/admindesa/agenda" },
-      { title: "APBDes", url: "/admindesa/apbdes" },
+      { title: "Video", url: "/admindesa/video" },
       { title: "Infografis", url: "/admindesa/infografis" },
     ],
   },

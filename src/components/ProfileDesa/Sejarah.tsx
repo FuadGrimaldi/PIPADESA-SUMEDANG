@@ -1,8 +1,62 @@
 "use client";
 import { motion } from "framer-motion";
-import { Desa } from "@/types/desa";
+import { useEffect, useState, useCallback } from "react";
 
-export default function SejarahDesa({ desa }: { desa: Desa | null }) {
+interface Props {
+  subdomain: string; // Assuming this is passed as a prop
+}
+
+export interface Profile {
+  id: number;
+  subdomain: string;
+  nama_desa: string;
+  alamat: string;
+  telepon: string;
+  email: string;
+  foto_depan?: string | null;
+  twitter: string;
+  instagram: string;
+  visi: string;
+  misi: string;
+  tujuan: string;
+  sejarah: string;
+  gmaps_embed_url: string;
+  lat: number | null;
+  lng: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export default function SejarahDesa({ subdomain }: Props) {
+  const [desa, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchProfile = useCallback(async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/desa/subdomain/${subdomain}`);
+      const data = await res.json();
+
+      if (res.ok) {
+        setProfile(data.data);
+      } else {
+        console.error("Error fetching komentar:", data.error);
+        setProfile(null);
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setProfile(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [subdomain]);
+
+  console.log(desa);
+
+  useEffect(() => {
+    fetchProfile();
+  }, [fetchProfile]);
+
   return (
     <section>
       <motion.div

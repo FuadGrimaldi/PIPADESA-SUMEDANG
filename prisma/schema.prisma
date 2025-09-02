@@ -221,8 +221,11 @@ model videos {
   desa_id      Int
   title        String   @db.VarChar(255)
   embed_url    String   @db.VarChar(255)
+  categori    String   
   deskripsi    String   @db.LongText
   uploaded_at  DateTime
+  created_at         DateTime
+  updated_at         DateTime
 
   profile_desa profile_desa @relation(fields: [desa_id], references: [id])
 }

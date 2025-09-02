@@ -14,6 +14,19 @@
   background-position: center;
 }
 
+#stats {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1339%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(243%2c 244%2c 246%2c 1)'%3e%3c/rect%3e%3cpath d='M -646.3704208114464%2c328 C -550.37%2c306 -358.37%2c218.4 -166.37042081144637%2c218 C 25.63%2c217.6 121.63%2c351.8 313.62957918855363%2c326 C 505.63%2c300.2 601.63%2c72.4 793.6295791885536%2c89 C 985.63%2c105.6 1144.36%2c400.8 1273.6295791885536%2c409 C 1402.9%2c417.2 1406.73%2c185.8 1440%2c130' stroke='rgba(51%2c 65%2c 85%2c 1)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -309.77326126178764%2c199 C -213.77%2c252.2 -21.77%2c466.6 170.22673873821233%2c465 C 362.23%2c463.4 458.23%2c193 650.2267387382124%2c191 C 842.23%2c189 938.23%2c460.4 1130.2267387382124%2c455 C 1322.23%2c449.6 1548.27%2c184.6 1610.2267387382124%2c164 C 1672.18%2c143.4 1474.05%2c314.4 1440%2c352' stroke='rgba(51%2c 65%2c 85%2c 1)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -478.27129757098214%2c314 C -382.27%2c289.4 -190.27%2c181.4 1.7287024290178543%2c191 C 193.73%2c200.6 289.73%2c379.2 481.72870242901786%2c362 C 673.73%2c344.8 769.73%2c100 961.7287024290179%2c105 C 1153.73%2c110 1346.07%2c388.2 1441.7287024290179%2c387 C 1537.38%2c385.8 1440.35%2c156.6 1440%2c99' stroke='rgba(51%2c 65%2c 85%2c 1)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -935.2506240673447%2c439 C -839.25%2c398.8 -647.25%2c266.4 -455.25062406734463%2c238 C -263.25%2c209.6 -167.25%2c315.8 24.74937593265537%2c297 C 216.75%2c278.2 312.75%2c121.8 504.74937593265537%2c144 C 696.75%2c166.2 797.7%2c408.2 984.7493759326553%2c408 C 1171.8%2c407.8 1348.95%2c196 1440%2c143' stroke='rgba(51%2c 65%2c 85%2c 1)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -334.4439801710983%2c329 C -238.44%2c318.6 -46.44%2c265.6 145.5560198289017%2c277 C 337.56%2c288.4 433.56%2c387.8 625.5560198289018%2c386 C 817.56%2c384.2 913.56%2c262 1105.5560198289018%2c268 C 1297.56%2c274 1518.67%2c422.2 1585.5560198289018%2c416 C 1652.44%2c409.8 1469.11%2c272.8 1440%2c237' stroke='rgba(51%2c 65%2c 85%2c 1)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -714.3071606364765%2c106 C -618.31%2c150.4 -426.31%2c321 -234.30716063647657%2c328 C -42.31%2c335 53.69%2c121.6 245.69283936352343%2c141 C 437.69%2c160.4 533.69%2c419.2 725.6928393635235%2c425 C 917.69%2c430.8 1062.83%2c198 1205.6928393635235%2c170 C 1348.55%2c142 1393.14%2c262 1440%2c285' stroke='rgba(51%2c 65%2c 85%2c 1)' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1339'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+  background-size: cover;
+  background-position: center;
+}
+#news-landing {
+  /* Ensure the SVG path is correct and the server serves it with the correct MIME type (image/svg+xml) */
+  background-image: url("/assets/background/wave-haikei.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 #kemerdekaan-landing {
   background-image: url("/assets/background/bg-kemerdekaan.png");
   background-size: contain;

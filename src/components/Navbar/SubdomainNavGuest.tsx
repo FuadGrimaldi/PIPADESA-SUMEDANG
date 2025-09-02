@@ -111,7 +111,7 @@ export default function SubdomainNavGuest({
         { name: "Berita & Informasi", href: "/berita" },
         { name: "Agenda", href: "/agenda" },
         { name: "Galeri", href: "/galeri" },
-        { name: "APBDes", href: "/apbdes" },
+        { name: "Video", href: "/video" },
         { name: "Informasi Lainnya", href: "/informasi-tambahan" },
       ],
     },
