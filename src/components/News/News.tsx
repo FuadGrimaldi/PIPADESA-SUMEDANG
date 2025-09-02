@@ -198,8 +198,8 @@ const News = ({ desaId }: AllBeritaProps) => {
 
         {displayedNews.length === 0 ? (
           // No articles state
-          <div className="text-center py-12">
-            <div className="bg-gray-50 rounded-lg p-8 inline-block">
+          <div className="text-center py-4">
+            <div className="w-full bg-gray-50 rounded-lg p-8 inline-block">
               <svg
                 className="w-16 h-16 text-gray-400 mx-auto mb-4"
                 fill="none"

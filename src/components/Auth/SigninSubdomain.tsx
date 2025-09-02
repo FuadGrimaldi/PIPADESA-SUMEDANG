@@ -44,7 +44,7 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
         localStorage.setItem("username", response.data.user.username);
         localStorage.setItem("email", response.data.user.email);
         alert("Login successful");
-        router.push("/admindesa/dashboard"); // arahkan ke dashboard setelah login berhasil
+        router.push("/admindesa"); // arahkan ke dashboard setelah login berhasil
         router.refresh(); // refresh halaman untuk memastikan data terbar
       } else {
         alert("Login failed");

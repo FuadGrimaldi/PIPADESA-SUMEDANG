@@ -134,8 +134,6 @@ const AllVideo = ({ desaId }: AllVideoData) => {
     }
   }, [desaId]);
 
-  console.log("Videos Data:", videosData);
-
   // Fetch agendas when desaId changes
   useEffect(() => {
     if (desaId) {
@@ -514,8 +512,8 @@ const AllVideo = ({ desaId }: AllVideoData) => {
                         <iframe
                           className="absolute inset-0 w-full h-full"
                           src={`https://www.youtube.com/embed/${getYouTubeId(
-                            selectedVideo.url
-                          )}?autoplay=1&mute=1`}
+                            selectedVideo.embed_url
+                          )}?autoplay=1`}
                           title={selectedVideo.title}
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

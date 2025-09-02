@@ -169,6 +169,27 @@ export default function AdminDesSidabar() {
         )}
         aria-label="Statistics navigation"
       >
+        {/* Sidebar Header */}
+        <header className="relative overflow-hidden border-b border-white/20 bg-gradient-to-r from-slate-800 to-slate-700 p-4 sm:p-6 rounded-none lg:rounded-t-xl">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
+          <div className="relative flex items-center justify-between">
+            <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-lg sm:text-xl font-bold text-white truncate">
+                  Desa Cipeundeuy
+                </h1>
+                <p className="text-xs sm:text-sm text-white/90 truncate">
+                  Portal Statistik
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={toggleMobile}
+              className="lg:hidden flex-shrink-0 ml-2 p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200"
+              aria-label="Close navigation menu"
+            ></button>
+          </div>
+        </header>
         {/* Sidebar Content */}
         <div className=" overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 lg:mt-0 mt-[70px]">
           <nav className="p-3 sm:p-4 space-y-2" role="navigation">
