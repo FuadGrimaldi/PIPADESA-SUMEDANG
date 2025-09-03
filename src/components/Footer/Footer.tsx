@@ -1,17 +1,6 @@
 "use client";
 
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  ChevronRight,
-  Home,
-  User,
-  BarChart2,
-  Newspaper,
-  LayoutGrid,
-} from "lucide-react";
+import { Home, User, BarChart2, Newspaper, LayoutGrid } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 

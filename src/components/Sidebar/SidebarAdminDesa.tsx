@@ -1,306 +1,360 @@
 "use client";
-
-import * as React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
+import React, { useState } from "react";
 import {
-  MessageCircleDashedIcon,
-  Building,
-  Shield,
-  Landmark,
-  LogOutIcon,
-  ChevronDown,
-  Menu,
-  UserRoundCog,
+  ChevronLeft,
+  ChevronRight,
   Home,
+  FolderOpen,
+  GraduationCap,
+  User,
+  Settings,
+  BarChart3,
+  FileText,
+  Users,
+  Award,
+  BookOpen,
+  School,
+  UserCheck,
+  Shield,
+  HelpCircle,
+  LogOut,
   Newspaper,
+  MessageCircle,
+  Landmark,
+  UserRoundCog,
+  Building,
+  MessageCircleDashedIcon,
   ChartBarIncreasing,
+  PenOffIcon,
+  BarChart,
+  Image,
+  Video,
+  Dessert,
+  LucideNewspaper,
 } from "lucide-react";
-import { cn } from "@/lib/utils/clsx";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Swal from "sweetalert2";
+import { signOut } from "next-auth/react";
+import { useSidebar } from "@/context/SidebarContext"; // 🔥 context
 
-// Menu data structure
-const menuData = [
-  {
-    title: "Profile",
-    icon: Landmark,
-    items: [{ title: "Profile Desa", url: "/admindesa/profile" }],
-  },
-  {
-    title: "Struktur",
-    icon: UserRoundCog,
-    items: [{ title: "Perangkat Desa", url: "/admindesa/struktur" }],
-  },
-  {
-    title: "Publikasi",
-    icon: Newspaper,
-    items: [
-      { title: "Berita", url: "/admindesa/berita" },
-      { title: "Agenda", url: "/admindesa/agenda" },
-      { title: "Video", url: "/admindesa/video" },
-      { title: "Infografis", url: "/admindesa/infografis" },
-    ],
-  },
-  {
-    title: "Direktori",
-    icon: Building,
-    items: [
-      { title: "Kategori", url: "/admindesa/kategori" },
-      { title: "Organisasi", url: "/admindesa/organisasi" },
-      { title: "Sarana", url: "/admindesa/sarana" },
-      { title: "Wisata", url: "/admindesa/wisata" },
-    ],
-  },
-  {
-    title: "Partisipasi Publik",
-    icon: MessageCircleDashedIcon,
-    items: [
-      { title: "Komentar", url: "/admindesa/komentar" },
-      { title: "Pengaduan dan Aspirasi", url: "/admindesa/pengaduan-aspirasi" },
-    ],
-  },
-  {
-    title: "Statistik",
-    icon: ChartBarIncreasing,
-    items: [{ title: "SDGs", url: "/admindesa/sdgs" }],
-  },
-  {
-    title: "Account",
-    icon: LogOutIcon,
-    items: [{ title: "Logout", url: "/logout" }],
-  },
-];
-function useLogout() {
+// Fungsi logout
+const logout = async () => {
+  await signOut({ redirect: false });
+};
+
+const AdminDesSidabar = () => {
+  const { isExpanded, toggleSidebar } = useSidebar(); // 🔥 sidebar global
+  const [activeItem, setActiveItem] = useState("dashboard");
+  const [expandedItems, setExpandedItems] = useState<string[]>([]); // 🔥 submenu expand
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const router = useRouter();
 
-  return React.useCallback(async () => {
-    try {
-      // Panggil NextAuth signOut tanpa callbackUrl
-      await signOut({ redirect: false });
-
-      // Manual redirect ke /logout yang akan di-handle middleware
-      const hostname = window.location.hostname;
-      const protocol = window.location.protocol;
-      const port = window.location.port ? `:${window.location.port}` : "";
-      Swal.fire({
-        title: "Berhasil Logout",
-        text: "Anda akan diarahkan ke halaman login.",
-        icon: "success",
-        confirmButtonText: "OK",
-      }).then(() => {
-        window.location.href = `${protocol}//${hostname}${port}/login`;
-      });
-    } catch (error) {
-      console.error("Logout error:", error);
-      // Fallback jika ada error
-      const hostname = window.location.hostname;
-      const protocol = window.location.protocol;
-      const port = window.location.port ? `:${window.location.port}` : "";
-      Swal.fire({
-        title: "Logout Gagal",
-        text: "Terjadi kesalahan saat logout. Silakan coba lagi.",
-
-        icon: "error",
-        confirmButtonText: "OK",
-      }).then(() => {
-        window.location.href = `${protocol}//${hostname}${port}/login`;
-      });
-    }
-  }, []);
-}
-
-export default function AdminDesSidabar() {
-  const pathname = usePathname();
-  const [isMobileOpen, setIsMobileOpen] = React.useState(false);
-  const [openSections, setOpenSections] = React.useState<string[]>([]);
-  const logout = useLogout();
-
-  const toggleSection = (title: string) => {
-    setOpenSections((prev) =>
-      prev.includes(title)
-        ? prev.filter((item) => item !== title)
-        : [...prev, title]
+  const toggleExpanded = (itemId: string) => {
+    setExpandedItems((prev) =>
+      prev.includes(itemId)
+        ? prev.filter((id) => id !== itemId)
+        : [...prev, itemId]
     );
   };
 
-  const toggleMobile = () => {
-    setIsMobileOpen(!isMobileOpen);
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await logout();
+      router.push("/login");
+      router.refresh();
+    } catch {
+      router.push("/login");
+      router.refresh();
+    } finally {
+      setIsLoggingOut(false);
+    }
   };
 
-  // Close mobile menu on escape key
-  React.useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsMobileOpen(false);
-      }
-    };
+  const menuItems = [
+    {
+      id: "dashboard",
+      label: "Dashboard",
+      icon: Home,
+      path: "/admindesa",
+    },
+    {
+      id: "profile",
+      label: "Profile",
+      icon: Building,
+      subItems: [
+        {
+          id: "profile-desa",
+          label: "Profile Desa",
+          icon: PenOffIcon,
+          path: "/admindesa/profile",
+        },
+      ],
+    },
+    {
+      id: "struktur",
+      label: "Struktur",
+      icon: UserRoundCog,
+      subItems: [
+        {
+          id: "perangkat-desa",
+          label: "Perangkat Desa",
+          icon: PenOffIcon,
+          path: "/admindesa/struktur",
+        },
+      ],
+    },
+    {
+      id: "publikasi",
+      label: "Publikasi",
+      icon: Newspaper,
+      subItems: [
+        {
+          id: "berita",
+          label: "Berita",
+          icon: FileText,
+          path: "/admindesa/berita",
+        },
+        {
+          id: "agenda",
+          label: "Agenda",
+          icon: FolderOpen,
+          path: "/admindesa/agenda",
+        },
+        {
+          id: "video",
+          label: "Video",
+          icon: Video,
+          path: "/admindesa/video",
+        },
+        {
+          id: "infografis",
+          label: "Infografis",
+          icon: Image,
+          path: "/admindesa/infografis",
+        },
+      ],
+    },
+    {
+      id: "direktori",
+      label: "Direktori",
+      icon: LucideNewspaper,
+      subItems: [
+        {
+          id: "kategori",
+          label: "Kategori",
+          icon: BookOpen,
+          path: "/admindesa/kategori",
+        },
+        {
+          id: "organisasi",
+          label: "Organisasi",
+          icon: Landmark,
+          path: "/admindesa/organisasi",
+        },
+        {
+          id: "sarana",
+          label: "Sarana",
+          icon: School,
+          path: "/admindesa/sarana",
+        },
+        {
+          id: "wisata",
+          label: "Wisata",
+          icon: Award,
+          path: "/admindesa/wisata",
+        },
+      ],
+    },
+    {
+      id: "partisipasi-publik",
+      label: "Partisipasi Publik",
+      icon: MessageCircleDashedIcon,
+      subItems: [
+        {
+          id: "komentar",
+          label: "Komentar",
+          icon: MessageCircle,
+          path: "/admindesa/komentar",
+        },
+        {
+          id: "aspirasi-pengaduan",
+          label: "Aspirasi & Pengaduan",
+          icon: UserCheck,
+          path: "/admindesa/aspirasi-pengaduan",
+        },
+      ],
+    },
+    {
+      id: "statistik",
+      label: "Statistik",
+      icon: BarChart3,
+      subItems: [
+        { id: "sdgs", label: "SDGs", icon: BarChart, path: "/admindesa/sdgs" },
+      ],
+    },
+  ];
 
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, []);
+  const bottomItems = [
+    { id: "help", label: "Help & Support", icon: HelpCircle },
+    { id: "settings", label: "Settings", icon: Settings },
+  ];
 
-  // Prevent body scroll when mobile menu is open
-  React.useEffect(() => {
-    if (isMobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+  type MenuSubItem = {
+    id: string;
+    label: string;
+    icon: React.ElementType;
+    path?: string;
+    badge?: string;
+  };
 
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isMobileOpen]);
+  type MenuItemType = {
+    id: string;
+    label: string;
+    icon: React.ElementType;
+    path?: string;
+    badge?: string;
+    subItems?: MenuSubItem[];
+  };
+
+  const MenuItem = ({
+    item,
+    isSubItem = false,
+  }: {
+    item: MenuItemType | MenuSubItem;
+    isSubItem?: boolean;
+  }) => {
+    const Icon = item.icon;
+    const hasSubItems =
+      "subItems" in item && item.subItems && item.subItems.length > 0;
+    const isItemExpanded = expandedItems.includes(item.id); // submenu expand check
+    const isActive = activeItem === item.id;
+
+    return (
+      <div className="w-full">
+        <div
+          onClick={() => {
+            setActiveItem(item.id);
+            if (hasSubItems) toggleExpanded(item.id);
+          }}
+          className={`
+            flex items-center w-full px-3 py-2.5 rounded-lg cursor-pointer
+            transition-all duration-200 ease-in-out group relative
+            ${
+              isActive
+                ? "bg-blue-50 text-blue-600 shadow-sm"
+                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+            }
+            ${isSubItem ? "ml-6 py-2" : ""}
+          `}
+        >
+          <div className="flex items-center flex-1 min-w-0">
+            <Link href={item.path || "#"} className="flex items-center w-full">
+              <Icon
+                size={isSubItem ? 16 : 18}
+                className={`flex-shrink-0 transition-colors duration-200 ${
+                  isActive
+                    ? "text-blue-600"
+                    : "text-gray-500 group-hover:text-gray-700"
+                }`}
+              />
+              <span
+                className={`ml-3 font-medium text-sm transition-all duration-300 ease-in-out ${
+                  isExpanded ? "opacity-100 w-auto" : "opacity-0 w-0"
+                } overflow-hidden whitespace-nowrap`}
+              >
+                {item.label}
+              </span>
+            </Link>
+          </div>
+
+          {isExpanded && hasSubItems && (
+            <ChevronRight
+              size={16}
+              className={`ml-auto transition-transform duration-200 text-gray-400 ${
+                isItemExpanded ? "rotate-90" : "rotate-0"
+              }`}
+            />
+          )}
+
+          {/* Tooltip hanya muncul kalau sidebar collapsed */}
+          {!isExpanded && (
+            <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-sm rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
+              {item.label}
+            </div>
+          )}
+        </div>
+
+        {/* Sub Items */}
+        {isExpanded && hasSubItems && (
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              isItemExpanded ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="mt-1 space-y-1">
+              {item.subItems?.map((subItem) => (
+                <MenuItem key={subItem.id} item={subItem} isSubItem={true} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
-    <>
-      {/* Mobile Menu Toggle Button */}
-      <button
-        onClick={toggleMobile}
-        className="lg:hidden fixed top-4 left-10 z-50 p-3 bg-[#C0B099] text-white rounded-lg shadow-lg hover:bg-[#A0906B] transition-all duration-200"
-        aria-label="Toggle navigation menu"
-      >
-        <Menu className="h-5 w-5" />
-      </button>
-
-      {/* Mobile Overlay */}
-      {isMobileOpen && (
+    <div
+      className={`flex flex-col h-screen bg-white border-r border-gray-200 shadow-sm transition-all duration-300 ease-in-out ${
+        isExpanded ? "w-64" : "w-16"
+      }`}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between p-[22px] border-b border-gray-200">
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[45] lg:hidden"
-          onClick={() => setIsMobileOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Sidebar Container */}
-      <aside
-        className={cn(
-          "fixed lg:static inset-y-0 left-0 z-50 overflow-x-hidden",
-          "transform transition-transform duration-300 ease-in-out lg:transform-none w-[280px] lg:w-64",
-          isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
-          "bg-white rounded-none lg:rounded-r-xl shadow-2xl lg:shadow-lg border-r lg:border border-gray-200"
-        )}
-        aria-label="Statistics navigation"
-      >
-        {/* Sidebar Header */}
-        <header className="relative overflow-hidden border-b border-white/20 bg-gradient-to-r from-slate-800 to-slate-700 p-4 sm:p-6 rounded-none lg:rounded-t-xl">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
-          <div className="relative flex items-center justify-between">
-            <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
-              <div className="min-w-0 flex-1">
-                <h1 className="text-lg sm:text-xl font-bold text-white truncate">
-                  Desa Cipeundeuy
-                </h1>
-                <p className="text-xs sm:text-sm text-white/90 truncate">
-                  Portal Statistik
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={toggleMobile}
-              className="lg:hidden flex-shrink-0 ml-2 p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200"
-              aria-label="Close navigation menu"
-            ></button>
-          </div>
-        </header>
-        {/* Sidebar Content */}
-        <div className=" overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 lg:mt-0 mt-[70px]">
-          <nav className="p-3 sm:p-4 space-y-2" role="navigation">
-            <div className="backdrop-blur-xl rounded-xl bg-gradient-to-b from-slate-800 to-slate-700 border border-white/10">
-              <div className="space-y-1">
-                <Link
-                  href="/admindesa"
-                  className={cn(
-                    "w-full flex items-center gap-3 px-3 sm:px-4 py-3 rounded-xl text-left transition-all duration-300",
-                    "text-white hover:text-white font-medium hover:shadow-lg hover:shadow-black/10",
-                    "relative overflow-hidden group focus:outline-none"
-                  )}
-                  aria-current={pathname === "/admindesa" ? "page" : undefined}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                  <Home className="h-4 w-4 sm:h-5 sm:w-5 text-white/90 group-hover:text-white transition-all duration-300 group-hover:scale-110 flex-shrink-0" />
-                  <span className="flex-1 text-sm sm:text-base truncate">
-                    Dashboard
-                  </span>
-                </Link>
-              </div>
-            </div>
-            {menuData.map((item, index) => (
-              <div
-                key={item.title}
-                className="group backdrop-blur-xl rounded-xl bg-gradient-to-b from-slate-800 to-slate-700 border border-white/10"
-              >
-                <div className="space-y-1">
-                  <button
-                    onClick={() => toggleSection(item.title)}
-                    className={cn(
-                      "w-full flex items-center gap-3 px-3 sm:px-4 py-3 rounded-xl text-left transition-all duration-300",
-                      "text-white hover:text-white font-medium hover:shadow-lg hover:shadow-black/10",
-                      "relative overflow-hidden group focus:outline-none"
-                    )}
-                    aria-expanded={openSections.includes(item.title)}
-                    aria-controls={`section-${item.title}`}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                    <item.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white/90 group-hover:text-white transition-all duration-300 group-hover:scale-110 flex-shrink-0" />
-                    <span className="flex-1 text-sm sm:text-base truncate">
-                      {item.title}
-                    </span>
-                    <ChevronDown
-                      className={cn(
-                        "h-4 w-4 text-white/70 transition-transform duration-300 flex-shrink-0",
-                        openSections.includes(item.title) ? "rotate-180" : ""
-                      )}
-                    />
-                  </button>
-
-                  <div
-                    id={`section-${item.title}`}
-                    className={cn(
-                      "overflow-hidden transition-all duration-300 ease-in-out",
-                      openSections.includes(item.title)
-                        ? "max-h-96 opacity-100"
-                        : "max-h-0 opacity-0"
-                    )}
-                  >
-                    <div className="ml-4 sm:ml-6 mt-2 space-y-1 border-l-2 border-white/20 pl-3 sm:pl-4 px-6">
-                      {item.items.map((subItem, subIndex) => (
-                        <Link
-                          key={subItem.title}
-                          href={subItem.url}
-                          onClick={(e) => {
-                            setIsMobileOpen(false);
-
-                            if (subItem.title.toLowerCase() === "logout") {
-                              e.preventDefault(); // cegah redirect ke /logout
-                              logout(); // jalankan fungsi logout
-                            }
-                          }}
-                          className={cn(
-                            "flex items-center gap-2 sm:gap-3 px-3 py-2 rounded-lg text-xs sm:text-sm transition-all duration-300",
-                            pathname === subItem.url
-                              ? "bg-white text-black font-semibold "
-                              : "text-white/80 hover:text-white hover:bg-white/15"
-                          )}
-                          style={{
-                            animationDelay: `${subIndex * 50}ms`,
-                          }}
-                        >
-                          <span className="relative truncate ">
-                            {subItem.title}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </nav>
+          className={`transition-all duration-300 ease-in-out overflow-hidden ${
+            isExpanded ? "opacity-100 w-auto" : "opacity-0 w-0"
+          }`}
+        >
+          <h1 className="text-xl font-bold text-gray-800 whitespace-nowrap">
+            Portal Desa
+          </h1>
         </div>
-      </aside>
-    </>
+        <button
+          onClick={toggleSidebar}
+          className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors duration-200 text-gray-500 hover:text-gray-700"
+        >
+          {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
+        </button>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4 px-3 space-y-1">
+        {menuItems.map((item) => (
+          <MenuItem key={item.id} item={item} />
+        ))}
+      </nav>
+
+      {/* Bottom Section */}
+      <div className="border-t border-gray-200 p-3 space-y-1">
+        {bottomItems.map((item) => (
+          <MenuItem key={item.id} item={item} />
+        ))}
+        <div>
+          <button
+            onClick={handleLogout}
+            disabled={isLoggingOut}
+            className="w-full flex items-center gap-3 px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 disabled:opacity-60"
+          >
+            <LogOut size={18} />
+            {isExpanded && (
+              <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
   );
-}
+};
+
+export default AdminDesSidabar;
