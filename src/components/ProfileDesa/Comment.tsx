@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { MessageCircle, Send, User, Phone, Mail, Calendar } from "lucide-react";
+import Swal from "sweetalert2";
 
 // TypeScript interfaces
 interface Comment {
@@ -126,13 +127,25 @@ export default function CommentSection({
         fetchComments();
 
         // Show success message (you can customize this)
-        alert("Komentar berhasil dikirim!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Komentar berhasil dikirim dan menunggu persetujuan",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       } else {
         throw new Error("Failed to submit comment");
       }
     } catch (error) {
       console.error("Error submitting comment:", error);
-      alert("Gagal mengirim komentar. Silakan coba lagi.");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat mengirim komentar",
+        showConfirmButton: false,
+        timer: 2000,
+      });
     } finally {
       setSubmitting(false);
     }

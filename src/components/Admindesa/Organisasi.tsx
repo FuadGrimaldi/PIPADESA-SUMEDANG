@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
+import Swal from "sweetalert2";
 
 type Organisasi = {
   id: number;
@@ -103,22 +104,47 @@ export default function OrganisasiManager({
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus organisasi ini?")) return;
+    const result = await Swal.fire({
+      title: "Yakin hapus organisasi ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!result.isConfirmed) return;
+    // if (!confirm("Yakin hapus organisasi ini?")) return;
 
     try {
       const res = await fetch(`/api/organisasi/${id}`, { method: "DELETE" });
       if (res.ok) {
         fetchOrganisasis();
-        alert("Organisasi berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Organisasi berhasil dihapus!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
-        alert(
-          `Gagal menghapus organisasi: ${errorData.error || "Unknown error"}`
-        );
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus organisasi");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus organisasi",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -136,7 +162,14 @@ export default function OrganisasiManager({
     const deskripsiKegiatan = fd.get("deskripsi_kegiatan");
 
     if (!namaOrganisasi || !kategoriId || !namaKetua || !deskripsiKegiatan) {
-      alert("Mohon lengkapi semua field yang wajib diisi!");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Semua field wajib diisi",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       setSubmitLoading(false);
       return;
     }
@@ -164,16 +197,37 @@ export default function OrganisasiManager({
       if (res.ok) {
         setModalOpen(false);
         fetchOrganisasis();
-        alert("Organisasi berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: editData
+            ? "Organisasi berhasil diperbarui!"
+            : "Organisasi berhasil ditambahkan!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         form.reset();
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan organisasi");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan data",
+
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } finally {
       setSubmitLoading(false);
     }

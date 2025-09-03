@@ -65,7 +65,6 @@ export async function PUT(
 
     // Handle file upload
     if (poster && poster.size > 0) {
-      console.log("Processing poster upload");
       try {
         if (existingAgenda.poster) {
           // Delete old image if it exists
@@ -122,7 +121,6 @@ export async function PUT(
       created_by: parseInt(created_by),
       status: status as Status,
     };
-    console.log("Updating agenda with data:", updateData);
     const updatedAgenda = await AgendaDesaService.updateAgenda(id, updateData);
     return NextResponse.json(updatedAgenda);
   } catch (error: any) {

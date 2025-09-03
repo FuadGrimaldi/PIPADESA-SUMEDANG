@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Swal from "sweetalert2";
 
 export type Infografis = {
   id: number;
@@ -63,19 +64,46 @@ export default function InfografisManager({ desaId }: InfografisManagerProps) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus infografis ini?")) return;
+    const confirm = await Swal.fire({
+      title: "Yakin ingin menghapus infografis ini?",
+      text: "Data yang sudah dihapus tidak bisa dikembalikan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus!",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!confirm.isConfirmed) return;
 
     try {
       const res = await fetch(`/api/infografis/${id}`, { method: "DELETE" });
       if (res.ok) {
         fetchInfografis();
-        alert("Infografis berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Infografis berhasil dihapus!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
-        alert("Gagal menghapus infografis");
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Gagal menghapus infografis",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus infografis");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus infografis",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -106,15 +134,35 @@ export default function InfografisManager({ desaId }: InfografisManagerProps) {
       if (res.ok) {
         setModalOpen(false);
         fetchInfografis();
-        alert("Infografis berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: `Infografis berhasil ${
+            editData ? "diperbarui" : "ditambahkan"
+          }!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan infografis");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 

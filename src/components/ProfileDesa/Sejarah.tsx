@@ -51,8 +51,6 @@ export default function SejarahDesa({ subdomain }: Props) {
     }
   }, [subdomain]);
 
-  console.log(desa);
-
   useEffect(() => {
     fetchProfile();
   }, [fetchProfile]);

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Swal from "sweetalert2";
 
 export type Sarana = {
   id: number;
@@ -74,19 +75,45 @@ export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus ini?")) return;
+    const result = await Swal.fire({
+      title: "Yakin hapus data ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!result.isConfirmed) return;
 
     try {
       const res = await fetch(`/api/sarana/${id}`, { method: "DELETE" });
       if (res.ok) {
         fetchSarana();
-        alert(" berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Berhasil dihapus",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
-        alert("Gagal menghapus ");
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Gagal menghapus",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus ");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Gagal menghapus",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -117,15 +144,34 @@ export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
       if (res.ok) {
         setModalOpen(false);
         fetchSarana();
-        alert("berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Berhasil disimpan",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Gagal menyimpan",
+          text: errorData.message || "Terjadi kesalahan",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Gagal menyimpan",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 

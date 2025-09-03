@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Status } from "@/types/agenda";
+import Swal from "sweetalert2";
 
 export interface Komentar {
   id: number;
@@ -62,7 +63,16 @@ export default function KomentarManager({ desaId }: Props) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus komentar ini?")) return;
+    const confirm = await Swal.fire({
+      title: "Yakin ingin menghapus komentar ini?",
+      text: "Tindakan ini tidak dapat dibatalkan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus!",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!confirm.isConfirmed) return;
 
     try {
       const res = await fetch(`/api/komentar/${id}`, {
@@ -70,16 +80,33 @@ export default function KomentarManager({ desaId }: Props) {
       });
       if (res.ok) {
         fetchKomentars();
-        alert("Komentar berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Komentar berhasil dihapus!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
-        alert(
-          `Gagal menghapus komentar: ${errorData.error || "Unknown error"}`
-        );
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus komentar");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus komentar",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -98,7 +125,13 @@ export default function KomentarManager({ desaId }: Props) {
 
     // Validasi
     if (!name || !email || !pesan) {
-      alert("Nama, email, dan pesan wajib diisi!");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Nama, email, dan pesan wajib diisi",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setSubmitLoading(false);
       return;
     }
@@ -137,16 +170,37 @@ export default function KomentarManager({ desaId }: Props) {
       if (res.ok) {
         setModalOpen(false);
         fetchKomentars();
-        alert("Komentar berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: editData
+            ? "Komentar berhasil diperbarui!"
+            : "Komentar berhasil ditambahkan!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
         form.reset();
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan komentar");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } finally {
       setSubmitLoading(false);
     }

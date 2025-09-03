@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Status } from "@/types/agenda";
+import Swal from "sweetalert2";
 
 export interface PengaduanAspirasi {
   id: number;
@@ -62,7 +63,16 @@ export default function PengaduanAspirasiManager({ desaId }: Props) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus data ini?")) return;
+    const result = await Swal.fire({
+      title: "Yakin hapus data ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!result.isConfirmed) return;
+    // if (!confirm("Yakin hapus ini?")) return;
 
     try {
       const res = await fetch(`/api/pengaduan-aspirasi/${id}`, {
@@ -70,14 +80,32 @@ export default function PengaduanAspirasiManager({ desaId }: Props) {
       });
       if (res.ok) {
         fetchItems();
-        alert("Data berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Data berhasil dihapus!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
-        alert(`Gagal menghapus data: ${errorData.error || "Unknown error"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus data");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -97,7 +125,14 @@ export default function PengaduanAspirasiManager({ desaId }: Props) {
 
     // Validasi
     if (!name || !email || !pesan) {
-      alert("Nama, email, dan pesan wajib diisi!");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Nama, Email, dan Pesan wajib diisi",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       setSubmitLoading(false);
       return;
     }
@@ -138,16 +173,36 @@ export default function PengaduanAspirasiManager({ desaId }: Props) {
       if (res.ok) {
         setModalOpen(false);
         fetchItems();
-        alert("Data berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: editData
+            ? "Data berhasil diperbarui!"
+            : "Data berhasil ditambahkan!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         form.reset();
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan data");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } finally {
       setSubmitLoading(false);
     }

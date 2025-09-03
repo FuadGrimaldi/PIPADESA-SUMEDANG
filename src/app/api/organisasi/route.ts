@@ -70,7 +70,6 @@ export async function POST(req: NextRequest) {
         await writeFile(filePath, buffer);
 
         logoPath = `/assets/uploads/organisasi/${fileName}`;
-        console.log("File uploaded successfully:", logoPath);
       } catch (uploadError) {
         console.error("File upload error:", uploadError);
         return NextResponse.json(

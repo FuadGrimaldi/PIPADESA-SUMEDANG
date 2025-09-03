@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from "react";
 import RichTextEditor from "../Ui/Editor/RichTextEditor";
 import Link from "next/link";
 import parse from "html-react-parser";
+import Swal from "sweetalert2";
 
 type Article = {
   id: number;
@@ -51,14 +52,12 @@ export default function ArticleManager({
     try {
       const res = await fetch(`/api/articles`);
       const data = await res.json();
-      console.log("Fetched articles data:", data);
 
       if (data.error) {
         console.error("Error fetching articles:", data.error);
         setArticles([]);
         setFilteredArticles([]);
       } else {
-        console.log("Fetched articles:", data);
         // Filter articles by desaId if needed
         const desaArticles = data.filter(
           (article: Article) => article.desa_id === desaId
@@ -93,19 +92,46 @@ export default function ArticleManager({
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus artikel ini?")) return;
+    const confirm = await Swal.fire({
+      title: "Yakin ingin menghapus artikel ini?",
+      text: "Data yang sudah dihapus tidak bisa dikembalikan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus!",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!confirm.isConfirmed) return;
 
     try {
       const res = await fetch(`/api/articles/${id}`, { method: "DELETE" });
       if (res.ok) {
         fetchArticles();
-        alert("Artikel berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Artikel berhasil dihapus!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
-        alert("Gagal menghapus artikel");
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Gagal menghapus artikel",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus artikel");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus artikel",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -144,15 +170,33 @@ export default function ArticleManager({
         setModalOpen(false);
         setContent(""); // Reset content after submit
         fetchArticles();
-        alert("Artikel berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: `Artikel berhasil ${editData ? "diperbarui" : "ditambahkan"}!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan artikel");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 

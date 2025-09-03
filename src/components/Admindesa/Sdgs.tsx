@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import Swal from "sweetalert2";
 
 export interface SdgsScore {
   id: number;
@@ -76,7 +77,15 @@ export default function SdgsScoreManager({ desaId }: Props) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus score SDGS ini?")) return;
+    const result = await Swal.fire({
+      title: "Yakin hapus score SDGS ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!result.isConfirmed) return;
 
     try {
       const res = await fetch(`/api/sdgs/score/${id}`, {
@@ -84,14 +93,32 @@ export default function SdgsScoreManager({ desaId }: Props) {
       });
       if (res.ok) {
         fetchScores();
-        alert("Score berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Score berhasil dihapus!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
-        alert(`Gagal menghapus: ${errorData.error || "Unknown error"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus score");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus score",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -106,10 +133,14 @@ export default function SdgsScoreManager({ desaId }: Props) {
     const score = Number(formData.get("score"));
     const tahun = Number(formData.get("tahun"));
 
-    console.log({ sdgs_id, score, tahun });
-
     if (!sdgs_id || !tahun) {
-      alert("SDGS dan Tahun wajib diisi!");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "SDGS dan Tahun wajib diisi",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setSubmitLoading(false);
       return;
     }
@@ -145,16 +176,35 @@ export default function SdgsScoreManager({ desaId }: Props) {
       if (res.ok) {
         setModalOpen(false);
         fetchScores();
-        alert("Score berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Score berhasil disimpan!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setEditData(null);
         form.reset();
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan score");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan score",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } finally {
       setSubmitLoading(false);
     }

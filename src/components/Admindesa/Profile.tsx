@@ -5,6 +5,7 @@ import { Desa } from "@/types/desa"; // Adjust path as needed
 import { MapPin, Phone, Mail, Twitter, Instagram, Clock } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Swal from "sweetalert2";
 
 interface ProfileDesaProps {
   desa: Desa;
@@ -83,8 +84,6 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
         submitData.append("foto_depan", selectedFile);
       }
 
-      console.log("Updating desa with FormData");
-
       const res = await fetch(`/api/desa/${desa.id}`, {
         method: "PUT",
         body: submitData, // Don't set Content-Type, let browser set it for FormData
@@ -96,7 +95,13 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
         throw new Error(result.error || "Gagal update");
       }
 
-      alert("Profil desa berhasil diperbarui!");
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Update Berhasil",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setIsEditing(false);
 
       // Clean up preview URL
@@ -109,11 +114,13 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
       router.refresh(); // Refresh to show updated data
     } catch (error) {
       console.error("Error updating desa:", error);
-      alert(
-        `Terjadi kesalahan: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      );
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Update Gagal",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } finally {
       setIsLoading(false);
     }

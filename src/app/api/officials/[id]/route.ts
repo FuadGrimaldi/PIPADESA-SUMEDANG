@@ -113,7 +113,6 @@ export async function PUT(
         await writeFile(filePath, buffer);
 
         photoPath = `/assets/uploads/officials/${fileName}`;
-        console.log("New file uploaded successfully:", photoPath);
       } catch (uploadError) {
         console.error("File upload error:", uploadError);
         return NextResponse.json(
@@ -132,11 +131,8 @@ export async function PUT(
       photo: photoPath,
     };
 
-    console.log("Updating official with data:", updateData);
-
     const updatedOfficial = await OfficialsService.updateOfficial(updateData);
 
-    console.log("Official updated successfully:", updatedOfficial);
     return NextResponse.json(updatedOfficial, { status: 200 });
   } catch (error: any) {
     console.error("PUT /api/officials/[id] error:", error);
@@ -182,7 +178,6 @@ export async function DELETE(
         currentOfficial.photo
       );
       if (fs.existsSync(photoPath)) {
-        console.log("Deleting photo:", photoPath);
         fs.unlinkSync(photoPath);
       }
     }
@@ -190,7 +185,6 @@ export async function DELETE(
     // Delete from database
     await OfficialsService.deleteOfficial(id);
 
-    console.log("Official deleted successfully:", id);
     return NextResponse.json({ message: "Official deleted successfully" });
   } catch (error: any) {
     console.error("DELETE /api/officials/[id] error:", error);

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Video, VideoCreate, VideoUpdate } from "@/types/video";
+import Swal from "sweetalert2";
 
 interface Props {
   desaId: number;
@@ -49,7 +50,16 @@ export default function VideoManager({ desaId }: Props) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus video ini?")) return;
+    const result = await Swal.fire({
+      title: "Yakin hapus video ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!result.isConfirmed) return;
+    // if (!confirm("Yakin hapus video ini?")) return;
 
     try {
       const res = await fetch(`/api/videos/${id}`, {
@@ -57,14 +67,33 @@ export default function VideoManager({ desaId }: Props) {
       });
       if (res.ok) {
         fetchVideos();
-        alert("Video berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Video berhasil dihapus!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
-        alert(`Gagal menghapus video: ${errorData.error || "Unknown error"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus video");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus video",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      // alert("Terjadi kesalahan saat menghapus video");
     }
   };
 
@@ -84,7 +113,14 @@ export default function VideoManager({ desaId }: Props) {
       : undefined;
 
     if (!title || !embed_url) {
-      alert("Judul dan URL embed wajib diisi!");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Judul dan Embed URL wajib diisi",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      // alert("Judul dan Embed URL wajib diisi!");
       setSubmitLoading(false);
       return;
     }
@@ -132,16 +168,36 @@ export default function VideoManager({ desaId }: Props) {
       if (res.ok) {
         setModalOpen(false);
         fetchVideos();
-        alert("Video berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: editData
+            ? "Video berhasil diperbarui!"
+            : "Video berhasil ditambahkan!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         form.reset();
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan video");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan video",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } finally {
       setSubmitLoading(false);
     }

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
+import Swal from "sweetalert2";
 
 type Agenda = {
   id: number;
@@ -42,14 +43,12 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
     try {
       const res = await fetch(`/api/agenda`);
       const data = await res.json();
-      console.log("Fetched agendas data:", data);
 
       if (data.error) {
         console.error("Error fetching agendas:", data.error);
         setAgendas([]);
         setFilteredAgendas([]);
       } else {
-        console.log("Fetched agendas:", data);
         // Filter agendas by desaId if needed
         const desaAgendas = data.filter(
           (agenda: Agenda) => agenda.desa_id === desaId
@@ -82,19 +81,46 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus agenda ini?")) return;
+    const confirm = await Swal.fire({
+      title: "Yakin ingin menghapus agenda ini?",
+      text: "Data yang sudah dihapus tidak bisa dikembalikan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus!",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!confirm.isConfirmed) return;
 
     try {
       const res = await fetch(`/api/agenda/${id}`, { method: "DELETE" });
       if (res.ok) {
         fetchAgendas();
-        alert("Agenda berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Agenda berhasil dihapus!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
-        alert("Gagal menghapus agenda");
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Terjadi kesalahan saat menghapus agenda",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus agenda");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus agenda",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -129,15 +155,33 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
       if (res.ok) {
         setModalOpen(false);
         fetchAgendas();
-        alert("Agenda berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: `Agenda berhasil ${editData ? "diperbarui" : "ditambahkan"}!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan agenda");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 

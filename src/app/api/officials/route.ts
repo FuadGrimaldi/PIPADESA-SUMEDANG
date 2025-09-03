@@ -84,7 +84,6 @@ export async function POST(req: NextRequest) {
         await writeFile(filePath, buffer);
 
         photoPath = `/assets/uploads/officials/${fileName}`;
-        console.log("File uploaded successfully:", photoPath);
       } catch (uploadError) {
         console.error("File upload error:", uploadError);
         return NextResponse.json(

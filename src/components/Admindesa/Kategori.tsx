@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import Swal from "sweetalert2";
 
 interface Kategori {
   id: number;
@@ -59,7 +60,16 @@ export default function KategoriManager({ desaId }: Props) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus kategori ini?")) return;
+    const confirm = await Swal.fire({
+      title: "Yakin ingin menghapus kategori ini?",
+      text: "Data yang sudah dihapus tidak bisa dikembalikan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus!",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!confirm.isConfirmed) return;
 
     try {
       const res = await fetch(`/api/organisasi/kategori/${id}`, {
@@ -67,16 +77,32 @@ export default function KategoriManager({ desaId }: Props) {
       });
       if (res.ok) {
         fetchKategoris();
-        alert("Kategori berhasil dihapus!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Kategori berhasil dihapus!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
-        alert(
-          `Gagal menghapus kategori: ${errorData.error || "Unknown error"}`
-        );
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus kategori");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus kategori",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -90,7 +116,14 @@ export default function KategoriManager({ desaId }: Props) {
 
     // Validate required fields
     if (!namaKategori || namaKategori.trim() === "") {
-      alert("Nama kategori wajib diisi!");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Nama kategori wajib diisi",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       setSubmitLoading(false);
       return;
     }
@@ -114,16 +147,37 @@ export default function KategoriManager({ desaId }: Props) {
       if (res.ok) {
         setModalOpen(false);
         fetchKategoris();
-        alert("Kategori berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: `Kategori berhasil ${
+            editData ? "diperbarui" : "ditambahkan"
+          }!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
         form.reset();
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan kategori");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } finally {
       setSubmitLoading(false);
     }

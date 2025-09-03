@@ -8,7 +8,8 @@ import {
   MessageCircleDashedIcon,
   Building,
   Shield,
-  Zap,
+  Landmark,
+  LogOutIcon,
   ChevronDown,
   Menu,
   UserRoundCog,
@@ -18,12 +19,13 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils/clsx";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 // Menu data structure
 const menuData = [
   {
     title: "Profile",
-    icon: Home,
+    icon: Landmark,
     items: [{ title: "Profile Desa", url: "/admindesa/profile" }],
   },
   {
@@ -66,7 +68,7 @@ const menuData = [
   },
   {
     title: "Account",
-    icon: Zap,
+    icon: LogOutIcon,
     items: [{ title: "Logout", url: "/logout" }],
   },
 ];
@@ -82,16 +84,29 @@ function useLogout() {
       const hostname = window.location.hostname;
       const protocol = window.location.protocol;
       const port = window.location.port ? `:${window.location.port}` : "";
-
-      // Redirect ke /logout endpoint yang akan di-handle middleware
-      window.location.href = `${protocol}//${hostname}${port}/login`;
+      Swal.fire({
+        title: "Berhasil Logout",
+        text: "Anda akan diarahkan ke halaman login.",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location.href = `${protocol}//${hostname}${port}/login`;
+      });
     } catch (error) {
       console.error("Logout error:", error);
       // Fallback jika ada error
       const hostname = window.location.hostname;
       const protocol = window.location.protocol;
       const port = window.location.port ? `:${window.location.port}` : "";
-      window.location.href = `${protocol}//${hostname}${port}/login`;
+      Swal.fire({
+        title: "Logout Gagal",
+        text: "Terjadi kesalahan saat logout. Silakan coba lagi.",
+
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location.href = `${protocol}//${hostname}${port}/login`;
+      });
     }
   }, []);
 }
@@ -193,6 +208,25 @@ export default function AdminDesSidabar() {
         {/* Sidebar Content */}
         <div className=" overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 lg:mt-0 mt-[70px]">
           <nav className="p-3 sm:p-4 space-y-2" role="navigation">
+            <div className="backdrop-blur-xl rounded-xl bg-gradient-to-b from-slate-800 to-slate-700 border border-white/10">
+              <div className="space-y-1">
+                <Link
+                  href="/admindesa"
+                  className={cn(
+                    "w-full flex items-center gap-3 px-3 sm:px-4 py-3 rounded-xl text-left transition-all duration-300",
+                    "text-white hover:text-white font-medium hover:shadow-lg hover:shadow-black/10",
+                    "relative overflow-hidden group focus:outline-none"
+                  )}
+                  aria-current={pathname === "/admindesa" ? "page" : undefined}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <Home className="h-4 w-4 sm:h-5 sm:w-5 text-white/90 group-hover:text-white transition-all duration-300 group-hover:scale-110 flex-shrink-0" />
+                  <span className="flex-1 text-sm sm:text-base truncate">
+                    Dashboard
+                  </span>
+                </Link>
+              </div>
+            </div>
             {menuData.map((item, index) => (
               <div
                 key={item.title}

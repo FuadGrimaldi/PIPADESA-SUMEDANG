@@ -37,7 +37,6 @@ export async function POST(req: NextRequest) {
     let imagePath: string | undefined;
     // Handle file upload
     if (gambar_path && gambar_path.size > 0) {
-      console.log("Processing featured image upload");
       try {
         const bytes = await gambar_path.arrayBuffer();
         const buffer = Buffer.from(bytes);

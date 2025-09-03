@@ -23,7 +23,6 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
-    console.log("Form data received:", formData);
     const title = formData.get("title") as string;
     const image = formData.get("image") as File | null;
     if (!title) {
@@ -32,7 +31,6 @@ export async function POST(request: NextRequest) {
     let imagePath: string | undefined;
     // Handle file upload
     if (image && image.size > 0) {
-      console.log("Processing image upload");
       try {
         const bytes = await image.arrayBuffer();
         const buffer = Buffer.from(bytes);
@@ -54,7 +52,6 @@ export async function POST(request: NextRequest) {
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
         imagePath = `/assets/uploads/sdgs/${fileName}`;
-        console.log("Image uploaded successfully:", imagePath);
       } catch (error) {
         console.error("❌ Error uploading image:", error);
         return NextResponse.json(
@@ -68,7 +65,6 @@ export async function POST(request: NextRequest) {
       title,
       image: imagePath ?? "/assets/default/image-not-available.png",
     };
-    console.log("Creating SDG with data:", data);
     const newSdgs = await SdgsDesaService.createSdgs(data);
     return NextResponse.json(newSdgs, { status: 201 });
   } catch (error) {

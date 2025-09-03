@@ -166,10 +166,6 @@ const DetailInstansi = ({ id }) => {
                 variants={cardHoverVariants}
                 whileHover="hover"
                 className="group cursor-pointer"
-                onClick={() => {
-                  // Navigate to service detail
-                  console.log(`Navigate to service: ${service.id}`);
-                }}
               >
                 <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 h-full transition-all duration-300 group-hover:shadow-xl group-hover:border-slate-300">
                   <div className="flex items-start justify-between mb-4">

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import Swal from "sweetalert2";
 
 export default function SubdomainRegister() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,8 +31,22 @@ export default function SubdomainRegister() {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      console.log(formData);
-      alert("Registered!");
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Registration Successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      // Reset form
+      setFormData({
+        nik: "",
+        username: "",
+        full_name: "",
+        email: "",
+        password: "",
+        role: "user",
+      });
     }, 2000);
   };
 

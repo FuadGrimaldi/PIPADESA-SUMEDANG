@@ -7,7 +7,6 @@ import { ArticleType, ArticleStatus, ArticleCreate } from "@/types/article";
 
 export async function GET() {
   try {
-    console.log("GET /api/articles - Starting request");
     // Fetch all articles
     const articles = await ArticlesDesaService.getAllArticles();
     return NextResponse.json(articles);
@@ -20,8 +19,6 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
-    console.log("POST /api/articles - Starting request");
-    console.log("Form data received:", formData);
 
     // Extract form fields
     const user_id = formData.get("user_id") as string;
@@ -49,7 +46,6 @@ export async function POST(req: NextRequest) {
 
     // Handle file upload
     if (featured_image && featured_image.size > 0) {
-      console.log("Processing featured image upload");
       try {
         const bytes = await featured_image.arrayBuffer();
         const buffer = Buffer.from(bytes);
@@ -101,7 +97,6 @@ export async function POST(req: NextRequest) {
       published_at:
         new Date(published_at).toISOString() || new Date().toISOString(),
     };
-    console.log("Article data prepared:", articleData);
 
     // Create article
     const article = await ArticlesDesaService.createArticle(articleData);

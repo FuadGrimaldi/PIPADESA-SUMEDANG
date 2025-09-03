@@ -106,7 +106,6 @@ export default function StatistikPenduduk({
       );
 
       const data = response.data.data;
-      console.log("Fetched statistik data:", data);
       updateDataStatistik(data);
     } catch (err) {
       console.error("Error fetching statistik data:", err);

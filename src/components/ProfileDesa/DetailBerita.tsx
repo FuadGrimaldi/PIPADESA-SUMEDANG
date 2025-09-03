@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Article } from "@/types/article";
 import CommentSection from "./Comment";
+import Swal from "sweetalert2";
 
 interface ArticleDetailProps {
   articleId: number;
@@ -122,12 +123,18 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
           url: window.location.href,
         });
       } catch (error) {
-        console.log("Error sharing:", error);
+        console.error("Error sharing:", error);
       }
     } else {
       // Fallback: copy to clipboard
       navigator.clipboard.writeText(window.location.href);
-      alert("Link berhasil disalin!");
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Link artikel disalin ke clipboard",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 

@@ -80,8 +80,6 @@ export async function PUT(
     let imagePath: string | undefined;
     // Handle file upload
     if (gambar_path && gambar_path.size > 0) {
-      console.log("Processing featured image upload");
-
       try {
         const defaultImages = [
           "/assets/default/image-not-available.png",
@@ -126,7 +124,6 @@ export async function PUT(
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
         imagePath = `/assets/uploads/infografis/${fileName}`;
-        console.log("File uploaded to:", filePath);
       } catch (fileError) {
         console.error("❌ File upload error:", fileError);
         return NextResponse.json(

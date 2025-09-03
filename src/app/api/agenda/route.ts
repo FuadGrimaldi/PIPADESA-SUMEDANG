@@ -18,8 +18,6 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
-    console.log("POST /api/agenda - Starting request");
-    console.log("Form data received:", formData);
 
     // Extract form fields
     const desa_id = formData.get("desa_id") as string;
@@ -45,7 +43,6 @@ export async function POST(req: NextRequest) {
 
     // Handle file upload
     if (poster && poster.size > 0) {
-      console.log("Processing poster upload");
       try {
         const bytes = await poster.arrayBuffer();
         const buffer = Buffer.from(bytes);
@@ -93,9 +90,7 @@ export async function POST(req: NextRequest) {
       created_by: parseInt(created_by),
       status: status as Status,
     };
-    console.log("Creating agenda with data:", createData);
     const agenda = await AgendaDesaService.createAgenda(createData);
-    console.log("Agenda created successfully:", agenda);
     return NextResponse.json(agenda, { status: 201 });
   } catch (error: any) {
     console.error("POST /api/agenda error:", error);

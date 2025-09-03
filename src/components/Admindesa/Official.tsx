@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
+import Swal from "sweetalert2";
 
 type Official = {
   id: number;
@@ -30,13 +31,11 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
     try {
       const res = await fetch(`/api/officials/subdomain/${desaId}`);
       const data = await res.json();
-      console.log("Fetched officials data:", data);
 
       if (data.error) {
         console.error("Error fetching officials:", data.error);
         setOfficials([]);
       } else {
-        console.log("Fetched officials:", data);
         setOfficials(data);
       }
     } catch (error) {
@@ -63,18 +62,39 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm("Yakin hapus data ini?")) return;
+    const confirm = await Swal.fire({
+      title: "Yakin ingin menghapus official ini?",
+      text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus!",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+    });
+    if (!confirm.isConfirmed) return;
 
     try {
       const res = await fetch(`/api/officials/${id}`, { method: "DELETE" });
       if (res.ok) {
         fetchOfficials();
       } else {
-        alert("Gagal menghapus data");
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Terjadi kesalahan saat menghapus data",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
-      alert("Terjadi kesalahan saat menghapus data");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menghapus data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -83,12 +103,6 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
 
     const form = e.currentTarget;
     const fd = new FormData(form);
-
-    // // Debug: log form data
-    // console.log("Form data entries:");
-    // for (let [key, value] of fd.entries()) {
-    //   console.log(key, value);
-    // }
 
     try {
       let res;
@@ -112,15 +126,35 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
       if (res.ok) {
         setModalOpen(false);
         fetchOfficials();
-        alert("Data berhasil disimpan!");
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: editData
+            ? "Official berhasil diperbarui!"
+            : "Official berhasil ditambahkan!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         const errorData = await res.json();
         console.error("API Error:", errorData);
-        alert(`Error: ${errorData.error || "Terjadi kesalahan"}`);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Error: ${errorData.error || "Terjadi kesalahan"}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error("Submit error:", error);
-      alert("Terjadi kesalahan saat menyimpan data");
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Terjadi kesalahan saat menyimpan data",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
   if (modalOpen) {

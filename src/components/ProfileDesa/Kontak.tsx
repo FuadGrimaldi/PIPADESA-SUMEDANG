@@ -11,6 +11,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { Desa } from "@/types/desa";
+import Swal from "sweetalert2";
 
 const MainKontak = ({ desa }: { desa: Desa | null }) => {
   // Sample data - replace with actual data from your backend
@@ -40,7 +41,14 @@ const MainKontak = ({ desa }: { desa: Desa | null }) => {
 
     // Simulate form submission
     setTimeout(() => {
-      alert("Pesan berhasil dikirim! Terima kasih telah menghubungi kami.");
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Pesan Anda telah terkirim!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+
       setFormData({
         nama: "",
         email: "",
