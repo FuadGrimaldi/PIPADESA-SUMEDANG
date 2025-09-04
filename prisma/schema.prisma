@@ -9,7 +9,7 @@ generator client {
 
 model users {
   id             Int     @id @default(autoincrement())
-  desa_id        Int
+  desa_id        Int?
   nik            String     @unique @db.VarChar(16)
   username       String     @unique @db.VarChar(50)
   full_name      String     @db.VarChar(255)
@@ -21,7 +21,7 @@ model users {
   created_at     DateTime
   updated_at     DateTime
 
-  profile_desa   profile_desa @relation(fields: [desa_id], references: [id])
+  profile_desa   profile_desa? @relation(fields: [desa_id], references: [id])
   profil_masyarakat profil_masyarakat?
   pengajuan_proposal pengajuan_proposal[]
   articles       articles[]

@@ -9,7 +9,7 @@ import { signIn } from "next-auth/react";
 import { Desa } from "@/types/desa"; // Pastikan Anda memiliki tipe Desa yang sesuai
 import Swal from "sweetalert2";
 
-export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
+export default function HostLogin({ desa }: { desa?: Desa | null }) {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -27,30 +27,25 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
       const singInData = await signIn("credentials", {
         email: data.email,
         password: data.password,
-        subdomainDesaId: desa?.id,
         redirect: false,
       });
       const response = await axios.post("/api/login", {
         email: data.email,
         password: data.password,
-        subdomaindesaId: desa?.id,
       });
-      console.log(response);
-
       if (response.status === 200 && response.data) {
-        const DesaId = response.data.user.desa_id;
-        if (DesaId !== desa?.id) {
+        const role = response.data.user.role;
+        if (role !== "admin_kab") {
           Swal.fire({
             position: "top",
             icon: "error",
-            title: "Not Authorized for this Village",
+            title: "Not Authorized",
             showConfirmButton: false,
             timer: 1500,
           });
           setIsLoading(false);
           return;
         }
-        const userId = response.data.user.id;
         Swal.fire({
           position: "top",
           icon: "success",
@@ -58,7 +53,7 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
           showConfirmButton: false,
           timer: 1500,
         });
-        router.push("/admindesa"); // arahkan ke dashboard setelah login berhasil
+        router.push("/dashboard"); // arahkan ke dashboard setelah login berhasil
         router.refresh(); // refresh halaman untuk memastikan data terbar
       } else {
         Swal.fire({
@@ -131,7 +126,7 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
                   onChange={(e) => setData({ ...data, email: e.target.value })}
                   type="email"
                   placeholder="Email"
-                  className="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400 transition-all"
+                  className="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400 transition-all text-gray-800"
                   required
                 />
               </div>

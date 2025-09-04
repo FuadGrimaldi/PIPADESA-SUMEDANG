@@ -34,6 +34,7 @@ export const POST = async (request: Request) => {
 
     // Login berhasil
     const { password: _, ...userWithoutPassword } = user;
+    console.log("Login successful for user:", user.email);
     return NextResponse.json(
       { message: "Login berhasil.", user: userWithoutPassword },
       { status: 200 }

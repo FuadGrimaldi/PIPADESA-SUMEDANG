@@ -21,7 +21,7 @@ const Hero = async ({ subdomain }: { subdomain: string | null }) => {
   return (
     <div className="pt-4 relative">
       <div
-        className="hero lg:h-[250px] h-[500px] rounded-2xl shadow-lg relative overflow-hidden"
+        className="hero lg:h-[350px] h-[500px] rounded-2xl shadow-lg relative overflow-hidden"
         style={{
           backgroundImage: `url(${
             desa?.foto_depan

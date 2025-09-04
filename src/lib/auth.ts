@@ -17,11 +17,12 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
+        subdomainDesaId: { label: "Subdomain Desa ID", type: "text" },
       },
       async authorize(credentials, req) {
         if (!credentials) return null;
 
-        const { email, password } = credentials;
+        const { email, password, subdomainDesaId } = credentials;
 
         const user = await prisma.users.findUnique({
           where: { email },
@@ -30,9 +31,13 @@ export const authOptions: NextAuthOptions = {
         if (user && user.password) {
           const passwordMatch = await bcrypt.compare(password, user.password);
           if (passwordMatch) {
+            if (user.desa_id && user.desa_id.toString() !== subdomainDesaId) {
+              // Jika desa_id tidak sesuai dengan subdomainDesaId, tolak login
+              return null;
+            }
             return {
               id: user.id.toString(), // Convert BigInt to string
-              desaId: user.desa_id.toString(), // Convert BigInt to string
+              desaId: user.desa_id ? user.desa_id.toString() : null,
               email: user.email,
               name: user.full_name,
               role: user.role,
@@ -48,7 +53,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.desaId = user.desaId;
+        token.desaId = user.desaId ?? null;
         token.email = user.email;
         token.username = user.username;
         token.name = user.name;
@@ -59,7 +64,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.desaId = token.desaId as string;
+        session.user.desaId = (token.desaId as string) ?? null;
         session.user.email = token.email as string;
         session.user.username = token.username as string;
         session.user.name = token.name as string;
