@@ -195,9 +195,16 @@ export async function DELETE(
         { status: 404 }
       );
     }
+    const defaultImages = [
+      "/assets/default/image-not-available.png",
+      "/assets/default/default.jpg",
+    ];
 
     // Delete associated image file if exists
-    if (existingDesa.foto_depan) {
+    if (
+      existingDesa.foto_depan &&
+      !defaultImages.includes(existingDesa.foto_depan)
+    ) {
       const imagePath = path.join(
         process.cwd(),
         "public",
