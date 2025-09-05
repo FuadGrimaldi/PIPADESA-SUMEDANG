@@ -103,10 +103,10 @@ const AdminKabSidebar = () => {
       icon: Users,
       subItems: [
         {
-          id: "profile",
-          label: "Profile",
+          id: "admin-kab",
+          label: "Admin Kabupaten",
           icon: User,
-          path: "/dashboard/profile",
+          path: "/dashboard/administrator-kabupaten",
         },
         {
           id: "admin-desa",

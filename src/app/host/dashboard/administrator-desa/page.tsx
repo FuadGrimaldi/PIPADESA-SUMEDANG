@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { getDesaById } from "@/lib/prisma-services/profileDesaService";
-import DesaManagerKab from "@/components/AdminKab/Desa";
+import OfficialManagerKab from "@/components/AdminKab/Struktur";
+import UserManagerKab from "@/components/AdminKab/Users";
 
-export default async function DesaAdminKabPage() {
+export default async function UsersAdminKabPage() {
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/login");
@@ -13,7 +13,7 @@ export default async function DesaAdminKabPage() {
   return (
     <div className="container min-h-screen">
       <div>
-        <DesaManagerKab />
+        <UserManagerKab role="admin_desa" />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { UserDesaService } from "@/lib/prisma-services/userDesaService";
 import { NextResponse, NextRequest } from "next/server";
-import { Roles } from "@/types/user";
+import { Roles, Status } from "@/types/user";
 
 // api by id
 export async function GET(
@@ -35,9 +35,12 @@ export async function PUT(
   const data = {
     desa_id: formData.get("desa_id") ? Number(formData.get("desa_id")) : null,
     nik: String(formData.get("nik")),
+    full_name: String(formData.get("full_name")),
     username: String(formData.get("username")),
     email: String(formData.get("email")),
+    password: String(formData.get("password")),
     role: String(formData.get("role")) as Roles,
+    status: String(formData.get("status")) as Status,
   };
   try {
     const updatedUser = await UserDesaService.updateUser(id, data);
