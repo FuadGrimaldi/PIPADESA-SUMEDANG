@@ -95,6 +95,27 @@ export class SdgsDesaService {
       orderBy: { id: "asc" },
     });
   }
+  // Get all SDG scores
+  static async getAllSdgsScores() {
+    return prisma.sdgsscore.findMany({
+      include: {
+        profile_desa: {
+          select: {
+            id: true,
+            nama_desa: true,
+          },
+        },
+        sdgs: {
+          select: {
+            id: true,
+            title: true,
+            image: true,
+          },
+        },
+      },
+      orderBy: { id: "asc" },
+    });
+  }
   // Create a new SDG score
   static async createSdgsScore(data: CreateSdgsScore) {
     try {

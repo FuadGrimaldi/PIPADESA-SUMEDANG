@@ -16,7 +16,6 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-  console.log("Session in DashboardLayout:", session);
   if (!session) {
     redirect("/login");
     return null;

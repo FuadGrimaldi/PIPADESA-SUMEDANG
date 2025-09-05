@@ -1,6 +1,20 @@
 import { SdgsDesaService } from "@/lib/prisma-services/sdgsDesaService";
 import { NextResponse, NextRequest } from "next/server";
 
+// get sdgs
+export async function GET() {
+  try {
+    const sdgsScores = await SdgsDesaService.getAllSdgsScores();
+    return NextResponse.json(sdgsScores, { status: 200 });
+  } catch (error) {
+    console.error("❌ Error fetching SDG scores:", error);
+    return NextResponse.json(
+      { message: "Failed to fetch SDG scores", error: String(error) },
+      { status: 500 }
+    );
+  }
+}
+
 // create sdgsscore
 export async function POST(request: NextRequest) {
   try {

@@ -10,7 +10,7 @@ import AdminDesaFooter from "@/components/Footer/FooterAdminDesa";
 function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
   const { isExpanded } = useSidebar();
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-gradient-to-br from-emerald-50 via-blue-50 to-purple-50">
       {/* Sidebar Fixed */}
       <div className="fixed top-0 left-0 h-screen z-40">
         <AppSidebar />

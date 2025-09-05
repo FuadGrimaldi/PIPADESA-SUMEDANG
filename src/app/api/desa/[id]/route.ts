@@ -82,8 +82,15 @@ export async function PUT(
 
     if (foto_depan && foto_depan.size > 0) {
       try {
+        const defaultImages = [
+          "/assets/default/image-not-available.png",
+          "/assets/default/default.jpg",
+        ];
         // Delete old image if it exists
-        if (existingDesa.foto_depan) {
+        if (
+          existingDesa.foto_depan &&
+          !defaultImages.includes(existingDesa.foto_depan)
+        ) {
           const oldImagePath = path.join(
             process.cwd(),
             "public",

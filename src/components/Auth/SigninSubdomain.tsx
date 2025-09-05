@@ -35,7 +35,6 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
         password: data.password,
         subdomaindesaId: desa?.id,
       });
-      console.log(response);
 
       if (response.status === 200 && response.data) {
         const DesaId = response.data.user.desa_id;

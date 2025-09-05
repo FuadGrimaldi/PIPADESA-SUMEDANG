@@ -57,8 +57,6 @@ export default function HostLandingPage() {
         // Ensure data is an array
         const villagesArray = Array.isArray(data.data) ? data.data : [];
 
-        console.log("Fetched villages data:", villagesArray); // Debug log
-
         setVillages(villagesArray);
         setFilteredVillages(villagesArray);
       } catch (error) {
