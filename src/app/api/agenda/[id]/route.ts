@@ -65,8 +65,15 @@ export async function PUT(
 
     // Handle file upload
     if (poster && poster.size > 0) {
+      const defaultImages = [
+        "/assets/default/image-not-available.png",
+        "/assets/default/default.jpg",
+      ];
       try {
-        if (existingAgenda.poster) {
+        if (
+          existingAgenda.poster &&
+          !defaultImages.includes(existingAgenda.poster)
+        ) {
           // Delete old image if it exists
           const oldImagePath = path.join(
             process.cwd(),
@@ -143,8 +150,15 @@ export async function DELETE(
     if (!existingAgenda) {
       return NextResponse.json({ error: "Agenda not found" }, { status: 404 });
     }
+    const defaultImages = [
+      "/assets/default/image-not-available.png",
+      "/assets/default/default.jpg",
+    ];
     // Delete poster if it exists
-    if (existingAgenda.poster) {
+    if (
+      existingAgenda.poster &&
+      !defaultImages.includes(existingAgenda.poster)
+    ) {
       const posterPath = path.join(
         process.cwd(),
         "public",

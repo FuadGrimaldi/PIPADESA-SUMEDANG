@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
       deskripsi,
       lokasi,
       waktu: new Date(waktu).toISOString(),
-      poster: posterPath,
+      poster: posterPath ?? "/assets/default/image-not-available.png",
       created_by: parseInt(created_by),
       status: status as Status,
     };
