@@ -11,6 +11,12 @@ export class ArticlesDesaService {
             nama_desa: true,
           },
         },
+        users: {
+          select: {
+            id: true,
+            full_name: true,
+          },
+        },
       },
       orderBy: { created_at: "desc" },
     });

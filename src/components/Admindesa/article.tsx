@@ -143,6 +143,32 @@ export default function ArticleManager({
 
     // tambahkan isi CKEditor ke form
     fd.set("content", content);
+    // create validation
+    const requiredFields = [
+      "tipe",
+      "title",
+      "slug",
+      "content",
+      "dokumen_terkait_path",
+      "waktu_kegiatan",
+      "lokasi_kegiatan",
+      "status",
+      "published_at",
+    ];
+
+    for (const field of requiredFields) {
+      const value = fd.get(field);
+      if (!value || (typeof value === "string" && value.trim() === "")) {
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: `Field "${field}" wajib diisi!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        return;
+      }
+    }
 
     try {
       let res;
@@ -336,6 +362,7 @@ export default function ArticleManager({
                 name="dokumen_terkait_path"
                 defaultValue={editData?.dokumen_terkait_path || ""}
                 className="border w-full px-3 py-2 rounded"
+                required
               />
             </div>
 
@@ -352,6 +379,7 @@ export default function ArticleManager({
                     : ""
                 }
                 className="border w-full px-3 py-2 rounded"
+                required
               />
             </div>
 
@@ -362,6 +390,7 @@ export default function ArticleManager({
                 name="lokasi_kegiatan"
                 defaultValue={editData?.lokasi_kegiatan || ""}
                 className="border w-full px-3 py-2 rounded"
+                required
               />
             </div>
 
@@ -388,6 +417,7 @@ export default function ArticleManager({
                     ? new Date(editData.published_at).toISOString().slice(0, 16)
                     : ""
                 }
+                required
                 className="border w-full px-3 py-2 rounded"
               />
             </div>

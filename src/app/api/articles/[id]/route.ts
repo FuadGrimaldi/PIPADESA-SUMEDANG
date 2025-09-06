@@ -73,8 +73,15 @@ export async function PUT(
       existingArticle.featured_image || undefined;
 
     if (featured_image && featured_image.size > 0) {
+      const defaultImages = [
+        "/assets/default/image-not-available.png",
+        "/assets/default/default.jpg",
+      ];
       try {
-        if (existingArticle.featured_image) {
+        if (
+          existingArticle.featured_image &&
+          !defaultImages.includes(existingArticle.featured_image)
+        ) {
           // Delete old image if it exists
           const oldImagePath = path.join(
             process.cwd(),
@@ -170,7 +177,14 @@ export async function DELETE(
     await ArticlesDesaService.deleteArticle(id);
 
     // Optionally delete the featured image if it exists
-    if (existingArticle.featured_image) {
+    const defaultImages = [
+      "/assets/default/image-not-available.png",
+      "/assets/default/default.jpg",
+    ];
+    if (
+      existingArticle.featured_image &&
+      !defaultImages.includes(existingArticle.featured_image)
+    ) {
       const imagePath = path.join(
         process.cwd(),
         "public",

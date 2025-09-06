@@ -212,8 +212,8 @@ model articles {
   updated_at         DateTime
 
   komentar           komentar[]
-  users              users     @relation(fields: [user_id], references: [id])
-  profile_desa       profile_desa @relation(fields: [desa_id], references: [id])
+  users users? @relation(fields: [user_id], references: [id])
+  profile_desa       profile_desa? @relation(fields: [desa_id], references: [id])
 }
 
 model videos {

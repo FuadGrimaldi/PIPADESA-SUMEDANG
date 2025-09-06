@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
       title,
       slug,
       content,
-      featured_image: imagePath ?? null,
+      featured_image: imagePath ?? "/assets/default/image-not-available.png",
       dokumen_terkait_path: dokumen_terkait_path || null,
       waktu_kegiatan: new Date(waktu_kegiatan).toISOString() || null,
       lokasi_kegiatan: lokasi_kegiatan || null,

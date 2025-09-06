@@ -122,10 +122,10 @@ const AdminKabSidebar = () => {
       icon: Newspaper,
       subItems: [
         {
-          id: "berita",
-          label: "Berita",
+          id: "artikel",
+          label: "Artilkel",
           icon: FileText,
-          path: "/dashboard/berita",
+          path: "/dashboard/artikel",
         },
         {
           id: "agenda",
