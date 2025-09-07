@@ -6,6 +6,7 @@ export class VideoDesaService {
   static async getAllVideos() {
     return prisma.videos.findMany({
       orderBy: { uploaded_at: "desc" },
+      include: { profile_desa: { select: { id: true, nama_desa: true } } },
     });
   }
 

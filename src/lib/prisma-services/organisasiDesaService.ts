@@ -10,24 +10,28 @@ export class OrganisasiDesaService {
   static async getAllCategories() {
     return prisma.kategori_organisasi.findMany({
       orderBy: { nama_kategori: "asc" },
+      include: { profile_desa: { select: { id: true, nama_desa: true } } },
     });
   }
   // get categori by id
   static async getCategoryById(id: number) {
     return prisma.kategori_organisasi.findUnique({
       where: { id },
+      include: { profile_desa: { select: { id: true, nama_desa: true } } },
     });
   }
   // get category by name
   static async getCategoryByName(nama_kategori: string) {
     return prisma.kategori_organisasi.findFirst({
       where: { nama_kategori },
+      include: { profile_desa: { select: { id: true, nama_desa: true } } },
     });
   }
   static async getCategoryByDesaId(desa_id: number) {
     return prisma.kategori_organisasi.findMany({
       where: { desa_id },
       orderBy: { nama_kategori: "asc" },
+      include: { profile_desa: { select: { id: true, nama_desa: true } } },
     });
   }
   // Create a new category
