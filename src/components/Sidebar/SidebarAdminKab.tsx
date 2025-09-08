@@ -31,6 +31,8 @@ import {
   Video,
   Dessert,
   LucideNewspaper,
+  Mountain,
+  LineChart,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -165,16 +167,10 @@ const AdminKabSidebar = () => {
           path: "/dashboard/organisasi",
         },
         {
-          id: "sarana",
-          label: "Sarana",
-          icon: School,
-          path: "/dashboard/sarana",
-        },
-        {
-          id: "wisata",
-          label: "Wisata",
-          icon: Award,
-          path: "/dashboard/wisata",
+          id: "sarana-wisata",
+          label: "Sarana & Wisata",
+          icon: Mountain,
+          path: "/dashboard/sarana-wisata",
         },
       ],
     },
@@ -203,6 +199,12 @@ const AdminKabSidebar = () => {
       icon: BarChart3,
       subItems: [
         { id: "sdgs", label: "SDGs", icon: BarChart, path: "/dashboard/sdgs" },
+        {
+          id: "sdgs-score",
+          label: "Skor SDGs",
+          icon: LineChart,
+          path: "/dashboard/sdgs/score",
+        },
       ],
     },
   ];

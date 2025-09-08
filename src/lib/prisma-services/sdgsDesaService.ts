@@ -44,11 +44,18 @@ export class SdgsDesaService {
   // Update an existing SDG
   static async updateSdgs(id: number, data: UpdateSdgs) {
     try {
-      const updateData: any = {};
+      const updateData: any = {
+        title: data.title,
+        image: data.image,
+      };
       if (data.title !== undefined) {
         updateData.title = data.title;
       }
-      if (data.image !== undefined) {
+      if (
+        data.image !== undefined &&
+        data.image !== null &&
+        data.image.trim() !== ""
+      ) {
         updateData.image = data.image;
       }
       const sdgs = await prisma.sdgs.update({

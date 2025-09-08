@@ -12,6 +12,9 @@ export class PengaduanAspirasiService {
         orderBy: {
           created_at: "desc",
         },
+        include: {
+          profile_desa: { select: { id: true, nama_desa: true } },
+        },
       });
       return pengaduanAspirasis;
     } catch (error) {
@@ -29,6 +32,9 @@ export class PengaduanAspirasiService {
         orderBy: {
           created_at: "desc",
         },
+        include: {
+          profile_desa: { select: { id: true, nama_desa: true } },
+        },
       });
       return pengaduanAspirasis;
     } catch (error) {
@@ -43,6 +49,9 @@ export class PengaduanAspirasiService {
     try {
       const pengaduanAspirasi = await prisma.pengaduan_aspirasi.findUnique({
         where: { id },
+        include: {
+          profile_desa: { select: { id: true, nama_desa: true } },
+        },
       });
       return pengaduanAspirasi;
     } catch (error) {

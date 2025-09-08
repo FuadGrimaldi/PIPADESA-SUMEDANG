@@ -13,6 +13,10 @@ export class KomentarArtikelService {
         orderBy: {
           created_at: "desc",
         },
+        include: {
+          profile_desa: { select: { id: true, nama_desa: true } },
+          articles: { select: { id: true, title: true } },
+        },
       });
       return komentars;
     } catch (error) {
@@ -29,6 +33,10 @@ export class KomentarArtikelService {
         },
         orderBy: {
           created_at: "desc",
+        },
+        include: {
+          profile_desa: { select: { id: true, nama_desa: true } },
+          articles: { select: { id: true, title: true } },
         },
       });
       return komentars;
@@ -47,6 +55,10 @@ export class KomentarArtikelService {
         orderBy: {
           created_at: "desc",
         },
+        include: {
+          profile_desa: { select: { id: true, nama_desa: true } },
+          articles: { select: { id: true, title: true } },
+        },
       });
       return komentars;
     } catch (error) {
@@ -59,7 +71,12 @@ export class KomentarArtikelService {
     try {
       const komentar = await prisma.komentar.findUnique({
         where: { id },
+        include: {
+          profile_desa: { select: { id: true, nama_desa: true } },
+          articles: { select: { id: true, title: true } },
+        },
       });
+
       return komentar;
     } catch (error) {
       throw new Error(`Failed to fetch comment by id: ${error}`);
