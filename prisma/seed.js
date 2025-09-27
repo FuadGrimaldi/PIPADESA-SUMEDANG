@@ -8,7 +8,6 @@ async function main() {
   const desa = await prisma.profile_desa.findFirst();
 
   if (!desa) {
-    console.log("No desa found. Please add a desa first.");
     return;
   }
 
@@ -28,8 +27,6 @@ async function main() {
       updated_at: new Date(),
     },
   });
-
-  console.log("Admin user inserted successfully.");
 }
 
 main()

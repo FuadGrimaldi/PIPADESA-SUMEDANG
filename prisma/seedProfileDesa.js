@@ -24,8 +24,6 @@ async function main() {
       updated_at: new Date(),
     },
   });
-
-  console.log("first desa inserted successfully.");
 }
 
 main()

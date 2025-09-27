@@ -149,7 +149,6 @@ export default function PengaduanAspirasiManager() {
     const pesan = formData.get("pesan") as string;
     const kategori = formData.get("kategori") as string;
     const status = formData.get("status") as string;
-    console.log("Form Data:", Array.from(formData.entries()));
 
     try {
       let res;

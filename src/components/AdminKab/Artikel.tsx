@@ -69,7 +69,6 @@ export default function ArtikelManagerKab({ userId }: Props) {
     try {
       const res = await fetch("/api/articles");
       const data = await res.json();
-      console.log("Fetched articles:", data);
 
       if (data.error) {
         console.error("Error fetching articles:", data.error);
@@ -97,7 +96,6 @@ export default function ArtikelManagerKab({ userId }: Props) {
     try {
       const res = await fetch("/api/users");
       const dataUsers = await res.json();
-      console.log("Fetched users:", dataUsers);
       setUsers(dataUsers || []);
     } catch (err) {
       console.error(err);
@@ -108,7 +106,6 @@ export default function ArtikelManagerKab({ userId }: Props) {
     try {
       const res = await fetch("/api/desa");
       const dataDesas = await res.json();
-      console.log("Fetched desas:", dataDesas);
       setDesas(dataDesas.data || []);
     } catch (err) {
       console.error(err);
