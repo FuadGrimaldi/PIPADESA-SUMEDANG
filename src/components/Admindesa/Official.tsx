@@ -161,7 +161,7 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-700">
             {editData ? "Edit Official" : "Tambah Official"}
           </h2>
 
@@ -172,12 +172,12 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
             {/* Show desa_id field only when editing */}
             {editData && (
               <div className="mb-3">
-                <label className="block mb-1">Desa ID</label>
+                <label className="block mb-1 text-gray-700">Desa ID</label>
                 <input
                   type="number"
                   name="desa_id"
                   defaultValue={editData.desa_id}
-                  className="border w-full px-3 py-2 rounded bg-gray-100"
+                  className="border w-full px-3 py-2 text-gray-700 bg-white text-gray-500 rounded bg-gray-100"
                   required
                   readOnly
                 />
@@ -185,46 +185,46 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
             )}
 
             <div className="mb-3">
-              <label className="block mb-1">Nama *</label>
+              <label className="block mb-1 text-gray-700">Nama *</label>
               <input
                 type="text"
                 name="name"
                 defaultValue={editData?.name || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-700 bg-white text-gray-500 rounded"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Jabatan *</label>
+              <label className="block mb-1 text-gray-700">Jabatan *</label>
               <input
                 type="text"
                 name="position"
                 defaultValue={editData?.position || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-700 bg-white text-gray-500 rounded"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Urutan *</label>
+              <label className="block mb-1 text-gray-700">Urutan *</label>
               <input
                 type="number"
                 name="display_order"
                 defaultValue={editData?.display_order || "1"}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-700 bg-white text-gray-500 rounded"
                 required
                 min="1"
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Foto</label>
+              <label className="block mb-1 text-gray-700">Foto</label>
               <input
                 type="file"
                 name="photo"
                 accept="image/*"
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-700 bg-white text-gray-500 rounded"
               />
               {editData?.photo && (
                 <div className="mt-2">
@@ -278,7 +278,7 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
         <input
           type="text"
           placeholder="Cari nama official..."
-          className="border px-3 py-2 rounded w-64"
+          className="border px-3 py-2 bg-white text-gray-700 rounded w-64"
           onChange={(e) => {
             const value = e.target.value.toLowerCase();
             setOfficials((prev) =>
@@ -297,18 +297,30 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
           <table className="w-full min-w-max border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
-                <th className="border px-3 py-2 min-w-20">Foto</th>
-                <th className="border px-3 py-2 min-w-32">Nama</th>
-                <th className="border px-3 py-2 min-w-32">Jabatan</th>
-                <th className="border px-3 py-2 min-w-32">Desa</th>
-                <th className="border px-3 py-2 min-w-20">Urutan</th>
-                <th className="border px-3 py-2 min-w-32">Aksi</th>
+                <th className="border px-3 py-2 text-gray-700 min-w-20">
+                  Foto
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Nama
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Jabatan
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Desa
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-20">
+                  Urutan
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Aksi
+                </th>
               </tr>
             </thead>
             <tbody>
               {officials.map((o) => (
                 <tr key={o.id}>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     {o.photo ? (
                       <Image
                         src={o.photo}
@@ -321,15 +333,17 @@ export default function OfficialManager({ desaId }: OfficialManagerProps) {
                       "-"
                     )}
                   </td>
-                  <td className="border px-3 py-2">{o.name}</td>
-                  <td className="border px-3 py-2">{o.position}</td>
-                  <td className="border px-3 py-2">
+                  <td className="border px-3 py-2 text-gray-700">{o.name}</td>
+                  <td className="border px-3 py-2 text-gray-700">
+                    {o.position}
+                  </td>
+                  <td className="border px-3 py-2 text-gray-700">
                     {o.profile_desa?.nama_desa || "-"}
                   </td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     {o.display_order}
                   </td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(o)}

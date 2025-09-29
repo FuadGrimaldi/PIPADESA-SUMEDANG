@@ -73,14 +73,8 @@ const Hero = async ({ subdomain }: { subdomain: string | null }) => {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                 <Link href="/layanan">
-                  <div className="px-4 py-2 lg:text-base text-sm bg-blue-800 hover:bg-blue-800 text-white rounded-md font-light transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer border border-blue-600">
-                    Jelajahi Layanan
-                  </div>
-                </Link>
-
-                <Link href="/visi-misi">
                   <div className="px-4 py-2 lg:text-base text-sm border-2 border-white text-white hover:bg-white hover:text-blue-600 rounded-md font-light transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer">
-                    Visi Misi Desa
+                    Jelajahi Layanan
                   </div>
                 </Link>
               </div>
@@ -90,7 +84,7 @@ const Hero = async ({ subdomain }: { subdomain: string | null }) => {
 
         {/* Info Bar Bottom (Optional) */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-blue-600/80 to-blue-800/80 backdrop-blur-sm p-3 z-10">
-          <div className="flex justify-between items-center text-white text-sm">
+          <div className="flex justify-between items-center text-white lg:text-sm text-xs">
             <div className="flex items-center space-x-2">
               <svg
                 className="w-4 h-4"

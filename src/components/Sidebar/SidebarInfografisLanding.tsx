@@ -42,10 +42,10 @@ const InfographicSlider = ({ infografis }: InfographicSliderProps) => {
       {/* Header Section */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+          <h4 className="text-xl font-bold text-gray-900  mb-2">
             Infografis Desa
           </h4>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-600 ">
             Informasi penting dalam bentuk visual yang mudah dipahami
           </p>
         </div>
@@ -131,7 +131,7 @@ const InfographicSlider = ({ infografis }: InfographicSliderProps) => {
         >
           {infografis.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="group relative bg-gray-50 dark:bg-gray-50 hover:rounded-2xl rounded-2xl shadow-2xl hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
+              <div className="group relative bg-gray-50 hover:rounded-2xl rounded-2xl shadow-2xl hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200">
                 {/* Image Container */}
                 <div className="relative h-[420px] overflow-hidden rounded-2xl">
                   <Image

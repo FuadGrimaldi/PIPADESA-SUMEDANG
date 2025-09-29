@@ -245,7 +245,7 @@ export default function ArticleManager({
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-700">
             {editData ? "Edit Artikel" : "Tambah Artikel"}
           </h2>
 
@@ -262,23 +262,23 @@ export default function ArticleManager({
             {editData && (
               <>
                 <div className="mb-3">
-                  <label className="block mb-1">User ID</label>
+                  <label className="block mb-1 text-gray-700">User ID</label>
                   <input
                     type="number"
                     name="user_id"
                     defaultValue={editData.user_id}
-                    className="border w-full px-3 py-2 rounded bg-gray-100"
+                    className="border w-full px-3 py-2 text-gray-600 rounded bg-white bg-gray-100"
                     required
                     readOnly
                   />
                 </div>
                 <div className="mb-3">
-                  <label className="block mb-1">Desa ID</label>
+                  <label className="block mb-1 text-gray-700">Desa ID</label>
                   <input
                     type="number"
                     name="desa_id"
                     defaultValue={editData.desa_id}
-                    className="border w-full px-3 py-2 rounded bg-gray-100"
+                    className="border w-full px-3 py-2 text-gray-600 rounded bg-white bg-gray-100"
                     required
                     readOnly
                   />
@@ -287,11 +287,11 @@ export default function ArticleManager({
             )}
 
             <div className="mb-3">
-              <label className="block mb-1">Tipe Artikel *</label>
+              <label className="block mb-1 text-gray-700">Tipe Artikel *</label>
               <select
                 name="tipe"
                 defaultValue={editData?.tipe || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-600 rounded bg-white"
                 required
               >
                 <option value="">Pilih Tipe</option>
@@ -304,29 +304,29 @@ export default function ArticleManager({
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Judul *</label>
+              <label className="block mb-1 text-gray-700">Judul *</label>
               <input
                 type="text"
                 name="title"
                 defaultValue={editData?.title || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-600 rounded bg-white"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Slug *</label>
+              <label className="block mb-1 text-gray-700">Slug *</label>
               <input
                 type="text"
                 name="slug"
                 defaultValue={editData?.slug || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-600 rounded bg-white"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Konten *</label>
+              <label className="block mb-1 text-gray-700">Konten *</label>
               <RichTextEditor
                 initialData={content}
                 onChange={(data) => setContent(data)} // langsung simpan ke state
@@ -334,12 +334,12 @@ export default function ArticleManager({
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Gambar Utama</label>
+              <label className="block mb-1 text-gray-700">Gambar Utama</label>
               <input
                 type="file"
                 name="featured_image"
                 accept="image/*"
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-600 rounded bg-white"
               />
               {editData?.featured_image && (
                 <div className="mt-2">
@@ -356,18 +356,20 @@ export default function ArticleManager({
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Dokumen Terkait (Path)</label>
+              <label className="block mb-1 text-gray-700">
+                Dokumen Terkait (Path)
+              </label>
               <input
                 type="text"
                 name="dokumen_terkait_path"
                 defaultValue={editData?.dokumen_terkait_path || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-600 rounded bg-white"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Waktu Kegiatan</label>
+              <label className="block mb-1 text-gray-700">Waktu Kegiatan</label>
               <input
                 type="datetime-local"
                 name="waktu_kegiatan"
@@ -378,28 +380,30 @@ export default function ArticleManager({
                         .slice(0, 16)
                     : ""
                 }
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-600 rounded bg-white"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Lokasi Kegiatan</label>
+              <label className="block mb-1 text-gray-700">
+                Lokasi Kegiatan
+              </label>
               <input
                 type="text"
                 name="lokasi_kegiatan"
                 defaultValue={editData?.lokasi_kegiatan || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-600 rounded bg-white"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Status *</label>
+              <label className="block mb-1 text-gray-700">Status *</label>
               <select
                 name="status"
                 defaultValue={editData?.status || "draft"}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-600 rounded bg-white"
                 required
               >
                 <option value="draft">Draft</option>
@@ -408,7 +412,9 @@ export default function ArticleManager({
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Tanggal Publikasi</label>
+              <label className="block mb-1 text-gray-700">
+                Tanggal Publikasi
+              </label>
               <input
                 type="datetime-local"
                 name="published_at"
@@ -418,7 +424,7 @@ export default function ArticleManager({
                     : ""
                 }
                 required
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 text-gray-600 rounded bg-white"
               />
             </div>
 
@@ -461,7 +467,7 @@ export default function ArticleManager({
         <input
           type="text"
           placeholder="Cari judul atau konten artikel..."
-          className="border px-3 py-2 rounded w-full max-w-64"
+          className="border px-3 py-2 bg-white text-gray-600 rounded w-full max-w-64"
           onChange={handleSearch}
         />
       </div>
@@ -475,19 +481,33 @@ export default function ArticleManager({
           <table className="w-full min-w-max border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
-                <th className="border px-3 py-2 min-w-20">Gambar</th>
-                <th className="border px-3 py-2 min-w-48">Judul</th>
-                <th className="border px-3 py-2 min-w-24">Tipe</th>
-                <th className="border px-3 py-2 min-w-24">Status</th>
-                <th className="border px-3 py-2 min-w-32">Tanggal</th>
-                <th className="border px-3 py-2 min-w-32">Lokasi</th>
-                <th className="border px-3 py-2 min-w-32">Aksi</th>
+                <th className="border px-3 py-2 text-gray-600 min-w-20">
+                  Gambar
+                </th>
+                <th className="border px-3 py-2 text-gray-600 min-w-48">
+                  Judul
+                </th>
+                <th className="border px-3 py-2 text-gray-600 min-w-24">
+                  Tipe
+                </th>
+                <th className="border px-3 py-2 text-gray-600 min-w-24">
+                  Status
+                </th>
+                <th className="border px-3 py-2 text-gray-600 min-w-32">
+                  Tanggal
+                </th>
+                <th className="border px-3 py-2 text-gray-600 min-w-32">
+                  Lokasi
+                </th>
+                <th className="border px-3 py-2 text-gray-600 min-w-32">
+                  Aksi
+                </th>
               </tr>
             </thead>
             <tbody>
               {filteredArticles.map((article) => (
                 <tr key={article.id}>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-600 text-center">
                     {article.featured_image ? (
                       <Image
                         src={article.featured_image}
@@ -500,13 +520,13 @@ export default function ArticleManager({
                       "-"
                     )}
                   </td>
-                  <td className="border px-3 py-2 w-[120px]">
+                  <td className="border px-3 py-2 text-gray-600 w-[120px]">
                     <div className="font-medium">{article.title}</div>
                     <div className="text-sm text-gray-500 truncate max-w-xs">
                       {parse(article.content.substring(0, 100))}...
                     </div>
                   </td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-600 text-center">
                     <span
                       className={`px-2 py-1 rounded text-xs font-medium ${
                         article.tipe === "berita"
@@ -521,7 +541,7 @@ export default function ArticleManager({
                       {article.tipe}
                     </span>
                   </td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-600 text-center">
                     <span
                       className={`px-2 py-1 rounded text-xs font-medium ${
                         article.status === "published"
@@ -534,13 +554,13 @@ export default function ArticleManager({
                       {article.status}
                     </span>
                   </td>
-                  <td className="border px-3 py-2 text-sm">
+                  <td className="border px-3 py-2 text-gray-600 text-sm">
                     {new Date(article.published_at).toLocaleDateString("id-ID")}
                   </td>
-                  <td className="border px-3 py-2 text-sm">
+                  <td className="border px-3 py-2 text-gray-600 text-sm">
                     {article.lokasi_kegiatan || "-"}
                   </td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-600 text-center">
                     <div className="flex space-x-2 justify-center">
                       <Link
                         href={`/berita/${article.id}`}

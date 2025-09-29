@@ -215,7 +215,7 @@ export default function SdgsScoreManager({ desaId }: Props) {
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">
             {editData ? "Edit Score SDGS" : "Tambah Score SDGS"}
           </h2>
 
@@ -223,11 +223,13 @@ export default function SdgsScoreManager({ desaId }: Props) {
             <input type="hidden" name="desa_id" value={desaId} />
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">SDGS</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                SDGS
+              </label>
               <select
                 name="sdgs_id"
                 defaultValue={editData?.sdgs_id || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-500 bg-white rounded-md"
                 required
                 disabled={!!editData}
               >
@@ -256,25 +258,29 @@ export default function SdgsScoreManager({ desaId }: Props) {
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Score</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Score
+              </label>
               <input
                 type="number"
                 step="0.01"
                 name="score"
                 defaultValue={editData?.score || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-500 bg-white rounded-md"
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Tahun</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Tahun
+              </label>
               <input
                 type="number"
                 name="tahun"
                 placeholder="Contoh: 2023"
                 defaultValue={editData?.tahun || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-500 bg-white rounded-md"
                 required
               />
             </div>
@@ -334,19 +340,19 @@ export default function SdgsScoreManager({ desaId }: Props) {
           <table className="w-full min-w-max border-collapse">
             <thead>
               <tr className="bg-gray-50">
-                <th className="border border-gray-200 px-4 py-3 text-left">
+                <th className="border border-gray-200 text-gray-700 px-4 py-3 text-left">
                   SDGS
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left">
+                <th className="border border-gray-200 text-gray-700 px-4 py-3 text-left">
                   Score
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left">
+                <th className="border border-gray-200 text-gray-700 px-4 py-3 text-left">
                   Tahun
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left">
+                <th className="border border-gray-200 text-gray-700 px-4 py-3 text-left">
                   Desa
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-center">
+                <th className="border border-gray-200 text-gray-700 px-4 py-3 text-center">
                   Aksi
                 </th>
               </tr>
@@ -354,19 +360,19 @@ export default function SdgsScoreManager({ desaId }: Props) {
             <tbody>
               {scores.map((s) => (
                 <tr key={s.id} className="hover:bg-gray-50">
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 text-gray-700 px-4 py-3">
                     {s.sdgs?.title || `SDGS #${s.sdgs_id}`}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 text-gray-700 px-4 py-3">
                     {s.score}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 text-gray-700 px-4 py-3">
                     {s.tahun}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 text-gray-700 px-4 py-3">
                     {s.profile_desa?.nama_desa || "-"}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 text-center">
+                  <td className="border border-gray-200 text-gray-700 px-4 py-3 text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(s)}

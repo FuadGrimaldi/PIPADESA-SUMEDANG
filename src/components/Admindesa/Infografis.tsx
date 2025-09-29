@@ -181,7 +181,7 @@ export default function InfografisManager({ desaId }: InfografisManagerProps) {
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">
             {editData ? "Edit Infografis" : "Tambah Infografis"}
           </h2>
 
@@ -189,23 +189,23 @@ export default function InfografisManager({ desaId }: InfografisManagerProps) {
             {!editData && <input type="hidden" name="desa_id" value={desaId} />}
 
             <div className="mb-3">
-              <label className="block mb-1">Judul *</label>
+              <label className="block mb-1 text-gray-700">Judul *</label>
               <input
                 type="text"
                 name="title"
                 defaultValue={editData?.title || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 bg-white text-gray-500 rounded"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Gambar</label>
+              <label className="block mb-1 text-gray-700">Gambar</label>
               <input
                 type="file"
                 name="gambar_path"
                 accept="image/*"
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 bg-white text-gray-500 rounded"
               />
               {editData?.gambar_path && (
                 <div className="mt-2">
@@ -260,7 +260,7 @@ export default function InfografisManager({ desaId }: InfografisManagerProps) {
         <input
           type="text"
           placeholder="Cari judul infografis..."
-          className="border px-3 py-2 rounded w-full max-w-64"
+          className="border px-3 py-2 rounded w-full max-w-64 text-gray-700 bg-white"
           onChange={handleSearch}
         />
       </div>
@@ -274,15 +274,21 @@ export default function InfografisManager({ desaId }: InfografisManagerProps) {
           <table className="w-full min-w-max border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
-                <th className="border px-3 py-2 min-w-20">Gambar</th>
-                <th className="border px-3 py-2 min-w-48">Judul</th>
-                <th className="border px-3 py-2 min-w-32">Aksi</th>
+                <th className="border px-3 py-2 text-gray-700 min-w-20">
+                  Gambar
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-48">
+                  Judul
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Aksi
+                </th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((item) => (
                 <tr key={item.id}>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     {item.gambar_path ? (
                       <Image
                         src={item.gambar_path}
@@ -295,8 +301,10 @@ export default function InfografisManager({ desaId }: InfografisManagerProps) {
                       "-"
                     )}
                   </td>
-                  <td className="border px-3 py-2">{item.title}</td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700">
+                    {item.title}
+                  </td>
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(item)}

@@ -38,7 +38,26 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
 
       if (response.status === 200 && response.data) {
         const DesaId = response.data.user.desa_id;
-        if (DesaId !== desa?.id) {
+        if (DesaId === desa?.id) {
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Login Success to " + (desa?.nama_desa || "the Village"),
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setIsLoading(false);
+          router.push("/admindesa");
+        } else if (DesaId === null) {
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Login Success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          router.push("/adminkab");
+        } else {
           Swal.fire({
             position: "top",
             icon: "error",
@@ -49,16 +68,6 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
           setIsLoading(false);
           return;
         }
-        const userId = response.data.user.id;
-        Swal.fire({
-          position: "top",
-          icon: "success",
-          title: "Login Success",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        router.push("/admindesa"); // arahkan ke dashboard setelah login berhasil
-        router.refresh(); // refresh halaman untuk memastikan data terbar
       } else {
         Swal.fire({
           position: "top",
@@ -100,8 +109,10 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
             Welcome back
           </h1>
           <p className="pr-3 text-sm opacity-75 text-black">
-            Lorem ipsum is placeholder text commonly used in the graphic, print,
-            and publishing industries for previewing layouts and visual mockups
+            Silakan masuk menggunakan akun yang terdaftar pada desa{" "}
+            <span className="font-bold">{desa?.nama_desa || "Anda"}</span>.
+            Masukkan email dan password Anda untuk mengakses dashboard
+            administrasi desa.
           </p>
         </motion.div>
 
@@ -115,12 +126,6 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
           <div className="p-10 w-96 bg-white mx-auto rounded-3xl shadow-lg">
             <div className="mb-7">
               <h3 className="font-semibold text-2xl text-gray-800">Sign In</h3>
-              <p className="text-gray-400 text-sm">
-                Don&apos;t have an account?{" "}
-                <a href="/register" className="text-primary hover:underline">
-                  Sign Up
-                </a>
-              </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -130,7 +135,7 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
                   onChange={(e) => setData({ ...data, email: e.target.value })}
                   type="email"
                   placeholder="Email"
-                  className="w-full text-sm px-4 py-3 bg-gray-200 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400 transition-all"
+                  className="w-full text-sm px-4 py-3 bg-gray-200 text-gray-800 focus:bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400 transition-all"
                   required
                 />
               </div>

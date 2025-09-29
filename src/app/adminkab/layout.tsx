@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import DashboardLayoutClient from "./DashboardLayout";
-import "../../globals.css";
+import "../globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";

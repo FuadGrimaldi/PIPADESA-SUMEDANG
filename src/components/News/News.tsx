@@ -129,10 +129,10 @@ const News = ({ desaId }: AllBeritaProps) => {
       <section className="pb-16">
         <div className="container mx-auto">
           <div className="text-left mb-6 max-w-xl ">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
               Berita dan Informasi
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
+            <p className="text-base text-gray-600">
               Temukan berbagai kabar terbaru, pengumuman resmi, dan informasi
               penting seputar kegiatan dan perkembangan di lingkungan kita.
             </p>
@@ -152,10 +152,10 @@ const News = ({ desaId }: AllBeritaProps) => {
       <section className="pb-16">
         <div className="container mx-auto">
           <div className="text-left mb-6 max-w-xl ">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
               Berita dan Informasi
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
+            <p className="text-base text-gray-600">
               Temukan berbagai kabar terbaru, pengumuman resmi, dan informasi
               penting seputar kegiatan dan perkembangan di lingkungan kita.
             </p>
@@ -186,10 +186,10 @@ const News = ({ desaId }: AllBeritaProps) => {
     <section className="pb-16">
       <div className="container mx-auto">
         <div className="text-left mb-6 max-w-xl">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
             Berita dan Informasi
           </h2>
-          <p className="text-base text-gray-600 dark:text-gray-400">
+          <p className="text-base text-gray-600">
             Temukan berbagai kabar terbaru, pengumuman resmi, dan informasi
             penting seputar kegiatan dan perkembangan di lingkungan kita.
           </p>
@@ -227,7 +227,7 @@ const News = ({ desaId }: AllBeritaProps) => {
               <div className="w-full lg:w-3/4 mb-6 lg:mb-0 space-y-6 bg-white p-4 rounded-md border border-gray-200 shadow-md">
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-lg lg:text-2xl font-bold text-dark dark:text-white mb-4">
+                    <h2 className="text-lg lg:text-2xl font-bold text-gray-700 mb-4">
                       Berita Terbaru
                     </h2>
                     <div>
@@ -250,7 +250,7 @@ const News = ({ desaId }: AllBeritaProps) => {
 
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-lg lg:text-2xl font-bold text-dark dark:text-white mb-4">
+                    <h2 className="text-lg lg:text-2xl font-bold text-gray-700 mb-4">
                       Agenda Terbaru
                     </h2>
                     <div>

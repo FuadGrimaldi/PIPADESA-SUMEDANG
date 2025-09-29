@@ -112,7 +112,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Informasi Kategori */}
             <div className="bg-blue-50 rounded-lg p-4">
-              <h4 className="text-lg font-semibold mb-4 flex items-center">
+              <h4 className="text-lg font-semibold mb-4 flex items-center text-gray-600">
                 <svg
                   className="w-5 h-5 mr-2"
                   fill="none"
@@ -138,7 +138,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
 
             {/* Informasi Ketua */}
             <div className="bg-green-50 rounded-lg p-4">
-              <h4 className="text-lg font-semibold mb-4 flex items-center">
+              <h4 className="text-lg font-semibold mb-4 flex items-center text-gray-600">
                 <svg
                   className="w-5 h-5 mr-2"
                   fill="none"
@@ -165,7 +165,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
 
           {/* Deskripsi Kegiatan */}
           <div className="mt-6">
-            <h4 className="text-lg font-semibold mb-4 flex items-center">
+            <h4 className="text-lg font-semibold mb-4 flex items-center text-gray-600">
               <svg
                 className="w-5 h-5 mr-2"
                 fill="none"
@@ -216,7 +216,7 @@ const CardOrganisasi: React.FC<CardOrganisasiProps> = ({
 }) => {
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 h-full flex flex-col cursor-pointer hover:scale-105"
+      className="bg-white f rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 h-full flex flex-col cursor-pointer hover:scale-105"
       onClick={() => onClick(organisasi)}
     >
       <div className="mb-4 flex-1">
@@ -248,7 +248,7 @@ const CardOrganisasi: React.FC<CardOrganisasiProps> = ({
             </div>
           )}
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
+            <h3 className="text-lg font-semibold text-gray-900  mb-2 line-clamp-2">
               {organisasi.nama_organisasi}
             </h3>
             <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
@@ -260,7 +260,7 @@ const CardOrganisasi: React.FC<CardOrganisasiProps> = ({
 
         {/* Ketua Organisasi */}
         <div className="mb-3">
-          <div className="flex items-center text-gray-600 dark:text-gray-300 text-sm">
+          <div className="flex items-center text-gray-600  text-sm">
             <svg
               className="w-4 h-4 mr-2 flex-shrink-0"
               fill="none"
@@ -282,7 +282,7 @@ const CardOrganisasi: React.FC<CardOrganisasiProps> = ({
 
         {/* Deskripsi */}
         <div className="mb-3">
-          <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
+          <p className="text-sm text-gray-600  line-clamp-3">
             {organisasi.deskripsi_kegiatan ||
               "Tidak ada deskripsi yang tersedia."}
           </p>
@@ -291,7 +291,7 @@ const CardOrganisasi: React.FC<CardOrganisasiProps> = ({
 
       {/* Informasi Desa */}
       <div className="border-t pt-4">
-        <div className="flex items-center text-gray-600 dark:text-gray-300 text-sm">
+        <div className="flex items-center text-gray-600  text-sm">
           <svg
             className="w-4 h-4 mr-2 flex-shrink-0"
             fill="none"
@@ -555,10 +555,10 @@ const AllOrganisasi: React.FC<AllOrganisasiProps> = ({
         <div className="container mx-auto px-4">
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
                 Daftar {namaKategori || "Organisasi"}
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-gray-600  leading-relaxed">
                 Memuat data organisasi...
               </p>
             </div>
@@ -595,10 +595,10 @@ const AllOrganisasi: React.FC<AllOrganisasiProps> = ({
         <div className="container mx-auto px-4">
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
                 Daftar {namaKategori || "Organisasi"}
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-gray-600  leading-relaxed">
                 Temukan organisasi yang aktif di desa ini.
               </p>
             </div>
@@ -640,10 +640,10 @@ const AllOrganisasi: React.FC<AllOrganisasiProps> = ({
         {/* Header */}
         <div className="mb-8 w-full border-b-4 border-[#C0B099]">
           <div className="mb-6 text-center max-w-2xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
               Daftar {namaKategori || "Organisasi"}
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-base text-gray-600  leading-relaxed">
               Temukan organisasi yang aktif di desa ini. Klik pada kartu
               organisasi untuk melihat detail lengkap.
             </p>

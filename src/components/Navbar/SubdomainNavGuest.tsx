@@ -12,6 +12,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Kategori {
   id: number;
@@ -133,7 +134,7 @@ export default function SubdomainNavGuest({
     <>
       {/* Navbar */}
       <div
-        className={`fixed w-[87%] mx-auto z-50 top-2 left-0 right-0 transition-all duration-300 rounded-2xl     ${
+        className={`fixed w-[87%] mx-auto z-30 top-2 left-0 right-0 transition-all duration-300 rounded-2xl     ${
           isScrolled
             ? "backdrop-blur-md bg-white/80 shadow-lg border-b border-gray-200/50"
             : "backdrop-blur-sm bg-white/60"
@@ -143,8 +144,16 @@ export default function SubdomainNavGuest({
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-lg">S</span>
+              <div className="w-16 h-16 flex items-center justify-center">
+                <Image
+                  src="/assets/logo-fix/logo-sumedang-500.png"
+                  alt="Logo Sumedang"
+                  width={60}
+                  height={60}
+                  className="object-contain"
+                  unoptimized
+                  priority
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-gray-900 text-lg leading-tight">
@@ -193,31 +202,7 @@ export default function SubdomainNavGuest({
             </div>
 
             {/* Auth Button & Mobile Menu Toggle */}
-            <div className="flex items-center space-x-4">
-              {username ? (
-                <Link
-                  href="/admindesa"
-                  className="hidden sm:block bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105"
-                >
-                  {username}
-                </Link>
-              ) : (
-                <>
-                  <Link
-                    href="/login"
-                    className="hidden sm:block bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105"
-                  >
-                    Masuk
-                  </Link>
-                  <Link
-                    href="/register"
-                    className="hidden sm:block bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md hover:shadow-lg transform hover:scale-105"
-                  >
-                    Daftar
-                  </Link>
-                </>
-              )}
-
+            <div className="lg:hidden bg-white/95 backdrop-blur-md rounded-lg">
               {/* Mobile menu button */}
               <button
                 onClick={toggleMobileMenu}
@@ -255,7 +240,7 @@ export default function SubdomainNavGuest({
                   <span className="text-white font-bold text-sm">S</span>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-900">Desa Cikeusi</div>
+                  <div className="font-bold text-gray-900">Desa</div>
                   <div className="text-xs text-gray-600">Sumedang</div>
                 </div>
               </div>
@@ -326,33 +311,6 @@ export default function SubdomainNavGuest({
                     </div>
                   );
                 })}
-              </div>
-
-              {/* Mobile Auth Button */}
-              <div className="flex justify-center gap-3 px-4 pt-6 border-t border-gray-200/50 mt-6">
-                {username ? (
-                  <Link
-                    href="/admindesa"
-                    className="bg-gradient-to-r from-red-500 to-red-600 text-white px-[45px] py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md"
-                  >
-                    {username}
-                  </Link>
-                ) : (
-                  <>
-                    <Link
-                      href="/login"
-                      className="bg-gradient-to-r from-red-500 to-red-600 text-white px-[45px] py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md"
-                    >
-                      Masuk
-                    </Link>
-                    <Link
-                      href="/register"
-                      className="bg-gradient-to-r from-red-500 to-red-600 text-white px-[45px] py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 font-semibold shadow-md"
-                    >
-                      Daftar
-                    </Link>
-                  </>
-                )}
               </div>
             </div>
           </div>

@@ -62,10 +62,10 @@ const SearchArticle = ({ articles }: SearchArticleProps) => {
       <div className="container mx-auto px-4 text-center">
         <div className="mb-6 w-full border-b-4 border-[#C0B099]">
           <div className="mb-6 text-center max-w-xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
               Hasil Pencarian
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
+            <p className="text-base text-gray-600">
               Artikel yang ditemukan berdasarkan pencarian Anda.
             </p>
           </div>
@@ -102,10 +102,10 @@ const SearchArticle = ({ articles }: SearchArticleProps) => {
       <div className="container mx-auto px-4">
         <div className="mb-6 w-full border-b-4 border-[#C0B099]">
           <div className="mb-6 text-center max-w-xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
               Hasil Pencarian
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
+            <p className="text-base text-gray-600">
               Artikel yang ditemukan berdasarkan pencarian Anda.
             </p>
           </div>

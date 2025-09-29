@@ -227,7 +227,7 @@ export default function KomentarManager({ desaId }: Props) {
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">
             {editData ? "Edit Komentar" : "Tambah Komentar"}
           </h2>
 
@@ -235,57 +235,67 @@ export default function KomentarManager({ desaId }: Props) {
             <input type="hidden" name="desa_id" value={desaId} />
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Nama</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Nama
+              </label>
               <input
                 type="text"
                 name="name"
                 defaultValue={editData?.name || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-500 bg-white rounded-md"
                 required
                 readOnly
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Email</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
                 defaultValue={editData?.email || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-500 bg-white rounded-md"
                 required
                 readOnly
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">No. Telepon</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                No. Telepon
+              </label>
               <input
                 type="text"
                 name="no_telp"
                 defaultValue={editData?.no_telp || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-500 bg-white rounded-md"
                 readOnly
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Pesan</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Pesan
+              </label>
               <textarea
                 name="pesan"
                 defaultValue={editData?.pesan || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-500 bg-white rounded-md"
                 required
                 readOnly
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Status</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Status
+              </label>
               <select
                 name="status"
                 defaultValue={editData?.status || "pending"}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-500 bg-white rounded-md"
                 required
               >
                 <option value="pending">Pending</option>
@@ -330,7 +340,7 @@ export default function KomentarManager({ desaId }: Props) {
         <input
           type="text"
           placeholder="Cari komentar..."
-          className="border border-gray-300 px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-gray-300 px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 bg-white"
           onChange={handleSearch}
         />
       </div>
@@ -349,22 +359,22 @@ export default function KomentarManager({ desaId }: Props) {
           <table className="w-full min-w-max border-collapse">
             <thead>
               <tr className="bg-gray-50">
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Article id
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Nama
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Email
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Pesan
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Status
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-center font-medium text-gray-700">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700 text-center font-medium text-gray-700">
                   Aksi
                 </th>
               </tr>
@@ -372,22 +382,22 @@ export default function KomentarManager({ desaId }: Props) {
             <tbody>
               {filteredKomentars.map((kom) => (
                 <tr key={kom.id} className="hover:bg-gray-50">
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {kom.article_id}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {kom.name}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {kom.email}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {kom.pesan}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {kom.status}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 text-center">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(kom)}

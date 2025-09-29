@@ -28,14 +28,14 @@ const SidebarNewsLanding = ({ articles }: SidebarNewsProps) => {
 
   return (
     <div>
-      <h4 className="text-xl font-bold text-dark dark:text-white mb-3">
+      <h4 className="text-xl font-bold text-gray-700  mb-3">
         Informasi Terbaru
       </h4>
       <ul className="space-y-4">
         {displayItems.slice(0, 1).map((item, idx) => (
           <li
             key={idx}
-            className="border-b pb-3 dark:border-gray-700 shadow-md p-3 rounded-lg bg-white"
+            className="border-b pb-3  shadow-md p-3 rounded-lg bg-white"
           >
             <a
               href={
@@ -45,7 +45,7 @@ const SidebarNewsLanding = ({ articles }: SidebarNewsProps) => {
             >
               {articles.length > 0 ? (item as Article).title : item.title}
             </a>
-            <span className="text-xs text-gray-500 dark:text-gray-400">
+            <span className="text-xs text-gray-500 ">
               {articles.length > 0
                 ? formatDate((item as Article).published_at)
                 : item.date}

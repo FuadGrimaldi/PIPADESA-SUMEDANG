@@ -23,7 +23,7 @@ export default function SearchLayanan() {
           <input
             type="text"
             placeholder="Search..."
-            className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-4 text-sm focus:border-blue-500 focus:outline-none"
+            className="w-full bg-white text-gray-500 rounded-md border border-gray-300 py-2 pl-10 pr-4 text-sm focus:border-blue-500 focus:outline-none"
           />
         </div>
 

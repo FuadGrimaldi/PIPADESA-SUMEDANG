@@ -189,10 +189,10 @@ export default function CommentSection({
   return (
     <div className="border-t border-gray-200 pt-3 px-8">
       {/* Section Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex gap-4 items-center justify-between mb-6">
         <div className="flex items-center">
-          <MessageCircle className="w-6 h-6 mr-3 text-blue-600" />
-          <h2 className="text-2xl font-bold text-gray-900">
+          <MessageCircle className="w-5 h-5 mr-3 text-blue-600" />
+          <h2 className="lg:text-xl font-medium text-gray-900">
             Komentar ({comments.length})
           </h2>
         </div>
@@ -200,9 +200,9 @@ export default function CommentSection({
         {!showCommentForm && (
           <button
             onClick={() => setShowCommentForm(true)}
-            className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="flex items-center px-4 lg:py-2 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            <MessageCircle className="w-4 h-4 mr-2" />
+            <MessageCircle className="w-5 h-5 mr-2" />
             Tulis Komentar
           </button>
         )}
@@ -210,7 +210,7 @@ export default function CommentSection({
 
       {/* Comment Form */}
       {showCommentForm && (
-        <div className="mb-8 p-6 bg-gray-50 rounded-lg">
+        <div className="mb-4 py-2 bg-gray-50 rounded-lg">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900">
               Tulis Komentar
@@ -385,7 +385,6 @@ export default function CommentSection({
             {[...Array(3)].map((_, i) => (
               <div key={i} className="animate-pulse">
                 <div className="flex space-x-3">
-                  <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
                   <div className="flex-1 space-y-2">
                     <div className="h-4 bg-gray-200 rounded w-1/4"></div>
                     <div className="h-4 bg-gray-200 rounded w-1/6"></div>
@@ -400,7 +399,7 @@ export default function CommentSection({
           </div>
         ) : comments.length === 0 ? (
           // Empty state
-          <div className="text-center py-12">
+          <div className="text-center py-4">
             <MessageCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">
               Belum ada komentar
@@ -423,21 +422,14 @@ export default function CommentSection({
           comments.map((comment) => (
             <div
               key={comment.id}
-              className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-sm transition-shadow mb-4"
+              className="bg-white border border-gray-200 rounded-lg px-4 py-3 hover:shadow-sm transition-shadow mb-4"
             >
               <div className="flex space-x-3">
-                {/* Avatar */}
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                    {getInitials(comment.name)}
-                  </div>
-                </div>
-
                 {/* Comment Content */}
                 <div className="flex-1 min-w-0">
                   {/* Comment Header */}
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center space-x-2">
+                  <div className="flex  justify-between mb-2 flex-col sm:flex-row sm:justify-between">
+                    <div className="flex space-x-2">
                       <h4 className="text-sm font-semibold text-gray-900">
                         {comment.name}
                       </h4>
@@ -447,7 +439,7 @@ export default function CommentSection({
                         </span>
                       )}
                     </div>
-                    <div className="flex items-center text-xs text-gray-500">
+                    <div className="flex  text-xs text-gray-500 mt-2 sm:mt-0">
                       <Calendar className="w-3 h-3 mr-1" />
                       {formatDate(comment.created_at)}
                     </div>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import "../../globals.css";
 import SubdomainNavGuest from "@/components/Navbar/SubdomainNavGuest";
 import { headers } from "next/headers";
 import Footer from "@/components/Footer/Footer";

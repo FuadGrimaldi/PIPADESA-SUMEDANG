@@ -156,7 +156,9 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
     return (
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Edit Profile Desa</h2>
+          <h2 className="text-xl font-semibold text-gray-700">
+            Edit Profile Desa
+          </h2>
           <button
             onClick={handleCancel}
             className="text-gray-500 hover:text-gray-700"
@@ -180,7 +182,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 name="nama_desa"
                 value={formData.nama_desa}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
@@ -194,7 +196,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 name="foto_depan"
                 accept="image/*"
                 onChange={handleFileChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
 
               {/* Preview current or selected image */}
@@ -248,7 +250,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 name="telepon"
                 value={formData.telepon}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -261,7 +263,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -275,7 +277,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 value={formData.twitter}
                 onChange={handleInputChange}
                 placeholder="https://twitter.com/username"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -289,7 +291,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 value={formData.instagram}
                 onChange={handleInputChange}
                 placeholder="https://instagram.com/username"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -303,7 +305,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 value={formData.gmaps_embed_url}
                 onChange={handleInputChange}
                 placeholder="https://www.google.com/maps/embed?pb=..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -318,7 +320,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 value={formData.lat}
                 onChange={handleInputChange}
                 placeholder="-6.2088"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -333,7 +335,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 value={formData.lng}
                 onChange={handleInputChange}
                 placeholder="106.8456"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
@@ -347,7 +349,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
               value={formData.alamat}
               onChange={handleInputChange}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -360,7 +362,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
               value={formData.visi}
               onChange={handleInputChange}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -373,7 +375,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
               value={formData.misi}
               onChange={handleInputChange}
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -386,7 +388,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
               value={formData.tujuan}
               onChange={handleInputChange}
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -399,7 +401,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
               value={formData.sejarah}
               onChange={handleInputChange}
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-white text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -444,7 +446,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
         {/* Foto Desa */}
         {desa.foto_depan && (
           <div className="bg-white rounded-lg shadow-md p-5 md:col-span-2">
-            <h3 className="text-lg font-semibold border-b pb-2 mb-4">
+            <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-gray-600">
               Foto Desa
             </h3>
             <div className="relative w-full h-64">
@@ -464,10 +466,10 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
 
         {/* Informasi Dasar */}
         <div className="bg-white rounded-lg shadow-md p-5 space-y-4">
-          <h3 className="text-lg font-semibold border-b pb-2">
+          <h3 className="text-lg font-semibold border-b pb-2 text-gray-600">
             Informasi Dasar
           </h3>
-          <div className="space-y-3">
+          <div className="space-y-3 text-gray-600">
             <p>
               <span className="font-medium">Nama Desa:</span> {desa.nama_desa}
             </p>
@@ -488,7 +490,9 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
 
         {/* Media Sosial */}
         <div className="bg-white rounded-lg shadow-md p-5 space-y-4">
-          <h3 className="text-lg font-semibold border-b pb-2">Media Sosial</h3>
+          <h3 className="text-lg font-semibold border-b pb-2 text-gray-600">
+            Media Sosial
+          </h3>
           <div className="space-y-3">
             <p>
               <Twitter className="inline w-4 h-4 mr-1 text-blue-500" />
@@ -524,7 +528,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
         </div>
 
         {/* Koordinat Lokasi */}
-        <div className="bg-white rounded-lg shadow-md p-5 space-y-4">
+        <div className="bg-white rounded-lg shadow-md p-5 space-y-4 text-gray-600">
           <h3 className="text-lg font-semibold border-b pb-2">Koordinat</h3>
           <p>
             <span className="font-medium">Latitude:</span>{" "}
@@ -537,7 +541,7 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
         </div>
 
         {/* Visi, Misi, Tujuan */}
-        <div className="bg-white rounded-lg shadow-md p-5 space-y-4">
+        <div className="bg-white rounded-lg shadow-md p-5 space-y-4 text-gray-600">
           <h3 className="text-lg font-semibold border-b pb-2">Visi</h3>
           <p className="whitespace-pre-wrap">{desa.visi}</p>
 
@@ -550,14 +554,14 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
       </div>
 
       {/* Sejarah Desa */}
-      <div className="bg-white rounded-lg shadow-md p-5">
+      <div className="bg-white rounded-lg shadow-md p-5 text-gray-600">
         <h3 className="text-lg font-semibold border-b pb-2">Sejarah Desa</h3>
         <p className="whitespace-pre-wrap">{desa.sejarah}</p>
       </div>
 
       {/* Peta Lokasi */}
       {desa.gmaps_embed_url && (
-        <div className="bg-white rounded-lg shadow-md p-5">
+        <div className="bg-white rounded-lg shadow-md p-5 text-gray-600">
           <h3 className="text-lg font-semibold border-b pb-2">Peta Lokasi</h3>
           <div className="aspect-video rounded-lg overflow-hidden mt-3">
             <iframe

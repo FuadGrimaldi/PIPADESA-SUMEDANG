@@ -93,10 +93,10 @@ const AllSDGS = ({ desaId }: AllSdgsScoreProps) => {
         <div className="container mx-auto px-4">
           <div className="mb-6 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
                 SDGs Desa
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400">
+              <p className="text-base text-gray-600">
                 Pencapaian Sustainable Development Goals (SDGs) Desa
               </p>
             </div>
@@ -115,10 +115,10 @@ const AllSDGS = ({ desaId }: AllSdgsScoreProps) => {
         <div className="container mx-auto px-4">
           <div className="mb-6 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
                 SDGs Desa
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400">
+              <p className="text-base text-gray-600">
                 Pencapaian Sustainable Development Goals (SDGs) Desa
               </p>
             </div>
@@ -137,10 +137,10 @@ const AllSDGS = ({ desaId }: AllSdgsScoreProps) => {
         {/* Header */}
         <div className="mb-6 w-full border-b-4 border-[#C0B099]">
           <div className="mb-6 text-center max-w-xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
               SDGs Desa
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
+            <p className="text-base text-gray-600">
               Pencapaian Sustainable Development Goals (SDGs) Desa
             </p>
             <div className="mt-4 text-xl font-semibold text-green-700">
@@ -162,7 +162,7 @@ const AllSDGS = ({ desaId }: AllSdgsScoreProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden"
+              className="bg-white  rounded-2xl shadow-lg overflow-hidden"
             >
               <Image
                 src={goal.image}
@@ -172,8 +172,10 @@ const AllSDGS = ({ desaId }: AllSdgsScoreProps) => {
                 height={400}
               />
               <div className="p-4">
-                <h3 className="font-bold text-lg mb-2">{goal.title}</h3>
-                <p className="text-gray-700 dark:text-gray-300">
+                <h3 className="font-bold text-lg mb-2 text-gray-700">
+                  {goal.title}
+                </h3>
+                <p className="text-gray-700 ">
                   Skor:{" "}
                   <span className="font-semibold">
                     {scoreMap[goal.id] ?? 0}

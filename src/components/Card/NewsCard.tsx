@@ -29,7 +29,10 @@ export default function CardNews({
       </div>
 
       <div className="p-5">
-        <time dateTime={date} className="flex items-center text-[12px]">
+        <time
+          dateTime={date}
+          className="flex items-center text-[12px] text-gray-500"
+        >
           <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"

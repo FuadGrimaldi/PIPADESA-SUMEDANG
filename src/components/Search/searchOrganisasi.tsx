@@ -76,7 +76,7 @@ export default function SearchOrganisasi({
               placeholder="Search..."
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
-              className="w-full rounded-md border border-gray-300 py-2 pl-3 pr-4 text-sm focus:border-blue-500 focus:outline-none"
+              className="w-full bg-white text-gray-500 rounded-md border border-gray-300 py-2 pl-3 pr-4 text-sm focus:border-blue-500 focus:outline-none"
             />
           </div>
 
@@ -90,7 +90,7 @@ export default function SearchOrganisasi({
                   ?.nama_kategori || ""
               }
               placeholder={namaKategori || "Pilih kategori"}
-              className="w-full rounded-md border border-gray-300 py-2 pl-3 pr-4 text-sm bg-gray-100 focus:border-blue-500 focus:outline-none"
+              className="w-full text-gray-500 rounded-md border border-gray-300 py-2 pl-3 pr-4 text-sm bg-gray-100 focus:border-blue-500 focus:outline-none"
             />
           </div>
 

@@ -190,7 +190,7 @@ export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">
             {editData ? `Edit ${tipe}` : `Tambah ${tipe}`}
           </h2>
 
@@ -198,22 +198,22 @@ export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
             {!editData && <input type="hidden" name="desa_id" value={desaId} />}
 
             <div className="mb-3">
-              <label className="block mb-1">Nama {tipe} *</label>
+              <label className="block mb-1 text-gray-700">Nama {tipe} *</label>
               <input
                 type="text"
                 name="nama_sarana"
                 defaultValue={editData?.nama_sarana || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded text-gray-500 bg-white"
                 required
               />
             </div>
             {tipe == "sarana" && (
               <div className="mb-3">
-                <label className="block mb-1">Kategori *</label>
+                <label className="block mb-1 text-gray-700">Kategori *</label>
                 <select
                   name="kategori"
                   defaultValue={editData?.kategori || ""}
-                  className="border w-full px-3 py-2 rounded"
+                  className="border w-full px-3 py-2 rounded text-gray-500 bg-white"
                   required
                 >
                   <option value="">-- Pilih Kategori --</option>
@@ -227,64 +227,64 @@ export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
             )}
             {tipe == "wisata" && (
               <div className="mb-3">
-                <label className="block mb-1">Kategori *</label>
+                <label className="block mb-1 text-gray-700">Kategori *</label>
                 <input
                   type="text"
                   name="kategori"
                   defaultValue={editData?.kategori || "wisata"}
-                  className="border w-full px-3 py-2 rounded"
+                  className="border w-full px-3 py-2 rounded text-gray-500 bg-white"
                   readOnly
                 />
               </div>
             )}
 
             <div className="mb-3">
-              <label className="block mb-1">Deskripsi</label>
+              <label className="block mb-1 text-gray-700">Deskripsi</label>
               <textarea
                 name="deskripsi"
                 defaultValue={editData?.deskripsi || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded text-gray-500 bg-white"
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Alamat Lokasi</label>
+              <label className="block mb-1 text-gray-700">Alamat Lokasi</label>
               <input
                 type="text"
                 name="alamat_lokasi"
                 defaultValue={editData?.alamat_lokasi || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded text-gray-500 bg-white"
               />
             </div>
             <div className="mb-3 flex space-x-4">
               <div className="flex-1">
-                <label className="block mb-1">Latitude</label>
+                <label className="block mb-1 text-gray-700">Latitude</label>
                 <input
                   type="text"
                   name="koordinat_lat"
                   defaultValue={editData?.koordinat_lat || ""}
-                  className="border w-full px-3 py-2 rounded"
+                  className="border w-full px-3 py-2 rounded text-gray-500 bg-white"
                   placeholder="-6.123456"
                 />
               </div>
               <div className="flex-1">
-                <label className="block mb-1">Longitude</label>
+                <label className="block mb-1 text-gray-700">Longitude</label>
                 <input
                   type="text"
                   name="koordinat_long"
                   defaultValue={editData?.koordinat_long || ""}
-                  className="border w-full px-3 py-2 rounded"
+                  className="border w-full px-3 py-2 rounded text-gray-500 bg-white"
                   placeholder="106.123456"
                 />
               </div>
             </div>
             {tipe == "wisata" && (
               <div className="mb-3">
-                <label className="block mb-1">Unggulan</label>
+                <label className="block mb-1 text-gray-700">Unggulan</label>
                 <select
                   name="unggulan"
                   defaultValue={editData?.unggulan || "N"}
-                  className="border w-full px-3 py-2 rounded"
+                  className="border w-full px-3 py-2 rounded text-gray-500 bg-white"
                 >
                   <option value="Y">Ya</option>
                   <option value="N">Tidak</option>
@@ -293,12 +293,12 @@ export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
             )}
 
             <div className="mb-3">
-              <label className="block mb-1">Foto</label>
+              <label className="block mb-1 text-gray-700">Foto</label>
               <input
                 type="file"
                 name="foto_path"
                 accept="image/*"
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded text-gray-500 bg-white"
               />
               {editData?.foto_path && (
                 <div className="mt-2">
@@ -353,7 +353,7 @@ export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
         <input
           type="text"
           placeholder={`Cari nama ${tipe}...`}
-          className="border px-3 py-2 rounded w-full max-w-64"
+          className="border px-3 py-2 rounded w-full max-w-64 text-gray-700 bg-white"
           onChange={handleSearch}
         />
       </div>
@@ -367,18 +367,30 @@ export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
           <table className="w-full min-w-max border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
-                <th className="border px-3 py-2 min-w-20">Foto</th>
-                <th className="border px-3 py-2 min-w-32">Nama {tipe}</th>
-                <th className="border px-3 py-2 min-w-32">Kategori</th>
-                <th className="border px-3 py-2 min-w-32">Deskripsi</th>
-                <th className="border px-3 py-2 min-w-32">Lokasi</th>
-                <th className="border px-3 py-2 min-w-32">Aksi</th>
+                <th className="border px-3 py-2 text-gray-700 min-w-20">
+                  Foto
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Nama {tipe}
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Kategori
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Deskripsi
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Lokasi
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Aksi
+                </th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((item) => (
                 <tr key={item.id}>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     {item.foto_path ? (
                       <Image
                         src={item.foto_path}
@@ -391,13 +403,19 @@ export default function SaranaManager({ desaId, tipe }: SaranaManagerProps) {
                       "-"
                     )}
                   </td>
-                  <td className="border px-3 py-2 w-24">{item.nama_sarana}</td>
-                  <td className="border px-3 py-2 w-16">{item.kategori}</td>
-                  <td className="border px-3 py-2">{item.deskripsi}</td>
-                  <td className="border px-3 py-2 w-16">
+                  <td className="border px-3 py-2 text-gray-700 w-24">
+                    {item.nama_sarana}
+                  </td>
+                  <td className="border px-3 py-2 text-gray-700 w-16">
+                    {item.kategori}
+                  </td>
+                  <td className="border px-3 py-2 text-gray-700">
+                    {item.deskripsi}
+                  </td>
+                  <td className="border px-3 py-2 text-gray-700 w-16">
                     {item.alamat_lokasi}
                   </td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(item)}

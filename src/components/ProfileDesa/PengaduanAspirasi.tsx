@@ -202,12 +202,10 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
       <div className="container mx-auto px-4">
         <div className="mb-6 w-full border-b-4 border-[#C0B099]">
           <div className="mb-6 text-center max-w-xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
               Pengaduan dan Aspirasi Desa
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
-              Error loading content.
-            </p>
+            <p className="text-base text-gray-600 ">Error loading content.</p>
           </div>
         </div>
       </div>
@@ -227,7 +225,7 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
       value: stats.pengaduan,
       icon: <AlertCircle className="w-8 h-8" />,
       color: "bg-red-500",
-      lightColor: "bg-red-50 dark:bg-red-900/20",
+      lightColor: "bg-red-50 ",
       status: stats.pengaduanStatus,
     },
     {
@@ -235,7 +233,7 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
       value: stats.aspirasi,
       icon: <MessageCircle className="w-8 h-8" />,
       color: "bg-green-500",
-      lightColor: "bg-green-50 dark:bg-green-900/20",
+      lightColor: "bg-green-50 ",
       status: stats.aspirasiStatus,
     },
   ];
@@ -245,10 +243,10 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
       <div className="container mx-auto px-4">
         <div className="mb-6 w-full border-b-4 border-[#C0B099]">
           <div className="mb-6 text-center max-w-xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
               Pengaduan dan Aspirasi Desa
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400">
+            <p className="text-base text-gray-600 ">
               Silahkan ajukan pengaduan dan aspirasi dengan isi form di bawah
               ini.
             </p>
@@ -272,12 +270,12 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex-1">
-                    <p className="text-gray-600 dark:text-gray-400 text-sm font-medium mb-1">
+                    <p className="text-gray-600  text-sm font-medium mb-1">
                       {card.title}
                     </p>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">
+                    <p className="text-3xl font-bold text-gray-900 ">
                       {loading ? (
-                        <div className="animate-pulse bg-gray-300 dark:bg-gray-700 h-8 w-12 rounded"></div>
+                        <div className="animate-pulse bg-gray-300  h-8 w-12 rounded"></div>
                       ) : (
                         card.value
                       )}
@@ -294,25 +292,19 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
                 {card.status && (
                   <div className="flex flex-col gap-1 mt-auto">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600 dark:text-gray-400">
-                        Pending:
-                      </span>
+                      <span className="text-gray-600 ">Pending:</span>
                       <span className="font-semibold">
                         {card.status.pending}
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600 dark:text-gray-400">
-                        Approved:
-                      </span>
+                      <span className="text-gray-600 ">Approved:</span>
                       <span className="font-semibold">
                         {card.status.approved}
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600 dark:text-gray-400">
-                        Rejected:
-                      </span>
+                      <span className="text-gray-600 ">Rejected:</span>
                       <span className="font-semibold">
                         {card.status.rejected}
                       </span>
@@ -328,7 +320,7 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6 p-4 bg-green-100 dark:bg-green-900/20 border border-green-400 text-green-700 dark:text-green-400 rounded-lg flex items-center gap-2"
+              className="mb-6 p-4 bg-green-100 d border border-green-400 text-green-700  rounded-lg flex items-center gap-2"
             >
               <CheckCircle className="w-5 h-5" />
               <span>Pengaduan/Aspirasi berhasil dikirim!</span>
@@ -340,13 +332,13 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8"
+            className="bg-white  rounded-xl shadow-lg p-8"
           >
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-xl font-semibold text-gray-900  mb-2">
                 Form Pengaduan dan Aspirasi
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600 ">
                 Sampaikan pengaduan atau aspirasi Anda untuk kemajuan desa
               </p>
             </div>
@@ -355,7 +347,7 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Name Field */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700  mb-2">
                     <User className="w-4 h-4" />
                     Nama Lengkap
                   </label>
@@ -365,14 +357,14 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                    className="w-full px-4 py-3 border bg-white text-gray-500 border-gray-300  rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent   transition-colors"
                     placeholder="Masukkan nama lengkap"
                   />
                 </div>
 
                 {/* Phone Field */}
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700  mb-2">
                     <Phone className="w-4 h-4" />
                     Nomor Telepon
                   </label>
@@ -382,7 +374,7 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
                     value={formData.no_telp}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                    className="w-full px-4 py-3 border bg-white text-gray-500 border-gray-300  rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent   transition-colors"
                     placeholder="Contoh: 08123456789"
                   />
                 </div>
@@ -390,7 +382,7 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
 
               {/* Email Field */}
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700  mb-2">
                   <Mail className="w-4 h-4" />
                   Email
                 </label>
@@ -400,14 +392,14 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                  className="w-full px-4 py-3 border bg-white text-gray-500 border-gray-300  rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent   transition-colors"
                   placeholder="nama@email.com"
                 />
               </div>
 
               {/* Category Field */}
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700  mb-2">
                   <FileText className="w-4 h-4" />
                   Kategori
                 </label>
@@ -416,7 +408,7 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
                   value={formData.kategori}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                  className="w-full px-4 py-3 border bg-white text-gray-500 border-gray-300  rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent   transition-colors"
                 >
                   <option value="pengaduan">Pengaduan</option>
                   <option value="aspirasi">Aspirasi</option>
@@ -425,7 +417,7 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
 
               {/* Message Field */}
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700  mb-2">
                   <MessageCircle className="w-4 h-4" />
                   Pesan
                 </label>
@@ -435,7 +427,7 @@ const PengaduanAspirasiComp: React.FC<Props> = ({ desaId }) => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors resize-vertical"
+                  className="w-full px-4 py-3 border bg-white text-gray-500 border-gray-300  rounded-lg focus:ring-2 focus:ring-[#C0B099] focus:border-transparent   transition-colors resize-vertical"
                   placeholder="Tuliskan pengaduan atau aspirasi Anda secara detail..."
                 />
               </div>

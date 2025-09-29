@@ -50,12 +50,12 @@ const BlogCardAgenda = ({ agenda }: BlogCardAgendaProps) => {
           <p className="line-clamp-2">{agenda.judul}</p>
         </h3>
         <div className="mt-2 flex flex-col gap-1 text-sm text-gray-600"></div>
-        <span>
+        <span className="text-sm text-gray-700">
           <strong>Waktu:</strong> {formatDate(agenda.waktu)}
         </span>
         <br />
         {agenda.lokasi && (
-          <span>
+          <span className="text-sm text-gray-700">
             <strong>Lokasi:</strong> {agenda.lokasi}
           </span>
         )}

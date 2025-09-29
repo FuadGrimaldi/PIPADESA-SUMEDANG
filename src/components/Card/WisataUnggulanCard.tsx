@@ -28,6 +28,7 @@ export default function CardEksklusif({ sarana, onClick }: CardEksklusifProps) {
           src={sarana.foto_path}
           alt={sarana.nama_sarana}
           fill
+          priority
           className="object-cover group-hover:brightness-75 transition"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>

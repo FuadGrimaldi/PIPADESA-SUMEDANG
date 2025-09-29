@@ -114,7 +114,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Foto Sarana */}
             <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="text-lg font-semibold mb-4 flex items-center">
+              <h4 className="text-lg font-semibold mb-4 flex items-center text-gray-600">
                 <svg
                   className="w-5 h-5 mr-2"
                   fill="none"
@@ -136,6 +136,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
                   alt={sarana.nama_sarana}
                   width={600}
                   height={400}
+                  priority
                   className="w-full h-48 object-cover rounded-lg"
                   onError={(e) => {
                     e.currentTarget.src = "/images/placeholder-sarana.jpg";
@@ -165,7 +166,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
 
             {/* Deskripsi */}
             <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="text-lg font-semibold mb-4 flex items-center">
+              <h4 className="text-lg font-semibold mb-4 flex items-center text-gray-600">
                 <svg
                   className="w-5 h-5 mr-2"
                   fill="none"
@@ -274,7 +275,7 @@ interface CardSaranaProps {
 const CardSarana: React.FC<CardSaranaProps> = ({ sarana, onClick }) => {
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 h-full flex flex-col cursor-pointer hover:scale-105"
+      className="bg-white  rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 h-full flex flex-col cursor-pointer hover:scale-105"
       onClick={() => onClick(sarana)}
     >
       {/* Foto Sarana */}
@@ -285,6 +286,7 @@ const CardSarana: React.FC<CardSaranaProps> = ({ sarana, onClick }) => {
             alt={sarana.nama_sarana}
             width={400}
             height={200}
+            priority
             className="w-full h-full object-cover"
           />
         ) : (
@@ -307,18 +309,18 @@ const CardSarana: React.FC<CardSaranaProps> = ({ sarana, onClick }) => {
       </div>
 
       <div className="mb-4 flex-1">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 line-clamp-2">
+        <h3 className="text-lg font-semibold text-gray-900  mb-3 line-clamp-2">
           {sarana.nama_sarana}
         </h3>
 
         {/* Deskripsi */}
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-3">
+        <p className="text-sm text-gray-600 mb-3 line-clamp-3">
           {sarana.deskripsi || "Tidak ada deskripsi tersedia."}
         </p>
 
         {/* Alamat */}
         <div className="mb-3">
-          <div className="flex items-start text-gray-600 dark:text-gray-300 text-sm">
+          <div className="flex items-start text-gray-600 text-sm">
             <svg
               className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"
               fill="none"
@@ -501,10 +503,10 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId, tipe }) => {
         <div className="container mx-auto px-4">
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
                 Daftar {tipe}
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-gray-600 leading-relaxed">
                 Memuat data sarana...
               </p>
             </div>
@@ -537,10 +539,10 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId, tipe }) => {
         <div className="container mx-auto px-4">
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
                 Daftar {tipe}
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-gray-600 leading-relaxed">
                 Temukan berbagai sarana yang tersedia di wilayah ini.
               </p>
             </div>
@@ -580,10 +582,10 @@ const AllSarana: React.FC<AllSaranaProps> = ({ desaId, tipe }) => {
           {/* Header */}
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
                 Daftar {tipe}
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-gray-600 leading-relaxed">
                 Temukan berbagai {tipe} yang tersedia di wilayah ini. Klik pada
                 kartu {tipe} untuk melihat detail lengkap dan lokasi.
               </p>

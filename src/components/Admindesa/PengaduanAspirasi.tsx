@@ -229,7 +229,7 @@ export default function PengaduanAspirasiManager({ desaId }: Props) {
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">
             {editData ? "Edit Data" : "Tambah Data"}
           </h2>
 
@@ -237,68 +237,80 @@ export default function PengaduanAspirasiManager({ desaId }: Props) {
             <input type="hidden" name="desa_id" value={desaId} />
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Nama</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Nama
+              </label>
               <input
                 type="text"
                 name="name"
                 defaultValue={editData?.name || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 text-gray-500 bg-white w-full px-3 py-2 rounded-md"
                 required
                 readOnly
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Email</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
                 defaultValue={editData?.email || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 text-gray-500 bg-white w-full px-3 py-2 rounded-md"
                 required
                 readOnly
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">No. Telepon</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                No. Telepon
+              </label>
               <input
                 type="text"
                 name="no_telp"
                 defaultValue={editData?.no_telp || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 text-gray-500 bg-white w-full px-3 py-2 rounded-md"
                 readOnly
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Pesan</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Pesan
+              </label>
               <textarea
                 name="pesan"
                 defaultValue={editData?.pesan || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 text-gray-500 bg-white w-full px-3 py-2 rounded-md"
                 required
                 readOnly
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Kategori</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Kategori
+              </label>
               <input
                 type="text"
                 name="kategori"
                 defaultValue={editData?.kategori || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 text-gray-500 bg-white w-full px-3 py-2 rounded-md"
                 readOnly
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Status</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Status
+              </label>
               <select
                 name="status"
                 defaultValue={editData?.status || "pending"}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 text-gray-500 bg-white w-full px-3 py-2 rounded-md"
                 required
               >
                 <option value="pending">Pending</option>
@@ -343,7 +355,7 @@ export default function PengaduanAspirasiManager({ desaId }: Props) {
         <input
           type="text"
           placeholder="Cari data..."
-          className="border border-gray-300 px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="border border-gray-300 text-gray-500 bg-white px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-green-500"
           onChange={handleSearch}
         />
       </div>
@@ -362,22 +374,22 @@ export default function PengaduanAspirasiManager({ desaId }: Props) {
           <table className="w-full table-fixed border-collapse">
             <thead>
               <tr className="bg-gray-50">
-                <th className="w-40 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="w-40 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Nama
                 </th>
-                <th className="w-52 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="w-52 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Email
                 </th>
-                <th className="w-64 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700 truncate">
+                <th className="w-64 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700 truncate">
                   Pesan
                 </th>
-                <th className="w-32 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="w-32 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Kategori
                 </th>
-                <th className="w-28 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="w-28 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Status
                 </th>
-                <th className="w-40 border border-gray-200 px-4 py-3 text-center font-medium text-gray-700">
+                <th className="w-40 border border-gray-200 px-4 py-3 text-gray-700 text-center font-medium text-gray-700">
                   Aksi
                 </th>
               </tr>
@@ -385,22 +397,22 @@ export default function PengaduanAspirasiManager({ desaId }: Props) {
             <tbody>
               {filteredItems.map((item) => (
                 <tr key={item.id} className="hover:bg-gray-50">
-                  <td className="border border-gray-200 px-4 py-3 truncate">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 truncate">
                     {item.name}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 truncate">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 truncate">
                     {item.email}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 truncate">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 truncate">
                     {item.pesan}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 capitalize">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 capitalize">
                     {item.kategori}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 capitalize">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 capitalize">
                     {item.status}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 text-center">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(item)}

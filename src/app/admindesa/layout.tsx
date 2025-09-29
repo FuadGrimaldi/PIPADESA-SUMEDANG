@@ -1,4 +1,5 @@
 // src/app/subdomain/dashboard/layout.tsx
+import "../globals.css";
 import DashboardLayoutClient from "./AdmindesaLayout";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";

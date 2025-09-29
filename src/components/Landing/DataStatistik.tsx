@@ -157,14 +157,12 @@ export default function StatistikPenduduk({
   }, [fetchStatistikData]);
 
   return (
-    <section className="py-12 bg-white shadow-md rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <section className="py-12 bg-white shadow-md rounded-lg border border-gray-200  ">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-8 items-center mb-6">
           <div>
-            <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
-              STATISTIK
-            </h2>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-black dark:text-white mb-2">
+            <h2 className="text-xl font-semibold text-gray-700 ">STATISTIK</h2>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-black  mb-2">
               JUMLAH PENDUDUK
             </h1>
             <p className="text-xl font-semibold italic text-[#C4B49B] mb-4">
@@ -174,7 +172,7 @@ export default function StatistikPenduduk({
           </div>
           <div>
             <div className="w-full h-[1px] bg-gray-300 mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-gray-600  leading-relaxed">
               Data kependudukan bersumber dari sensus penduduk dan proyeksi.
               Untuk tahun tanpa sensus, digunakan data proyeksi berdasarkan tren
               dan asumsi demografis.
@@ -212,17 +210,14 @@ export default function StatistikPenduduk({
           // Loading state
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {Array.from({ length: 4 }).map((_, index) => (
-              <div
-                key={index}
-                className="px-6 py-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm animate-pulse"
-              >
+              <div key={index} className="px-6 py-2 bg-white  e">
                 <div className="flex items-center gap-1 lg:gap-4 mb-2">
-                  <div className="p-[5px] lg:p-3 bg-gray-200 dark:bg-gray-700 rounded-full w-10 h-10"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                  <div className="p-[5px] lg:p-3 bg-gray-200  rounded-full w-10 h-10"></div>
+                  <div className="h-4 bg-gray-200  rounded w-20"></div>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-full py-1 bg-gray-200 dark:bg-gray-700 rounded-xl mr-2 h-4"></div>
-                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                  <div className="w-full py-1 bg-gray-200  rounded-xl mr-2 h-4"></div>
+                  <div className="h-6 bg-gray-200  rounded w-16"></div>
                 </div>
               </div>
             ))}
@@ -231,21 +226,18 @@ export default function StatistikPenduduk({
           // Data display
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {dataStatistik.map((item, index) => (
-              <div
-                key={index}
-                className="group px-6 py-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 duration-300"
-              >
+              <div key={index} className="group px-6 py-2 bg-white  0">
                 <div className="flex items-center gap-1 lg:gap-4 mb-2">
-                  <div className="p-[5px] lg:p-3 bg-purple-100 dark:bg-purple-900 rounded-full transition-all group-hover:scale-110">
+                  <div className="p-[5px] lg:p-3 bg-purple-100  rounded-full transition-all group-hover:scale-110">
                     {item.icon}
                   </div>
-                  <h3 className="text-sm lg:text-lg font-medium text-gray-700 dark:text-gray-300">
+                  <h3 className="text-sm lg:text-lg font-medium text-gray-700 ">
                     {item.title}
                   </h3>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-full py-1 bg-purple-200 dark:bg-purple-800 rounded-xl mr-2"></div>
-                  <p className="text-lg lg:text-2xl font-bold text-right text-black dark:text-white">
+                  <div className="w-full py-1 bg-purple-200  rounded-xl mr-2"></div>
+                  <p className="text-lg lg:text-2xl font-bold text-right text-black ">
                     {item.value}
                   </p>
                 </div>

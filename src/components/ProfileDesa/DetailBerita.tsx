@@ -205,7 +205,7 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
             className="bg-white rounded-xl shadow-lg overflow-hidden"
           >
             {/* Article Header */}
-            <div className="p-6 md:p-8 border-b border-gray-100">
+            <div className="px-6 md:px-8 py-2 border-b border-gray-100">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span
                   className={`px-3 py-1 rounded-full text-sm font-medium border ${getTypeColor(
@@ -224,7 +224,7 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
                 </div>
               </div>
 
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-4">
+              <h1 className="text-xl lg:text-3xl font-bold text-gray-900 leading-tight mb-4">
                 {article.title}
               </h1>
 
@@ -243,14 +243,6 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
                     </div>
                   )}
                 </div>
-
-                <button
-                  onClick={handleShare}
-                  className="flex items-center px-4 py-2 text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
-                >
-                  <Share2 className="w-4 h-4 mr-2" />
-                  Bagikan
-                </button>
               </div>
             </div>
 
@@ -270,7 +262,7 @@ const ArticleDetail = ({ articleId }: ArticleDetailProps) => {
             )}
 
             {/* Article Content */}
-            <div className="p-6 md:p-8">
+            <div className="px-6 md:px-8 py-2">
               <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
                 {parse(article.content)}
               </div>

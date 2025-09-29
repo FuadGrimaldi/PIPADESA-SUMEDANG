@@ -224,7 +224,7 @@ export default function VideoManager({ desaId }: Props) {
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-700">
             {editData ? "Edit Video" : "Tambah Video"}
           </h2>
 
@@ -232,42 +232,50 @@ export default function VideoManager({ desaId }: Props) {
             <input type="hidden" name="desa_id" value={desaId} />
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Judul</label>
+              <label className="block mb-2 font-medium text-gray-800">
+                Judul
+              </label>
               <input
                 type="text"
                 name="title"
                 defaultValue={editData?.title || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 rounded-md text-gray-500 bg-white"
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Deskripsi</label>
+              <label className="block mb-2 font-medium text-gray-800">
+                Deskripsi
+              </label>
               <textarea
                 name="deskripsi"
                 defaultValue={editData?.deskripsi || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 rounded-md text-gray-500 bg-white"
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Embed URL</label>
+              <label className="block mb-2 font-medium text-gray-800">
+                Embed URL
+              </label>
               <input
                 type="text"
                 name="embed_url"
                 defaultValue={editData?.embed_url || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 rounded-md text-gray-500 bg-white"
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Kategori</label>
+              <label className="block mb-2 font-medium text-gray-800">
+                Kategori
+              </label>
               <select
                 name="categori"
                 defaultValue={editData?.categori || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 rounded-md text-gray-500 bg-white"
                 required
               >
                 <option value="" disabled>
@@ -287,7 +295,9 @@ export default function VideoManager({ desaId }: Props) {
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Tanggal Upload</label>
+              <label className="block mb-2 font-medium text-gray-800">
+                Tanggal Upload
+              </label>
               <input
                 type="datetime-local"
                 name="uploaded_at"
@@ -296,7 +306,7 @@ export default function VideoManager({ desaId }: Props) {
                     ? new Date(editData.uploaded_at).toISOString().slice(0, 16)
                     : ""
                 }
-                className="border border-gray-300 w-full px-3 py-2 rounded-md"
+                className="border border-gray-300 w-full px-3 py-2 rounded-md text-gray-500 bg-white"
               />
             </div>
 
@@ -345,7 +355,7 @@ export default function VideoManager({ desaId }: Props) {
         <input
           type="text"
           placeholder="Cari video..."
-          className="border border-gray-300 px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-gray-300 px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700"
           onChange={handleSearch}
         />
       </div>
@@ -364,22 +374,22 @@ export default function VideoManager({ desaId }: Props) {
           <table className="w-full min-w-max border-collapse">
             <thead>
               <tr className="bg-gray-50">
-                <th className="w-40 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="w-40 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Judul
                 </th>
-                <th className="w-52 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="w-52 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Deskripsi
                 </th>
-                <th className="w-40 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="w-40 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Kategori
                 </th>
-                <th className="w-40 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="w-40 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   URL
                 </th>
-                <th className="w-40 border border-gray-200 px-4 py-3 text-left font-medium text-gray-700">
+                <th className="w-40 border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700">
                   Upload
                 </th>
-                <th className="w-40 border border-gray-200 px-4 py-3 text-center font-medium text-gray-700">
+                <th className="w-40 border border-gray-200 px-4 py-3 text-gray-700 text-center font-medium text-gray-700">
                   Aksi
                 </th>
               </tr>
@@ -387,22 +397,22 @@ export default function VideoManager({ desaId }: Props) {
             <tbody>
               {filteredVideos.map((video) => (
                 <tr key={video.id} className="hover:bg-gray-50">
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {video.title}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {video.deskripsi}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {video.categori}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {video.embed_url}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700">
                     {new Date(video.uploaded_at).toLocaleString("id-ID")}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 text-center">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(video)}

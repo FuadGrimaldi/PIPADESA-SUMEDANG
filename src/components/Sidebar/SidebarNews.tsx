@@ -101,17 +101,17 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
   // Loading state
   if (loading) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-        <h4 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 border-b-2 border-[#C0B099] pb-2">
+      <div className="bg-white  rounded-xl shadow-lg p-6">
+        <h4 className="text-2xl font-bold text-gray-800  mb-6 border-b-2 border-[#C0B099] pb-2">
           Informasi Lainnya
         </h4>
         <div className="space-y-5">
           {Array.from({ length: 4 }).map((_, idx) => (
             <div key={idx} className="animate-pulse">
-              <div className="bg-gray-200 dark:bg-gray-700 h-32 rounded-lg mb-3"></div>
+              <div className="bg-gray-200  h-32 rounded-lg mb-3"></div>
               <div className="space-y-2">
-                <div className="bg-gray-200 dark:bg-gray-700 h-4 rounded w-3/4"></div>
-                <div className="bg-gray-200 dark:bg-gray-700 h-3 rounded w-1/2"></div>
+                <div className="bg-gray-200  h-4 rounded w-3/4"></div>
+                <div className="bg-gray-200  h-3 rounded w-1/2"></div>
               </div>
             </div>
           ))}
@@ -123,8 +123,8 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
   // Error state
   if (error) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-        <h4 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 border-b-2 border-[#C0B099] pb-2">
+      <div className="bg-white  rounded-xl shadow-lg p-6">
+        <h4 className="text-2xl font-bold text-gray-800  mb-6 border-b-2 border-[#C0B099] pb-2">
           Informasi Lainnya
         </h4>
         <div className="text-center py-8">
@@ -141,9 +141,7 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
               />
             </svg>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-            {error}
-          </p>
+          <p className="text-sm text-gray-600  mb-3">{error}</p>
           <button
             onClick={fetchSidebarArticles}
             className="text-blue-600 hover:text-blue-800 text-sm font-medium"
@@ -158,8 +156,8 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
   // No articles state
   if (articles.length === 0) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-        <h4 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 border-b-2 border-[#C0B099] pb-2">
+      <div className="bg-white  rounded-xl shadow-lg p-6">
+        <h4 className="text-2xl font-bold text-gray-800  mb-6 border-b-2 border-[#C0B099] pb-2">
           Informasi Lainnya
         </h4>
         <div className="text-center py-8">
@@ -178,17 +176,15 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
               />
             </svg>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Belum ada artikel tersedia
-          </p>
+          <p className="text-sm text-gray-600 ">Belum ada artikel tersedia</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-      <h4 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 border-b-2 border-[#C0B099] pb-2">
+    <div className="bg-white  rounded-xl shadow-lg p-6">
+      <h4 className="text-2xl font-bold text-gray-800  mb-6 border-b-2 border-[#C0B099] pb-2">
         Informasi Lainnya
       </h4>
 
@@ -196,7 +192,7 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
         {articles.map((article) => (
           <article
             key={article.id}
-            className="group cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-700/50 shadow-lg"
+            className="group cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg rounded-lg overflow-hidden bg-gray-50 /50 shadow-lg"
           >
             <a href={`/berita/${article.id}`} className="block">
               <div className="relative overflow-hidden">
@@ -220,11 +216,11 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
               </div>
 
               <div className="p-4">
-                <h5 className="text-sm font-semibold text-gray-800 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+                <h5 className="text-sm font-semibold text-gray-800  mb-2 line-clamp-2 group-hover:text-blue-600  transition-colors duration-200">
                   {truncateTitle(article.title)}
                 </h5>
 
-                <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                <div className="flex items-center justify-between text-xs text-gray-500 ">
                   <time
                     dateTime={new Date(article.published_at).toISOString()}
                     className="flex items-center"
@@ -244,11 +240,9 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
                   </time>
 
                   <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <span className="text-blue-600 dark:text-blue-400">
-                      Baca
-                    </span>
+                    <span className="text-blue-600 ">Baca</span>
                     <svg
-                      className="w-3 h-3 ml-1 text-blue-600 dark:text-blue-400"
+                      className="w-3 h-3 ml-1 text-blue-600 "
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -271,7 +265,7 @@ const SidebarNewsPhoto = ({ desaId }: SidebarNewsPhotoProps) => {
       <div className="mt-6 text-center">
         <a
           href="/berita"
-          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium text-sm transition-colors duration-200"
+          className="inline-flex items-center text-blue-600  hover:text-blue-800  font-medium text-sm transition-colors duration-200"
         >
           Lihat Semua Berita
           <svg

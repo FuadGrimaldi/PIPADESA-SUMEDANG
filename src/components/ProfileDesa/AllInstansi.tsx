@@ -148,7 +148,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Informasi Kontak */}
             <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="text-lg font-semibold mb-4 flex items-center">
+              <h4 className="text-lg font-semibold mb-4 flex items-center text-gray-700">
                 <svg
                   className="w-5 h-5 mr-2"
                   fill="none"
@@ -241,7 +241,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
 
             {/* Jam Operasional */}
             <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="text-lg font-semibold mb-4 flex items-center">
+              <h4 className="text-lg font-semibold mb-4 flex items-center text-gray-700">
                 <svg
                   className="w-5 h-5 mr-2"
                   fill="none"
@@ -257,14 +257,14 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
                 </svg>
                 Jam Operasional
               </h4>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-sm text-gray-500">
                 {formatJamBuka(instansi.jam_buka)}
               </div>
             </div>
 
             {/* Statistik Layanan */}
             <div className="bg-blue-50 rounded-lg p-4">
-              <h4 className="text-lg font-semibold mb-4 flex items-center">
+              <h4 className="text-lg font-semibold mb-4 flex items-center text-gray-700">
                 <svg
                   className="w-5 h-5 mr-2"
                   fill="none"
@@ -294,7 +294,7 @@ const ModalDetail: React.FC<ModalDetailProps> = ({
           {/* Daftar Layanan */}
           {instansi.layanan && instansi.layanan.length > 0 && (
             <div className="mt-6">
-              <h4 className="text-lg font-semibold mb-4 flex items-center">
+              <h4 className="text-lg font-semibold mb-4 flex items-center text-gray-700">
                 <svg
                   className="w-5 h-5 mr-2"
                   fill="none"
@@ -363,17 +363,17 @@ interface CardInstansiProps {
 const CardInstansi: React.FC<CardInstansiProps> = ({ instansi, onClick }) => {
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 h-full flex flex-col cursor-pointer hover:scale-105"
+      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 h-full flex flex-col cursor-pointer hover:scale-105"
       onClick={() => onClick(instansi)}
     >
       <div className="mb-4 flex-1">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 line-clamp-2">
+        <h3 className="text-lg font-semibold text-gray-900  mb-3 line-clamp-2">
           {instansi.instansi}
         </h3>
 
         {/* Alamat */}
         <div className="mb-3">
-          <div className="flex items-start text-gray-600 dark:text-gray-300 text-sm">
+          <div className="flex items-start text-gray-600  text-sm">
             <svg
               className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"
               fill="none"
@@ -408,7 +408,7 @@ const CardInstansi: React.FC<CardInstansiProps> = ({ instansi, onClick }) => {
       {/* Kontak Information Preview */}
       <div className="space-y-2 text-sm border-t pt-4">
         {instansi.kontak?.telepon && (
-          <div className="flex items-center text-gray-600 dark:text-gray-300">
+          <div className="flex items-center text-gray-600 ">
             <svg
               className="w-4 h-4 mr-2 flex-shrink-0"
               fill="none"
@@ -427,7 +427,7 @@ const CardInstansi: React.FC<CardInstansiProps> = ({ instansi, onClick }) => {
         )}
 
         {instansi.kontak?.email && (
-          <div className="flex items-center text-gray-600 dark:text-gray-300">
+          <div className="flex items-center text-gray-600 ">
             <svg
               className="w-4 h-4 mr-2 flex-shrink-0"
               fill="none"
@@ -619,10 +619,10 @@ const AllInstansi: React.FC<AllInstansiProps> = ({ desaId }) => {
         <div className="container mx-auto px-4">
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
                 Daftar Instansi
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-gray-600 leading-relaxed">
                 Memuat data instansi...
               </p>
             </div>
@@ -654,7 +654,7 @@ const AllInstansi: React.FC<AllInstansiProps> = ({ desaId }) => {
         <div className="container mx-auto px-4">
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
                 Daftar Instansi
               </h2>
             </div>
@@ -696,10 +696,10 @@ const AllInstansi: React.FC<AllInstansiProps> = ({ desaId }) => {
         <div className="container mx-auto px-4">
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
                 Daftar Instansi
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-gray-600 leading-relaxed">
                 Temukan instansi yang menyediakan berbagai layanan untuk
                 masyarakat.
               </p>
@@ -740,10 +740,10 @@ const AllInstansi: React.FC<AllInstansiProps> = ({ desaId }) => {
           {/* Header */}
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700  mb-4">
                 Daftar Instansi
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-gray-600 leading-relaxed">
                 Temukan instansi yang menyediakan berbagai layanan untuk
                 masyarakat. Klik pada kartu instansi untuk melihat detail
                 lengkap.

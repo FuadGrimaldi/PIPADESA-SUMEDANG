@@ -218,10 +218,10 @@ const AllLayanan = ({ desaId }: AllLayananProps) => {
         <div className="container mx-auto px-4">
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
                 Daftar Layanan
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-base text-gray-600 leading-relaxed">
                 Memuat data layanan...
               </p>
             </div>
@@ -253,7 +253,7 @@ const AllLayanan = ({ desaId }: AllLayananProps) => {
         <div className="container mx-auto px-4">
           <div className="mb-8 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
                 Daftar Layanan
               </h2>
             </div>
@@ -295,10 +295,10 @@ const AllLayanan = ({ desaId }: AllLayananProps) => {
         <div className="container mx-auto px-4">
           <div className="mb-6 w-full border-b-4 border-[#C0B099]">
             <div className="mb-6 text-center max-w-xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
                 Daftar Layanan
               </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400">
+              <p className="text-base text-gray-600">
                 Tidak ada layanan yang tersedia saat ini. Silakan hubungi
                 administrator untuk informasi lebih lanjut.
               </p>
@@ -338,10 +338,10 @@ const AllLayanan = ({ desaId }: AllLayananProps) => {
         {/* Header */}
         <div className="mb-8 w-full border-b-4 border-[#C0B099]">
           <div className="mb-6 text-center max-w-2xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 mb-4">
               Daftar Layanan
             </h2>
-            <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-base text-gray-600 leading-relaxed">
               Temukan instansi dan layanan yang tersedia untuk masyarakat.
               Setiap instansi menyediakan berbagai layanan yang dapat diakses
               secara online.

@@ -63,7 +63,7 @@ export default function SearchBerita({ desaId }: { desaId: number }) {
                 placeholder="Cari berita, agenda, kegiatan..."
                 value={keyword || ""}
                 onChange={(e) => setKeyword(e.target.value)}
-                className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-4 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
+                className="w-full bg-white text-gray-500 rounded-md border border-gray-300 py-2 pl-10 pr-4 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
                 minLength={2}
               />
             </div>
@@ -73,7 +73,7 @@ export default function SearchBerita({ desaId }: { desaId: number }) {
               <select
                 value={tipe}
                 onChange={(e) => setTipe(e.target.value)}
-                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
+                className="w-full bg-white text-gray-500 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
               >
                 <option value="">Semua Kategori</option>
                 <option value="berita">Berita</option>

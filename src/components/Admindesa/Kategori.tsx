@@ -201,21 +201,21 @@ export default function KategoriManager({ desaId }: Props) {
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">
             {editData ? "Edit Kategori" : "Tambah Kategori"}
           </h2>
 
           <form onSubmit={handleSubmit} encType="multipart/form-data">
             <input type="hidden" name="desa_id" value={desaId} />
             <div className="mb-4">
-              <label className="block mb-2 font-medium">
+              <label className="block mb-2 font-medium text-gray-700">
                 Nama Kategori <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 name="nama_kategori"
                 defaultValue={editData?.nama_kategori || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-300 w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700"
                 required
                 placeholder="Masukkan nama kategori"
                 maxLength={100}
@@ -264,7 +264,7 @@ export default function KategoriManager({ desaId }: Props) {
         <input
           type="text"
           placeholder="Cari kategori organisasi..."
-          className="border border-gray-300 px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border text-gray-700 bg-white border-gray-300 px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           onChange={handleSearch}
         />
       </div>
@@ -283,10 +283,10 @@ export default function KategoriManager({ desaId }: Props) {
           <table className="w-full min-w-max border-collapse">
             <thead>
               <tr className="bg-gray-50">
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700 min-w-48">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700 text-left font-medium text-gray-700 min-w-48">
                   Nama Kategori
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-center font-medium text-gray-700 min-w-32">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700 text-center font-medium text-gray-700 min-w-32">
                   Aksi
                 </th>
               </tr>
@@ -294,10 +294,10 @@ export default function KategoriManager({ desaId }: Props) {
             <tbody>
               {filteredKategoris.map((kat, index) => (
                 <tr key={kat.id} className="hover:bg-gray-50">
-                  <td className="border border-gray-200 px-4 py-3 font-medium">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 font-medium">
                     {kat.nama_kategori}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 text-center">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(kat)}

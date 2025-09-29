@@ -205,7 +205,7 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">
             {editData ? "Edit Agenda" : "Tambah Agenda"}
           </h2>
 
@@ -222,23 +222,25 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
             {editData && (
               <>
                 <div className="mb-3">
-                  <label className="block mb-1">Created By (User ID)</label>
+                  <label className="block mb-1 text-gray-700">
+                    Created By (User ID)
+                  </label>
                   <input
                     type="number"
                     name="created_by"
                     defaultValue={editData.created_by}
-                    className="border w-full px-3 py-2 rounded bg-gray-100"
+                    className="border w-full px-3 py-2 rounded bg-white text-gray-50"
                     required
                     readOnly
                   />
                 </div>
                 <div className="mb-3">
-                  <label className="block mb-1">Desa ID</label>
+                  <label className="block mb-1 text-gray-700">Desa ID</label>
                   <input
                     type="number"
                     name="desa_id"
                     defaultValue={editData.desa_id}
-                    className="border w-full px-3 py-2 rounded bg-gray-100"
+                    className="border w-full px-3 py-2 rounded bg-white text-gray-50"
                     required
                     readOnly
                   />
@@ -247,11 +249,13 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
             )}
 
             <div className="mb-3">
-              <label className="block mb-1">Kategori Agenda *</label>
+              <label className="block mb-1 text-gray-700">
+                Kategori Agenda *
+              </label>
               <select
                 name="kategori"
                 defaultValue={editData?.kategori || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded bg-white text-gray-500"
                 required
               >
                 <option value="">Pilih Kategori</option>
@@ -269,50 +273,50 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Judul *</label>
+              <label className="block mb-1 text-gray-700">Judul *</label>
               <input
                 type="text"
                 name="judul"
                 defaultValue={editData?.judul || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded bg-white text-gray-500"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Slug *</label>
+              <label className="block mb-1 text-gray-700">Slug *</label>
               <input
                 type="text"
                 name="slug"
                 defaultValue={editData?.slug || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded bg-white text-gray-500"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Deskripsi *</label>
+              <label className="block mb-1 text-gray-700">Deskripsi *</label>
               <textarea
                 name="deskripsi"
                 defaultValue={editData?.deskripsi || ""}
-                className="border w-full px-3 py-2 rounded h-32"
+                className="border w-full px-3 py-2 rounded bg-white text-gray-500 h-32"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Lokasi *</label>
+              <label className="block mb-1 text-gray-700">Lokasi *</label>
               <input
                 type="text"
                 name="lokasi"
                 defaultValue={editData?.lokasi || ""}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded bg-white text-gray-500"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Waktu Agenda *</label>
+              <label className="block mb-1 text-gray-700">Waktu Agenda *</label>
               <input
                 type="datetime-local"
                 name="waktu"
@@ -321,18 +325,18 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
                     ? new Date(editData.waktu).toISOString().slice(0, 16)
                     : ""
                 }
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded bg-white text-gray-500"
                 required
               />
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Poster</label>
+              <label className="block mb-1 text-gray-700">Poster</label>
               <input
                 type="file"
                 name="poster"
                 accept="image/*"
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded bg-white text-gray-500"
               />
               {editData?.poster && (
                 <div className="mt-2">
@@ -349,11 +353,11 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
             </div>
 
             <div className="mb-3">
-              <label className="block mb-1">Status *</label>
+              <label className="block mb-1 text-gray-700">Status *</label>
               <select
                 name="status"
                 defaultValue={editData?.status || "Pending"}
-                className="border w-full px-3 py-2 rounded"
+                className="border w-full px-3 py-2 rounded bg-white text-gray-500"
                 required
               >
                 <option value="pending">Pending</option>
@@ -401,7 +405,7 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
         <input
           type="text"
           placeholder="Cari judul, deskripsi, atau lokasi agenda..."
-          className="border px-3 py-2 rounded w-full max-w-64"
+          className="border px-3 py-2 rounded w-full max-w-64 bg-white text-gray-500"
           onChange={handleSearch}
         />
       </div>
@@ -415,19 +419,33 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
           <table className="w-full min-w-max border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
-                <th className="border px-3 py-2 min-w-20">Poster</th>
-                <th className="border px-3 py-2 min-w-48">Judul</th>
-                <th className="border px-3 py-2 min-w-24">Kategori</th>
-                <th className="border px-3 py-2 min-w-32">Waktu</th>
-                <th className="border px-3 py-2 min-w-32">Lokasi</th>
-                <th className="border px-3 py-2 min-w-24">Status</th>
-                <th className="border px-3 py-2 min-w-32">Aksi</th>
+                <th className="border px-3 py-2 text-gray-700 min-w-20">
+                  Poster
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-48">
+                  Judul
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-24">
+                  Kategori
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Waktu
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Lokasi
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-24">
+                  Status
+                </th>
+                <th className="border px-3 py-2 text-gray-700 min-w-32">
+                  Aksi
+                </th>
               </tr>
             </thead>
             <tbody>
               {filteredAgendas.map((agenda) => (
                 <tr key={agenda.id}>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     {agenda.poster ? (
                       <Image
                         src={agenda.poster}
@@ -440,13 +458,13 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
                       "-"
                     )}
                   </td>
-                  <td className="border px-3 py-2 w-[120px]">
+                  <td className="border px-3 py-2 text-gray-700 w-[120px]">
                     <div className="font-medium">{agenda.judul}</div>
                     <div className="text-sm text-gray-500 truncate max-w-xs">
                       {agenda.deskripsi.substring(0, 100)}...
                     </div>
                   </td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     <span
                       className={`px-2 py-1 rounded text-xs font-medium ${
                         agenda.kategori === "Kebudayaan"
@@ -469,7 +487,7 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
                       {agenda.kategori}
                     </span>
                   </td>
-                  <td className="border px-3 py-2 text-sm">
+                  <td className="border px-3 py-2 text-gray-700 text-sm">
                     {new Date(agenda.waktu).toLocaleDateString("id-ID", {
                       year: "numeric",
                       month: "short",
@@ -478,8 +496,10 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
                       minute: "2-digit",
                     })}
                   </td>
-                  <td className="border px-3 py-2 text-sm">{agenda.lokasi}</td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-sm">
+                    {agenda.lokasi}
+                  </td>
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     <span
                       className={`px-2 py-1 rounded text-xs font-medium ${
                         agenda.status === "pending"
@@ -494,7 +514,7 @@ export default function AgendaManager({ desaId, userId }: AgendaManagerProps) {
                       {agenda.status}
                     </span>
                   </td>
-                  <td className="border px-3 py-2 text-center">
+                  <td className="border px-3 py-2 text-gray-700 text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(agenda)}

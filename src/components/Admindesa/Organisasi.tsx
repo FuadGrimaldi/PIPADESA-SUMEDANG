@@ -254,7 +254,7 @@ export default function OrganisasiManager({
     return (
       <div>
         <div className="bg-white w-full p-6 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-800">
             {editData ? "Edit Organisasi" : "Tambah Organisasi"}
           </h2>
 
@@ -267,27 +267,27 @@ export default function OrganisasiManager({
             )}
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">
+              <label className="block mb-2 font-medium text-gray-700">
                 Nama Organisasi <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 name="nama_organisasi"
                 defaultValue={editData?.nama_organisasi || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-700 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
                 placeholder="Masukkan nama organisasi"
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">
+              <label className="block mb-2 font-medium text-gray-700">
                 Kategori Organisasi <span className="text-red-500">*</span>
               </label>
               <select
                 name="kategori_id"
                 defaultValue={editData?.kategori_id || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-700 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="">Pilih Kategori</option>
@@ -300,39 +300,41 @@ export default function OrganisasiManager({
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">
+              <label className="block mb-2 font-medium text-gray-700">
                 Nama Ketua <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 name="nama_ketua"
                 defaultValue={editData?.nama_ketua || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-700 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
                 placeholder="Masukkan nama ketua"
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">
+              <label className="block mb-2 font-medium text-gray-700">
                 Deskripsi Kegiatan <span className="text-red-500">*</span>
               </label>
               <textarea
                 name="deskripsi_kegiatan"
                 defaultValue={editData?.deskripsi_kegiatan || ""}
-                className="border border-gray-300 w-full px-3 py-2 rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-700 bg-white rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
                 placeholder="Masukkan deskripsi kegiatan organisasi"
               />
             </div>
 
             <div className="mb-4">
-              <label className="block mb-2 font-medium">Logo Organisasi</label>
+              <label className="block mb-2 font-medium text-gray-700">
+                Logo Organisasi
+              </label>
               <input
                 type="file"
                 name="logo_path"
                 accept="image/*"
-                className="border border-gray-300 w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border border-gray-300 w-full px-3 py-2 text-gray-700 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <p className="text-sm text-gray-500 mt-1">
                 Format yang didukung: JPG, PNG, GIF (maksimal 5MB)
@@ -393,7 +395,7 @@ export default function OrganisasiManager({
         <input
           type="text"
           placeholder="Cari nama organisasi, ketua, kategori, atau deskripsi..."
-          className="border border-gray-300 px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-gray-300 px-3 py-2 rounded-md w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-700"
           onChange={handleSearch}
         />
       </div>
@@ -412,22 +414,22 @@ export default function OrganisasiManager({
           <table className="w-full min-w-max border-collapse">
             <thead>
               <tr className="bg-gray-50">
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700 min-w-20">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700  text-left font-medium text-gray-700 min-w-20">
                   Logo
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700 min-w-48">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700  text-left font-medium text-gray-700 min-w-48">
                   Nama Organisasi
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700 min-w-32">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700  text-left font-medium text-gray-700 min-w-32">
                   Kategori
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700 min-w-32">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700  text-left font-medium text-gray-700 min-w-32">
                   Ketua
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-left font-medium text-gray-700 min-w-64">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700  text-left font-medium text-gray-700 min-w-64">
                   Deskripsi
                 </th>
-                <th className="border border-gray-200 px-4 py-3 text-center font-medium text-gray-700 min-w-32">
+                <th className="border border-gray-200 px-4 py-3 text-gray-700  text-center font-medium text-gray-700 min-w-32">
                   Aksi
                 </th>
               </tr>
@@ -435,7 +437,7 @@ export default function OrganisasiManager({
             <tbody>
               {filteredOrganisasis.map((org) => (
                 <tr key={org.id} className="hover:bg-gray-50">
-                  <td className="border border-gray-200 px-4 py-3 text-center">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700  text-center">
                     {org.logo_path ? (
                       <Image
                         src={org.logo_path}
@@ -450,21 +452,21 @@ export default function OrganisasiManager({
                       </div>
                     )}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 font-medium">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700  font-medium">
                     {org.nama_organisasi}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 ">
                     {org.kategori_organisasi?.nama_kategori || "-"}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700 ">
                     {org.nama_ketua}
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 text-sm">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700  text-sm">
                     <div className="max-w-xs">
                       <p className="line-clamp-3">{org.deskripsi_kegiatan}</p>
                     </div>
                   </td>
-                  <td className="border border-gray-200 px-4 py-3 text-center">
+                  <td className="border border-gray-200 px-4 py-3 text-gray-700  text-center">
                     <div className="flex space-x-2 justify-center">
                       <button
                         onClick={() => handleOpenEdit(org)}
