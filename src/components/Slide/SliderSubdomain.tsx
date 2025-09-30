@@ -16,8 +16,6 @@ const partners = [
   { id: 4, logo: "/assets/logo-fix/logo-pemkab.png", name: "Partner 4" },
   { id: 5, logo: "/assets/logo-fix/sitabaha.png", name: "Partner 5" },
   { id: 6, logo: "/assets/logo-fix/logo-sumedang-500.png", name: "Partner 1" },
-  { id: 7, logo: "/assets/logo-fix/logo-sumedang-500.png", name: "Partner 2" },
-  { id: 8, logo: "/assets/logo-fix/logo-sumedang-500.png", name: "Partner 3" },
 ];
 
 const PartnerLogos = () => {

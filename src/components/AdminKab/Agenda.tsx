@@ -333,7 +333,7 @@ export default function AgendaManagerKab() {
                       type="text"
                       name="judul"
                       defaultValue={viewData?.judul || editData?.judul || ""}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                       disabled={isView || submitting}
                       readOnly={isView}
@@ -350,7 +350,7 @@ export default function AgendaManagerKab() {
                       type="text"
                       name="slug"
                       defaultValue={viewData?.slug || editData?.slug || ""}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                       disabled={isView || submitting}
                       readOnly={isView}
@@ -371,7 +371,7 @@ export default function AgendaManagerKab() {
                       <textarea
                         name="deskripsi"
                         defaultValue={editData?.deskripsi || ""}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent min-h-[120px]"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent min-h-[120px]"
                         required
                         disabled={submitting}
                         placeholder="Masukkan deskripsi agenda"
@@ -390,7 +390,7 @@ export default function AgendaManagerKab() {
                         defaultValue={
                           viewData?.kategori || editData?.kategori || ""
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         required
                         disabled={isView || submitting}
                       >
@@ -417,7 +417,7 @@ export default function AgendaManagerKab() {
                         defaultValue={
                           viewData?.status || editData?.status || "draft"
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         required
                         disabled={isView || submitting}
                       >
@@ -439,7 +439,7 @@ export default function AgendaManagerKab() {
                         defaultValue={
                           viewData?.created_by || editData?.created_by || ""
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         required
                         disabled={isView || submitting}
                       >
@@ -461,7 +461,7 @@ export default function AgendaManagerKab() {
                         defaultValue={
                           viewData?.desa_id || editData?.desa_id || ""
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         required
                         disabled={isView || submitting}
                       >
@@ -492,7 +492,7 @@ export default function AgendaManagerKab() {
                         type="file"
                         name="poster"
                         accept="image/*"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         disabled={submitting}
                       />
                     )}
@@ -522,7 +522,7 @@ export default function AgendaManagerKab() {
                           ? new Date(editData.waktu).toISOString().slice(0, 16)
                           : ""
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       disabled={isView || submitting}
                     />
                   </div>
@@ -536,7 +536,7 @@ export default function AgendaManagerKab() {
                       type="text"
                       name="lokasi"
                       defaultValue={viewData?.lokasi || editData?.lokasi || ""}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       disabled={isView || submitting}
                       placeholder="Contoh: Balai Desa, Lapangan Desa, dll"
                     />
@@ -652,7 +652,7 @@ export default function AgendaManagerKab() {
             type="text"
             placeholder="Cari judul artikel, tipe, penulis, atau desa..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full bg-white text-gray-500 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             onChange={handleSearch}
           />
         </div>

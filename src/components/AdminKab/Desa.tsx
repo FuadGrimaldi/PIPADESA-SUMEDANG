@@ -305,7 +305,7 @@ export default function DesaManagerKab() {
                     defaultValue={
                       viewData?.subdomain || editData?.subdomain || ""
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
                     placeholder="nama-desa"
                     disabled={isView || submitting}
@@ -323,7 +323,7 @@ export default function DesaManagerKab() {
                     defaultValue={
                       viewData?.nama_desa || editData?.nama_desa || ""
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
                     disabled={isView || submitting}
                     readOnly={isView}
@@ -338,7 +338,7 @@ export default function DesaManagerKab() {
                   <textarea
                     name="alamat"
                     defaultValue={viewData?.alamat || editData?.alamat || ""}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     rows={3}
                     required
                     disabled={isView || submitting}
@@ -358,7 +358,7 @@ export default function DesaManagerKab() {
                       defaultValue={
                         viewData?.telepon || editData?.telepon || ""
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                       disabled={isView || submitting}
                       readOnly={isView}
@@ -374,7 +374,7 @@ export default function DesaManagerKab() {
                       type="email"
                       name="email"
                       defaultValue={editData?.email || editData?.email || ""}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                       disabled={isView || submitting}
                       readOnly={isView}
@@ -394,7 +394,7 @@ export default function DesaManagerKab() {
                       defaultValue={
                         viewData?.twitter || editData?.twitter || ""
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                       disabled={isView || submitting}
                       readOnly={isView}
@@ -412,7 +412,7 @@ export default function DesaManagerKab() {
                       defaultValue={
                         viewData?.instagram || editData?.instagram || ""
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                       disabled={isView || submitting}
                       readOnly={isView}
@@ -429,7 +429,7 @@ export default function DesaManagerKab() {
                     type="file"
                     name="foto_depan"
                     accept="image/*"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     disabled={isView || submitting}
                     readOnly={isView}
                   />
@@ -464,7 +464,7 @@ export default function DesaManagerKab() {
                   <textarea
                     name="visi"
                     defaultValue={viewData?.visi || editData?.visi || ""}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     rows={3}
                     required
                     disabled={isView || submitting}
@@ -480,7 +480,7 @@ export default function DesaManagerKab() {
                   <textarea
                     name="misi"
                     defaultValue={viewData?.misi || editData?.misi || ""}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     rows={4}
                     required
                     disabled={isView || submitting}
@@ -496,7 +496,7 @@ export default function DesaManagerKab() {
                   <textarea
                     name="tujuan"
                     defaultValue={viewData?.tujuan || editData?.tujuan || ""}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     rows={3}
                     required
                     disabled={isView || submitting}
@@ -512,7 +512,7 @@ export default function DesaManagerKab() {
                   <textarea
                     name="sejarah"
                     defaultValue={viewData?.sejarah || editData?.sejarah || ""}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     rows={4}
                     required
                     disabled={isView || submitting}
@@ -533,7 +533,7 @@ export default function DesaManagerKab() {
                       editData?.gmaps_embed_url ||
                       ""
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
                     disabled={isView || submitting}
                     readOnly={isView}
@@ -551,7 +551,7 @@ export default function DesaManagerKab() {
                       step="any"
                       name="lat"
                       defaultValue={editData?.lat || editData?.lat || ""}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       disabled={isView || submitting}
                       readOnly={isView}
                       placeholder="-6.123456"
@@ -567,7 +567,7 @@ export default function DesaManagerKab() {
                       step="any"
                       name="lng"
                       defaultValue={editData?.lng || editData?.lng || ""}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       disabled={isView || submitting}
                       readOnly={isView}
                       placeholder="107.123456"
@@ -643,7 +643,7 @@ export default function DesaManagerKab() {
             type="text"
             placeholder="Cari nama desa, alamat, email, atau subdomain..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-700"
             onChange={handleSearch}
           />
         </div>

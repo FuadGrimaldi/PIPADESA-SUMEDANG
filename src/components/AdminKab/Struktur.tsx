@@ -291,7 +291,7 @@ export default function OfficialManagerKab() {
                     type="text"
                     name="name"
                     defaultValue={viewData?.name || editData?.name || ""}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-700 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
                     disabled={isView || submitting}
                     readOnly={isView}
@@ -310,7 +310,7 @@ export default function OfficialManagerKab() {
                     defaultValue={
                       viewData?.position || editData?.position || ""
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-700 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
                     disabled={isView || submitting}
                     readOnly={isView}
@@ -329,7 +329,7 @@ export default function OfficialManagerKab() {
                     defaultValue={
                       viewData?.display_order || editData?.display_order || ""
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-700 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
                     disabled={isView || submitting}
                     readOnly={isView}
@@ -352,7 +352,7 @@ export default function OfficialManagerKab() {
                   <select
                     name="desa_id"
                     defaultValue={viewData?.desa_id || editData?.desa_id || ""}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-700 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
                     disabled={isView || submitting}
                   >
@@ -375,7 +375,7 @@ export default function OfficialManagerKab() {
                     type="file"
                     name="photo"
                     accept="image/*"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border text-gray-700 bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     disabled={isView || submitting}
                   />
                   {(viewData?.photo || editData?.photo) && (
@@ -467,7 +467,7 @@ export default function OfficialManagerKab() {
             type="text"
             placeholder="Cari nama, jabatan, atau desa..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full bg-white text-gray-700 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             onChange={handleSearch}
           />
         </div>

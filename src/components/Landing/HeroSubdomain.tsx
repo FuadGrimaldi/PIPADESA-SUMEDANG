@@ -36,28 +36,6 @@ const Hero = async ({ subdomain }: { subdomain: string | null }) => {
         {/* Hero Overlay */}
         <div className="hero-overlay bg-opacity-60 rounded-2xl"></div>
 
-        {/* Logo Kiri */}
-        <div className="absolute top-1 left-1 z-20">
-          <Image
-            src={"/assets/logo-fix/logo-sumedang-500.png"}
-            alt="Logo Desa"
-            width={80}
-            height={80}
-            className="rounded-full shadow-lg p-1"
-          />
-        </div>
-
-        {/* Logo Kanan */}
-        <div className="absolute top-1 right-1 z-20">
-          <Image
-            src={"/assets/logo-fix/logo-sumedang-500.png"}
-            alt="Logo Pemda"
-            width={80}
-            height={80}
-            className="rounded-full shadow-lg p-1"
-          />
-        </div>
-
         {/* Content Container */}
         <div className="flex justify-center items-center w-full h-full rounded-2xl relative z-10">
           <div className="text-white text-center max-w-2xl mx-auto px-4 pb-6">

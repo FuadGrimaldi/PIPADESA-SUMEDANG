@@ -227,7 +227,7 @@ export default function SdgsManager() {
                 type="text"
                 name="title"
                 defaultValue={viewData?.title || editData?.title || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -242,7 +242,7 @@ export default function SdgsManager() {
                 type="file"
                 name="image"
                 accept="image/*"
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 disabled={isView || submitting}
               />
               {(viewData?.image || editData?.image) && (
@@ -327,7 +327,7 @@ export default function SdgsManager() {
             type="text"
             placeholder="Cari nama, jabatan, atau desa..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             onChange={handleSearch}
           />
         </div>

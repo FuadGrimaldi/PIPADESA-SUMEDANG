@@ -23,7 +23,7 @@ export default async function SubdomainHomePage() {
         </div>
       </div>
 
-      <div id="news-landing" className="px-[31px] lg:px-[100px] px-4 py-8">
+      <div className="px-[31px] lg:px-[100px] px-4 py-8">
         <News desaId={Number(desa?.id)} />
       </div>
       <div

@@ -242,11 +242,13 @@ export default function SaranaWisataManager() {
           >
             {/* Desa */}
             <div>
-              <label className="block text-sm font-medium mb-2">Desa *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Desa *
+              </label>
               <select
                 name="desa_id"
                 value={selectedDesa}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 onChange={(e) => setSelectedDesa(Number(e.target.value) || "")}
@@ -262,7 +264,7 @@ export default function SaranaWisataManager() {
 
             {/* Nama Sarana */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Nama Sarana *
               </label>
               <input
@@ -271,7 +273,7 @@ export default function SaranaWisataManager() {
                 defaultValue={
                   viewData?.nama_sarana || editData?.nama_sarana || ""
                 }
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -280,13 +282,13 @@ export default function SaranaWisataManager() {
 
             {/* Kategori */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Kategori *
               </label>
               <select
                 name="kategori"
                 defaultValue={viewData?.kategori || editData?.kategori || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
               >
@@ -302,13 +304,13 @@ export default function SaranaWisataManager() {
 
             {/* Deskripsi */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Deskripsi *
               </label>
               <textarea
                 name="deskripsi"
                 defaultValue={viewData?.deskripsi || editData?.deskripsi || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -317,7 +319,7 @@ export default function SaranaWisataManager() {
 
             {/* Alamat Lokasi */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Alamat Lokasi *
               </label>
               <input
@@ -326,7 +328,7 @@ export default function SaranaWisataManager() {
                 defaultValue={
                   viewData?.alamat_lokasi || editData?.alamat_lokasi || ""
                 }
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -335,7 +337,7 @@ export default function SaranaWisataManager() {
 
             {/* Koordinat Latitude */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Koordinat Latitude
               </label>
               <input
@@ -344,7 +346,7 @@ export default function SaranaWisataManager() {
                 defaultValue={
                   viewData?.koordinat_lat || editData?.koordinat_lat || ""
                 }
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 disabled={isView || submitting}
                 readOnly={isView}
               />
@@ -352,7 +354,7 @@ export default function SaranaWisataManager() {
 
             {/* Koordinat Longitude */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Koordinat Longitude
               </label>
               <input
@@ -361,7 +363,7 @@ export default function SaranaWisataManager() {
                 defaultValue={
                   viewData?.koordinat_long || editData?.koordinat_long || ""
                 }
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 disabled={isView || submitting}
                 readOnly={isView}
               />
@@ -369,11 +371,13 @@ export default function SaranaWisataManager() {
 
             {/* Unggulan */}
             <div>
-              <label className="block text-sm font-medium mb-2">Unggulan</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Unggulan
+              </label>
               <select
                 name="unggulan"
                 defaultValue={viewData?.unggulan || editData?.unggulan || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 disabled={isView || submitting}
               >
                 <option value="">Pilih</option>
@@ -384,11 +388,13 @@ export default function SaranaWisataManager() {
 
             {/* Status */}
             <div>
-              <label className="block text-sm font-medium mb-2">Status *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Status *
+              </label>
               <select
                 name="status"
                 defaultValue={viewData?.status || editData?.status || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
               >
@@ -401,12 +407,14 @@ export default function SaranaWisataManager() {
 
             {/* Foto */}
             <div>
-              <label className="block text-sm font-medium mb-2">Foto</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Foto
+              </label>
               <input
                 type="file"
                 name="foto_path"
                 accept="image/*"
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 disabled={isView || submitting}
               />
               {(viewData?.foto_path || editData?.foto_path) && (
@@ -505,7 +513,7 @@ export default function SaranaWisataManager() {
             type="text"
             placeholder="Cari nama, jabatan, atau desa..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full bg-white text-gray-500 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             onChange={handleSearch}
           />
         </div>

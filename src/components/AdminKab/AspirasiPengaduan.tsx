@@ -265,11 +265,11 @@ export default function PengaduanAspirasiManager() {
 
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
             <div>
-              <label className="block text-sm mb-2">Desa *</label>
+              <label className="block text-sm mb-2 text-gray-700">Desa *</label>
               <select
                 name="desa_id"
                 defaultValue={viewData?.desa_id || editData?.desa_id || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 bg-white border text-gray-500 rounded-lg"
                 required
                 disabled={isView || submitting}
               >
@@ -282,12 +282,12 @@ export default function PengaduanAspirasiManager() {
               </select>
             </div>
             <div>
-              <label className="block text-sm mb-2">Nama *</label>
+              <label className="block text-sm mb-2 text-gray-700">Nama *</label>
               <input
                 type="text"
                 name="name"
                 defaultValue={viewData?.name || editData?.name || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 bg-white border text-gray-500 rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -295,12 +295,14 @@ export default function PengaduanAspirasiManager() {
             </div>
 
             <div>
-              <label className="block text-sm mb-2">Email *</label>
+              <label className="block text-sm mb-2 text-gray-700">
+                Email *
+              </label>
               <input
                 type="email"
                 name="email"
                 defaultValue={viewData?.email || editData?.email || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 bg-white border text-gray-500 rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -308,12 +310,14 @@ export default function PengaduanAspirasiManager() {
             </div>
 
             <div>
-              <label className="block text-sm mb-2">No. Telepon *</label>
+              <label className="block text-sm mb-2 text-gray-700">
+                No. Telepon *
+              </label>
               <input
                 type="text"
                 name="no_telp"
                 defaultValue={viewData?.no_telp || editData?.no_telp || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 bg-white border text-gray-500 rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -321,11 +325,13 @@ export default function PengaduanAspirasiManager() {
             </div>
 
             <div>
-              <label className="block text-sm mb-2">Pesan *</label>
+              <label className="block text-sm mb-2 text-gray-700">
+                Pesan *
+              </label>
               <textarea
                 name="pesan"
                 defaultValue={viewData?.pesan || editData?.pesan || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 bg-white border text-gray-500 rounded-lg"
                 rows={4}
                 required
                 disabled={isView || submitting}
@@ -334,11 +340,13 @@ export default function PengaduanAspirasiManager() {
             </div>
 
             <div>
-              <label className="block text-sm mb-2">Kategori *</label>
+              <label className="block text-sm mb-2 text-gray-700">
+                Kategori *
+              </label>
               <select
                 name="kategori"
                 defaultValue={viewData?.kategori || editData?.kategori || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 bg-white border text-gray-500 rounded-lg"
                 required
                 disabled={isView || submitting}
               >
@@ -349,11 +357,13 @@ export default function PengaduanAspirasiManager() {
             </div>
 
             <div>
-              <label className="block text-sm mb-2">Status *</label>
+              <label className="block text-sm mb-2 text-gray-700">
+                Status *
+              </label>
               <select
                 name="status"
                 defaultValue={viewData?.status || editData?.status || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 bg-white border text-gray-500 rounded-lg"
                 required
                 disabled={isView || submitting}
               >
@@ -419,7 +429,7 @@ export default function PengaduanAspirasiManager() {
             type="text"
             placeholder="Cari nama, jabatan, atau desa..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 bg-white text-gray-500 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             onChange={handleSearch}
           />
         </div>

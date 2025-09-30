@@ -310,7 +310,7 @@ export default function VideoManager() {
                   defaultValue={viewData?.title || editData?.title || ""}
                   required
                   disabled={isView || submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                   placeholder="Judul video"
                 />
               </div>
@@ -326,7 +326,7 @@ export default function VideoManager() {
                   defaultValue={viewData?.categori || editData?.categori || ""}
                   required
                   disabled={isView || submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                   placeholder="Kategori"
                 />
               </div>
@@ -342,7 +342,7 @@ export default function VideoManager() {
                     viewData?.deskripsi || editData?.deskripsi || ""
                   }
                   disabled={isView || submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                   placeholder="Deskripsi video"
                   rows={4}
                 ></textarea>
@@ -361,7 +361,7 @@ export default function VideoManager() {
                   }
                   required
                   disabled={isView || submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                   placeholder="https://youtube.com/embed/xxxx"
                 />
               </div>
@@ -376,7 +376,7 @@ export default function VideoManager() {
                   defaultValue={viewData?.desa_id || editData?.desa_id || ""}
                   required
                   disabled={isView || submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 >
                   <option value="">Pilih Desa</option>
                   {desaList?.map((desa) => (
@@ -408,7 +408,7 @@ export default function VideoManager() {
                   }
                   required
                   disabled={isView || submitting}
-                  className="w-full px-4 py-2 border rounded-lg"
+                  className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 />
               </div>
             </div>
@@ -476,7 +476,7 @@ export default function VideoManager() {
             type="text"
             placeholder="Cari nama desa, alamat, email, atau subdomain..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full bg-white text-gray-500 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             onChange={handleSearch}
           />
         </div>

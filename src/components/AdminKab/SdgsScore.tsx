@@ -296,11 +296,13 @@ export default function SdgsScoreManager() {
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
             {/* Desa */}
             <div>
-              <label className="block text-sm font-medium mb-2">Desa *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Desa *
+              </label>
               <select
                 name="desa_id"
                 value={selectedDesa}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 onChange={(e) => setSelectedDesa(Number(e.target.value) || "")}
@@ -316,11 +318,13 @@ export default function SdgsScoreManager() {
 
             {/* SDGs */}
             <div>
-              <label className="block text-sm font-medium mb-2">SDGs *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                SDGs *
+              </label>
               <select
                 name="sdgs_id"
                 defaultValue={viewData?.sdgs_id || editData?.sdgs_id || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
               >
@@ -335,12 +339,14 @@ export default function SdgsScoreManager() {
 
             {/* Score */}
             <div>
-              <label className="block text-sm font-medium mb-2">Score *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Score *
+              </label>
               <input
                 type="number"
                 name="score"
                 defaultValue={viewData?.score || editData?.score || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -349,12 +355,14 @@ export default function SdgsScoreManager() {
 
             {/* Tahun */}
             <div>
-              <label className="block text-sm font-medium mb-2">Tahun *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Tahun *
+              </label>
               <input
                 type="number"
                 name="tahun"
                 defaultValue={viewData?.tahun || editData?.tahun || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -416,7 +424,7 @@ export default function SdgsScoreManager() {
             type="text"
             placeholder="Cari nama, jabatan, atau desa..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full pl-10 bg-white text-gray-500 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             onChange={handleSearch}
           />
         </div>

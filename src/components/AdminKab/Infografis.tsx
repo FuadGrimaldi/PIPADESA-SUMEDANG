@@ -270,7 +270,7 @@ export default function InfografisManager() {
                 type="text"
                 name="title"
                 defaultValue={viewData?.title || editData?.title || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -285,7 +285,7 @@ export default function InfografisManager() {
               <select
                 name="desa_id"
                 defaultValue={viewData?.desa_id || editData?.desa_id || ""}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
               >
@@ -307,7 +307,7 @@ export default function InfografisManager() {
                 type="file"
                 name="gambar_path"
                 accept="image/*"
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 disabled={isView || submitting}
               />
               {(viewData?.gambar_path || editData?.gambar_path) && (
@@ -394,7 +394,7 @@ export default function InfografisManager() {
               type="text"
               placeholder="Cari nama, jabatan, atau desa..."
               value={searchTerm}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="w-full bg-white text-gray-500 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               onChange={handleSearch}
             />
           </div>

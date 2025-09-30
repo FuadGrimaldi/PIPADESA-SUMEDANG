@@ -340,7 +340,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                       type="text"
                       name="title"
                       defaultValue={viewData?.title || editData?.title || ""}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                       disabled={isView || submitting}
                       readOnly={isView}
@@ -355,7 +355,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                       type="text"
                       name="slug"
                       defaultValue={viewData?.slug || editData?.slug || ""}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       required
                       disabled={isView || submitting}
                       readOnly={isView}
@@ -375,7 +375,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                       <textarea
                         name="content"
                         defaultValue={editData?.content || ""}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent min-h-[120px]"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent min-h-[120px]"
                         required
                         disabled={submitting}
                         placeholder="Masukkan konten artikel"
@@ -391,7 +391,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                       <select
                         name="tipe"
                         defaultValue={viewData?.tipe || editData?.tipe || ""}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         required
                         disabled={isView || submitting}
                       >
@@ -413,7 +413,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                         defaultValue={
                           viewData?.status || editData?.status || "draft"
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         required
                         disabled={isView || submitting}
                       >
@@ -434,7 +434,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                         defaultValue={
                           viewData?.user_id || editData?.user_id || ""
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         required
                         disabled={isView || submitting}
                       >
@@ -458,7 +458,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                         defaultValue={
                           viewData?.desa_id || editData?.desa_id || ""
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         required
                         disabled={isView || submitting}
                       >
@@ -489,7 +489,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                         type="file"
                         name="featured_image"
                         accept="image/*"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         disabled={submitting}
                       />
                     )}
@@ -524,7 +524,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                         editData?.dokumen_terkait_path ||
                         ""
                       }
-                      className="border w-full px-3 py-2 rounded"
+                      className="border w-full px-3 py-2 rounded bg-white text-gray-500"
                       placeholder="Masukkan path dokumen terkait"
                       disabled={isView || submitting}
                       readOnly={isView}
@@ -545,7 +545,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                               .slice(0, 16)
                           : ""
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       disabled={isView || submitting}
                       readOnly={isView}
                     />
@@ -563,7 +563,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                         editData?.lokasi_kegiatan ||
                         ""
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       disabled={isView || submitting}
                       readOnly={isView}
                       placeholder="Contoh: Balai Desa, Lapangan Desa, dll"
@@ -584,7 +584,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
                               .slice(0, 16)
                           : ""
                       }
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="w-full px-4 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       disabled={isView || submitting}
                       readOnly={isView}
                     />
@@ -702,7 +702,7 @@ export default function ArtikelManagerKab({ userId }: Props) {
             type="text"
             placeholder="Cari judul artikel, tipe, penulis, atau desa..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full bg-white text-gray-500 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             onChange={handleSearch}
           />
         </div>

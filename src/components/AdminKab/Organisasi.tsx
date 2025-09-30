@@ -281,11 +281,13 @@ export default function OrganisasiManager() {
           >
             {/* Desa */}
             <div>
-              <label className="block text-sm font-medium mb-2">Desa *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Desa *
+              </label>
               <select
                 name="desa_id"
                 value={selectedDesa}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 onChange={(e) => setSelectedDesa(Number(e.target.value) || "")}
@@ -301,7 +303,7 @@ export default function OrganisasiManager() {
 
             {/* Nama Organisasi */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Nama Organisasi *
               </label>
               <input
@@ -310,7 +312,7 @@ export default function OrganisasiManager() {
                 defaultValue={
                   viewData?.nama_organisasi || editData?.nama_organisasi || ""
                 }
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -319,7 +321,7 @@ export default function OrganisasiManager() {
 
             {/* Nama Ketua */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Nama Ketua *
               </label>
               <input
@@ -328,7 +330,7 @@ export default function OrganisasiManager() {
                 defaultValue={
                   viewData?.nama_ketua || editData?.nama_ketua || ""
                 }
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -337,7 +339,7 @@ export default function OrganisasiManager() {
 
             {/* Deskripsi */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Deskripsi Kegiatan *
               </label>
               <textarea
@@ -347,7 +349,7 @@ export default function OrganisasiManager() {
                   editData?.deskripsi_kegiatan ||
                   ""
                 }
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
                 readOnly={isView}
@@ -356,7 +358,7 @@ export default function OrganisasiManager() {
 
             {/* Kategori */}
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Kategori *
               </label>
               <select
@@ -364,7 +366,7 @@ export default function OrganisasiManager() {
                 defaultValue={
                   viewData?.kategori_id || editData?.kategori_id || ""
                 }
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 required
                 disabled={isView || submitting}
               >
@@ -383,12 +385,14 @@ export default function OrganisasiManager() {
 
             {/* Logo */}
             <div>
-              <label className="block text-sm font-medium mb-2">Logo</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Logo
+              </label>
               <input
                 type="file"
                 name="logo_path"
                 accept="image/*"
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 text-gray-500 bg-white border rounded-lg"
                 disabled={isView || submitting}
               />
               {(viewData?.logo_path || editData?.logo_path) && (
@@ -471,7 +475,7 @@ export default function OrganisasiManager() {
               type="text"
               placeholder="Cari nama, jabatan, atau desa..."
               value={searchTerm}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="w-full bg-white text-gray-500 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               onChange={handleSearch}
             />
           </div>
@@ -542,10 +546,10 @@ export default function OrganisasiManager() {
                         <div className="text-sm font-medium text-gray-900">
                           {organisasi.nama_organisasi}
                         </div>
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-medium text-gray-700">
                           {organisasi.nama_ketua}
                         </div>
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-medium text-gray-500">
                           {organisasi.deskripsi_kegiatan}
                         </div>
                       </td>

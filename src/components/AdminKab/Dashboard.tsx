@@ -570,7 +570,9 @@ export default function DashboardAdminKab() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Content Distribution Chart */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-lg font-semibold mb-4">Distribusi Konten</h3>
+          <h3 className="text-lg font-semibold mb-4 text-gray-700">
+            Distribusi Konten
+          </h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -596,7 +598,7 @@ export default function DashboardAdminKab() {
 
         {/* Organization Distribution Chart */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-lg font-semibold mb-4">
+          <h3 className="text-lg font-semibold mb-4 text-gray-700">
             Distribusi Organisasi & Sarana
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -615,37 +617,11 @@ export default function DashboardAdminKab() {
         </div>
       </div>
 
-      {/* Interaction Trends */}
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h3 className="text-lg font-semibold mb-4">Tren Interaksi Publik</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={interactionData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="pengaduan"
-              stroke="#8884d8"
-              strokeWidth={2}
-            />
-            <Line
-              type="monotone"
-              dataKey="komentar"
-              stroke="#82ca9d"
-              strokeWidth={2}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-
       {/* Recent Activity & Quick Stats */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Activity */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-lg font-semibold mb-4 flex items-center">
+          <h3 className="text-lg font-semibold mb-4 text-gray-700 flex items-center">
             <Clock className="w-5 h-5 mr-2" />
             Aktivitas Terbaru
           </h3>
@@ -659,7 +635,7 @@ export default function DashboardAdminKab() {
                 >
                   <IconComponent className="w-5 h-5 text-gray-500 mr-3" />
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-800">
+                    <p className="text-sm font-medium text-gray-600 text-gray-800">
                       {activity.title}
                     </p>
                     <p className="text-xs text-gray-500">
@@ -677,37 +653,47 @@ export default function DashboardAdminKab() {
 
         {/* Quick Stats */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-lg font-semibold mb-4 flex items-center">
+          <h3 className="text-lg font-semibold mb-4 text-gray-700 flex items-center">
             <TrendingUp className="w-5 h-5 mr-2" />
             Statistik Cepat
           </h3>
           <div className="space-y-4">
             <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-              <span className="text-sm font-medium">Kategori Organisasi</span>
+              <span className="text-sm font-medium text-gray-600">
+                Kategori Organisasi
+              </span>
               <span className="text-lg font-bold text-blue-600">
                 {kategoriOrganisasis.length}
               </span>
             </div>
             <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
-              <span className="text-sm font-medium">Wisata & Wisata</span>
+              <span className="text-sm font-medium text-gray-600">
+                Wisata & Wisata
+              </span>
               <span className="text-lg font-bold text-green-600">
                 {stats.totalSaranaWisata}
               </span>
             </div>
             <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg">
-              <span className="text-sm font-medium">Total Komentar</span>
+              <span className="text-sm font-medium text-gray-600">
+                Total Komentar
+              </span>
               <span className="text-lg font-bold text-yellow-600">
                 {stats.totalKomentar}
               </span>
             </div>
             <div className="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
-              <span className="text-sm font-medium">Data SDGs</span>
+              <span className="text-sm font-medium text-gray-600">
+                Data SDGs
+              </span>
               <span className="text-lg font-bold text-purple-600">
                 {sdgs.length}
               </span>
             </div>
             <div className="flex justify-between items-center p-3 bg-indigo-50 rounded-lg">
-              <span className="text-sm font-medium">Skor SDGs</span>
+              <span className="text-sm font-medium text-gray-600">
+                Skor SDGs
+              </span>
               <span className="text-lg font-bold text-indigo-600">
                 {sdgsScores.length}
               </span>

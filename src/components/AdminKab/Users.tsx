@@ -275,7 +275,7 @@ export default function UserManagerKab({ role }: UserProps) {
                     type="text"
                     name="nik"
                     defaultValue={viewData?.nik || editData?.nik || ""}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white rounded-lg"
                     required
                     disabled={isView || submitting}
                     readOnly={isView}
@@ -291,7 +291,7 @@ export default function UserManagerKab({ role }: UserProps) {
                     defaultValue={
                       viewData?.username || editData?.username || ""
                     }
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white rounded-lg"
                     required
                     disabled={isView || submitting}
                     readOnly={isView}
@@ -307,7 +307,7 @@ export default function UserManagerKab({ role }: UserProps) {
                     defaultValue={
                       viewData?.full_name || editData?.full_name || ""
                     }
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white rounded-lg"
                     required
                     disabled={isView || submitting}
                     readOnly={isView}
@@ -321,7 +321,7 @@ export default function UserManagerKab({ role }: UserProps) {
                     type="email"
                     name="email"
                     defaultValue={viewData?.email || editData?.email || ""}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white rounded-lg"
                     required
                     disabled={isView || submitting}
                     readOnly={isView}
@@ -337,7 +337,7 @@ export default function UserManagerKab({ role }: UserProps) {
                   <select
                     name="role"
                     defaultValue={viewData?.role || editData?.role || ""}
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white rounded-lg"
                     required
                     disabled={isView || submitting}
                   >
@@ -362,7 +362,7 @@ export default function UserManagerKab({ role }: UserProps) {
                         ? editData.desa_id
                         : ""
                     }
-                    className="w-full px-4 py-2 border rounded-lg"
+                    className="w-full px-4 py-2 border text-gray-500 bg-white rounded-lg"
                     required
                     disabled={isView || submitting}
                   >
@@ -382,7 +382,7 @@ export default function UserManagerKab({ role }: UserProps) {
                   <input
                     type="password"
                     name="password"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg 
+                    className="w-full px-4 py-2 border text-gray-500 bg-white border-gray-300 rounded-lg 
                focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder={
                       editData
@@ -445,7 +445,7 @@ export default function UserManagerKab({ role }: UserProps) {
             type="text"
             placeholder="Cari username, email, role, atau desa..."
             value={searchTerm}
-            className="w-full pl-10 pr-4 py-2 border rounded-lg"
+            className="w-full pl-10 pr-4 py-2 border rounded-lg bg-white text-gray-500"
             onChange={handleSearch}
           />
         </div>
@@ -494,13 +494,13 @@ export default function UserManagerKab({ role }: UserProps) {
               <tbody className="divide-y divide-gray-200">
                 {filteredUsers.map((user) => (
                   <tr key={user.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">{user.username}</td>
-                    <td className="px-6 py-4">{user.email}</td>
-                    <td className="px-6 py-4">{user.role}</td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 text-gray-700">{user.username}</td>
+                    <td className="px-6 py-4 text-gray-700">{user.email}</td>
+                    <td className="px-6 py-4 text-gray-700">{user.role}</td>
+                    <td className="px-6 py-4 text-gray-700">
                       {user.profile_desa?.nama_desa || "-"}
                     </td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-6 py-4 text-gray-700 text-center">
                       <div className="flex justify-center space-x-2">
                         <button
                           onClick={() => handleOpenView(user)}
