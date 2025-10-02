@@ -29,7 +29,7 @@ export default async function AgendaDesa() {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-4">
-              <SearchBerita />
+              <SearchBerita desaId={desaId} />
             </div>
             <div className="mb-4 bg-white rounded-lg shadow-lg p-6">
               <AllAgenda desaId={Number(desa?.id)} />

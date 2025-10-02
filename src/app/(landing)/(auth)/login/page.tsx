@@ -9,7 +9,10 @@ export default async function LoginPageSubdomain() {
   const desa = await getDesaBySubdomain(subdomain); // Fetch desa data if needed
   return (
     <div>
-      <SubdomainLogin desa={desa} />
+      <SubdomainLogin
+        desaId={Number(desa?.id)}
+        nama_desa={desa?.nama_desa ?? ""}
+      />
     </div>
   );
 }

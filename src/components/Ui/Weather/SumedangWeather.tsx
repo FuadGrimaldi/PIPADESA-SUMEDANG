@@ -29,17 +29,20 @@ export default function SumedangWeatherWidget() {
   const [error, setError] = useState<string | null>(null);
 
   // Mock weather data for Sumedang (since we can't use real API in this environment)
-  const mockWeatherData: WeatherData = {
-    location: "Sumedang, West Java",
-    temperature: 26,
-    condition: "Partly Cloudy",
-    humidity: 78,
-    windSpeed: 12,
-    visibility: 8,
-    feelsLike: 28,
-    description: "Partly cloudy with a chance of light rain",
-    icon: "partly-cloudy",
-  };
+  const mockWeatherData: WeatherData = React.useMemo(
+    () => ({
+      location: "Sumedang, West Java",
+      temperature: 26,
+      condition: "Partly Cloudy",
+      humidity: 78,
+      windSpeed: 12,
+      visibility: 8,
+      feelsLike: 28,
+      description: "Partly cloudy with a chance of light rain",
+      icon: "partly-cloudy",
+    }),
+    []
+  );
 
   useEffect(() => {
     // Simulate API call
@@ -57,7 +60,7 @@ export default function SumedangWeatherWidget() {
     };
 
     fetchWeather();
-  }, []);
+  }, [mockWeatherData]);
 
   const getWeatherIcon = (condition: string) => {
     switch (condition) {

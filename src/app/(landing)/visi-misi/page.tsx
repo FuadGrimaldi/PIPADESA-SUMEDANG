@@ -27,7 +27,11 @@ export default async function VisiMisiPage() {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <VisiMisiDesa desa={desa} />
+              <VisiMisiDesa
+                visi={desa?.visi || ""}
+                misi={desa?.misi || ""}
+                tujuan={desa?.tujuan || ""}
+              />
             </div>
             <SumedangWeatherWidget />
           </div>

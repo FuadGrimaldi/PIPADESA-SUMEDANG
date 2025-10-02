@@ -28,7 +28,7 @@ export default async function SejarahPage() {
           {/* Main Content */}
           <div className="w-full lg:flex-1 ">
             <div className="mb-8 bg-white rounded-lg shadow-lg p-6">
-              <MainKontak desa={desa} />
+              <MainKontak desaId={desaId} />
             </div>
             <SumedangWeatherWidget />
           </div>

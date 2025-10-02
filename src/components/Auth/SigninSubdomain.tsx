@@ -6,10 +6,14 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation"; // untuk melakukan redirect
 import { signIn } from "next-auth/react";
-import { Desa } from "@/types/desa"; // Pastikan Anda memiliki tipe Desa yang sesuai
 import Swal from "sweetalert2";
 
-export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
+interface loginProps {
+  desaId: number;
+  nama_desa: string;
+}
+
+export default function SubdomainLogin({ desaId, nama_desa }: loginProps) {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -27,22 +31,22 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
       const singInData = await signIn("credentials", {
         email: data.email,
         password: data.password,
-        subdomainDesaId: desa?.id,
+        subdomainDesaId: desaId,
         redirect: false,
       });
       const response = await axios.post("/api/login", {
         email: data.email,
         password: data.password,
-        subdomaindesaId: desa?.id,
+        subdomaindesaId: desaId,
       });
 
       if (response.status === 200 && response.data) {
         const DesaId = response.data.user.desa_id;
-        if (DesaId === desa?.id) {
+        if (DesaId === desaId) {
           Swal.fire({
             position: "top",
             icon: "success",
-            title: "Login Success to " + (desa?.nama_desa || "the Village"),
+            title: "Login Success to " + (nama_desa || "the Village"),
             showConfirmButton: false,
             timer: 1500,
           });
@@ -110,9 +114,8 @@ export default function SubdomainLogin({ desa }: { desa?: Desa | null }) {
           </h1>
           <p className="pr-3 text-sm opacity-75 text-black">
             Silakan masuk menggunakan akun yang terdaftar pada desa{" "}
-            <span className="font-bold">{desa?.nama_desa || "Anda"}</span>.
-            Masukkan email dan password Anda untuk mengakses dashboard
-            administrasi desa.
+            <span className="font-bold">{nama_desa || "Anda"}</span>. Masukkan
+            email dan password Anda untuk mengakses dashboard administrasi desa.
           </p>
         </motion.div>
 

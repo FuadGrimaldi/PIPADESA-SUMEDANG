@@ -2,7 +2,17 @@
 import { motion } from "framer-motion";
 import { Desa } from "@/types/desa";
 
-export default function VisiMisiDesa({ desa }: { desa: Desa | null }) {
+interface VisiMisiDesaProps {
+  visi: string;
+  misi: string;
+  tujuan: string;
+}
+
+export default function VisiMisiDesa({
+  visi,
+  misi,
+  tujuan,
+}: VisiMisiDesaProps) {
   return (
     <section>
       <motion.div
@@ -26,7 +36,7 @@ export default function VisiMisiDesa({ desa }: { desa: Desa | null }) {
               Visi
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              {desa?.visi || "Loading... Visi desa belum tersedia."}
+              {visi || "Loading... Visi desa belum tersedia."}
             </p>
           </div>
 
@@ -35,7 +45,7 @@ export default function VisiMisiDesa({ desa }: { desa: Desa | null }) {
               Misi
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              {desa?.misi || "Loading... Visi desa belum tersedia."}
+              {misi || "Loading... Visi desa belum tersedia."}
             </p>
           </div>
           <div className="mt-10">
@@ -43,7 +53,7 @@ export default function VisiMisiDesa({ desa }: { desa: Desa | null }) {
               Tujuan
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              {desa?.tujuan || "Loading... Tujuan desa belum tersedia."}
+              {tujuan || "Loading... Tujuan desa belum tersedia."}
             </p>
           </div>
         </div>

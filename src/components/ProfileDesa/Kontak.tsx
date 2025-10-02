@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, use } from "react";
 import {
   MapPin,
   Phone,
@@ -13,8 +13,14 @@ import {
 import { Desa } from "@/types/desa";
 import Swal from "sweetalert2";
 
-const MainKontak = ({ desa }: { desa: Desa | null }) => {
-  // Sample data - replace with actual data from your backend
+interface KontakProps {
+  desaId: number;
+}
+
+const MainKontak = ({ desaId }: KontakProps) => {
+  const [desa, setDesa] = useState<Desa | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     nama: "",
@@ -23,6 +29,29 @@ const MainKontak = ({ desa }: { desa: Desa | null }) => {
     subjek: "",
     pesan: "",
   });
+
+  const fetchDesa = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`/api/desa/${desaId}`);
+      if (!res.ok) {
+        throw new Error("Failed to fetch agenda");
+      }
+      const data = await res.json();
+      setDesa(data);
+    } catch (error) {
+      console.error("Error fetching agenda:", error);
+      setError("Gagal memuat agenda");
+      setDesa(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [desaId]);
+
+  useEffect(() => {
+    fetchDesa();
+  }, [fetchDesa]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
