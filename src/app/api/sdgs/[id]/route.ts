@@ -57,14 +57,24 @@ export async function PUT(
         ];
         if (existingSdgs.image && !defaultImages.includes(existingSdgs.image)) {
           {
-            // Delete old image if it exists
-            const oldImagePath = path.join(
-              process.cwd(),
-              "public",
-              existingSdgs.image
-            );
-            if (fs.existsSync(oldImagePath)) {
-              fs.unlinkSync(oldImagePath);
+            let imagePath: string;
+
+            if (existingSdgs.image.startsWith("/assets/")) {
+              // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+              imagePath = path.join(
+                process.cwd(),
+                "public",
+                existingSdgs.image
+              );
+            } else if (existingSdgs.image.startsWith("/uploads/")) {
+              // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+              imagePath = path.join(process.cwd(), existingSdgs.image);
+            } else {
+              imagePath = "";
+            }
+
+            if (imagePath && fs.existsSync(imagePath)) {
+              fs.unlinkSync(imagePath);
             }
           }
         }
@@ -75,7 +85,7 @@ export async function PUT(
         const fileExtension = path.extname(image.name);
         const fileName = `${uniqueSuffix}${fileExtension}`;
         // Ensure the uploads directory exists
-        const uploadDir = path.join(process.cwd(), "public", "assets", "sdgs");
+        const uploadDir = path.join(process.cwd(), "uploads", "sdgs");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -123,9 +133,19 @@ export async function DELETE(
       "/assets/default/default.jpg",
     ];
     if (existingSdgs.image && !defaultImages.includes(existingSdgs.image)) {
-      const imagePath = path.join(process.cwd(), "public", existingSdgs.image);
+      let imagePath: string;
 
-      if (fs.existsSync(imagePath)) {
+      if (existingSdgs.image.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), "public", existingSdgs.image);
+      } else if (existingSdgs.image.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), existingSdgs.image);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
       }
     }

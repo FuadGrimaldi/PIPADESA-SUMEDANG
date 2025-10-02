@@ -71,13 +71,7 @@ export async function POST(req: Request) {
         const fileExtension = path.extname(foto_depan.name);
         const fileName = `${uniqueSuffix}${fileExtension}`;
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "profile-desa"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "profile-desa");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }

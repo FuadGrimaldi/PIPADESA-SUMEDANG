@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  web:
+    image: fuadgrimaldi/fullstack-web-desa:latest
+    restart: unless-stopped
+    container_name: fullstack-web-desa
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./uploads:/app/uploads
+    networks:
+      - portofolios
+    env_file:
+      - .env
+
+networks:
+  portofolio:
+    external: true
+    name: personal-app_portofolio

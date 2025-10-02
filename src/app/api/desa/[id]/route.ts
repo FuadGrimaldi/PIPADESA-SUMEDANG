@@ -91,17 +91,24 @@ export async function PUT(
           existingDesa.foto_depan &&
           !defaultImages.includes(existingDesa.foto_depan)
         ) {
-          const oldImagePath = path.join(
-            process.cwd(),
-            "public",
-            existingDesa.foto_depan
-          );
-          if (fs.existsSync(oldImagePath)) {
-            try {
-              fs.unlinkSync(oldImagePath);
-            } catch (deleteError) {
-              console.warn("Could not delete old image:", deleteError);
-            }
+          let imagePath: string;
+
+          if (existingDesa.foto_depan.startsWith("/assets/")) {
+            // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              "public",
+              existingDesa.foto_depan
+            );
+          } else if (existingDesa.foto_depan.startsWith("/uploads/")) {
+            // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+            imagePath = path.join(process.cwd(), existingDesa.foto_depan);
+          } else {
+            imagePath = "";
+          }
+
+          if (imagePath && fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
           }
         }
 
@@ -115,13 +122,7 @@ export async function PUT(
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "profile-desa"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "profile-desa");
 
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
@@ -205,17 +206,20 @@ export async function DELETE(
       existingDesa.foto_depan &&
       !defaultImages.includes(existingDesa.foto_depan)
     ) {
-      const imagePath = path.join(
-        process.cwd(),
-        "public",
-        existingDesa.foto_depan
-      );
-      if (fs.existsSync(imagePath)) {
-        try {
-          fs.unlinkSync(imagePath);
-        } catch (deleteError) {
-          console.warn("Could not delete image file:", deleteError);
-        }
+      let imagePath: string;
+
+      if (existingDesa.foto_depan.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), "public", existingDesa.foto_depan);
+      } else if (existingDesa.foto_depan.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), existingDesa.foto_depan);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
       }
     }
 

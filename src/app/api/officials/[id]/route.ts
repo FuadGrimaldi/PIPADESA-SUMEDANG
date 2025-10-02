@@ -78,13 +78,24 @@ export async function PUT(
           currentOfficial.photo &&
           !defaultImages.includes(currentOfficial.photo)
         ) {
-          const oldPhotoPath = path.join(
-            process.cwd(),
-            "public",
-            currentOfficial.photo
-          );
-          if (fs.existsSync(oldPhotoPath)) {
-            fs.unlinkSync(oldPhotoPath);
+          let imagePath: string;
+
+          if (currentOfficial.photo.startsWith("/assets/")) {
+            // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              "public",
+              currentOfficial.photo
+            );
+          } else if (currentOfficial.photo.startsWith("/uploads/")) {
+            // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+            imagePath = path.join(process.cwd(), currentOfficial.photo);
+          } else {
+            imagePath = "";
+          }
+
+          if (imagePath && fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
           }
         }
 
@@ -97,13 +108,7 @@ export async function PUT(
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "officials"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "officials");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -171,14 +176,20 @@ export async function DELETE(
       currentOfficial.photo &&
       !defaultImages.includes(currentOfficial.photo)
     ) {
-      const photoPath = path.join(
-        process.cwd(),
-        "public",
+      let imagePath: string;
 
-        currentOfficial.photo
-      );
-      if (fs.existsSync(photoPath)) {
-        fs.unlinkSync(photoPath);
+      if (currentOfficial.photo.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), "public", currentOfficial.photo);
+      } else if (currentOfficial.photo.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), currentOfficial.photo);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
       }
     }
 

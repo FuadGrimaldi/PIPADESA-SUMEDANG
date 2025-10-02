@@ -93,14 +93,27 @@ export async function PUT(
           existingOrganization.logo_path &&
           !defaultImages.includes(existingOrganization.logo_path)
         ) {
-          // Delete old image if it exists
-          const oldImagePath = path.join(
-            process.cwd(),
-            "public",
-            existingOrganization.logo_path
-          );
-          if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath);
+          let imagePath: string;
+
+          if (existingOrganization.logo_path.startsWith("/assets/")) {
+            // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              "public",
+              existingOrganization.logo_path
+            );
+          } else if (existingOrganization.logo_path.startsWith("/uploads/")) {
+            // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              existingOrganization.logo_path
+            );
+          } else {
+            imagePath = "";
+          }
+
+          if (imagePath && fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
           }
         }
         const bytes = await logoFile.arrayBuffer();
@@ -112,13 +125,7 @@ export async function PUT(
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "organisasi"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "organisasi");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -180,12 +187,23 @@ export async function DELETE(
     }
     await OrganisasiDesaService.deleteOrganization(id);
     if (existingOrganization.logo_path) {
-      const imagePath = path.join(
-        process.cwd(),
-        "public",
-        existingOrganization.logo_path
-      );
-      if (fs.existsSync(imagePath)) {
+      let imagePath: string;
+
+      if (existingOrganization.logo_path.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(
+          process.cwd(),
+          "public",
+          existingOrganization.logo_path
+        );
+      } else if (existingOrganization.logo_path.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), existingOrganization.logo_path);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
       }
     }

@@ -82,14 +82,24 @@ export async function PUT(
           existingSarana.foto_path &&
           !defaultImages.includes(existingSarana.foto_path)
         ) {
-          // Delete old image if it exists
-          const oldImagePath = path.join(
-            process.cwd(),
-            "public",
-            existingSarana.foto_path
-          );
-          if (fs.existsSync(oldImagePath)) {
-            fs.unlinkSync(oldImagePath);
+          let imagePath: string;
+
+          if (existingSarana.foto_path.startsWith("/assets/")) {
+            // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+            imagePath = path.join(
+              process.cwd(),
+              "public",
+              existingSarana.foto_path
+            );
+          } else if (existingSarana.foto_path.startsWith("/uploads/")) {
+            // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+            imagePath = path.join(process.cwd(), existingSarana.foto_path);
+          } else {
+            imagePath = "";
+          }
+
+          if (imagePath && fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
           }
         }
         const bytes = await fotoFile.arrayBuffer();
@@ -101,13 +111,7 @@ export async function PUT(
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "sarana"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "sarana");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
@@ -166,12 +170,23 @@ export async function DELETE(
       existingSarana.foto_path &&
       !defaultImages.includes(existingSarana.foto_path)
     ) {
-      const imagePath = path.join(
-        process.cwd(),
-        "public",
-        existingSarana.foto_path
-      );
-      if (fs.existsSync(imagePath)) {
+      let imagePath: string;
+
+      if (existingSarana.foto_path.startsWith("/assets/")) {
+        // ✅ path dari public (misal: /assets/uploads/articles/xxx.jpg)
+        imagePath = path.join(
+          process.cwd(),
+          "public",
+          existingSarana.foto_path
+        );
+      } else if (existingSarana.foto_path.startsWith("/uploads/")) {
+        // ✅ path dari uploads (misal: /uploads/articles/xxx.jpg)
+        imagePath = path.join(process.cwd(), existingSarana.foto_path);
+      } else {
+        imagePath = "";
+      }
+
+      if (imagePath && fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
       }
     }

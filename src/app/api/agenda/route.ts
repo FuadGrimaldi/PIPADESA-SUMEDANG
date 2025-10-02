@@ -53,13 +53,7 @@ export async function POST(req: NextRequest) {
         const fileName = `${uniqueSuffix}${fileExtension}`;
 
         // Ensure upload directory exists
-        const uploadDir = path.join(
-          process.cwd(),
-          "public",
-          "assets",
-          "uploads",
-          "agenda"
-        );
+        const uploadDir = path.join(process.cwd(), "uploads", "agenda");
         if (!fs.existsSync(uploadDir)) {
           fs.mkdirSync(uploadDir, { recursive: true });
         }
