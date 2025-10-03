@@ -32,7 +32,7 @@ export default async function SubdomainLayout({
   return (
     <>
       <SubdomainNavGuest
-        subdomain={subdomain}
+        nama_desa={desa?.nama_desa || null}
         desaId={desaId}
         username={session?.user?.username || null}
       />

@@ -23,11 +23,7 @@ const Hero = async ({ subdomain }: { subdomain: string | null }) => {
       <div
         className="hero lg:h-[350px] h-[500px] rounded-2xl shadow-lg relative overflow-hidden"
         style={{
-          backgroundImage: `url(${
-            desa?.foto_depan
-              ? desa.foto_depan
-              : "https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
-          })`,
+          backgroundImage: `url(${desa?.foto_depan})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",

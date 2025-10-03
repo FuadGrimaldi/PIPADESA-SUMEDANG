@@ -20,11 +20,11 @@ interface Kategori {
 }
 
 export default function SubdomainNavGuest({
-  subdomain,
+  nama_desa,
   username,
   desaId,
 }: {
-  subdomain: string | null;
+  nama_desa: string | null;
   username: string | null;
   desaId: number | null;
 }) {
@@ -157,7 +157,7 @@ export default function SubdomainNavGuest({
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-gray-900 text-lg leading-tight">
-                  Desa {subdomain}
+                  Desa {nama_desa || ""}
                 </span>
                 <span className="text-xs text-gray-600 leading-tight">
                   Sumedang
