@@ -217,15 +217,11 @@ export default function ProfileDesaComponent({ desa }: ProfileDesaProps) {
                 ) : desa.foto_depan ? (
                   <div className="relative">
                     <Image
-                      src={desa.foto_depan}
+                      src={desa.foto_depan || "/images/default-village.jpg"}
                       alt="Current"
                       width={200}
                       height={150}
                       className="object-cover rounded border"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "/images/default-village.jpg";
-                      }}
                     />
                     <span className="text-xs text-gray-600 block mt-1">
                       Gambar saat ini

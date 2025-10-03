@@ -130,7 +130,7 @@ export async function PUT(
         // Write file to disk
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        imagePath = `/assets/uploads/infografis/${fileName}`;
+        imagePath = `/uploads/infografis/${fileName}`;
       } catch (fileError) {
         console.error("❌ File upload error:", fileError);
         return NextResponse.json(

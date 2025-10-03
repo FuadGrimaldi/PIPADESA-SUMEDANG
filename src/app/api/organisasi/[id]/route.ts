@@ -133,7 +133,7 @@ export async function PUT(
         // Write file to disk
         logoPath = path.join(uploadDir, fileName);
         await writeFile(logoPath, buffer);
-        logoPath = `/assets/uploads/organisasi/${fileName}`;
+        logoPath = `/uploads/organisasi/${fileName}`;
       } catch (error) {
         console.error("Error saving logo file:", error);
         return NextResponse.json(

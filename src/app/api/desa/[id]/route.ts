@@ -133,7 +133,7 @@ export async function PUT(
         await writeFile(filePath, buffer);
 
         // Update image path (fix path to match upload directory)
-        imagePath = `/assets/uploads/profile-desa/${fileName}`;
+        imagePath = `/uploads/profile-desa/${fileName}`;
       } catch (uploadError) {
         console.error("File upload error:", uploadError);
         return NextResponse.json(

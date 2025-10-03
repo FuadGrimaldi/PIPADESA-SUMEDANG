@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
 
-        logoPath = `/assets/uploads/organisasi/${fileName}`;
+        logoPath = `/uploads/organisasi/${fileName}`;
       } catch (uploadError) {
         console.error("File upload error:", uploadError);
         return NextResponse.json(

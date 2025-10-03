@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
         await writeFile(filePath, buffer);
 
         // Set the relative path to be saved in the database
-        fotoPath = `/assets/sarana/${fileName}`;
+        fotoPath = `/uploads/sarana/${fileName}`;
       } catch (fileError) {
         console.error("File upload error:", fileError);
         return NextResponse.json(

@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
         }
         const filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        imagePath = `/assets/uploads/sdgs/${fileName}`;
+        imagePath = `/uploads/sdgs/${fileName}`;
       } catch (error) {
         console.error("❌ Error uploading image:", error);
         return NextResponse.json(

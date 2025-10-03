@@ -119,7 +119,7 @@ export async function PUT(
         // Write file to disk
         fotoPath = path.join(uploadDir, fileName);
         await writeFile(fotoPath, buffer);
-        fotoPath = `/assets/uploads/sarana/${fileName}`;
+        fotoPath = `/uploads/sarana/${fileName}`;
       } catch (error) {
         console.error("Error saving foto file:", error);
         return NextResponse.json(

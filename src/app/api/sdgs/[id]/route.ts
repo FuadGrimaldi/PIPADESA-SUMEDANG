@@ -91,7 +91,7 @@ export async function PUT(
         }
         filePath = path.join(uploadDir, fileName);
         await writeFile(filePath, buffer);
-        filePath = `/assets/sdgs/${fileName}`;
+        filePath = `/uploads/sdgs/${fileName}`;
       } catch (error) {
         console.error("❌ Error uploading image:", error);
         return NextResponse.json(
